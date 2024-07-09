@@ -1,0 +1,453 @@
+fileFormatVersion: 2
+guid: ad0397724e8cafe4998ae08bc9812799
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerBG
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 604
+        width: 460
+        height: 652
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e162d0733f8e53348b308f15a7cebd6e
+      internalID: 726820303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InventoryBG
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 602
+        width: 460
+        height: 652
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1752666d2be265241ac7071e61b27461
+      internalID: 748134892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ItemView
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 92
+        width: 460
+        height: 472
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32b4161d09c81d24a94a57129ea74ee2
+      internalID: -804497068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlideHandle
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 404
+        width: 12
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acdfc96b85b51c44193e74170f6f896a
+      internalID: 1700110999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlideIcon
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 10
+        width: 8
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 295d1508774c21240a4dfece423523be
+      internalID: 1502921249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BambooUI_22
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 340
+        width: 192
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 859d07002ee76b347904c7581e3057fc
+      internalID: -1286131744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonSystemUnselected
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 212
+        width: 192
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 70, y: 30, z: 70, w: 20}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65d4a2bda8e462441b1effd08aa44e92
+      internalID: -773300007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CurrencyBG
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 208
+        width: 276
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6e6b17a094b8b346be8bce6835ed1e1
+      internalID: -835318790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BoxIcon
+      rect:
+        serializedVersion: 2
+        x: 1482
+        y: 208
+        width: 44
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac4b908ea2a4be4998527541280687d
+      internalID: -173667569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonSystemSelected
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 84
+        width: 192
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 70, y: 20, z: 70, w: 20}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6604ae8ed26224e48ba22e7731538114
+      internalID: -924361984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackSpeedIcon
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 82
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eb2dd6577159bd49b25c83a0585a017
+      internalID: 880530539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatsBG
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 12
+        width: 112
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88aabeb7a9d42c5489f4a4afffe3155f
+      internalID: -1835192363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      AllIcon: -8095830
+      AllIconWhite: 1579248156
+      ArmorIcon: 1986334240
+      AttackIcon: 1018549776
+      AttackRangeIcon: -184703269
+      AttackSpeedIcon: 880530539
+      BambooUI_0: -1580485963
+      BambooUI_10: -1999961422
+      BambooUI_11: 435701412
+      BambooUI_12: -1313455780
+      BambooUI_13: 2051778519
+      BambooUI_2: -1625796646
+      BambooUI_22: -1286131744
+      BambooUI_27: -1776006922
+      BambooUI_29: 1343432371
+      BambooUI_3: -579302702
+      BambooUI_32: -1513074611
+      BambooUI_38: 189584285
+      BambooUI_4: 546505280
+      BambooUI_40: 1352699021
+      BambooUI_41: -1895387265
+      BambooUI_42: 1625376189
+      BambooUI_43: -1344080385
+      BambooUI_44: 2121999318
+      BambooUI_45: -1568294065
+      BambooUI_47: 762072431
+      BambooUI_5: -2026320190
+      BambooUI_52: -1119614837
+      BambooUI_53: -2017922630
+      BambooUI_54: -1545066926
+      BambooUI_6: -1902802400
+      BambooUI_7: -915159175
+      BambooUI_8: -103440020
+      BambooUI_9: -678154626
+      BoxIcon: -173667569
+      ButtonSystemSelected: -924361984
+      ButtonSystemUnselected: -773300007
+      CurrencyBG: -835318790
+      DeleteSelected: -133923675
+      DeleteUnselected: -1612628896
+      Diamond: 1362268524
+      EquipSlotBG: -1215189176
+      EquipSlotSelected: 874069057
+      Gold: -1947791886
+      HPIcon: -1570270683
+      HelmetIcon: 1433903774
+      InventoryBG: 748134892
+      ItemView: -804497068
+      MagicalDefIcon: 361925887
+      MaterialIcon: 180041504
+      NecklaceIcon: 199107236
+      PantsIcon: -952289889
+      PhysicalDefIcon: -573406529
+      PlayerBG: 726820303
+      PotionIcon: -1641191541
+      RingIcon: 2040392376
+      SlideHandle: 1700110999
+      SlideIcon: 1502921249
+      StatsBG: -1835192363
+      WeaponIcon: 233518305
+      WeaponIconWhite: 168745618
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

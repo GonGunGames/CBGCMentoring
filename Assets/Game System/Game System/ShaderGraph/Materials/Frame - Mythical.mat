@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2283056615325373352
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Frame - Mythical
+  m_Shader: {fileID: -6465566751694194690, guid: 143ad7bdb4c3cc04eb53d1ad9a6a6898, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - UNITY_UI_ALPHACLIP
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseTex:
+        m_Texture: {fileID: 2800000, guid: 67e80e99baddd8141a6523685a65727c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RotatingTexture:
+        m_Texture: {fileID: 2800000, guid: 3e34a9eb6c6b154419fc6aae5ec261e2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Star:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_CloudNoise:
+        m_Texture: {fileID: 2800000, guid: 0567ec71ab3136944a20404df5e5c47f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaSmooth: 1
+    - _Boolean: 0
+    - _Float: 0.211
+    - _Fuzziness: 0
+    - _Number: 0
+    - _NumberOfWave: 2
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Range: 0.8
+    - _Smooth: -3.62
+    - _Speed: 2
+    - _Threshold: 0.5
+    - _Thresholds: -1
+    m_Colors:
+    - _Clor1: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 0.80622363, b: 0.39215684, a: 0}
+    - _Color2: {r: 1, g: 0.9053673, b: 0.46855342, a: 0}
+    - _Color3: {r: 1, g: 1, b: 1, a: 0}
+    - _Color4: {r: 1, g: 1, b: 1, a: 0}
+    - _Color5: {r: 1, g: 1, b: 1, a: 0}
+    - _Color6: {r: 1, g: 1, b: 1, a: 0}
+    - _Color7: {r: 0.92158204, g: 0.92158204, b: 0.92158204, a: 0}
+    - _Color_1: {r: 1.3350784, g: 0, b: 0.13393424, a: 0}
+    - _Intensity: {r: 55.26734, g: 45.572384, b: 3.1829357, a: 1}
+    - _Vector2: {r: -0.25, g: 0.15, b: 0, a: 0}
+    - _Vertex_Position: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
