@@ -6,6 +6,7 @@ using UnityEngine;
  */
 public class CPCalculator: MonoBehaviour
 {
+    // 플레이어 스탯
     public const long CP_ATK = 20;
     public const long CP_ATK_SPD = 0;
     public const long CP_ATK_RANGE = 0;
@@ -13,6 +14,7 @@ public class CPCalculator: MonoBehaviour
     public const long CP_MAG_DEF = 10;
     public const long CP_PHY_DEF = 10;
 
+    // 스탯유형에 따른 아이템 스탯 계산
     public long CalculateStatCP(StatType statType, float itemStat)
     {
         long multiplier = 1;
@@ -39,6 +41,8 @@ public class CPCalculator: MonoBehaviour
         }
         return (long)(itemStat * multiplier);
     }
+
+    //계산된 아이템의 스탯값 가져오기
     public long GetItemCP(InventoryItem item)
     {
         int statLen = item.data.currentStat.Length;

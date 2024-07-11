@@ -42,11 +42,14 @@ public class GachaManager : MonoBehaviour
 
     private void Start()
     {
+        // 아이템 등급별 획득 확률 표시
         for(int i = 0; i < gacha.Length; i++ )
         {
             UIRate[i].text = gacha[i].rate.ToString() + "%";
         }
     }
+
+    // 가챠 1번
     public void GachaOneTime()
     {
         for (int i = 1; i < rewardGOs.Length; i++) //Set active false for all other reward
@@ -79,6 +82,7 @@ public class GachaManager : MonoBehaviour
         }
     }
 
+    // 가챠 10번
     public void GachaTenTime()
     {
         for (int i = 0; i < 10; i++)
@@ -114,14 +118,15 @@ public class GachaManager : MonoBehaviour
 
 
     [System.Serializable]
-    public class GachaRate
+    public class GachaRate                  // 각 아이템의 희귀도와 확률 설정 클래스
     {
-        public string rarity;
-        [Range(1, 100)] // To Show the Slider in Inspector
-        public int rate;
-        public ItemBase.ItemData[] rewards;
+        public string rarity;               // 등급
+        [Range(1, 100)]                     // To Show the Slider in Inspector
+        public int rate;                    // 확률
+        public ItemBase.ItemData[] rewards; // 해당 등급의 아이템 종류
     }
 
+    // 확률에 따른 희귀도 선택하고 해당 등급의 무작위 아이템 선택한 뒤 인벤토리 추가
     ItemBase.ItemData Reward(string rarity)
     {
         GachaRate gr = Array.Find(gacha, rt => rt.rarity == rarity); // Find the rarity of reward that matches with given rarity
