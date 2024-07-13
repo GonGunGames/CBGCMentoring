@@ -145,7 +145,7 @@ public class ShopManager : MonoBehaviour
             {
                 shopSlots[i].typeCurrency = ranCurrency == 0 ? Currency.Gold : Currency.Diamond;
             }
-            shopSlots[i].Attempt = 0;
+            shopSlots[i].Attempt = 0;           // 구매 횟수
             shopSlots[i].EnableBuyButton();
         }
     }
