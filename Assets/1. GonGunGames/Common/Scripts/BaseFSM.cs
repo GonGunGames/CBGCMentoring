@@ -11,7 +11,9 @@ public enum FSMState
     Attack = 3,
     Hit = 4,
     Dead = 5,
+    Fastmove = 6,
 }
+//각상태를 enum 변환
 public class BaseFSM : MonoBehaviour
 {
     [SerializeField]
@@ -67,12 +69,29 @@ public class BaseFSM : MonoBehaviour
     {
         yield return null;
     }
+    protected virtual IEnumerator Fastmove()
+    {
+        yield return null;
+    }
+    protected virtual IEnumerator Attack()
+    {
+        yield return null;
+    }
     protected void SetState(FSMState newState)
     {
         isNewState = true;
         state = newState;
-        animator.SetInteger("state", (int)state);
+
+        if (animator != null)
+        {
+            animator.SetInteger("state", (int)state);
+        }
+        else
+        {
+            Debug.LogWarning("Animator component is not assigned.");
+        }
 
         Debug.Log(gameObject + ".SetState." + state.ToString());
     }
+
 }
