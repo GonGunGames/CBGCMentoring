@@ -42,6 +42,11 @@ public class Player : PlayerFSM
                 Debug.Log("Dead");
                 PlayerSetState(PlayerFSMState.Dead);
             }
+            if (health != null && health.isHit)
+            {
+                Debug.Log("Hit");
+                PlayerSetState(PlayerFSMState.Hit);
+            }
             yield return null;
         }
     }
@@ -62,6 +67,11 @@ public class Player : PlayerFSM
                 Debug.Log("Dead");
                 PlayerSetState(PlayerFSMState.Dead);
             }
+            if (health != null && health.isHit)
+            {
+                Debug.Log("Hit");
+                PlayerSetState(PlayerFSMState.Hit);
+            }
             yield return null;
         }
     }
@@ -70,6 +80,15 @@ public class Player : PlayerFSM
     {
         while (!isNewPlayerState)
         {
+            if (Joystick != null && Joystick.isRunning)
+            {
+                Debug.Log("Hit -> Run");
+                PlayerSetState(PlayerFSMState.Run);
+            }
+            else
+            {
+                PlayerSetState(PlayerFSMState.Idle);    
+            }
             yield return null;
         }
     }
