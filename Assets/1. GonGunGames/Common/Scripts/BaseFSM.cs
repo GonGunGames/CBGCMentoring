@@ -12,6 +12,7 @@ public enum FSMState
     Hit = 4,
     Dead = 5,
     Fastmove = 6,
+    SAttack = 7
 }
 //각상태를 enum 변환
 public class BaseFSM : MonoBehaviour
@@ -74,6 +75,10 @@ public class BaseFSM : MonoBehaviour
         yield return null;
     }
     protected virtual IEnumerator Attack()
+    {
+        yield return null;
+    }
+    protected virtual IEnumerator SAttack()
     {
         yield return null;
     }

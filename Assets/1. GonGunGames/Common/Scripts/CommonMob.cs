@@ -13,6 +13,8 @@ public class CommonMob : BaseFSM
     public float fastMoveSpeed = 5f;
     public float aggroTime = 3f;
 
+    private int attackCount = 0;
+    private int maxAttacks = 3;
     public List<Transform> moveMarkers;
 
     public GameObject player;
@@ -43,6 +45,7 @@ public class CommonMob : BaseFSM
             yield return null;
         }
     }
+    //플레이
     protected override IEnumerator Move()
     {
         while (!isNewState)
@@ -56,7 +59,7 @@ public class CommonMob : BaseFSM
             yield return null;
         }
     }
-    //추첮
+    //빨라짐
     protected override IEnumerator Chase()
     {
         float timer = 0f;
@@ -114,15 +117,34 @@ public class CommonMob : BaseFSM
         {
             // 플레이어와 몬스터 사이의 거리를 계산
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-
             // 만약 플레이어가 공격 범위를 벗어나면 Chase 상태로 전환
             if (distanceToPlayer > attackRange)
             {
                 SetState(FSMState.Chase);
             }
-
+            else
+            {
+                attackCount++;
+                if (attackCount > maxAttacks)
+                {
+                    SetState(FSMState.SAttack);
+                }
+            }
             yield return null;
         }
     }
-
+    protected override IEnumerator SAttack()
+    {
+        while (!isNewState)
+        {
+            yield return null;
+        }
+    }
+    protected override IEnumerator Dead()
+    {
+        while (!isNewState)
+        {
+            yield return null;
+        }
+    }
 }
