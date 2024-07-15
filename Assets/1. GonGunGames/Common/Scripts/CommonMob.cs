@@ -137,6 +137,14 @@ public class CommonMob : BaseFSM
     {
         while (!isNewState)
         {
+            // 플레이어와 몬스터 사이의 거리를 계산
+            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+            // 만약 플레이어가 공격 범위를 벗어나면 Chase 상태로 전환
+            if (distanceToPlayer > attackRange)
+            {
+                SetState(FSMState.Chase);
+            }
+
             yield return null;
         }
     }
