@@ -30,6 +30,7 @@ public class BaseFSM : MonoBehaviour
         StartCoroutine(FSM());
 
         SetState(FSMState.Idle);
+ 
     }
 
     protected virtual void Update()
