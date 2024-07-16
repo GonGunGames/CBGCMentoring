@@ -112,6 +112,8 @@ public class CommonMob : BaseFSM
             yield return null;
         }
     }
+
+
     protected override IEnumerator Attack()
     {
         while (!isNewState)
@@ -173,6 +175,7 @@ public class CommonMob : BaseFSM
         yield return new WaitForSeconds(attackCooldown); // Attack 애니메이션 시간만큼 대기
         isCooldown = false;
     }
+
     protected override IEnumerator Dead()
     {
         while (!isNewState)
