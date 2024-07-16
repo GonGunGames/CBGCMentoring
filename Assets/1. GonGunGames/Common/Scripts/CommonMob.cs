@@ -15,10 +15,11 @@ public class CommonMob : BaseFSM
 
     private int attackCount = 0;
     private int maxAttacks = 3;
-    public List<Transform> moveMarkers;
+    private float attackCooldown = 0.7f;
+    private bool isCooldown = false;
+    private float sAttackDuration = 0.6f;
 
     public GameObject player;
-
     protected override void Start()
     {
         base.Start();
@@ -117,6 +118,7 @@ public class CommonMob : BaseFSM
         {
             // 플레이어와 몬스터 사이의 거리를 계산
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+
             // 만약 플레이어가 공격 범위를 벗어나면 Chase 상태로 전환
             if (distanceToPlayer > attackRange)
             {
@@ -124,29 +126,52 @@ public class CommonMob : BaseFSM
             }
             else
             {
-                attackCount++;
-                if (attackCount > maxAttacks)
+                if (!isCooldown)
                 {
-                    SetState(FSMState.SAttack);
+                    attackCount++;
+                    if (attackCount >= maxAttacks)
+                    {
+                        SetState(FSMState.SAttack);
+                        yield break; // Attack 코루틴 종료
+                    }
+                    else
+                    {
+                        // 쿨타임 시작
+                        StartCoroutine(AttackCooldown());
+                    }
                 }
             }
             yield return null;
         }
     }
+
     protected override IEnumerator SAttack()
     {
-        while (!isNewState)
-        {
-            // 플레이어와 몬스터 사이의 거리를 계산
-            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-            // 만약 플레이어가 공격 범위를 벗어나면 Chase 상태로 전환
-            if (distanceToPlayer > attackRange)
-            {
-                SetState(FSMState.Chase);
-            }
+        // SAttack 상태 로직
+        // 플레이어와 몬스터 사이의 거리를 계산
+        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
-            yield return null;
+        // 만약 플레이어가 공격 범위를 벗어나면 Chase 상태로 전환
+        if (distanceToPlayer > attackRange)
+        {
+            SetState(FSMState.Chase);
+            yield break; // SAttack 코루틴 종료
         }
+
+        // SAttack 상태 로직 (한 번 실행)
+        // 여기서 SAttack 동작을 수행합니다.
+        yield return new WaitForSeconds(sAttackDuration); // SAttack 애니메이션 시간만큼 대기
+
+        // SAttack 완료 후 Attack 상태로 전환
+        attackCount = 0; // 공격 카운트 초기화
+        SetState(FSMState.Attack);
+    }
+
+    private IEnumerator AttackCooldown()
+    {
+        isCooldown = true;
+        yield return new WaitForSeconds(attackCooldown); // Attack 애니메이션 시간만큼 대기
+        isCooldown = false;
     }
     protected override IEnumerator Dead()
     {
