@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fa24ec97e3fcf64388c0f2cb2af70d9, type: 3}
-  m_Name: Common - Shoes
+  m_Name: Legendary - Gloves
   m_EditorClassIdentifier: 
   prop:
-    image: {fileID: 1134324286, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
+    image: {fileID: 18420711, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
     countable: 0
-    itemName: Wood Shoes
+    itemName: Wood Ring
     specialStat: 
     itemDescription: '- Write something here
 
@@ -24,11 +24,11 @@ MonoBehaviour:
 
       ...'
   baseStat:
-    type: 3
-    rarity: 1
+    type: 6
+    rarity: 6
     requiredLevel: 1
     stats:
-    - type: 3
-      value: 1
-    - type: 5
-      value: 10
+    - type: 0
+      value: 700
+    - type: 0
+      value: 700

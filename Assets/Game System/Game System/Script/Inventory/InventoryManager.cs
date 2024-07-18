@@ -193,7 +193,7 @@ public class InventoryManager : Singleton<InventoryManager>
             verticalSlash.SetActive(false);
             itemViewStatGroup.SetActive(false);
         }
-        else if (currentItem.data.info.baseStat.type != ItemType.Currency) //----3. If Item is Weapon -> Ring
+        else if (currentItem.data.info.baseStat.type != ItemType.Currency) //----3. If Item is Weapon -> Gloves
         {
             verticalSlash.SetActive(true);
             itemViewStatGroup.SetActive(true);

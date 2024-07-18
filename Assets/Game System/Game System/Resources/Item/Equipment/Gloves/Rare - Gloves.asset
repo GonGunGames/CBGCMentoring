@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fa24ec97e3fcf64388c0f2cb2af70d9, type: 3}
-  m_Name: Mythical - Ring
+  m_Name: Rare - Gloves
   m_EditorClassIdentifier: 
   prop:
-    image: {fileID: 521716323, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
+    image: {fileID: -1085486120, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
     countable: 0
     itemName: Wood Ring
@@ -25,10 +25,10 @@ MonoBehaviour:
       ...'
   baseStat:
     type: 6
-    rarity: 5
+    rarity: 3
     requiredLevel: 1
     stats:
     - type: 0
-      value: 250
+      value: 50
     - type: 0
-      value: 250
+      value: 50

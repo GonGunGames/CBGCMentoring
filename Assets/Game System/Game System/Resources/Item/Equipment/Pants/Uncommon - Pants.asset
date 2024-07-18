@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fa24ec97e3fcf64388c0f2cb2af70d9, type: 3}
-  m_Name: Rare - Shoes
+  m_Name: Uncommon - Pants
   m_EditorClassIdentifier: 
   prop:
-    image: {fileID: 86186782, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
+    image: {fileID: -1912245595, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
     countable: 0
     itemName: Wood Shoes
@@ -25,10 +25,10 @@ MonoBehaviour:
       ...'
   baseStat:
     type: 3
-    rarity: 3
+    rarity: 2
     requiredLevel: 1
     stats:
     - type: 3
-      value: 10
+      value: 5
     - type: 5
-      value: 200
+      value: 100
