@@ -57,6 +57,7 @@ public class ItemBase : MonoBehaviour
         UpdateRarityBG();
     }
 
+    // 아이템 등급별 다이아 가격
     public int SetPriceByRarity()
     {
         if (data.info != null)

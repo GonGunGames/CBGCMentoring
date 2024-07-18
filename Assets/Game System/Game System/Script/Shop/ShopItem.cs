@@ -28,6 +28,8 @@ public class ShopItem : ItemBase
     [SerializeField] TextMeshProUGUI attemptText;
 
     [SerializeField] Image buttonImage;
+
+    // 아이템 등급별 골드 가격
     public override void Start()
     {
         base.Start();
