@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using AllUnits;
+using TMPro;
 
 public class EnemyHealth : Unit
 {
     [SerializeField] private Slider e_hpBar;
-    public bool isDead { get; private set; } = false;
+    public bool isDead { get; private set; }
     private bool isHit = false;
+
+    [SerializeField]
     private CommonMob commonMob;
 
     private void Awake()

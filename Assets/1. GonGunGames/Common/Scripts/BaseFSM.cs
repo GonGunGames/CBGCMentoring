@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AllUnits;
+using UnityEngine.Rendering;
 
 public enum FSMState
 {
@@ -19,21 +20,26 @@ public enum FSMState
 public class BaseFSM : MonoBehaviour
 {
     [SerializeField]
-    protected FSMState state; // 접근자를 protected로 변경
+    protected FSMState state = FSMState.Idle; // 접근자를 protected로 변경
 
     protected bool isNewState = false;
+
+    [SerializeField]
     protected Animator animator;
 
+    [SerializeField]
     protected CharacterController controller;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+
+    protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
+    }
+    protected virtual void Start()
+    {                
         StartCoroutine(FSM());
-
-        SetState(FSMState.Idle);
     }
 
     protected virtual void Update()

@@ -19,10 +19,15 @@ public class CommonMobN : BaseFSM
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
+    protected override void Awake()
+    {
+        base.Awake();
+        health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+    }
+
     protected override void Start()
     {
         base.Start();
-        health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
     }
 
     protected override IEnumerator Idle()
@@ -43,11 +48,15 @@ public class CommonMobN : BaseFSM
                 SetState(FSMState.Chase);
             }
 
+
+            /*
             // 체력이 0이면 Dead 상태로 전환
             if (health.isDead)
             {
                 SetState(FSMState.Dead);
             }
+
+            */
 
             yield return null;
         }
