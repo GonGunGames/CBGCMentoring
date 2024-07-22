@@ -2,19 +2,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using AllUnits;
 
-public class EnemyHealth : Unit
+public class EnemyHealth : MonoBehaviour
 {
+    public int currentId;
+
+    public float currentDamage;
+
+    public float currentHealth;
+
+    
+    int currentLevel;
+
+    bool isDamage;
+
     [SerializeField] private Slider e_hpBar;
     public bool isDead { get; private set; } = false;
     private bool isHit = false;
     private CommonMob commonMob;
-    public PlayerStats playerStats;
     public Weapon weapon;
 
-    private void Awake()
+    private void Start()
     {
-        maxHealth = 50;
-        SetMaxHealth(maxHealth);
+        currentHealth = DataBase.Instance.enemyData.maxHealth;
+        currentDamage = DataBase.Instance.enemyData.damage;
+        SetMaxHealth(currentHealth);
         commonMob = GetComponent<CommonMob>(); // CommonMob 컴포넌트를 가져옵니다.
     }
 
@@ -27,10 +38,10 @@ public class EnemyHealth : Unit
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Bullet") && !isDamage)
+        if (collision.collider.CompareTag("Bullet") && isDamage)
         {
+            Debug.Log("Damage ON");
             isDamage = true;
-
             Weaponbullet bullet = collision.collider.GetComponent<Weaponbullet>();
             Weaponbullet2 bullet2 = collision.collider.GetComponent<Weaponbullet2>();
 
@@ -53,7 +64,8 @@ public class EnemyHealth : Unit
 
     public void ApplyDamage(float damage)
     {
-        currentHealth -= damage;
+
+        currentHealth -= weapon.attackDamage;
         e_hpBar.value = currentHealth;
 
         if (currentHealth <= 0 && !isDead)

@@ -4,9 +4,16 @@ using UnityEngine;
 using AllUnits;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Experimental.GlobalIllumination;
+using System.Runtime.Serialization;
 
-public class PlayerHealth : Unit
+public class PlayerHealth : MonoBehaviour
 {
+    public float currentHealth;
+
+    bool isDamage;
+
+
     private Rigidbody rb;
     private Animator myAnim;
     [SerializeField] private Slider _hpBar;
@@ -18,10 +25,14 @@ public class PlayerHealth : Unit
 
     private void Awake()
     {
-        maxHealth = 100;
-        SetMaxHealth(maxHealth);
         rb = GetComponent<Rigidbody>();
         myAnim = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        currentHealth = DataBase.Instance.playerData.maxHealth;
+        SetMaxHealth(currentHealth);
     }
 
     public void SetMaxHealth(float hp)
@@ -43,7 +54,7 @@ public class PlayerHealth : Unit
                 // 현재 시간과 마지막 데미지 시간 비교
                 if (Time.time - lastDamageTime >= damageInterval)
                 {
-                    float enemyAttack = enemy.damage; // 적의 공격력 가져오기
+                    float enemyAttack = enemy.currentDamage; // 적의 공격력 가져오기
                     currentHealth -= enemyAttack;
                     _hpBar.value = currentHealth;
                     lastDamageTime = Time.time; // 마지막 데미지 시간 업데이트

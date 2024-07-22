@@ -10,7 +10,7 @@ public class CommonMob : BaseFSM
     public float attackRange = 1.5f;
     public float fastMoveSpeed = 4f;
     public float aggroTime = 3f;
-    public EnemyHealth health;
+    public EnemyHealth enemyHealth;
     private int attackCount = 0;
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
@@ -24,7 +24,7 @@ public class CommonMob : BaseFSM
     protected override void Start()
     {
         base.Start();
-        health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+        enemyHealth = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
     }
 
     protected override IEnumerator Idle()
@@ -172,7 +172,7 @@ public class CommonMob : BaseFSM
         // 피격 애니메이션 재생 등
         yield return new WaitForSeconds(0.5f); // Hit 애니메이션 시간만큼 대기
 
-        if (health.currentHealth <= 0)
+        if (enemyHealth.currentHealth <= 0)
         {
             SetState(FSMState.Dead);
         }
