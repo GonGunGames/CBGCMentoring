@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AllUnits;
+using UnityEngine.UI;
 
 public class PlayerHealth : Unit
 {
     private Rigidbody rb;
     private Animator myAnim;
+    [SerializeField] private Slider _hpBar;
     public bool isDead { get; private set; } = false;
     public bool isHit = false;
 
     private void Awake()
     {
+        maxHealth = 100;
+        SetMaxHealth(maxHealth);
         rb = GetComponent<Rigidbody>();
         myAnim = GetComponent<Animator>();
+    }
+
+    public void SetMaxHealth(float hp)
+    {
+        _hpBar.maxValue = hp;
+        _hpBar.value = hp;
     }
 
 
@@ -23,12 +33,12 @@ public class PlayerHealth : Unit
         {
             isDamage = true;
             // Enemy의 damage 값을 가져오기 위해 Enemy 스크립트를 참조합니다.
-            Enemy enemy = collision.collider.GetComponent<Enemy>();
+            EnemyHealth enemy = collision.collider.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
                 float enemyAttack = enemy.damage; // 적의 공격력 가져오기
                 currentHealth -= enemyAttack;
-
+                _hpBar.value = currentHealth;
                 if (currentHealth <= 0)
                 {
                     isDead = true;

@@ -9,7 +9,6 @@ namespace AllUnits
         [SerializeField] internal float currentHealth;
         [SerializeField] internal float damage = 5f;
         [SerializeField] protected bool isDamage = false;
-
         // 자식 클래스들도 사용될 수 있도록
         virtual protected void Start()
         {
