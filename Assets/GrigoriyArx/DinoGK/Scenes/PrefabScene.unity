@@ -2846,10 +2846,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 01_Triceratops
       objectReference: {fileID: 0}
-    - target: {fileID: 4158759077257224049, guid: 0783bb47bce0983489116dc925da134e, type: 3}
-      propertyPath: BabyScale
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4484556247543278623, guid: 00655827ea62a9b4db3b4c714083125c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2893,6 +2889,10 @@ PrefabInstance:
     - target: {fileID: 4484556247543278623, guid: 00655827ea62a9b4db3b4c714083125c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158759077257224049, guid: 0783bb47bce0983489116dc925da134e, type: 3}
+      propertyPath: BabyScale
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3364,6 +3364,10 @@ PrefabInstance:
     - target: {fileID: 5093708505614625681, guid: 577651315d789e64bb1e76192b81d8a5, type: 3}
       propertyPath: m_Name
       value: 62_Hesperosaurus
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093708505614625681, guid: 577651315d789e64bb1e76192b81d8a5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5619274391356174635, guid: 577651315d789e64bb1e76192b81d8a5, type: 3}
       propertyPath: m_RootOrder

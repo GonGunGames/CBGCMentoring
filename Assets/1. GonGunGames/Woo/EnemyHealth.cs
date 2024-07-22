@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using AllUnits;
 using TMPro;
+using Unity.Burst.CompilerServices;
 
 public class EnemyHealth : Unit
 {
@@ -10,13 +11,28 @@ public class EnemyHealth : Unit
     private bool isHit = false;
 
     [SerializeField]
-    private CommonMob commonMob;
-
+    private CommonMob commonMob; // 기존 CommonMob
+    [SerializeField]
+    private CommonMobN commonMobN; // 새로운 CommonMobN
+    [SerializeField]
+    private CommonMobB commonMobB;
     private void Awake()
     {
         maxHealth = 50;
         SetMaxHealth(maxHealth);
         commonMob = GetComponent<CommonMob>(); // CommonMob 컴포넌트를 가져옵니다.
+        commonMobN = GetComponent<CommonMobN>(); // CommonMobN 컴포넌트를 가져옵니다.
+        commonMobB = GetComponent<CommonMobB>();
+        // null 체크 추가
+        if (commonMob == null)
+        {
+            Debug.LogWarning("CommonMob 컴포넌트가 없습니다.");
+        }
+
+        if (commonMobN == null)
+        {
+            Debug.LogWarning("CommonMobN 컴포넌트가 없습니다.");
+        }
     }
 
     protected override void Start()
@@ -50,7 +66,9 @@ public class EnemyHealth : Unit
                 }
 
                 isHit = true; // 적과 충돌 시 isHit를 true로 설정
-                commonMob.SetState(FSMState.Hit); // 피격 시 Hit 상태로 전환
+                commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
+                commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
+                commonMobB?.SetState(FSMState.Hit);
                 // 피격 시 추가 로직 처리 (예: 애니메이션, 효과 등)
             }
             isDamage = false; // Damage 처리 후 다시 false로 설정
