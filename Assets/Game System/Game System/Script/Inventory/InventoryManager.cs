@@ -246,14 +246,6 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             return statSprites[3];
         }
-        else if(stat.type == StatType.PhysicalDefense)
-        {
-            return statSprites[4];
-        }
-        else if (stat.type == StatType.MagicalDefense)
-        {
-            return statSprites[5];
-        }
         return null;
     }
     string GetRarityText(Rarity rarity)

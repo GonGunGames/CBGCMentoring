@@ -11,8 +11,7 @@ public class CPCalculator: MonoBehaviour
     public const long CP_ATK_SPD = 0;
     public const long CP_ATK_RANGE = 0;
     public const long CP_HP = 4;
-    public const long CP_MAG_DEF = 10;
-    public const long CP_PHY_DEF = 10;
+
 
     // 스탯유형에 따른 아이템 스탯 계산
     public long CalculateStatCP(StatType statType, float itemStat)
@@ -31,12 +30,6 @@ public class CPCalculator: MonoBehaviour
                 break;
             case StatType.Health:
                 multiplier = CP_HP;
-                break;
-            case StatType.MagicalDefense:
-                multiplier = CP_MAG_DEF;
-                break;
-            case StatType.PhysicalDefense:
-                multiplier = CP_PHY_DEF;
                 break;
         }
         return (long)(itemStat * multiplier);
