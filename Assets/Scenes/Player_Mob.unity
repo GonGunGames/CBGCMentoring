@@ -307,17 +307,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8609901236660776222, guid: e2988d02785a60b41a67903458e4414f, type: 3}
   m_PrefabInstance: {fileID: 6720877336593666827}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &968933013 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 836841423050092126, guid: e2988d02785a60b41a67903458e4414f, type: 3}
-  m_PrefabInstance: {fileID: 6720877336593666827}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968933012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8001e65836200247836d38cbf22f25e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &968933017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,19 +316,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 968933012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d396a02077d50942aed43d1436fb489, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c3908fb4b5244b4d8a574e1eb4c766f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  animator: {fileID: 0}
+  controller: {fileID: 0}
   idleTime: 1
   moveSpeed: 1
   turnSpeed: 180
   chaseRange: 10
   attackRange: 1.5
   aggroTime: 3
-  health: {fileID: 968933013}
+  health: {fileID: 0}
   player: {fileID: 750109582}
-  deathPrefab: {fileID: 2237428270439026578, guid: 7ff4b9ef0a765ac4eb4d1afd4b7b5369, type: 3}
+  deathPrefab: {fileID: 2237428270439026578, guid: 3dc8ffd6f3a3cd44db0ff82b20bd2c04, type: 3}
 --- !u!1001 &1049601795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -859,6 +850,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1441081607}
+    - target: {fileID: 2617141265036373928, guid: 83aa9840e839da34087809b813c0d002, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 2212033436154223188, guid: 6a4f3431a7cda3c4d8c650b82d483a85, type: 3}
     - target: {fileID: 3153245937569838151, guid: 83aa9840e839da34087809b813c0d002, type: 3}
       propertyPath: m_Camera
       value: 
