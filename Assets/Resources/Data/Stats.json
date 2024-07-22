@@ -2,7 +2,9 @@
     "units": [
         {
             "maxHealth": 120,
-            "damage": 10
+            "currentHealth": 120,
+            "damage": 10,
+            "isDamage": false
         }
     ]
 }

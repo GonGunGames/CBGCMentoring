@@ -13,7 +13,7 @@ namespace AllUnits
 
         public Unit()
         {
-            currentHealth = maxHealth;
+            currentHealth = maxHealth - damage;
         }
     }
 
@@ -25,12 +25,37 @@ namespace AllUnits
 
     public class DataManager : MonoBehaviour
     {
+        void Start()
+        {
+            Debug.Log("DataManager Start called");
+            Init();
+        }
+
         public void Init()
         {
-            TextAsset textAsset = Resources.Load<TextAsset>("Data/Stats");
-            StatData data = JsonUtility.FromJson<StatData>(textAsset.text);
+            Debug.Log("Init method called");
 
-            // 데이터 확인을 위해 로그 출력
+            // Step 1: Load the JSON file
+            TextAsset textAsset = Resources.Load<TextAsset>("Data/Stats");
+            if (textAsset == null)
+            {
+                Debug.LogError("Failed to load Stats data! The textAsset is null.");
+                return;
+            }
+
+            Debug.Log("Stats data loaded successfully");
+
+            // Step 2: Parse the JSON data
+            StatData data = JsonUtility.FromJson<StatData>(textAsset.text);
+            if (data == null || data.units == null)
+            {
+                Debug.LogError("Failed to parse Stats data! The parsed data is null.");
+                return;
+            }
+
+            Debug.Log("Stats data parsed successfully");
+
+            // Step 3: Log the parsed data
             foreach (var unit in data.units)
             {
                 Debug.Log($"Unit maxHealth: {unit.maxHealth}, damage: {unit.damage}");

@@ -18,6 +18,7 @@ public class EnemyHealth : Unit
         commonMob = GetComponent<CommonMob>(); // CommonMob 컴포넌트를 가져옵니다.
     }
 
+
     private void SetMaxHealth(float hp)
     {
         e_hpBar.maxValue = hp;
