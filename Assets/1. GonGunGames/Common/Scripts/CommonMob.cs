@@ -1,18 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CommonMob : BaseFSM
 {
-
     public float idleTime = 1.5f;
     public float moveSpeed = 3f;
     public float turnSpeed = 180f;
-    public float chaseRange = 3f;
+    public float chaseRange = 10f;
     public float attackRange = 1.5f;
-    public float fastMoveSpeed = 5f;
+    public float fastMoveSpeed = 4f;
     public float aggroTime = 3f;
-
+    public EnemyHealth health;
     private int attackCount = 0;
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
@@ -20,11 +18,15 @@ public class CommonMob : BaseFSM
     private float sAttackDuration = 0.6f;
 
     public GameObject player;
+    [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
+    private FSMState previousState; // Hit 전 상태를 저장할 변수
+
     protected override void Start()
     {
         base.Start();
+        health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
     }
-    //override 부모클래스로부터 물려받은 함수를 자식 클래스에서 덮어 씌워서 자기만의 것으로 재정의 하는것
+
     protected override IEnumerator Idle()
     {
         float timer = 0f;
@@ -37,7 +39,6 @@ public class CommonMob : BaseFSM
             {
                 SetState(FSMState.Move);
             }
-
             if (Vector3.Distance(player.transform.position, transform.position) <= chaseRange)
             {
                 SetState(FSMState.Chase);
@@ -46,7 +47,7 @@ public class CommonMob : BaseFSM
             yield return null;
         }
     }
-    //플레이
+
     protected override IEnumerator Move()
     {
         while (!isNewState)
@@ -56,11 +57,10 @@ public class CommonMob : BaseFSM
             {
                 SetState(FSMState.Chase);
             }
-
             yield return null;
         }
     }
-    //빨라짐
+
     protected override IEnumerator Chase()
     {
         float timer = 0f;
@@ -73,7 +73,6 @@ public class CommonMob : BaseFSM
             {
                 SetState(FSMState.Idle);
             }
-
             if (MoveUtil.MoveFrame(controller, player.transform, moveSpeed * 3.0f, turnSpeed) <= attackRange)
             {
                 SetState(FSMState.Attack);
@@ -82,6 +81,7 @@ public class CommonMob : BaseFSM
             yield return null;
         }
     }
+
     protected override IEnumerator Fastmove()
     {
         while (!isNewState)
@@ -100,19 +100,9 @@ public class CommonMob : BaseFSM
             {
                 SetState(FSMState.Attack);
             }
-
             yield return null;
         }
     }
-
-    protected override IEnumerator Hit()
-    {
-        while (!isNewState)
-        {
-            yield return null;
-        }
-    }
-
 
     protected override IEnumerator Attack()
     {
@@ -176,11 +166,41 @@ public class CommonMob : BaseFSM
         isCooldown = false;
     }
 
+    protected override IEnumerator Hit()
+    {
+        // Hit 상태 로직
+        // 피격 애니메이션 재생 등
+        yield return new WaitForSeconds(0.5f); // Hit 애니메이션 시간만큼 대기
+
+        if (health.currentHealth <= 0)
+        {
+            SetState(FSMState.Dead);
+        }
+        else
+        {
+            SetState(previousState); // 원래 상태로 복귀
+        }
+    }
+
     protected override IEnumerator Dead()
     {
-        while (!isNewState)
-        {
-            yield return null;
-        }
+        // Dead 상태에서 추가 로직 처리
+        // 예: 애니메이션, 사운드 재생 등
+        Debug.Log("Entering Dead State");
+
+        // Dead 애니메이션 재생
+        yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
+
+        // 프리팹 인스턴스화
+        Instantiate(deathPrefab, transform.position, transform.rotation);
+
+        // 애니메이션 재생 후 오브젝트 소멸
+        Destroy(gameObject);
+    }
+
+    // 현재 상태를 저장하는 메서드
+    public void SaveCurrentState(FSMState state)
+    {
+        previousState = state;
     }
 }

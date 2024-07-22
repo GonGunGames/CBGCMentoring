@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using AllUnits;
 
 public enum FSMState
 {
@@ -12,13 +12,14 @@ public enum FSMState
     Hit = 4,
     Dead = 5,
     Fastmove = 6,
-    SAttack = 7
+    SAttack = 7,
 }
-//각상태를 enum 변환
+
+//각 상태를 enum 변환
 public class BaseFSM : MonoBehaviour
 {
     [SerializeField]
-    FSMState state;
+    protected FSMState state; // 접근자를 protected로 변경
 
     protected bool isNewState = false;
     protected Animator animator;
@@ -33,7 +34,6 @@ public class BaseFSM : MonoBehaviour
         StartCoroutine(FSM());
 
         SetState(FSMState.Idle);
- 
     }
 
     protected virtual void Update()
@@ -41,10 +41,9 @@ public class BaseFSM : MonoBehaviour
 
     }
 
-
     IEnumerator FSM()
-    {   
-        while(true)
+    {
+        while (true)
         {
             isNewState = false;
             yield return StartCoroutine(state.ToString());
@@ -83,7 +82,8 @@ public class BaseFSM : MonoBehaviour
     {
         yield return null;
     }
-    protected void SetState(FSMState newState)
+
+    public void SetState(FSMState newState)
     {
         isNewState = true;
         state = newState;
@@ -99,5 +99,4 @@ public class BaseFSM : MonoBehaviour
 
         Debug.Log(gameObject + ".SetState." + state.ToString());
     }
-
 }
