@@ -10,37 +10,37 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fa24ec97e3fcf64388c0f2cb2af70d9, type: 3}
-  m_Name: Uncommon - Shot Gun 1
+  m_Name: Common - Sniper 2
   m_EditorClassIdentifier: 
   prop:
     image: {fileID: 638316187, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
     countable: 0
-    itemName: Shot Gun
+    itemName: Sniper
     specialStat: 
-    itemDescription: Basic Shot Gun
+    itemDescription: Basic Sniper
   baseStat:
     type: 1
-    rarity: 2
+    rarity: 1
     requiredLevel: 1
     stats:
-    - type: 0
-      value: 40
     - type: 1
-      value: 30
-    - type: 18
-      value: 3
-    - type: 19
-      value: 40
+      value: 50
     - type: 4
-      value: 1.4
-    - type: 8
-      value: 15
-    - type: 7
-      value: 2
-    - type: 14
-      value: 7
-    - type: 15
+      value: 5
+    - type: 5
       value: 1
-    - type: 20
+    - type: 6
       value: 2
+    - type: 7
+      value: 1
+    - type: 11
+      value: 1
+    - type: 12
+      value: 10
+    - type: 14
+      value: 30
+    - type: 17
+      value: 20
+    - type: 19
+      value: 3

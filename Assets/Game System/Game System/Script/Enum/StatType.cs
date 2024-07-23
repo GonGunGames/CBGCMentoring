@@ -10,6 +10,7 @@ public enum StatType
     AttackRange,                        // 사거리
     AttackSpeed,                        // 공격 속도 (연사력)
     Branche,                            // 갈래
+    BulletSize,                         // 총알 크기
     BulletSpeed,                        // 총알 속도
     BulletSpread,                       // 총알 퍼짐
     CriticalProbability,                // 치명타 확률
