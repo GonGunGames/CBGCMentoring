@@ -25,6 +25,12 @@ public class CommonMob : BaseFSM
     {
         base.Start();
         health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.LogError("Player with tag 'Player' not found in the scene.");
+        }
     }
 
     protected override IEnumerator Idle()
