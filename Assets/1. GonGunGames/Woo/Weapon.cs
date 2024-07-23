@@ -8,27 +8,45 @@ public enum UpgradeOption
     AttackChance
 }
 
-public class Weapon : PlayerStats
+public class Weapon : MonoBehaviour
 {
     public GameObject bulletPrefab; // 발사할 기본 총알 프리팹
     public GameObject bulletPrefab2; // 발사할 두 번째 총알 프리팹
     public Transform firePoint; // 총알이 발사될 위치
-    public float bulletSpeed = 10f; // 총알 발사 속도
-    public float attackSpeed = 1f; // 발사 간격 (초)
-    public float attackDamage = 1f; // 무기 데미지 
-    public float attackChance = 0.5f; // 공격 성공 확률 (0.0 ~ 1.0)
-    public int bulletsPerShot = 5; // 한 번에 발사할 총알의 개수
-    public float burstInterval = 0.1f; // 연속 발사 간격 (초)
+    public float bulletSpeed; // 총알 발사 속도
+    public float attackSpeed; // 발사 간격 (초)
+    public float attackDamage; // 무기 데미지 
+    public float attackChance; // 공격 성공 확률 (0.0 ~ 1.0)
+    public int bulletsPerShot; // 한 번에 발사할 총알의 개수
+    public float burstInterval; // 연속 발사 간격 (초)
     public PlayerHealth health;
-    public PlayerStats stats;
-    private float nextFireTime = 0f; // 다음 발사 가능 시간
-    private Coroutine fireBurstCoroutine; // FireBurst 코루틴을 저장하기 위한 변수
+    public float nextFireTime; // 다음 발사 가능 시간
 
-    public void Start()
+    private Coroutine fireBurstCoroutine; // FireBurst 코루틴을 저장하기 위한 변수
+    private WeaponInfo currentWeapon;
+
+    private void Start()
     {
-        attackChance = 0f;
-        attackSpeed = 1.0f;
-        attackDamage = 10; // 무기 공격력 설정
+        // gunId가 1인 WeaponInfo를 가져옵니다.
+        currentWeapon = DataBase.Instance.GetWeaponInfoByGunId(1);
+
+        if (currentWeapon != null)
+        {
+            // WeaponInfo에서 값을 가져와서 클래스 필드에 할당합니다.
+            bulletSpeed = currentWeapon.bulletSpeed;
+            attackChance = currentWeapon.attackChance;
+            attackSpeed = currentWeapon.attackSpeed;
+            attackDamage = currentWeapon.attackDamage;
+            bulletsPerShot = currentWeapon.bulletsPerShot;
+            burstInterval = currentWeapon.burstInterval;
+
+            // Debug 로그로 값 확인
+            Debug.Log($"Weapon initialized: AttackChance={attackChance}, AttackSpeed={attackSpeed}, AttackDamage={attackDamage}, BulletsPerShot={bulletsPerShot}, BurstInterval={burstInterval}");
+        }
+        else
+        {
+            Debug.LogError("WeaponInfo with gunId 1 not found.");
+        }
     }
 
     private void Update()
@@ -65,8 +83,8 @@ public class Weapon : PlayerStats
                 Debug.Log("공격력이 증가했습니다. 현재 공격력: " + attackDamage);
                 break;
             case UpgradeOption.AttackChance:
-                attackChance += 0.1f; // 고폭유탄 발사확률 증가
-                Debug.Log("고폭유탄 발사확률이 증가했습니다. 현재 발사 확률: " + attackChance);
+                attackChance += 0.1f; // 공격 성공 확률 증가
+                Debug.Log("공격 성공 확률이 증가했습니다. 현재 발사 확률: " + attackChance);
                 break;
             default:
                 Debug.LogError("잘못된 선택입니다.");

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AllUnits;
 
-public class Weaponbullet : PlayerStats
+public class Weaponbullet :MonoBehaviour
 {
     private float destroyDelay = 2f; // 자동 파괴 지연 시간
 

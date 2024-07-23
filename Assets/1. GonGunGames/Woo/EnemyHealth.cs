@@ -4,16 +4,9 @@ using AllUnits;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int currentId;
-
+    public int currentId; // 인스펙터에서 설정할 수 있도록 public으로 설정
     public float currentDamage;
-
     public float currentHealth;
-
-    
-    int currentLevel;
-
-    bool isDamage;
 
     [SerializeField] private Slider e_hpBar;
     public bool isDead { get; private set; } = false;
@@ -23,11 +16,29 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = DataBase.Instance.enemyData.maxHealth;
-        currentDamage = DataBase.Instance.enemyData.damage;
-        SetMaxHealth(currentHealth);
+        // 인스펙터에서 설정된 currentId를 사용합니다.
+        // 또는 여기서 직접 설정할 수 있습니다.
+        // 예: currentId = 1;
+
+        // 특정 ID에 해당하는 적 정보를 가져옵니다.
+        EnemyInfo enemyInfo = DataBase.Instance.GetEnemyInfoById(currentId);
+
+        if (enemyInfo != null)
+        {
+            currentId = enemyInfo.id;
+            currentHealth = enemyInfo.maxHealth;
+            currentDamage = enemyInfo.damage;
+            SetMaxHealth(currentHealth);
+        }
+        else
+        {
+            Debug.LogError("Enemy with ID " + currentId + " not found.");
+        }
+
         commonMob = GetComponent<CommonMob>(); // CommonMob 컴포넌트를 가져옵니다.
     }
+
+
 
 
     private void SetMaxHealth(float hp)
@@ -38,10 +49,10 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Bullet") && isDamage)
+       
+        if (collision.collider.CompareTag("Bullet"))
         {
             Debug.Log("Damage ON");
-            isDamage = true;
             Weaponbullet bullet = collision.collider.GetComponent<Weaponbullet>();
             Weaponbullet2 bullet2 = collision.collider.GetComponent<Weaponbullet2>();
 
@@ -57,8 +68,6 @@ public class EnemyHealth : MonoBehaviour
                 float bulletDamage = weapon.attackDamage;
                 ApplyDamage(bulletDamage);
             }
-
-            isDamage = false; // Damage 처리 후 다시 false로 설정
         }
     }
 

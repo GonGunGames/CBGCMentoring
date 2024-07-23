@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Weaponbullet2 : PlayerStats
+public class Weaponbullet2 : MonoBehaviour
 {
     private float destroyDelay = 2f; // 자동 파괴 지연 시간
     public GameObject explosionPrefab; // 폭발 효과 프리팹
