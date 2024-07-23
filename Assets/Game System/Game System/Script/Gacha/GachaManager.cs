@@ -136,9 +136,8 @@ public class GachaManager : MonoBehaviour
         int rnd = UnityEngine.Random.Range(0, rewards.Length);
 
         ItemBase.ItemData finalReward = rewards[rnd];
-
-        InventoryManager.Instance.AddAmountOfItem(finalReward, 1);
-
+        InventoryManager.Instance.AddAmountOfItem(finalReward, 1, finalReward.info.baseStat.IDIDID);
+        
         return finalReward;
     }
 }
