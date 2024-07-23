@@ -82,13 +82,13 @@ public class ShopManager : MonoBehaviour
                 {
                     Gold -= item.price;
                     item.Attempt++;
-                    InventoryManager.Instance.AddAmountOfItem(item.data, 1);
+                    InventoryManager.Instance.AddAmountOfItem(item.data, 1, item.data.info.baseStat.IDIDID);
                 }
                 else if (item.typeCurrency == Currency.Diamond && Diamond >= item.price)
                 {
                     Diamond -= item.price;
                     item.Attempt++;
-                    InventoryManager.Instance.AddAmountOfItem(item.data, 1);
+                    InventoryManager.Instance.AddAmountOfItem(item.data, 1, item.data.info.baseStat.IDIDID);
                 }
             }
             else //If item you buy is Gold or Diamond

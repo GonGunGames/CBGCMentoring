@@ -9,7 +9,8 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     [Header("General")]
     public Camera mainCamera;
-    
+    public ItemInfo itemInfo;
+
     [Header("DataInventory")]
     public DataInventory inventoryData;
 
@@ -101,6 +102,8 @@ public class InventoryManager : Singleton<InventoryManager>
             
         }
         FilterTypeAndRarity(currentItemType, currentRarity);
+
+
     }
 
     private void Update()
@@ -193,7 +196,7 @@ public class InventoryManager : Singleton<InventoryManager>
             verticalSlash.SetActive(false);
             itemViewStatGroup.SetActive(false);
         }
-        else if (currentItem.data.info.baseStat.type != ItemType.Currency) //----3. If Item is Weapon -> Ring
+        else if (currentItem.data.info.baseStat.type != ItemType.Currency) //----3. If Item is Weapon -> Gloves
         {
             verticalSlash.SetActive(true);
             itemViewStatGroup.SetActive(true);
@@ -245,14 +248,6 @@ public class InventoryManager : Singleton<InventoryManager>
         else if(stat.type == StatType.Health)
         {
             return statSprites[3];
-        }
-        else if(stat.type == StatType.PhysicalDefense)
-        {
-            return statSprites[4];
-        }
-        else if (stat.type == StatType.MagicalDefense)
-        {
-            return statSprites[5];
         }
         return null;
     }
@@ -386,8 +381,10 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
-    public void AddAmountOfItem(ItemBase.ItemData data, int amount)
+    public void AddAmountOfItem(ItemBase.ItemData data, int amount, int id)
     {
+        //Debug.Log($"data: {data}, data.info: {data?.info}, data.info.baseStat: {data?.info?.baseStat}");
+
         bool newItem = false;
         if (data.info.prop.countable)
         {
@@ -434,7 +431,9 @@ public class InventoryManager : Singleton<InventoryManager>
                     //Initialize data for new item => Fix in the future because it should be init in shop system/craft/gacha.
                     //Means it should be initialized when the item was created, not when add to inventory.
                     InventoryItem item = itemAdd.GetComponent<InventoryItem>();
-                    item.data.ID = GenerateID();
+                    //item.data.ID = GenerateID();
+                    //Debug.Log($"item.data.ID 할당 전: data.info: {data.info}, data.info.baseStat: {data.info.baseStat}, data.info.baseStat.IDIDID: {data.info.baseStat.IDIDID}");
+                    item.data.ID = id;
                     item.data.info = data.info;
                     item.data.amount += amount;
                     item.data.currentStat = data.info.baseStat.stats;
