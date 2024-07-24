@@ -661,12 +661,16 @@ public class InventoryManager : Singleton<InventoryManager>
     /// </summary>
     public void QuitGame()
     {
+        Debug.Log("종료1");
         Application.Quit();
+        Debug.Log("종료2");
     }
 
 
     public void OnApplicationQuit()
     {
+        Debug.Log("저장중");
         DataInventory.SaveData(inventoryData);
+        Debug.Log("저장완료");
     }
 }

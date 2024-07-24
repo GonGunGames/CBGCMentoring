@@ -10,42 +10,42 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fa24ec97e3fcf64388c0f2cb2af70d9, type: 3}
-  m_Name: Uncommon - Assault Rifle
+  m_Name: Uncommon - Sniper
   m_EditorClassIdentifier: 
   prop:
     image: {fileID: 638316187, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
     countable: 0
-    itemName: Assault Rifle
+    itemName: Sniper
     specialStat: 
-    itemDescription: Basic Assault Rifle
+    itemDescription: Basic Sniper
   baseStat:
-    IDIDID: 112
+    IDIDID: 118
     type: 1
     rarity: 2
     requiredLevel: 1
     stats:
+    - type: 0
+      value: 40
     - type: 1
-      value: 20
-    - type: 2
-      value: 2
-    - type: 3
-      value: 20
+      value: 100
     - type: 4
-      value: 1.5
+      value: 2
     - type: 5
-      value: 1.5
+      value: 2
     - type: 8
-      value: 1.5
+      value: 2
     - type: 9
-      value: 0.9
-    - type: 12
-      value: 1.5
-    - type: 13
-      value: 20
+      value: 1
     - type: 15
-      value: 50
-    - type: 18
+      value: 15
+    - type: 16
+      value: 1
+    - type: 19
+      value: 1
+    - type: 20
       value: 40
     - type: 21
       value: 2
+    - type: 7
+      value: 1.2

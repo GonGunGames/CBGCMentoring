@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fa24ec97e3fcf64388c0f2cb2af70d9, type: 3}
-  m_Name: Uncommon - Helmet
+  m_Name: Rare - Armor
   m_EditorClassIdentifier: 
   prop:
     image: {fileID: -1438004089, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
     countable: 0
-    itemName: Helmet
+    itemName: Armor
     specialStat: 
-    itemDescription: Basic Helmet
+    itemDescription: Basic Armor
   baseStat:
-    IDIDID: 107
-    type: 4
-    rarity: 2
+    IDIDID: 102
+    type: 2
+    rarity: 3
     requiredLevel: 1
     stats:
     - type: 11
-      value: 40
+      value: 120
     - type: 14
-      value: 400
+      value: 1200
