@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using AllUnits;
 
-public class Weaponbullet :MonoBehaviour
+public class Weaponbullet : Unit
 {
     private float destroyDelay = 2f; // 자동 파괴 지연 시간
-
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        damage = 5f; // 무기 공격력 설정
         StartCoroutine(DestroyAfterDelay());
     }
     private void OnCollisionEnter(Collision collision)

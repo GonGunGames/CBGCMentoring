@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+// using static System.Net.Mime.MediaTypeNames;
+using UnityApp = UnityEngine.Application;
 
 public class DataBase : MonoBehaviour
 {
@@ -52,6 +54,15 @@ public class DataBase : MonoBehaviour
         WeaponList weaponList = new WeaponList { weaponData = weaponType.ToArray() };
         string jsonData = JsonUtility.ToJson(weaponList, true);
         string path = Path.Combine(Application.persistentDataPath, "weaponData.json");
+        File.WriteAllText(path, jsonData);
+    }
+
+    [ContextMenu("Save Spawn Data")]
+    void SaveSpawnDataToJson()
+    {
+        SpawnTableList spawnTableList = new SpawnTableList { spawnData = spawnTables.ToArray() };
+        string jsonData = JsonUtility.ToJson(spawnTableList, true);
+        string path = Path.Combine(Application.persistentDataPath, "spawnData.json");
         File.WriteAllText(path, jsonData);
     }
 

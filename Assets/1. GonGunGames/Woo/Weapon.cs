@@ -21,6 +21,9 @@ public class Weapon : MonoBehaviour
     public float burstInterval; // 연속 발사 간격 (초)
     public PlayerHealth health;
     public float nextFireTime; // 다음 발사 가능 시간
+    public int AttackDamageCount;
+    public int AttackSpeedCount;
+    public int AttackChanceCount;
 
     private Coroutine fireBurstCoroutine; // FireBurst 코루틴을 저장하기 위한 변수
     private WeaponInfo currentWeapon;
@@ -75,16 +78,30 @@ public class Weapon : MonoBehaviour
         switch (option)
         {
             case UpgradeOption.AttackSpeed:
+                AttackSpeedCount++;
                 attackSpeed -= 0.1f; // 공격 속도 증가 
                 Debug.Log("공격속도가 증가했습니다. 현재 공격속도: " + attackSpeed);
+                if (AttackSpeedCount == 5){
+                    attackSpeed -= 0.6f;
+                };
                 break;
             case UpgradeOption.AttackDamage:
-                attackDamage += 5; // 공격력 증가
+                AttackDamageCount++;
+                attackDamage += 20; // 공격력 증가           
                 Debug.Log("공격력이 증가했습니다. 현재 공격력: " + attackDamage);
+                if (AttackDamageCount == 5)
+                {
+                    attackDamage += 50;
+                };
                 break;
             case UpgradeOption.AttackChance:
+                AttackChanceCount++;
                 attackChance += 0.1f; // 공격 성공 확률 증가
                 Debug.Log("공격 성공 확률이 증가했습니다. 현재 발사 확률: " + attackChance);
+                if (AttackChanceCount == 5)
+                {
+                    attackChance += 0.5f;
+                };
                 break;
             default:
                 Debug.LogError("잘못된 선택입니다.");

@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     public bool isDead { get; private set; } = false;
     private bool isHit = false;
     private CommonMob commonMob;
+    private CommonMobB commonMobB;
     public Weapon weapon;
 
     private void Start()
@@ -49,7 +50,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-       
+
         if (collision.collider.CompareTag("Bullet"))
         {
             Debug.Log("Damage ON");
@@ -84,6 +85,5 @@ public class EnemyHealth : MonoBehaviour
         }
 
         isHit = true; // 적과 충돌 시 isHit를 true로 설정
-        commonMob.SetState(FSMState.Hit); // 피격 시 Hit 상태로 전환
     }
 }

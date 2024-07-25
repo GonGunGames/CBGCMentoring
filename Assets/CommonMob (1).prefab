@@ -293,6 +293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  animator: {fileID: 0}
+  controller: {fileID: 0}
   idleTime: 1
   moveSpeed: 0.5
   turnSpeed: 180
@@ -301,7 +303,6 @@ MonoBehaviour:
   fastMoveSpeed: 5
   aggroTime: 3
   enemyHealth: {fileID: 4287371314148859732}
-  player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
   deathPrefab: {fileID: 3402780874705691559, guid: b87acac54ab42a444a574ae5910feec5, type: 3}
 --- !u!143 &4946362813375649667
 CharacterController:
@@ -344,7 +345,7 @@ MonoBehaviour:
   currentId: 5
   currentDamage: 0
   currentHealth: 0
-  e_hpBar: {fileID: 7476303424977102099}
+  e_hpBar: {fileID: 0}
   weapon: {fileID: 1341522866263006105, guid: 4ba1a4ca55e6981449b71ccb6154c86c, type: 3}
 --- !u!1 &4842256833241295775
 GameObject:

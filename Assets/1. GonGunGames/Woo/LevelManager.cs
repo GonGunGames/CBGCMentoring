@@ -9,6 +9,9 @@ public class LevelManager : MonoBehaviour
     public Button attackSpeedButton;
     public Button attackDamageButton;
     public Button attackRangeButton;
+    public RawImage rawImage;
+    public Text leveltext;
+    public Text noticetext;
 
     private Action onUpgradeOptionsClosed; // 콜백을 저장할 변수
 
@@ -54,5 +57,8 @@ public class LevelManager : MonoBehaviour
         attackSpeedButton.gameObject.SetActive(isActive);
         attackDamageButton.gameObject.SetActive(isActive);
         attackRangeButton.gameObject.SetActive(isActive);
+        rawImage.gameObject.SetActive(isActive);
+        leveltext.gameObject.SetActive(isActive);
+        noticetext.gameObject.SetActive(isActive);
     }
 }
