@@ -74,7 +74,33 @@ public class PlayerHealth : MonoBehaviour
             isDamage = false; // Damage 처리 후 다시 false로 설정
         }
     }
-    private IEnumerator ResetIsHitAfterDelay(float delay)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy") && !isDamage)
+        {
+            isDamage = true;
+            HitBox hitBox = other.GetComponent<HitBox>();
+            if (hitBox != null)
+            {
+                Debug.Log("EnemyHealth와 HitBox 컴포넌트를 찾음");
+                float hitAttack = hitBox.attackdamage;
+                currentHealth -= hitAttack;
+                _hpBar.value = currentHealth;
+                if (currentHealth <= 0)
+                {
+                    isDead = true;
+                }
+                else
+                {
+                    isHit = true;
+                    StartCoroutine(ResetIsHitAfterDelay(3f));
+                }
+            }
+            isDamage = false;
+        }
+    }
+
+        private IEnumerator ResetIsHitAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         isHit = false; // 지연 후에 isHit를 false로 설정

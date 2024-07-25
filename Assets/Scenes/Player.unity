@@ -1731,9 +1731,27 @@ MonoBehaviour:
   spawnSchedules:
   - tableId: 1
     triggerTime: 0
-    interval: 20
+    interval: 10
   - tableId: 2
     triggerTime: 60
+    interval: 0
+  - tableId: 3
+    triggerTime: 0
+    interval: 60
+  - tableId: 4
+    triggerTime: 0
+    interval: 60
+  - tableId: 3
+    triggerTime: 0
+    interval: 60
+  - tableId: 3
+    triggerTime: 0
+    interval: 60
+  - tableId: 3
+    triggerTime: 0
+    interval: 60
+  - tableId: 3
+    triggerTime: 0
     interval: 60
   - tableId: 3
     triggerTime: 0
@@ -1989,7 +2007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData:
     name: asdasd
-    maxHealth: 222
+    maxHealth: 300
     currentLevel: 1
     currentExp: 0
     expToLevelUp: 100
@@ -2017,8 +2035,44 @@ MonoBehaviour:
       maxHealth: 200
       damage: 80
     - id: 6
-      name: Boss_01
+      name: Elite_06
       maxHealth: 400
+      damage: 60
+    - id: 7
+      name: Elite_07
+      maxHealth: 400
+      damage: 60
+    - id: 8
+      name: Elite_08
+      maxHealth: 400
+      damage: 60
+    - id: 9
+      name: Elite_09
+      maxHealth: 400
+      damage: 60
+    - id: 10
+      name: Elite_10
+      maxHealth: 400
+      damage: 60
+    - id: 11
+      name: Boss_1
+      maxHealth: 1000
+      damage: 60
+    - id: 12
+      name: Boss_2
+      maxHealth: 1000
+      damage: 60
+    - id: 13
+      name: Boss_3
+      maxHealth: 1000
+      damage: 60
+    - id: 14
+      name: Boss_4
+      maxHealth: 1000
+      damage: 60
+    - id: 15
+      name: Boss_5
+      maxHealth: 1000
       damage: 60
   weaponType:
   - gunId: 1
@@ -2045,14 +2099,35 @@ MonoBehaviour:
   - tableId: 2
     monsterIds: 040000000500000001000000010000000200000003000000
   - tableId: 3
-    monsterIds: 06000000
+    monsterIds: 010000000200000004000000050000000100000002000000
+  - tableId: 4
+    monsterIds: 010000000200000004000000050000000100000002000000
+  - tableId: 5
+    monsterIds: 010000000200000004000000050000000100000002000000
+  - tableId: 6
+    monsterIds: 0600000005000000
+  - tableId: 7
+    monsterIds: 0700000008000000
+  - tableId: 8
+    monsterIds: 0800000009000000
+  - tableId: 9
+    monsterIds: 0a000000
   monsterPrefabs:
-  - {fileID: 5328421219649580403, guid: 413c1c98316851c4dae8abca8489a3e4, type: 3}
-  - {fileID: 7597810684385870420, guid: 36aaa072398ae704bb76801e2e1ced9f, type: 3}
-  - {fileID: 6170031427976494239, guid: 861852b3495096640a6fdfd8899af6e3, type: 3}
-  - {fileID: 3040020723140953905, guid: bf9eafde2bdd0c944a64e69961e6a856, type: 3}
-  - {fileID: 5832269946465963658, guid: db28d9ee192de3c4d9f938f457bbb56b, type: 3}
-  - {fileID: 6266429299291169695, guid: 7e7855182d8888e47a1f46f5f88492b4, type: 3}
+  - {fileID: 7125178182998182048, guid: cddd744e5e0fe7848bc060b4dd9e28dd, type: 3}
+  - {fileID: 401355436703469182, guid: f91c91333a2555c42b86f30f58ed6415, type: 3}
+  - {fileID: 1895339597246568999, guid: fc15ce423b672ab418f2e81748b2abdb, type: 3}
+  - {fileID: 8597572437820063218, guid: c6a8ec8fd2422b545bca431109af003c, type: 3}
+  - {fileID: 523718257550782695, guid: b5274d7269e8df24086f4714a88f1bd7, type: 3}
+  - {fileID: 1313451114104010478, guid: ffa82d308029922429d14fcb903c7f6f, type: 3}
+  - {fileID: 2698702039568066387, guid: 22ba5ae45a9ebf24ea0c2d5c885d95df, type: 3}
+  - {fileID: 37318212971319319, guid: 2ccff4c9eef4852448570e5b7178766b, type: 3}
+  - {fileID: 6524473473708282373, guid: 33628bb89a520ec47b27f4a2b1a11a91, type: 3}
+  - {fileID: 3097455423403343128, guid: e5023e587f7ad0d46a6e17e9c366b1e8, type: 3}
+  - {fileID: 7001260569789979294, guid: b2869ab10f059eb46ba31e9d3b4b540a, type: 3}
+  - {fileID: 7889670066033090832, guid: 222cf980fc50e2f4d82c2045a9db572b, type: 3}
+  - {fileID: 5289255735730365812, guid: 3c9ee1b92d115bd4c8cb4b8741045b34, type: 3}
+  - {fileID: 5575446776493164258, guid: 09f1c114064de304db5e097dec6e56e8, type: 3}
+  - {fileID: 8923121374777257822, guid: b20dc4a2928a4d44d82a64288172e85f, type: 3}
 --- !u!4 &1244531025
 Transform:
   m_ObjectHideFlags: 0
@@ -4076,7 +4151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c269c13101ac2ca47840c1dd79d2406b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerExp: {fileID: 0}
+  playerExp: {fileID: 4716468619935254538}
   weapon: {fileID: 7509607317436997688}
   attackSpeedButton: {fileID: 6747346139946510039}
   attackDamageButton: {fileID: 3082140425004201655}
@@ -4505,6 +4580,7 @@ GameObject:
   - component: {fileID: 2643422210246214297}
   - component: {fileID: 2402497576132649801}
   - component: {fileID: 2737074812541898516}
+  - component: {fileID: 5253338929753386776}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4512,6 +4588,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5253338929753386776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253338929753386775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd16d28a637eb4148ad919c77a3e1907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTextPrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!1 &5287476035093864132
 GameObject:
   m_ObjectHideFlags: 0

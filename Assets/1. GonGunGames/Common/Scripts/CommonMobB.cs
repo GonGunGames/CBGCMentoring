@@ -17,7 +17,7 @@ public class CommonMobB : BaseFSM
     private bool isCooldown = false;
     private float sAttackDuration = 0.6f;
 
-    public GameObject player;
+    private GameObject player; // 플레이어를 GameObject로 변경
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
@@ -25,6 +25,12 @@ public class CommonMobB : BaseFSM
     {
         base.Start();
         health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.LogError("Player with tag 'Player' not found in the scene.");
+        }
     }
 
     protected override IEnumerator Idle()

@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     public bool isDead { get; private set; } = false;
     public bool isHit = false;
     private CommonMob commonMob;
+    private CommonMobN commonMobN;
     private CommonMobB commonMobB;
     public Weapon weapon;
 
@@ -83,7 +84,11 @@ public class EnemyHealth : MonoBehaviour
             isDead = true;
             // 적 사망 시 추가 로직 (예: 애니메이션, 아이템 드랍 등) 처리
         }
-
         isHit = true; // 적과 충돌 시 isHit를 true로 설정
+        commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
+        commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
+        commonMobB?.SetState(FSMState.Hit);
+        // 피격 시 추가 로직 처리 (예: 애니메이션, 효과 등)
+
     }
 }

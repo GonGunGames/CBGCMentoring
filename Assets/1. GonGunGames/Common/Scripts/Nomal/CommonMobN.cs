@@ -28,6 +28,12 @@ public class CommonMobN : BaseFSM
     protected override void Start()
     {
         base.Start();
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.LogError("Player with tag 'Player' not found in the scene.");
+        }
     }
 
     protected override IEnumerator Idle()

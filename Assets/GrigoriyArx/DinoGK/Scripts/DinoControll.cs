@@ -1,3 +1,4 @@
+using AlmostEngine.Preview;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class DinoControll : MonoBehaviour
     [SerializeField] private Transform dinoTransform;
     [SerializeField] private Transform youngDinoLeftEye, youngDinoRightEye;
     [SerializeField] private Transform oldDinoLeftEye, oldDinoRightEye;
+    [SerializeField] private HitBox hitbox;
 
     private Vector2 dinoMinMaxScale;
     private int dinoState = 0;
@@ -34,6 +36,11 @@ public class DinoControll : MonoBehaviour
         SetGrowth(DinoAge * 0.1f); // DinoAge에 따라 초기 성장 설정
     }
 
+    public void EnableHitBox()
+    {
+
+        hitbox.EnableHitBox();
+    }
     void Update()
     {
         if (dinoState == 17) dinoState = 0;
