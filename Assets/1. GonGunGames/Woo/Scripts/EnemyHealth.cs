@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private Slider e_hpBar;
     public bool isDead { get; private set; } = false;
-    private bool isHit = false;
+    public bool isHit = false;
     private CommonMob commonMob;
     private CommonMobB commonMobB;
     public Weapon weapon;

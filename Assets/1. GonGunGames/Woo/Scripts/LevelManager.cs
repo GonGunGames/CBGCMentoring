@@ -4,7 +4,7 @@ using System;
 
 public class LevelManager : MonoBehaviour
 {
-    public PlayerStats playerStats;
+    public PlayerExp playerExp;
     public Weapon weapon;
     public Button attackSpeedButton;
     public Button attackDamageButton;

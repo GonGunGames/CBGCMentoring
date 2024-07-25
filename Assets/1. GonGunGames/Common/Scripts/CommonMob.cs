@@ -192,7 +192,7 @@ public class CommonMob : BaseFSM
         // Hit 상태 로직
         // 피격 애니메이션 재생 등
         yield return new WaitForSeconds(0.5f); // Hit 애니메이션 시간만큼 대기
-
+        
         if (enemyHealth.currentHealth <= 0)
         {
             SetState(FSMState.Dead);
