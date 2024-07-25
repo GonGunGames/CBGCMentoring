@@ -3,13 +3,14 @@ using UnityEngine.UI;
 using AllUnits;
 using TMPro;
 using Unity.Burst.CompilerServices;
+using JetBrains.Annotations;
 
 public class EnemyHealth : Unit
 {
     [SerializeField] private Slider e_hpBar;
     public bool isDead { get; private set; }
     private bool isHit = false;
-
+    public float attackdamage;
     [SerializeField]
     private CommonMob commonMob; // 기존 CommonMob
     [SerializeField]
@@ -38,7 +39,7 @@ public class EnemyHealth : Unit
     protected override void Start()
     {
         base.Start();
-        damage = 50f; // 적의 공격력을 50으로 설정
+        attackdamage = damage;  // 적의 공격력을 50으로 설정
     }
 
     private void SetMaxHealth(float hp)

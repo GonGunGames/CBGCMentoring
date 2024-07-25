@@ -31,11 +31,13 @@ public class PlayerHealth : Unit
     {
         if (collision.collider.CompareTag("Enemy") && !isDamage)
         {
+            
             isDamage = true;
             // Enemy의 damage 값을 가져오기 위해 Enemy 스크립트를 참조합니다.
             EnemyHealth enemy = collision.collider.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
+                Debug.Log("dhdlsghks");
                 float enemyAttack = enemy.damage; // 적의 공격력 가져오기
                 currentHealth -= enemyAttack;
                 _hpBar.value = currentHealth;
@@ -50,6 +52,31 @@ public class PlayerHealth : Unit
                 }
             }
             isDamage = false; // Damage 처리 후 다시 false로 설정
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy") && !isDamage)
+        {
+            isDamage = true;
+            HitBox hitBox = other.GetComponent<HitBox>();
+            if (hitBox != null)
+            {
+                Debug.Log("EnemyHealth와 HitBox 컴포넌트를 찾음");
+                float hitAttack = hitBox.attackdamage;
+                currentHealth -= hitAttack;
+                _hpBar.value = currentHealth;
+                if (currentHealth <= 0)
+                {
+                    isDead = true;
+                }
+                else
+                {
+                    isHit = true;
+                    StartCoroutine(ResetIsHitAfterDelay(3f));
+                }
+            }
+            isDamage = false;
         }
     }
 
