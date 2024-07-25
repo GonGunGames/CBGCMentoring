@@ -30,7 +30,7 @@ public class ItemViewToggle : MonoBehaviour
     // 토글 상태가 변경될 때 호출되는 메서드
     void OnToggleValueChanged(bool isOn)
     {
-        Debug.Log(isOn);
+        //Debug.Log(isOn);
         // 하이어라키 객체 활성/비활성화
         if (targetObject != null && isOn == true)
         {

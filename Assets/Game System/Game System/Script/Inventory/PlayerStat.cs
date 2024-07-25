@@ -29,7 +29,7 @@ public class PlayerStat : Singleton<PlayerStat>
         playerCP_TMP.text = playerCP.ToString();
 
         string path = Application.persistentDataPath + "/playerData.json";
-        print(path);
+        //print(path);
     }
     void InitializePlayerStatFromData()
     {
