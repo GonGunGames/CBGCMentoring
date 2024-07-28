@@ -129,7 +129,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     private void DisplayUpgradeCurrentStat()
     {
-        int len = upgradeItem.data.currentStat.Length;
+        int len = 4;// upgradeItem.data.currentStat.Length;
         for(int i = 0; i < len; i++)
         {
             currentStats[i].DisplayInfo(true);
@@ -155,7 +155,7 @@ public class UpgradeManager : MonoBehaviour
 
         previewItem.levelText.color = Color.green;
 
-        int len = upgradeItem.data.currentStat.Length;
+        int len = 4;// upgradeItem.data.currentStat.Length;
         for (int i = 0; i < len; i++)
         {
             previewStats[i].DisplayInfo(true);
