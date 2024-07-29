@@ -12823,6 +12823,38 @@ MonoBehaviour:
     icon: {fileID: 14323221, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
   - stat: 5
     icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 6
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 7
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 8
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 9
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 10
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 11
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 12
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 13
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 14
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 15
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 16
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 17
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 18
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 19
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 20
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
+  - stat: 21
+    icon: {fileID: -2076510246, guid: 19101898984fb1a4f9acc1d4a92d472f, type: 3}
   frameMaterials:
   - rarity: 5
     material: {fileID: 2100000, guid: 093a392e16eabf64d923e0bda4e85b14, type: 2}
@@ -24319,69 +24351,124 @@ MonoBehaviour:
   gacha:
   - rarity: Legendary
     rate: 1
-    rewards:
-    - ID: 0
-      info: {fileID: 11400000, guid: 3b9df0dee788be8439eb75fff732939a, type: 2}
-      amount: 0
-      currentLevel: 0
-      currentStat: []
+    rewards: []
   - rarity: Mythical
-    rate: 2
-    rewards:
-    - ID: 0
-      info: {fileID: 11400000, guid: 466035c1d7dffc642a50044bd42508e4, type: 2}
-      amount: 0
-      currentLevel: 0
-      currentStat: []
-    - ID: 0
-      info: {fileID: 11400000, guid: 1af94cec6522eee498939aac43c4578d, type: 2}
-      amount: 0
-      currentLevel: 0
-      currentStat: []
+    rate: 1
+    rewards: []
   - rarity: Epic
-    rate: 5
-    rewards:
-    - ID: 0
-      info: {fileID: 11400000, guid: b1f93c08b17cfc443a4d7bf360929834, type: 2}
-      amount: 0
-      currentLevel: 0
-      currentStat: []
-    - ID: 0
-      info: {fileID: 11400000, guid: 9c9278f04c9bbdd45a9e6c79a2c2290b, type: 2}
-      amount: 0
-      currentLevel: 0
-      currentStat: []
+    rate: 1
+    rewards: []
   - rarity: Rare
-    rate: 15
+    rate: 10
     rewards:
     - ID: 0
-      info: {fileID: 11400000, guid: 91c7aadb4fa7a99438bf9ac16b440f8a, type: 2}
+      info: {fileID: 11400000, guid: 68590569aae2c20428f309621b765c8e, type: 2}
       amount: 0
       currentLevel: 0
       currentStat: []
     - ID: 0
-      info: {fileID: 11400000, guid: 588ea69216f3dc240aead3eed33cb812, type: 2}
+      info: {fileID: 11400000, guid: 3e7c8d37e65cead4fb0e1ba5cc553732, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 42deb6c5d8517db46b5230fcef04dc50, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 9e7d72eeffaf2264f82a54541971bdb3, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 71fd06432f68d3d478a59cd3fa40c41c, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 39e944b5750607940a99afccb9b4a0fb, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 16ee69a02020e6d48bdb12dbaf7e1e06, type: 2}
       amount: 0
       currentLevel: 0
       currentStat: []
   - rarity: Uncommon
-    rate: 25
+    rate: 30
     rewards:
     - ID: 0
-      info: {fileID: 11400000, guid: e6a7c25de8063d848b17c41e9ae13331, type: 2}
+      info: {fileID: 11400000, guid: c1dfb6a61cdbad542a2ae54cd88e8e1d, type: 2}
       amount: 0
       currentLevel: 0
       currentStat: []
     - ID: 0
-      info: {fileID: 11400000, guid: ada88043a78cd5c4cb9c13b18074c49f, type: 2}
+      info: {fileID: 11400000, guid: c22a7f8e33b00c74f916f9665aa06102, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: ba7567975af4b124e9a6dd6f4f5c8197, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: a5fa61093f268874896f74298c7e2438, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: be6b3de2da61f7240b572042496ebcde, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 54e81d4964af1ed4ab717696aeb64691, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: c08f2023cd635a04a86be3ca19c93934, type: 2}
       amount: 0
       currentLevel: 0
       currentStat: []
   - rarity: Common
-    rate: 52
+    rate: 60
     rewards:
     - ID: 0
-      info: {fileID: 11400000, guid: a857a2bc44834b543ab8d17a3d9812ae, type: 2}
+      info: {fileID: 11400000, guid: 70faa09ed26c71c4ab5bebc9e8b245c5, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: b948e843d33c3c6428ad3afb0fad6bc2, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 7df65ff2be782894f80a255e3699362e, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 90e590b1a99ca8144927ebe7c6dc678f, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: 862f8724d2e03ce43b3d4dd973c5443d, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: c6055d8d68908954f878c27d1c20cffc, type: 2}
+      amount: 0
+      currentLevel: 0
+      currentStat: []
+    - ID: 0
+      info: {fileID: 11400000, guid: c0314ddaed8b78d409a9c2ceee44e9ac, type: 2}
       amount: 0
       currentLevel: 0
       currentStat: []

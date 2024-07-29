@@ -204,7 +204,7 @@ public class InventoryManager : Singleton<InventoryManager>
             {
                 stat.gameObject.SetActive(false);
             }
-            int statLen = 4; // currentItem.data.currentStat.Length;
+            int statLen = currentItem.data.currentStat.Length;
             for (int i = 0; i < statLen; i++)
             {
                 itemStats[i].gameObject.SetActive(true);
