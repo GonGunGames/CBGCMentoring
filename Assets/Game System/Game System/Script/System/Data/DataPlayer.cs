@@ -17,7 +17,7 @@ public class DataPlayer : ScriptableObject
     {
         level = 1;
         gold = 1000000;
-        diamond = 110;
+        diamond = 1000000;
         combatPower = 0;
 
         for (int i = 0; i < additionalStats.Length; i++)

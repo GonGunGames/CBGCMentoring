@@ -19,6 +19,7 @@ public class ShopManager : MonoBehaviour
         set
         {
             playerStat.playerData.diamond = value;
+            goldText.text = playerStat.playerData.gold.ToString();
             diamondText.text = value.ToString();
         }
     }
@@ -32,6 +33,7 @@ public class ShopManager : MonoBehaviour
         {
             playerStat.playerData.gold = value;
             goldText.text = value.ToString();
+            diamondText.text = playerStat.playerData.diamond.ToString();
         }
     }
     public Sprite[] currencySprites;
@@ -89,15 +91,6 @@ public class ShopManager : MonoBehaviour
                     Diamond -= item.price;
                     item.Attempt++;
                     InventoryManager.Instance.AddAmountOfItem(item.data, 1, item.data.info.baseStat.IDIDID);
-                }
-            }
-            else //If item you buy is Gold or Diamond
-            {
-                if (item.typeCurrency == Currency.Diamond && Diamond >= item.price)
-                {
-                    Diamond -= item.price;
-                    item.Attempt++;
-                    Gold += item.price * 10;
                 }
             }
         }
