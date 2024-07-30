@@ -27,23 +27,27 @@ public class PlayerStats : MonoBehaviour
         if (DataPlayer.LoadData() != null)
         {
             playerData = DataPlayer.LoadData();
+        
         }
+        playerStats = new float[playerData.baseStats.Length];
+
     }
 
-    public void GetStats()
+    public float GetStats(StatType statType)
     {
-
-        for (int i = 0; i < playerData.baseStats.Length; i++)
+        /*for (int i = 0; i < playerData.baseStats.Length; i++)
         {
             playerStats[i] = playerData.additionalStats[i].value + playerData.baseStats[i].value;
-            Debug.Log(playerStats[i]);
-        }
+            
+        }*/
+        playerStats[((int)statType)] = playerData.additionalStats[((int)statType)].value + playerData.baseStats[((int)statType)].value;
+        return playerStats[((int)statType)];
     }
 
     void Start()
     {
 
-        GetStats();
+        //GetStats();
 
     }
 
