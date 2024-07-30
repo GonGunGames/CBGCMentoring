@@ -7,6 +7,36 @@ using UnityEngine.UI;
 
 public class GachaManager : MonoBehaviour
 {
+    public PlayerStat playerStat;
+
+    [SerializeField] TextMeshProUGUI diamondText;
+    [SerializeField] TextMeshProUGUI goldText;
+
+    public int Diamond
+    {
+        get
+        {
+            return playerStat.playerData.diamond;
+        }
+        set
+        {
+            playerStat.playerData.diamond = value;
+            diamondText.text = value.ToString();
+        }
+    }
+    public int Gold
+    {
+        get
+        {
+            return playerStat.playerData.gold;
+        }
+        set
+        {
+            playerStat.playerData.gold = value;
+            goldText.text = value.ToString();
+        }
+    }
+
     [SerializeField] GachaRate[] gacha;
     [SerializeField] Transform cardParent;
     [SerializeField] List<TextMeshProUGUI> UIRate;
@@ -42,20 +72,31 @@ public class GachaManager : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < gacha.Length; i++ )
+        Diamond = playerStat.playerData.diamond;
+        Gold = playerStat.playerData.gold;
+        for (int i = 0; i < gacha.Length; i++ )
         {
             UIRate[i].text = gacha[i].rate.ToString() + "%";
         }
     }
+
     public void GachaOneTime()
     {
         int emptySlotCount = InventoryManager.Instance.IsEmptySlot();
-        if (emptySlotCount < 1)
+
+        if (Diamond < 10)
         {
-            // 가챠 불가능 알림창
-            Debug.Log("1번 가챠 불가능");
+            Debug.Log("1번 가챠 : 다이아 부족");
             return;
         }
+
+        if (emptySlotCount < 1)
+        {
+            Debug.Log("1번 가챠 : 인벤토리 부족");
+            return;
+        }
+
+        Diamond -= 10;
 
         for (int i = 1; i < rewardGOs.Length; i++) //Set active false for all other reward
         {
@@ -90,12 +131,21 @@ public class GachaManager : MonoBehaviour
     public void GachaTenTime()
     {
         int emptySlotCount = InventoryManager.Instance.IsEmptySlot();
+
+        if (Diamond < 95)
+        {
+            Debug.Log("10번 가챠 : 다이아 부족");
+            return;
+        }
+
         if (emptySlotCount < 10)
         {
-            Debug.Log("10번 가챠 불가능");
+            Debug.Log("10번 가챠 : 인벤토리 공간 부족");
             // 가챠 불가능 알림창
             return;
         }
+
+        Diamond -= 95;
 
         for (int i = 0; i < 10; i++)
         {

@@ -23009,7 +23009,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1 Time
+  m_text: '<sprite name=Diamond Icon> 10
+
+    1 Time'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80e5db961a8c22a4d85e7c8de87df8ac, type: 2}
   m_sharedMaterial: {fileID: 734049897934466843, guid: 80e5db961a8c22a4d85e7c8de87df8ac, type: 2}
@@ -30858,6 +30860,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a95e31a6eaeb5f41808cac4f8a4686f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStat: {fileID: 767146022}
+  diamondText: {fileID: 1608098587}
+  goldText: {fileID: 989329364}
   gacha:
   - rarity: Legendary
     rate: 0
@@ -32767,7 +32772,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10 Times
+  m_text: '<sprite name=Diamond Icon> 95
+
+    10 Times'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80e5db961a8c22a4d85e7c8de87df8ac, type: 2}
   m_sharedMaterial: {fileID: 734049897934466843, guid: 80e5db961a8c22a4d85e7c8de87df8ac, type: 2}
@@ -46641,7 +46648,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1938277016}
-  - component: {fileID: 1938277017}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -46670,18 +46676,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1938277017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938277015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc3b09a3cfb4f04d93e79c41c0bc7f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1941725376
 GameObject:
   m_ObjectHideFlags: 0
