@@ -71,6 +71,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Awake()
     {
+
         DataInventory.LoadData(inventoryData);
 
         //Hide all the item stats in baseStat view
@@ -629,6 +630,22 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
+    }
+
+    public int IsEmptySlot()
+    {
+        int i = 0;
+        foreach (GameObject unlockedSlot in unlockedSlots)
+        {
+            InventorySlot slot = unlockedSlot.GetComponent<InventorySlot>();
+            if (slot.isEmpty)
+            {
+                i++;
+            }
+        }
+        if (i > 0)
+            return i;
+        return 0;
     }
 
     /// <summary>

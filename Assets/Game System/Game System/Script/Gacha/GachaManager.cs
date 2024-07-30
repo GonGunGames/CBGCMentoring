@@ -49,6 +49,14 @@ public class GachaManager : MonoBehaviour
     }
     public void GachaOneTime()
     {
+        int emptySlotCount = InventoryManager.Instance.IsEmptySlot();
+        if (emptySlotCount < 1)
+        {
+            // 가챠 불가능 알림창
+            Debug.Log("1번 가챠 불가능");
+            return;
+        }
+
         for (int i = 1; i < rewardGOs.Length; i++) //Set active false for all other reward
         {
             if (rewardGOs[i] != null)
@@ -81,6 +89,14 @@ public class GachaManager : MonoBehaviour
 
     public void GachaTenTime()
     {
+        int emptySlotCount = InventoryManager.Instance.IsEmptySlot();
+        if (emptySlotCount < 10)
+        {
+            Debug.Log("10번 가챠 불가능");
+            // 가챠 불가능 알림창
+            return;
+        }
+
         for (int i = 0; i < 10; i++)
         {
             if (rewardGOs[i] != null)
@@ -117,7 +133,7 @@ public class GachaManager : MonoBehaviour
     public class GachaRate
     {
         public string rarity;
-        [Range(1, 100)] // To Show the Slider in Inspector
+        [Range(0, 100)] // To Show the Slider in Inspector
         public int rate;
         public ItemBase.ItemData[] rewards;
     }
@@ -131,6 +147,7 @@ public class GachaManager : MonoBehaviour
         int rnd = UnityEngine.Random.Range(0, rewards.Length);
 
         ItemBase.ItemData finalReward = rewards[rnd];
+
         InventoryManager.Instance.AddAmountOfItem(finalReward, 1, finalReward.info.baseStat.IDIDID);
         
         return finalReward;

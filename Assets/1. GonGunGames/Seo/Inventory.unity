@@ -9218,8 +9218,8 @@ MonoBehaviour:
   SlotFree: {fileID: 6856829134547613079, guid: 7f5a11be6c7ecfe45a6cd5d104c563f1, type: 3}
   ItemPrefab: {fileID: 8101133388274673269, guid: 9531d25a5aefd4a4596a4af1da5907ab, type: 3}
   unlockNoti: {fileID: 0}
-  inventorySize: 50
-  inventoryLockedSize: 50
+  inventorySize: 200
+  inventoryLockedSize: 0
   canExpand: 0
   AddEmptyCells: 1
   unlockedSlots: []
@@ -24350,13 +24350,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gacha:
   - rarity: Legendary
-    rate: 1
+    rate: 0
     rewards: []
   - rarity: Mythical
-    rate: 1
+    rate: 0
     rewards: []
   - rarity: Epic
-    rate: 1
+    rate: 0
     rewards: []
   - rarity: Rare
     rate: 10
