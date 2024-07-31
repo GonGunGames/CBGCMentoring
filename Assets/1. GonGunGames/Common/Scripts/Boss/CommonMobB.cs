@@ -21,7 +21,8 @@ public class CommonMobB : BaseFSM
     private float lastRoarAttackTime = 0f; // 마지막 RoarAttack 발동 시간
 
     public GameObject player;
-    [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
+    [SerializeField] private GameObject deathPrefab;
+    [SerializeField] private GameObject expPrefab;// Dead 상태에서 스폰할 프리팹
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
     protected override void Start()
@@ -312,6 +313,7 @@ public class CommonMobB : BaseFSM
         yield return new WaitForSeconds(1f);
 
         Instantiate(deathPrefab, transform.position, transform.rotation);
+        Instantiate(expPrefab, transform.position, transform.rotation);
 
         Destroy(gameObject);
     }
