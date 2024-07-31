@@ -268,13 +268,29 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             return statSprites[1];
         }
-        else if (stat.type == StatType.Health)
+        else if (stat.type == StatType.AttackRange)
         {
             return statSprites[2];
         }
-        else if (stat.type == StatType.Defense)
+        else if (stat.type == StatType.BulletSpread)
         {
             return statSprites[3];
+        }
+        else if (stat.type == StatType.ExplosionRange)
+        {
+            return statSprites[4];
+        }
+        else if (stat.type == StatType.ReloadTime)
+        {
+            return statSprites[5];
+        }
+        else if (stat.type == StatType.Health)
+        {
+            return statSprites[6];
+        }
+        else if (stat.type == StatType.Defense)
+        {
+            return statSprites[7];
         }
         return null;
     }
