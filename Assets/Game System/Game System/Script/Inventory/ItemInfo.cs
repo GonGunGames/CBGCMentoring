@@ -17,6 +17,7 @@ public class ItemInfo : ScriptableObject
     [System.Serializable]
     public class ItemStat
     {
+        public int IDIDID;
         public ItemType type;
         public Rarity rarity;
         public int requiredLevel = 1;

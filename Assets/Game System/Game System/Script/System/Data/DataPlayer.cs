@@ -17,14 +17,14 @@ public class DataPlayer : ScriptableObject
     {
         level = 1;
         gold = 1000000;
-        diamond = 100000;
+        diamond = 1000000;
         combatPower = 0;
 
         for (int i = 0; i < additionalStats.Length; i++)
         {
             additionalStats[i].value = 0;
         }
-        File.Delete(Application.persistentDataPath + "/playerData.json");
+        File.Delete(Application.persistentDataPath + "/player.json");
     }
     public static void SaveData(DataPlayer data)
     {
@@ -37,12 +37,12 @@ public class DataPlayer : ScriptableObject
         saveData.additionalStats = data.additionalStats;
 
         string json = JsonUtility.ToJson(saveData);
-        File.WriteAllText(Application.persistentDataPath + "/playerData.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/player.json", json);
     }
 
     public static DataPlayer LoadData()
     {
-        string path = Application.persistentDataPath + "/playerData.json";
+        string path = Application.persistentDataPath + "/player.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);

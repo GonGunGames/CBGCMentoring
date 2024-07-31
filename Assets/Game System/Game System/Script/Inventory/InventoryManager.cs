@@ -9,7 +9,8 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     [Header("General")]
     public Camera mainCamera;
-    
+    public ItemInfo itemInfo;
+
     [Header("DataInventory")]
     public DataInventory inventoryData;
 
@@ -70,6 +71,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Awake()
     {
+
         DataInventory.LoadData(inventoryData);
 
         //Hide all the item stats in baseStat view
@@ -101,6 +103,8 @@ public class InventoryManager : Singleton<InventoryManager>
             
         }
         FilterTypeAndRarity(currentItemType, currentRarity);
+
+
     }
 
     private void Update()
@@ -193,7 +197,7 @@ public class InventoryManager : Singleton<InventoryManager>
             verticalSlash.SetActive(false);
             itemViewStatGroup.SetActive(false);
         }
-        else if (currentItem.data.info.baseStat.type != ItemType.Currency) //----3. If Item is Weapon -> Ring
+        else if (currentItem.data.info.baseStat.type != ItemType.Currency) //----3. If Item is Weapon -> Gloves
         {
             verticalSlash.SetActive(true);
             itemViewStatGroup.SetActive(true);
@@ -238,21 +242,13 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             return statSprites[1];
         }
-        else if (stat.type == StatType.AttackRange)
+        else if (stat.type == StatType.Health)
         {
             return statSprites[2];
         }
-        else if(stat.type == StatType.Health)
+        else if(stat.type == StatType.Defense)
         {
             return statSprites[3];
-        }
-        else if(stat.type == StatType.PhysicalDefense)
-        {
-            return statSprites[4];
-        }
-        else if (stat.type == StatType.MagicalDefense)
-        {
-            return statSprites[5];
         }
         return null;
     }
@@ -386,8 +382,10 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
-    public void AddAmountOfItem(ItemBase.ItemData data, int amount)
+    public void AddAmountOfItem(ItemBase.ItemData data, int amount, int id)
     {
+        //Debug.Log($"data: {data}, data.info: {data?.info}, data.info.baseStat: {data?.info?.baseStat}");
+
         bool newItem = false;
         if (data.info.prop.countable)
         {
@@ -434,7 +432,9 @@ public class InventoryManager : Singleton<InventoryManager>
                     //Initialize data for new item => Fix in the future because it should be init in shop system/craft/gacha.
                     //Means it should be initialized when the item was created, not when add to inventory.
                     InventoryItem item = itemAdd.GetComponent<InventoryItem>();
-                    item.data.ID = GenerateID();
+                    //item.data.ID = GenerateID();
+                    //Debug.Log($"item.data.ID 할당 전: data.info: {data.info}, data.info.baseStat: {data.info.baseStat}, data.info.baseStat.IDIDID: {data.info.baseStat.IDIDID}");
+                    item.data.ID = id;
                     item.data.info = data.info;
                     item.data.amount += amount;
                     item.data.currentStat = data.info.baseStat.stats;
@@ -632,6 +632,22 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
+    public int IsEmptySlot()
+    {
+        int i = 0;
+        foreach (GameObject unlockedSlot in unlockedSlots)
+        {
+            InventorySlot slot = unlockedSlot.GetComponent<InventorySlot>();
+            if (slot.isEmpty)
+            {
+                i++;
+            }
+        }
+        if (i > 0)
+            return i;
+        return 0;
+    }
+
     /// <summary>
     /// Just remove all items from the inventory, but not remove it from data.
     /// </summary>
@@ -662,12 +678,16 @@ public class InventoryManager : Singleton<InventoryManager>
     /// </summary>
     public void QuitGame()
     {
+        Debug.Log("종료1");
         Application.Quit();
+        Debug.Log("종료2");
     }
 
 
     public void OnApplicationQuit()
     {
+        Debug.Log("저장중");
         DataInventory.SaveData(inventoryData);
+        Debug.Log("저장완료");
     }
 }

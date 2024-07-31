@@ -31,7 +31,9 @@ public class InventoryItem : ItemBase
                 slot.DisplayCountText(false, data.amount);
             }
             levelText.gameObject.SetActive(true);
-            levelText.text = "+" + data.currentLevel.ToString();
+
+            if (data.currentLevel != 0)
+                levelText.text = "Lv. " + data.currentLevel.ToString();
         }
     }
 

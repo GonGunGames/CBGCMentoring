@@ -3,10 +3,10 @@ public enum ItemType
     Currency = 0,
     Weapon = 1,
     Armor = 2,
-    Shoes = 3,
+    Pants = 3,
     Helmet = 4,
-    Necklace = 5,
-    Ring = 6,
+    Pet = 5,
+    Gloves = 6,
 
     Equipment = 7,
 
