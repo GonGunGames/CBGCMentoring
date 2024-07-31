@@ -9,6 +9,10 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI diamondText;
     [SerializeField] TextMeshProUGUI goldText;
+    [SerializeField] TextMeshProUGUI[] timeText;
+
+    int min = 0;
+    int sec = 0;
 
     public int Diamond
     {
@@ -55,8 +59,6 @@ public class ShopManager : MonoBehaviour
     }
     public shopContainer[] shopContainers;
 
-    public List<int> times;
-
     public void Awake()
     {
         Instance = this;
@@ -72,6 +74,40 @@ public class ShopManager : MonoBehaviour
             Refresh(i);
         }
         DisplayMenu(0);
+        StartCoroutine(RefreshTime());
+    }
+
+    IEnumerator RefreshTime()
+    {
+        while (true)
+        {
+            if (min <= 0 && sec <= 0)
+            {
+                for (int i = 0; i < shopMenu.Length; i++)
+                {
+                    DisplayMenu(i);
+                    Refresh(i);
+                }
+                min = 30;
+                sec = 1;
+            }
+            else if (min > 0 && sec <= 0)
+            {
+                min--;
+                sec = 60;
+            }
+
+            sec--;
+
+            for (int i = 0; i < timeText.Length; i++)
+            {
+                timeText[i].text = "00:" + min.ToString() + ":" + sec.ToString();
+            }
+
+            yield return new WaitForSecondsRealtime(1.0f);
+
+        }
+
     }
 
     public void BuyItem(ShopItem item)
@@ -94,7 +130,7 @@ public class ShopManager : MonoBehaviour
                 }
             }
         }
-        if(item.Attempt >= item.maxAttempt)
+        if (item.Attempt >= item.maxAttempt)
         {
             item.DisableBuyButton();
         }
@@ -106,14 +142,14 @@ public class ShopManager : MonoBehaviour
     /// <param name="idx"></param> index of the menu
     public void DisplayMenu(int idx)
     {
-        foreach(GameObject shop in shopMenu)
+        foreach (GameObject shop in shopMenu)
         {
             shop.SetActive(false);
         }
         shopMenu[idx].SetActive(true);
 
         shopSlots = shopMenu[idx].GetComponentsInChildren<ShopItem>();
-        
+
     }
 
     /// <summary>
@@ -128,7 +164,7 @@ public class ShopManager : MonoBehaviour
             int ranItem = Random.Range(0, shopContainers[idx].kindOfItem[randKind].itemInfos.Length);
 
             shopSlots[i].data.info = shopContainers[idx].kindOfItem[randKind].itemInfos[ranItem];
-            
+
             int ranCurrency = Random.Range(0, 2);
             if (shopContainers[idx].kindOfItem[randKind].name == "Currency")
             {
