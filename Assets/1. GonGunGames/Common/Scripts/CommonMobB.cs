@@ -10,7 +10,7 @@ public class CommonMobB : BaseFSM
     public float attackRange = 1.5f;
     public float fastMoveSpeed = 2f;
     public float aggroTime = 3f;
-    public EnemyHealth health;
+    public BossHealth health;
     private int attackCount = 0;
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
@@ -21,14 +21,19 @@ public class CommonMobB : BaseFSM
     private float lastRoarAttackTime = 0f; // 마지막 RoarAttack 발동 시간
 
     public GameObject player;
-    [SerializeField] private GameObject deathPrefab;
-    [SerializeField] private GameObject expPrefab;// Dead 상태에서 스폰할 프리팹
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
     protected override void Start()
     {
         base.Start();
-        health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+        health = GetComponent<BossHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+                                             // player 태그를 가진 오브젝트를 찾아서 할당
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.LogError("Player with tag 'Player' not found in the scene.");
+        }
     }
 
     protected override IEnumerator Idle()
@@ -254,7 +259,7 @@ public class CommonMobB : BaseFSM
         lastRoarAttackTime = Time.time;
 
         // 저장된 상태로 돌아갑니다. 유효하지 않을 경우 기본 상태로 전환
-        
+
         if (previousState == FSMState.Idle || previousState == FSMState.Move || previousState == FSMState.Chase || previousState == FSMState.Attack || previousState == FSMState.Fastmove || previousState == FSMState.SAttack)
         {
             Debug.Log("디버그로그 특수패턴");
@@ -311,10 +316,6 @@ public class CommonMobB : BaseFSM
 
         animator.SetTrigger("Dead");
         yield return new WaitForSeconds(1f);
-
-        Instantiate(deathPrefab, transform.position, transform.rotation);
-        Instantiate(expPrefab, transform.position, transform.rotation);
-
         Destroy(gameObject);
     }
 }

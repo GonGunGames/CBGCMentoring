@@ -17,7 +17,7 @@ public class CommonMob : BaseFSM
     private bool isCooldown = false;
     private float sAttackDuration = 0.6f;
 
-    private GameObject player; // 플레이어를 GameObject로 변경
+    public GameObject player; // 플레이어를 GameObject로 변경
 
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 

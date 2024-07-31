@@ -21,7 +21,7 @@ public class EnemyPoolManager : MonoBehaviour
     private Dictionary<int, ObjectPool<GameObject>> pools = new Dictionary<int, ObjectPool<GameObject>>();
     private List<GameObject> activeEnemies = new List<GameObject>();
 
-    void Start()
+    void Awake()
     {
         // 각 적 프리팹에 대해 풀 생성
         foreach (var enemyPrefab in enemyPrefabs)
@@ -35,7 +35,7 @@ public class EnemyPoolManager : MonoBehaviour
                 defaultCapacity: initialPoolSize,
                 maxSize: 100
             );
-            pools[enemyPrefab.id] = pool;
+            pools.Add(enemyPrefab.id, pool);
         }
     }
 

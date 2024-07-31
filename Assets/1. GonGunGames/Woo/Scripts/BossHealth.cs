@@ -14,14 +14,24 @@ public class BossHealth : MonoBehaviour
     private CommonMob commonMob; // CommonMob 컴포넌트
     private CommonMobN commonMobN; // CommonMobN 컴포넌트
     private CommonMobB commonMobB; // CommonMobB 컴포넌트
-    public Weapon weapon; // 무기 정보
-    public Shotgun shotgun; // 샷건 정보
+    private Weapon weapon; // 무기 정보
+    private Shotgun shotgun; // 샷건 정보
     public GameObject damageTextPrefab; // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint; // 데미지 텍스트가 생성될 위치
 
     private void Start()
     {
         // 인스펙터에서 설정된 currentId를 사용하여 적 정보를 가져옵니다.
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            weapon = player.GetComponentInChildren<Weapon>();
+            shotgun = player.GetComponentInChildren<Shotgun>();
+        }
+        else
+        {
+            Debug.LogError("Player를 찾을 수 없습니다.");
+        }
         EnemyInfo enemyInfo = DataBase.Instance.GetEnemyInfoById(currentId);
 
         if (enemyInfo != null)

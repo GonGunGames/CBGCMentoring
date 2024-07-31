@@ -836,6 +836,7 @@ MonoBehaviour:
   fastMoveSpeed: 2
   aggroTime: 3
   enemyHealth: {fileID: 5198559573406495993}
+  player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
 --- !u!143 &2325239969189264968
 CharacterController:
   m_ObjectHideFlags: 0
@@ -961,6 +962,8 @@ MonoBehaviour:
   oldDinoLeftEye: {fileID: 5047957810584878896}
   oldDinoRightEye: {fileID: 3667489837443266852}
   hitbox: {fileID: 2275116766247517129}
+  hitbox2: {fileID: 0}
+  hitboxrange: {fileID: 0}
 --- !u!1 &7207431914379221724
 GameObject:
   m_ObjectHideFlags: 0
