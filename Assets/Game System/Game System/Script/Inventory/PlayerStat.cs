@@ -28,8 +28,8 @@ public class PlayerStat : Singleton<PlayerStat>
         playerCP = playerData.combatPower;
         playerCP_TMP.text = playerCP.ToString();
 
-        string path = Application.persistentDataPath + "/playerData.json";
-        print(path);
+        string path = Application.persistentDataPath + "/player.json";
+        //print(path);
     }
     void InitializePlayerStatFromData()
     {
@@ -110,11 +110,12 @@ public class PlayerStat : Singleton<PlayerStat>
         }
         return -1;
     }
+
     /*IEnumerator SaveDataPeriodically(float interval)
     {
         while (true)
         {
-            DataPlayer.SaveData(playerData);
+            DataPlayer.SaveData(player);
             yield return new WaitForSeconds(interval);
         }
     }

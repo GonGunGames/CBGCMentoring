@@ -52,7 +52,7 @@ public class CraftRequirement : MonoBehaviour
         {
             InventoryManager.Instance.RemoveAmountOfItem(requireMaterial[i].info, requireMaterial[i].amount);
         }
-        InventoryManager.Instance.AddAmountOfItem(item.data, 1);
+        InventoryManager.Instance.AddAmountOfItem(item.data, 1, item.data.info.baseStat.IDIDID);
     }
 
     public bool CanCraft()

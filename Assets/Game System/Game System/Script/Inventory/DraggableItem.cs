@@ -78,7 +78,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         if (!allowDrag) return;
-        Debug.Log("Dragging");
+        //Debug.Log("Dragging");
 
         Vector3 mousePositionScreen = Input.mousePosition;
         mousePositionScreen.z = 0; // Set the z-component to 0
@@ -88,7 +88,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.localPosition = mousePositionScreen;
 
         GameObject target = eventData.pointerCurrentRaycast.gameObject;
-        Debug.Log("Target:" + target);
+        //Debug.Log("Target:" + target);
 
 
         if (InventoryManager.Instance.ActiveSlot.GetComponentInChildren<InventorySlot>() != null)
