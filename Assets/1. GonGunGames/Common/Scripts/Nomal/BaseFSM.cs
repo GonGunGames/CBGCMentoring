@@ -102,7 +102,5 @@ public class BaseFSM : MonoBehaviour
         {
             Debug.LogWarning("Animator component is not assigned.");
         }
-
-        Debug.Log(gameObject + ".SetState." + state.ToString());
     }
 }

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-// using static System.Net.Mime.MediaTypeNames;
-using UnityApp = UnityEngine.Application;
 
 public class DataBase : MonoBehaviour
 {
@@ -16,7 +14,6 @@ public class DataBase : MonoBehaviour
     public PlayerData playerData;
     public EnemyData enemyData;
     public List<WeaponInfo> weaponType;
-
     public List<MonsterTableEntry> spawnTables; // 몬스터 테이블 리스트
     public GameObject[] monsterPrefabs;
 
@@ -67,7 +64,7 @@ public class DataBase : MonoBehaviour
     }
 
     [ContextMenu("Load Player Data")]
-    void LoadPlayerDataFromJson()
+    public void LoadPlayerDataFromJson()
     {
         string path = Path.Combine(Application.persistentDataPath, "playerData.json");
 
@@ -83,7 +80,7 @@ public class DataBase : MonoBehaviour
     }
 
     [ContextMenu("Load Enemy Data")]
-    void LoadEnemyDataFromJson()
+    public void LoadEnemyDataFromJson()
     {
         string path = Path.Combine(Application.persistentDataPath, "enemyData.json");
 
@@ -99,7 +96,7 @@ public class DataBase : MonoBehaviour
     }
 
     [ContextMenu("Load Weapon Data")]
-    void LoadWeaponDataFromJson()
+    public void LoadWeaponDataFromJson()
     {
         string path = Path.Combine(Application.persistentDataPath, "weaponData.json");
 
@@ -116,7 +113,7 @@ public class DataBase : MonoBehaviour
     }
 
     [ContextMenu("Load Spawn Tables")]
-    void LoadSpawnTablesFromJson()
+    public void LoadSpawnTablesFromJson()
     {
         string path = Path.Combine(Application.persistentDataPath, "spawnData.json");
 
@@ -147,6 +144,12 @@ public class DataBase : MonoBehaviour
         }
         return null;
     }
+
+    public bool IsValidMonsterId(int monsterId)
+    {
+        return monsterId >= 1 && monsterId <= monsterPrefabs.Length;
+    }
+
     public WeaponInfo GetWeaponInfoByGunId(int gunId)
     {
         foreach (WeaponInfo weapon in weaponType)
@@ -170,6 +173,7 @@ public class PlayerData
     public int currentExp;
     public int expToLevelUp;
     public string[] items;
+    public int weaponId; // 플레이어가 장착한 무기의 ID 추가
 }
 
 [System.Serializable]

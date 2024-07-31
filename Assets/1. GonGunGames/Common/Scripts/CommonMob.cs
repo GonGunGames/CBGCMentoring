@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CommonMob : BaseFSM
 {
-    public float idleTime = 1.5f;
+    public float idleTime = 0f;
     public float moveSpeed = 3f;
     public float turnSpeed = 180f;
     public float chaseRange = 10f;
@@ -18,7 +18,7 @@ public class CommonMob : BaseFSM
     private float sAttackDuration = 0.6f;
 
     private GameObject player; // 플레이어를 GameObject로 변경
-    [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
+
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
     protected override void Start()
@@ -212,8 +212,6 @@ public class CommonMob : BaseFSM
         // Dead 애니메이션 재생
         yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
 
-        // 프리팹 인스턴스화
-        Instantiate(deathPrefab, transform.position, transform.rotation);
 
         // 애니메이션 재생 후 오브젝트 소멸
         Destroy(gameObject);

@@ -9,7 +9,8 @@ public class Player : PlayerFSM
     public JoystickPlayer Joystick; // JoystickPlayer 클래스 참조
     public Rigidbody rb;
     public PlayerHealth health; // PlayerHealth 클래스 참조
-    protected override void Start()
+
+     public void Start()
     {
         base.Start();
         if (Joystick == null)
@@ -21,11 +22,11 @@ public class Player : PlayerFSM
         {
             Debug.LogError("JoystickPlayer를 찾을 수 없습니다. Joystick 변수가 설정되지 않았습니다.");
         }
-        Debug.Log("HI");
 
         // 초기 상태를 Idle로 설정
         PlayerSetState(PlayerFSMState.Idle);
-    }
+}
+
 
     protected override IEnumerator Idle()
     {

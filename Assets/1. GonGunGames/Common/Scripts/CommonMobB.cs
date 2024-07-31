@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class CommonMobB : BaseFSM
 {
-    public float idleTime = 1f;
+    public float idleTime = 0f;
     public float moveSpeed = 1f;
     public float turnSpeed = 180f;
     public float chaseRange = 10f;
     public float attackRange = 1.5f;
     public float fastMoveSpeed = 2f;
     public float aggroTime = 3f;
-    public EnemyHealth health;
+    public BossHealth health;
     private int attackCount = 0;
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
@@ -24,7 +24,7 @@ public class CommonMobB : BaseFSM
     protected override void Start()
     {
         base.Start();
-        health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+        health = GetComponent<BossHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player == null)

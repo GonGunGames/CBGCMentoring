@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     public PlayerExp playerExp;
     public Weapon weapon;
+    public Shotgun shotgun;
     public Button attackSpeedButton;
     public Button attackDamageButton;
     public Button attackRangeButton;
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
     private void OnUpgradeButtonClicked(UpgradeOption option)
     {
         weapon.UpgradeStat(option);
+        shotgun.UpgradeStat(option);
         SetButtonsActive(false); // 선택 후 버튼들을 다시 비활성화
         OnUpgradeOptionsClosed(); // 콜백 호출
     }

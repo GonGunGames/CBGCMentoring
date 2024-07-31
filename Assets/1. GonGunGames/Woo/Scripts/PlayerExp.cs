@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class PlayerExp : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class PlayerExp : MonoBehaviour
 
     private LevelManager levelManager;
     private bool isLevelingUp = false; // 레벨업 중인지 여부를 체크하는 변수
+
     public Slider expSlider; // 경험치 슬라이더 UI
 
     private void Start()
@@ -27,20 +27,12 @@ public class PlayerExp : MonoBehaviour
     // 경험치 획득 메서드
     public void GainExp(int exp)
     {
-        StartCoroutine(GainExpOverTime(exp));
-    }
-
-    // 서서히 경험치를 증가시키는 Coroutine 메서드
-    private IEnumerator GainExpOverTime(int exp)
-    {
-        int steps = 50; // 나눌 단계 수
-        double expIncrement = (double)exp / steps;
-
-        for (int i = 0; i < steps; i++)
+        if (!isLevelingUp) // 레벨업 중일 때는 경험치를 추가하지 않음
         {
-            currentExp += expIncrement;
-            UpdateExpSliderSmooth();
-            yield return new WaitForSeconds(0.02f); // 0.02초 대기
+            currentExp += exp;
+            // 경험치 슬라이더 업데이트
+            UpdateExpSlider();
+            // 레벨업 체크
             CheckLevelUp();
         }
     }
@@ -52,33 +44,17 @@ public class PlayerExp : MonoBehaviour
         expSlider.value = (float)currentExp;
     }
 
-    // 서서히 슬라이더 값을 증가시키는 메서드
-    private void UpdateExpSliderSmooth()
-    {
-        StartCoroutine(SmoothSliderUpdate(expSlider, (float)currentExp, 0.2f));
-    }
-
-    private IEnumerator SmoothSliderUpdate(Slider slider, float targetValue, float duration)
-    {
-        float startValue = slider.value;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            slider.value = Mathf.Lerp(startValue, targetValue, elapsed / duration);
-            yield return null;
-        }
-
-        slider.value = targetValue;
-    }
-
     // 레벨업 체크 메서드
     private void CheckLevelUp()
     {
-        while (currentExp >= expToLevelUp && !isLevelingUp)
+        // 레벨업 가능할 때까지 계속 반복
+        while (currentExp >= expToLevelUp)
         {
             LevelUp();
+            if (isLevelingUp) // 레벨업 중이면 루프 탈출
+            {
+                break;
+            }
         }
     }
 
