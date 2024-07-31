@@ -14,6 +14,7 @@ public enum FSMState
     Dead = 5,
     Fastmove = 6,
     SAttack = 7,
+    RoarAttack = 8
 }
 
 //각 상태를 enum 변환
@@ -88,7 +89,10 @@ public class BaseFSM : MonoBehaviour
     {
         yield return null;
     }
-
+    protected virtual IEnumerator RoarAttack()
+    {
+        yield return null; // 기본적으로 아무 동작도 하지 않음
+    }
     public void SetState(FSMState newState)
     {
         isNewState = true;

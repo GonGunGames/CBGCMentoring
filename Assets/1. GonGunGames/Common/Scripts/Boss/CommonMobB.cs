@@ -17,6 +17,9 @@ public class CommonMobB : BaseFSM
     private bool isCooldown = false;
     private float sAttackDuration = 0.6f;
 
+    private float roarAttackInterval = 10f; // 10초 간격으로 RoarAttack 발동
+    private float lastRoarAttackTime = 0f; // 마지막 RoarAttack 발동 시간
+
     public GameObject player;
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
     private FSMState previousState; // Hit 전 상태를 저장할 변수
@@ -38,17 +41,27 @@ public class CommonMobB : BaseFSM
             if (timer >= idleTime)
             {
                 SetState(FSMState.Move);
+                yield break; // Idle 상태 종료
             }
-            Debug.Log(player);
+
             if (Vector3.Distance(player.transform.position, transform.position) <= chaseRange)
             {
                 SetState(FSMState.Chase);
+                yield break; // Idle 상태 종료
+            }
+
+            // RoarAttack 상태로 전환 조건
+            if (Time.time - lastRoarAttackTime >= roarAttackInterval)
+            {
+                SetState(FSMState.RoarAttack);
+                yield break; // Idle 상태 종료
             }
 
             // 체력이 0이면 Dead 상태로 전환
             if (health.isDead)
             {
                 SetState(FSMState.Dead);
+                yield break; // Idle 상태 종료
             }
 
             yield return null;
@@ -60,15 +73,25 @@ public class CommonMobB : BaseFSM
         while (!isNewState)
         {
             MoveUtil.MoveFrame(controller, player.transform, moveSpeed, turnSpeed);
+
             if (Vector3.Distance(player.transform.position, transform.position) <= chaseRange)
             {
                 SetState(FSMState.Chase);
+                yield break; // Move 상태 종료
+            }
+
+            // RoarAttack 상태로 전환 조건
+            if (Time.time - lastRoarAttackTime >= roarAttackInterval)
+            {
+                SetState(FSMState.RoarAttack);
+                yield break; // Move 상태 종료
             }
 
             // 체력이 0이면 Dead 상태로 전환
             if (health.isDead)
             {
                 SetState(FSMState.Dead);
+                yield break; // Move 상태 종료
             }
 
             yield return null;
@@ -86,16 +109,27 @@ public class CommonMobB : BaseFSM
             if (timer >= aggroTime)
             {
                 SetState(FSMState.Idle);
+                yield break; // Chase 상태 종료
             }
+
             if (MoveUtil.MoveFrame(controller, player.transform, moveSpeed * 3.0f, turnSpeed) <= attackRange)
             {
                 SetState(FSMState.Attack);
+                yield break; // Chase 상태 종료
+            }
+
+            // RoarAttack 상태로 전환 조건
+            if (Time.time - lastRoarAttackTime >= roarAttackInterval)
+            {
+                SetState(FSMState.RoarAttack);
+                yield break; // Chase 상태 종료
             }
 
             // 체력이 0이면 Dead 상태로 전환
             if (health.isDead)
             {
                 SetState(FSMState.Dead);
+                yield break; // Chase 상태 종료
             }
 
             yield return null;
@@ -106,25 +140,29 @@ public class CommonMobB : BaseFSM
     {
         while (!isNewState)
         {
-            // 플레이어와의 거리가 추적 범위 이내인지 확인
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-
-            // 거리에 따라 이동 속도를 설정
             float currentSpeed = (distanceToPlayer <= chaseRange) ? fastMoveSpeed : moveSpeed;
 
-            // 플레이어를 향해 이동
             MoveUtil.MoveFrame(controller, player.transform, currentSpeed, turnSpeed);
 
-            // 공격 범위에 들어오면 공격 상태로 전환
             if (distanceToPlayer <= attackRange)
             {
                 SetState(FSMState.Attack);
+                yield break; // Fastmove 상태 종료
+            }
+
+            // RoarAttack 상태로 전환 조건
+            if (Time.time - lastRoarAttackTime >= roarAttackInterval)
+            {
+                SetState(FSMState.RoarAttack);
+                yield break; // Fastmove 상태 종료
             }
 
             // 체력이 0이면 Dead 상태로 전환
             if (health.isDead)
             {
                 SetState(FSMState.Dead);
+                yield break; // Fastmove 상태 종료
             }
 
             yield return null;
@@ -135,13 +173,12 @@ public class CommonMobB : BaseFSM
     {
         while (!isNewState)
         {
-            // 플레이어와 몬스터 사이의 거리를 계산
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
-            // 만약 플레이어가 공격 범위를 벗어나면 Chase 상태로 전환
             if (distanceToPlayer > attackRange)
             {
                 SetState(FSMState.Chase);
+                yield break; // Attack 상태 종료
             }
             else
             {
@@ -151,20 +188,27 @@ public class CommonMobB : BaseFSM
                     if (attackCount >= maxAttacks)
                     {
                         SetState(FSMState.SAttack);
-                        yield break; // Attack 코루틴 종료
+                        yield break; // Attack 상태 종료
                     }
                     else
                     {
-                        // 쿨타임 시작
                         StartCoroutine(AttackCooldown());
                     }
                 }
+            }
+
+            // RoarAttack 상태로 전환 조건
+            if (Time.time - lastRoarAttackTime >= roarAttackInterval)
+            {
+                SetState(FSMState.RoarAttack);
+                yield break; // Attack 상태 종료
             }
 
             // 체력이 0이면 Dead 상태로 전환
             if (health.isDead)
             {
                 SetState(FSMState.Dead);
+                yield break; // Attack 상태 종료
             }
 
             yield return null;
@@ -173,22 +217,17 @@ public class CommonMobB : BaseFSM
 
     protected override IEnumerator SAttack()
     {
-        // SAttack 상태 로직
-        // 플레이어와 몬스터 사이의 거리를 계산
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
-        // 만약 플레이어가 공격 범위를 벗어나면 Chase 상태로 전환
         if (distanceToPlayer > attackRange)
         {
             SetState(FSMState.Chase);
-            yield break; // SAttack 코루틴 종료
+            yield break; // SAttack 상태 종료
         }
 
         // SAttack 상태 로직 (한 번 실행)
-        // 여기서 SAttack 동작을 수행합니다.
-        yield return new WaitForSeconds(sAttackDuration); // SAttack 애니메이션 시간만큼 대기
+        yield return new WaitForSeconds(sAttackDuration);
 
-        // SAttack 완료 후 Attack 상태로 전환
         attackCount = 0; // 공격 카운트 초기화
         SetState(FSMState.Attack);
 
@@ -199,23 +238,54 @@ public class CommonMobB : BaseFSM
         }
     }
 
+    protected override IEnumerator RoarAttack()
+    {
+        // RoarAttack 전의 상태를 저장합니다
+        FSMState previousState = state;
+
+        // Roar 애니메이션 트리거
+        animator.SetTrigger("Roar");
+
+        // Roar 애니메이션이 끝날 때까지 대기
+        yield return new WaitForSeconds(3f); // 애니메이션 시간에 맞게 조정
+
+        // 마지막 RoarAttack 시간 업데이트
+        lastRoarAttackTime = Time.time;
+
+        // 저장된 상태로 돌아갑니다. 유효하지 않을 경우 기본 상태로 전환
+        
+        if (previousState == FSMState.Idle || previousState == FSMState.Move || previousState == FSMState.Chase || previousState == FSMState.Attack || previousState == FSMState.Fastmove || previousState == FSMState.SAttack)
+        {
+            Debug.Log("디버그로그 특수패턴");
+            SetState(previousState);
+        }
+        else
+        {
+            SetState(FSMState.Idle); // 기본 상태로 전환
+        }
+
+        // 체력이 0인 경우 Dead 상태로 전환
+        if (health.isDead)
+        {
+            SetState(FSMState.Dead);
+        }
+    }
+
+
     private IEnumerator AttackCooldown()
     {
         isCooldown = true;
-        yield return new WaitForSeconds(attackCooldown); // Attack 애니메이션 시간만큼 대기
+        yield return new WaitForSeconds(attackCooldown);
         isCooldown = false;
     }
 
     protected override IEnumerator Hit()
     {
-        // Hit 상태로 전환 전에 현재 상태 저장
         previousState = state;
 
-        // Hit 상태 로직
-        // 피격 애니메이션 재생 등
-        animator.SetTrigger("Hit"); // Hit 애니메이션 트리거
+        animator.SetTrigger("Hit");
 
-        yield return new WaitForSeconds(0.5f); // Hit 애니메이션 시간만큼 대기
+        yield return new WaitForSeconds(0.5f);
 
         if (health.currentHealth <= 0)
         {
@@ -225,29 +295,24 @@ public class CommonMobB : BaseFSM
         {
             if (previousState == FSMState.Idle || previousState == FSMState.Move || previousState == FSMState.Chase || previousState == FSMState.Attack || previousState == FSMState.Fastmove || previousState == FSMState.SAttack)
             {
-                SetState(previousState); // 원래 상태로 복귀
+                SetState(previousState);
             }
             else
             {
-                SetState(FSMState.Idle); // 다른 경우에는 Idle 상태로 복귀
+                SetState(FSMState.Idle);
             }
         }
     }
 
     protected override IEnumerator Dead()
     {
-        // Dead 상태에서 추가 로직 처리
-        // 예: 애니메이션, 사운드 재생 등
         Debug.Log("Entering Dead State");
 
-        // Dead 애니메이션 재생
-        animator.SetTrigger("Dead"); // Dead 애니메이션 트리거
-        yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
+        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(1f);
 
-        // 프리팹 인스턴스화
         Instantiate(deathPrefab, transform.position, transform.rotation);
 
-        // 애니메이션 재생 후 오브젝트 소멸
         Destroy(gameObject);
     }
 }
