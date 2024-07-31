@@ -108,7 +108,7 @@ Animator:
   m_GameObject: {fileID: 657789654059979428}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 186e86aee5c47b243a632aaf63e86b97, type: 3}
-  m_Controller: {fileID: 22100000, guid: 14bf0142746265140be438ca586b3a41, type: 2}
+  m_Controller: {fileID: 22100000, guid: 506c9160708c8194d8cbca29dea76d73, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -143,6 +143,8 @@ MonoBehaviour:
   oldDinoLeftEye: {fileID: 5466785540375796026}
   oldDinoRightEye: {fileID: 2073038239848332640}
   hitbox: {fileID: 305749213037605542}
+  hitbox2: {fileID: 0}
+  hitboxrange: {fileID: 0}
 --- !u!1 &721974882150085416
 GameObject:
   m_ObjectHideFlags: 0
