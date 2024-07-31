@@ -6,20 +6,20 @@ TagManager:
   tags:
   - Enemy
   - Bullet
-  - EquipField
-  - InventoryField
-  - ItemView
-  - PlayerStats
+  - Item
+  - Boss
+  - Weapon
+  - ShotgunBullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - BulletLayer
+  - Bullet
   - Water
   - UI
   - Player
-  - 
-  - 
+  - Weapon
+  - ShotgunBullet
   - 
   - 
   - 
