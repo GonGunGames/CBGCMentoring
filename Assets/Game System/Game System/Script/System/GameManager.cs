@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         systemViews = systemPool.GetComponentsInChildren<UISystemView>();
-        DisplaySystem(0);
+        DisplaySystem(2);
     }
     public void DisplaySystem(int idx)
     {
