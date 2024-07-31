@@ -124,7 +124,6 @@ public class EnemyHealth : MonoBehaviour
         commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
         commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
         commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
-                                            // 피격 시 추가 로직 처리 (예: 애니메이션, 효과 등)
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
