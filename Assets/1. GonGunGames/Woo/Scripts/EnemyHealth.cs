@@ -120,7 +120,11 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log("데미지 적용: " + damage); // 디버그 로그 추가
         currentHealth -= damage;
-
+        isHit = true; // 적과 충돌 시 isHit를 true로 설정
+        commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
+        commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
+        commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
+                                            // 피격 시 추가 로직 처리 (예: 애니메이션, 효과 등)
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
@@ -130,11 +134,7 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(deathPrefab, transform.position, transform.rotation);
             ReleaseToPool();
         }
-        isHit = true; // 적과 충돌 시 isHit를 true로 설정
-        commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
-        commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
-        commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
-        // 피격 시 추가 로직 처리 (예: 애니메이션, 효과 등)
+       
     }
 
     private void ReleaseToPool()
