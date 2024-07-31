@@ -15,8 +15,7 @@ public class DinoControll : MonoBehaviour
     [SerializeField] private Transform youngDinoLeftEye, youngDinoRightEye;
     [SerializeField] private Transform oldDinoLeftEye, oldDinoRightEye;
     [SerializeField] private HitBox hitbox;
-    [SerializeField] private HitBox2 hitbox2;
-    [SerializeField] private HitBoxrange hitboxrange;
+
     private Vector2 dinoMinMaxScale;
     private int dinoState = 0;
     private int _blendShapesCount;
@@ -41,16 +40,6 @@ public class DinoControll : MonoBehaviour
     {
 
         hitbox.EnableHitBox();
-    }
-    public void EnableHitBox2()
-    {
-
-        hitbox2.EnableHitBox2();
-    }
-    public void EnableHitBoxrange()
-    {
-
-        hitboxrange.EnableHitBoxrange();
     }
     void Update()
     {
