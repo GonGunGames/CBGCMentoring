@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class MoveUtil
 {
+    private static float gravity = -50.81f; // 중력 상수
+    private static float verticalSpeed = 0f; // 수직 속도 요소
+
     public static float MoveFrame(CharacterController cc, Transform target, float moveSpeed, float turnSpeed)
     {
         Transform t = cc.transform;
         Vector3 dir = target.position - t.position;
         Vector3 dirXZ = new Vector3(dir.x, 0f, dir.z);
-        Vector3 targetPos = t.position + dirXZ;
-        Vector3 framePos = Vector3.MoveTowards(t.position, targetPos, moveSpeed * Time.deltaTime);
 
-        cc.Move(framePos - t.position);
+        // 중력 적용
+        if (cc.isGrounded)
+        {
+            verticalSpeed = 0f; // 지면에 있으면 수직 속도 초기화
+        }
+        else
+        {
+            verticalSpeed += gravity * Time.deltaTime; // 중력 적용
+        }
+
+        Vector3 moveDirection = dirXZ.normalized * moveSpeed + Vector3.up * verticalSpeed;
+        cc.Move(moveDirection * Time.deltaTime);
 
         RotateDir(t, target, turnSpeed);
 
-        return Vector3.Distance(framePos, targetPos);
+        return Vector3.Distance(cc.transform.position, target.position);
     }
 
     public static void RotateDir(Transform self, Transform target, float turnSpeed)
-    {        
+    {
         Vector3 dir = target.position - self.position;
         Vector3 dirXZ = new Vector3(dir.x, 0f, dir.z);
 
@@ -28,7 +40,6 @@ public class MoveUtil
             return;
 
         self.rotation = Quaternion.RotateTowards(self.rotation, Quaternion.LookRotation(dirXZ), turnSpeed * Time.deltaTime);
-
     }
 
     public static void RotateToDirBurst(Transform self, Transform target)
@@ -39,7 +50,6 @@ public class MoveUtil
         if (dirXZ == Vector3.zero)
             return;
 
-        self.rotation = Quaternion.LookRotation(dirXZ * Time.deltaTime);
+        self.rotation = Quaternion.LookRotation(dirXZ);
     }
-
 }

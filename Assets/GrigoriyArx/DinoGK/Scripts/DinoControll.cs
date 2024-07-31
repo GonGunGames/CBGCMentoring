@@ -1,27 +1,27 @@
+using AlmostEngine.Preview;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DinoControll : MonoBehaviour
 {
-
     Animator anim;
-    [Header("Age (0..10)")] [SerializeField] float DinoAge = 10;
+    [Header("Age (0..10)")][SerializeField] float DinoAge = 0; // 0으로 초기화
     [SerializeField] private float BabyScale = 0.5f;
     [SerializeField] private SkinnedMeshRenderer dinoRenderer;
     [SerializeField] private SkinnedMeshRenderer eyeLeft, eyeRight;
-    [SerializeField] private float eyeShapeChangingSpeed=10f;
+    [SerializeField] private float eyeShapeChangingSpeed = 10f;
     [SerializeField] private Transform dinoTransform;
     [SerializeField] private Transform youngDinoLeftEye, youngDinoRightEye;
     [SerializeField] private Transform oldDinoLeftEye, oldDinoRightEye;
-
-
+    [SerializeField] private HitBox hitbox;
+    [SerializeField] private HitBox2 hitbox2;
+    [SerializeField] private HitBoxrange hitboxrange;
     private Vector2 dinoMinMaxScale;
     private int dinoState = 0;
     private int _blendShapesCount;
     private float[] _eyeBlendShapesTargets;
     private int eyeShape = 0;
-
 
     private void Awake()
     {
@@ -34,10 +34,24 @@ public class DinoControll : MonoBehaviour
         anim = GetComponent<Animator>();
         dinoMinMaxScale.x = this.transform.localScale.x * BabyScale;
         dinoMinMaxScale.y = this.transform.localScale.x;
-        
-
+        SetGrowth(DinoAge * 0.1f); // DinoAge에 따라 초기 성장 설정
     }
 
+    public void EnableHitBox()
+    {
+
+        hitbox.EnableHitBox();
+    }
+    public void EnableHitBox2()
+    {
+
+        hitbox2.EnableHitBox2();
+    }
+    public void EnableHitBoxrange()
+    {
+
+        hitboxrange.EnableHitBoxrange();
+    }
     void Update()
     {
         if (dinoState == 17) dinoState = 0;
@@ -84,7 +98,7 @@ public class DinoControll : MonoBehaviour
             if (eyeShape >= 0)
             {
                 eyeShape++;
-                if (eyeShape > _blendShapesCount-1) eyeShape = 0;
+                if (eyeShape > _blendShapesCount - 1) eyeShape = 0;
                 Debug.Log(eyeShape);
                 SwitchEyeShape(eyeShape);
             }
@@ -95,7 +109,7 @@ public class DinoControll : MonoBehaviour
             if (eyeShape <= _blendShapesCount)
             {
                 eyeShape--;
-                if (eyeShape < 0) eyeShape = _blendShapesCount-1;
+                if (eyeShape < 0) eyeShape = _blendShapesCount - 1;
                 Debug.Log(eyeShape);
                 SwitchEyeShape(eyeShape);
             }
@@ -140,7 +154,7 @@ public class DinoControll : MonoBehaviour
 
         dinoRenderer.SetBlendShapeWeight(0, (1 - t) * 100);
     }
-    
+
     private void SwitchAnimation(int targetState)
     {
         if ((anim.GetInteger("State") != 0) && (anim.GetInteger("State") < 97)) anim.SetTrigger("Reset");
