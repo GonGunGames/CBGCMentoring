@@ -1,5 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEditor.SearchService;
 
 public class SceneChanger : MonoBehaviour
 {
