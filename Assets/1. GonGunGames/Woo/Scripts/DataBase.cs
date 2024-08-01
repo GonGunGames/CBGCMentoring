@@ -181,7 +181,7 @@ public class WeaponInfo
 {
     public int gunId;
     public string name;
-    public float bulletSpeed;
+    public float bulletSpeed; // GetPlayerStats.instance.GetStats(StatType.BulletSpeed);
     public float attackSpeed;
     public float attackDamage;
     public float attackChance;

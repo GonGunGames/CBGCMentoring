@@ -31,7 +31,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = DataBase.Instance.playerData.maxHealth;
+        //currentHealth = DataBase.Instance.playerData.maxHealth;
+        currentHealth = GetPlayerStats.instance.GetStats(StatType.Health);
         SetMaxHealth(currentHealth);
     }
 
