@@ -194,8 +194,6 @@ public class CommonMobN : BaseFSM
         // 예: 애니메이션, 사운드 재생 등
         Debug.Log("Entering Dead State");
 
-        // Dead 애니메이션 재생
-        animator.SetTrigger("Dead"); // Dead 애니메이션 트리거
         yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
 
         // 애니메이션 재생 후 오브젝트 소멸
