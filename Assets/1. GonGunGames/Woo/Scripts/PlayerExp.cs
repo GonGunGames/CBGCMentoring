@@ -6,14 +6,17 @@ public class PlayerExp : MonoBehaviour
     public int currentLevel;
     public double currentExp;
     public double expToLevelUp; // 레벨업에 필요한 경험치
+    public int totalgold;
+    public Text goldText; // 골드를 표시할 UI 텍스트
+    public Slider expSlider; // 경험치 슬라이더 UI
 
     private LevelManager levelManager;
     private bool isLevelingUp = false; // 레벨업 중인지 여부를 체크하는 변수
 
-    public Slider expSlider; // 경험치 슬라이더 UI
-
     private void Start()
     {
+        // 초기화
+        totalgold = DataBase.Instance.playerData.gold;
         currentLevel = DataBase.Instance.playerData.currentLevel;
         currentExp = DataBase.Instance.playerData.currentExp;
         expToLevelUp = DataBase.Instance.playerData.expToLevelUp;
@@ -22,6 +25,9 @@ public class PlayerExp : MonoBehaviour
         // 슬라이더 초기화
         expSlider.maxValue = (float)expToLevelUp;
         expSlider.value = (float)currentExp;
+
+        // 골드 텍스트 초기화
+        UpdateGoldText();
     }
 
     // 경험치 획득 메서드
@@ -37,6 +43,13 @@ public class PlayerExp : MonoBehaviour
         }
     }
 
+    public void GainGold(int gold)
+    {
+        totalgold += gold;
+        // 골드 UI 업데이트
+        UpdateGoldText();
+    }
+
     // 경험치 슬라이더 업데이트 메서드
     private void UpdateExpSlider()
     {
@@ -44,10 +57,18 @@ public class PlayerExp : MonoBehaviour
         expSlider.value = (float)currentExp;
     }
 
+    // 골드 텍스트 업데이트 메서드
+    private void UpdateGoldText()
+    {
+        if (goldText != null)
+        {
+            goldText.text = "Gold: " + totalgold.ToString();
+        }
+    }
+
     // 레벨업 체크 메서드
     private void CheckLevelUp()
     {
-        // 레벨업 가능할 때까지 계속 반복
         while (currentExp >= expToLevelUp)
         {
             LevelUp();
@@ -97,10 +118,18 @@ public class PlayerExp : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
-            ItemEx item = other.GetComponent<ItemEx>();
-            if (item != null)
+            ItemEx itemEx = other.GetComponent<ItemEx>();
+            ItemGold itemGold = other.GetComponent<ItemGold>();
+
+            if (itemEx != null)
             {
-                GainExp(item.expAmount); // 아이템에서 정의된 경험치 양을 플레이어의 경험치에 추가
+                GainExp(itemEx.expAmount); // 아이템에서 정의된 경험치 양을 플레이어의 경험치에 추가
+                Destroy(other.gameObject); // 충돌한 아이템 오브젝트 파괴
+            }
+
+            if (itemGold != null)
+            {
+                GainGold(itemGold.goldAmount); // 아이템에서 정의된 골드 양을 플레이어의 골드에 추가
                 Destroy(other.gameObject); // 충돌한 아이템 오브젝트 파괴
             }
         }

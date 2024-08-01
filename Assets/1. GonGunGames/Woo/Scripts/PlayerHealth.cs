@@ -10,7 +10,6 @@ using System.Runtime.Serialization;
 public class PlayerHealth : MonoBehaviour
 {
     public float currentHealth;
-
     bool isDamage;
 
 
@@ -35,13 +34,21 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = DataBase.Instance.playerData.maxHealth;
         SetMaxHealth(currentHealth);
     }
-
+    private void Update()
+    {
+        _hpBar.value = currentHealth;
+    }
     public void SetMaxHealth(float hp)
     {
         _hpBar.maxValue = hp;
         _hpBar.value = hp;
     }
 
+    public void HealToMax()
+    {
+        currentHealth = DataBase.Instance.playerData.maxHealth; // 체력을 최대 값으로 설정
+        Debug.Log("Player healed to max health.");
+    }
 
     private void OnCollisionEnter(Collision collision)
     {

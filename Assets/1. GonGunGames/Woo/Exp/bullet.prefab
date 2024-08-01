@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 5664186691947451673}
   - component: {fileID: 2835433188010688827}
   - component: {fileID: 2659711988798162287}
-  - component: {fileID: 3658478598265151901}
-  m_Layer: 3
-  m_Name: Bullet
-  m_TagString: Bullet
+  - component: {fileID: 238524532451943385}
+  m_Layer: 0
+  m_Name: bullet
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3658478598265151901
+--- !u!114 &238524532451943385
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,10 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2212033436154223188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52846331b7e26f84db4beabcd897d887, type: 3}
+  m_Script: {fileID: 11500000, guid: 99fa5f8aa3fe42549b1cb4954ef8fa3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  currentHealth: 0
-  damage: 5
-  isDamage: 0
+  goldAmount: 30
