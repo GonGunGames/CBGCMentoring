@@ -17,6 +17,7 @@ public class DinoControll : MonoBehaviour
     [SerializeField] private HitBox hitbox;
     [SerializeField] private HitBox2 hitbox2;
     [SerializeField] private HitBoxrange hitboxrange;
+    [SerializeField] private bool isSpecialMob = false;
     private Vector2 dinoMinMaxScale;
     private int dinoState = 0;
     private int _blendShapesCount;
@@ -44,13 +45,18 @@ public class DinoControll : MonoBehaviour
     }
     public void EnableHitBox2()
     {
-
-        hitbox2.EnableHitBox2();
+        if (isSpecialMob)
+        {
+            hitbox2.EnableHitBox2();
+        }
     }
+
     public void EnableHitBoxrange()
     {
-
-        hitboxrange.EnableHitBoxrange();
+        if (isSpecialMob)
+        {
+            hitboxrange.EnableHitBoxrange();
+        }
     }
     void Update()
     {
