@@ -17,7 +17,7 @@ public class ElliteHealth : MonoBehaviour
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
-    public int deathCount;
+    private int deathCount;
 
     private void Start()
     {
