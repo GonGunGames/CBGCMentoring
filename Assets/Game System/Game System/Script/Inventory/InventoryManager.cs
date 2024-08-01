@@ -87,8 +87,8 @@ public class InventoryManager : Singleton<InventoryManager>
         currentRarity = 0;
         //Allocate FilterItemType() function to Toggle and filter first tab
         inventoryTabs = inventoryTabPool.GetComponentsInChildren<Toggle>();
-        tabParameters = new int[] { 0, 7, 8, 9, 11};
-        for(int i = 0; i < inventoryTabs.Length; i++)
+        tabParameters = new int[] { 0, 7, 8, 9, 11 };
+        for (int i = 0; i < inventoryTabs.Length; i++)
         {
             Toggle tab = inventoryTabs[i];
             int tabPara = tabParameters[i];
@@ -100,7 +100,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     FilterItemType(tabPara);
                 }
             });
-            
+
         }
         FilterTypeAndRarity(currentItemType, currentRarity);
 
@@ -205,13 +205,29 @@ public class InventoryManager : Singleton<InventoryManager>
             {
                 stat.gameObject.SetActive(false);
             }
+
             int statLen = currentItem.data.currentStat.Length;
-            for (int i = 0; i < statLen; i++)
+            if (statLen <= 5)
             {
-                itemStats[i].gameObject.SetActive(true);
-                itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.currentStat[i]);
-                itemStats[i].statText.text = currentItem.data.currentStat[i].value.ToString();
+                for (int i = 0; i < statLen; i++)
+                {
+                    itemStats[(int)currentItem.data.info.baseStat.stats[i].type].gameObject.SetActive(true);
+                    itemStats[(int)currentItem.data.info.baseStat.stats[i].type].statImage.sprite = CheckStatImage(currentItem.data.currentStat[i]);
+                    itemStats[(int)currentItem.data.info.baseStat.stats[i].type].statText.text = currentItem.data.currentStat[i].value.ToString();
+                }
+
             }
+            else
+            {
+                DisplayItemStats(StatType.Attack);
+                DisplayItemStats(StatType.AttackSpeed);
+                DisplayItemStats(StatType.AttackRange);
+                DisplayItemStats(StatType.BulletSpread);
+                DisplayItemStats(StatType.ExplosionRange);
+                DisplayItemStats(StatType.ReloadTime);
+            }
+
+            
         }
 
         //---Then, set main features
@@ -232,9 +248,19 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
     }
+
+    void DisplayItemStats(StatType statType)
+    {
+        InventoryItem currentItem = ActiveSlot.GetComponentInChildren<InventoryItem>();
+        itemStats[(int)statType].gameObject.SetActive(true);
+        itemStats[(int)statType].statImage.sprite = CheckStatImage(currentItem.data.currentStat[(int)statType]);
+        itemStats[(int)statType].statText.text = currentItem.data.currentStat[(int)statType].value.ToString();
+    }
+
+
     Sprite CheckStatImage(ItemInfo.ItemStat.Stat stat)
     {
-        if(stat.type == StatType.Attack)
+        if (stat.type == StatType.Attack)
         {
             return statSprites[0];
         }
@@ -242,13 +268,29 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             return statSprites[1];
         }
-        else if (stat.type == StatType.Health)
+        else if (stat.type == StatType.AttackRange)
         {
             return statSprites[2];
         }
-        else if(stat.type == StatType.Defense)
+        else if (stat.type == StatType.BulletSpread)
         {
             return statSprites[3];
+        }
+        else if (stat.type == StatType.ExplosionRange)
+        {
+            return statSprites[4];
+        }
+        else if (stat.type == StatType.ReloadTime)
+        {
+            return statSprites[5];
+        }
+        else if (stat.type == StatType.Health)
+        {
+            return statSprites[6];
+        }
+        else if (stat.type == StatType.Defense)
+        {
+            return statSprites[7];
         }
         return null;
     }
@@ -424,7 +466,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     GameObject itemAdd = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
 
                     itemAdd.transform.SetParent(unlockedSlot.transform);
-                    itemAdd.transform.SetSiblingIndex(4);   
+                    itemAdd.transform.SetSiblingIndex(4);
                     itemAdd.transform.localPosition = new Vector3(0, 1, 0);
                     itemAdd.transform.localScale = new Vector3(1, 1, 1);
                     slot.isEmpty = false;
@@ -499,7 +541,7 @@ public class InventoryManager : Singleton<InventoryManager>
         do
         {
             randNum = Random.Range(1000, 10000);
-        } while (inventoryData.inventoryData.Exists(x => x.ID == randNum)); 
+        } while (inventoryData.inventoryData.Exists(x => x.ID == randNum));
         /* Exists is similar to Single:
          * - Exists used for List
          * - Single used for array
@@ -544,7 +586,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// itemType == item.type => Filter with specific type. For example, itemType = 9, filter with 9, which is Potion.
     /// <param name="itemType"></param> the type that user wants to filter.
     /// </summary>
-    public void FilterItemType(int itemType) 
+    public void FilterItemType(int itemType)
     {
         currentItemType = itemType;
         FilterTypeAndRarity(currentItemType, currentRarity);
