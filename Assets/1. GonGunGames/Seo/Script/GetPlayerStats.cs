@@ -76,10 +76,22 @@ public class GetPlayerStats : MonoBehaviour
 
     }
 
-    public float GetStats(StatType statType)
+    public float GetStat(StatType statType)
     {
+        // 장비 + 플레이어 스탯
         playerStats[((int)statType)] = playerData.additionalStats[((int)statType)].value + playerData.baseStats[((int)statType)].value;
         return playerStats[((int)statType)];
+    }
+    public float GetAdditionalStat(StatType statType)
+    {
+        // 장비 스탯
+        return playerData.baseStats[((int)statType)].value;
+    }
+
+    public float GetBaseStat(StatType statType)
+    {
+        // 플레이어 스탯
+        return playerData.additionalStats[((int)statType)].value;
     }
 
     void Start()
