@@ -6,6 +6,8 @@ using System.Linq;
 using UnityEngine.UI;
 public class UpgradeManager : MonoBehaviour
 {
+    public PlayerStat playerStat;
+
     [SerializeField] Toggle upgradeSystemButton;
     [SerializeField] private List<InventoryItem> equipItems;
 
@@ -21,10 +23,45 @@ public class UpgradeManager : MonoBehaviour
 
     private int currentIdx;
 
+    [SerializeField] TextMeshProUGUI goldText;
+    [SerializeField] TextMeshProUGUI diamondText;
+    [SerializeField] TextMeshProUGUI upgradeCostText;
+
+    int cost;
+
+    public int Diamond
+    {
+        get
+        {
+            return playerStat.playerData.diamond;
+        }
+        set
+        {
+            playerStat.playerData.diamond = value;
+            goldText.text = playerStat.playerData.gold.ToString();
+            diamondText.text = value.ToString();
+        }
+    }
+    public int Gold
+    {
+        get
+        {
+            return playerStat.playerData.gold;
+        }
+        set
+        {
+            playerStat.playerData.gold = value;
+            goldText.text = value.ToString();
+            diamondText.text = playerStat.playerData.diamond.ToString();
+        }
+    }
+
+
+
     private void Awake()
     {
         equipItems = equipItemPool.GetComponentsInChildren<InventoryItem>().ToList();
-        foreach(InventoryItem item in equipItems)
+        foreach (InventoryItem item in equipItems)
         {
             item.gameObject.SetActive(false);
         }
@@ -33,7 +70,8 @@ public class UpgradeManager : MonoBehaviour
         previewStats = previewStatPool.GetComponentsInChildren<UIStat>();
 
 
-        upgradeSystemButton.onValueChanged.AddListener(delegate {
+        upgradeSystemButton.onValueChanged.AddListener(delegate
+        {
             ShowEquipItem();
             DisplayUI(false);
         });
@@ -46,7 +84,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     private void ShowEquipItem()
     {
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             EquipmentSlot slot = InventoryManager.Instance.equipmentSlots[i];
             if (InventoryManager.Instance.equipmentSlots[i].isEquip)
@@ -75,7 +113,7 @@ public class UpgradeManager : MonoBehaviour
     public void DisplayItem(int idx)
     {
         currentIdx = idx;
-        if (!equipItems[idx].gameObject.activeInHierarchy )
+        if (!equipItems[idx].gameObject.activeInHierarchy)
         {
             DisplayUI(false);
             return;
@@ -90,6 +128,7 @@ public class UpgradeManager : MonoBehaviour
 
         DisplayUpgradeCurrentStat();
         DisplayUpgradeStatPreview();
+        UpgradeCostUpdate();
     }
     /* 
      * Step 1: Go to Player Stat scripts and read two functions RemoveItemStat() and AddItemStat() 
@@ -105,6 +144,9 @@ public class UpgradeManager : MonoBehaviour
      */
     public void UpgradeItem()
     {
+        if (Gold < cost)
+            return;
+
         if (!equipItems[currentIdx].gameObject.activeInHierarchy || upgradeItem.data == null)
         {
             return;
@@ -113,14 +155,24 @@ public class UpgradeManager : MonoBehaviour
         PlayerStat.Instance.RemoveItemStat(upgradeItem);
 
         upgradeItem.data.currentLevel++;
-        foreach(ItemInfo.ItemStat.Stat stat in upgradeItem.data.currentStat)
+
+        foreach (ItemInfo.ItemStat.Stat stat in upgradeItem.data.currentStat)
         {
             stat.value = stat.GetNextValue();
         }
 
         PlayerStat.Instance.AddItemStat(upgradeItem);
+        Gold -= cost;
+
         DisplayUpgradeCurrentStat();
         DisplayUpgradeStatPreview();
+        UpgradeCostUpdate();
+    }
+
+    public void UpgradeCostUpdate()
+    {
+        cost = (int)(upgradeItem.data.currentLevel * (int)upgradeItem.data.info.baseStat.rarity * 50);
+        upgradeCostText.text = $"<sprite name=Gold Icon>{cost}\nUpgrade";
     }
 
 
@@ -130,7 +182,7 @@ public class UpgradeManager : MonoBehaviour
     private void DisplayUpgradeCurrentStat()
     {
         int len = upgradeItem.data.currentStat.Length;
-        for(int i = 0; i < len; i++)
+        for (int i = 0; i < len; i++)
         {
             currentStats[i].DisplayInfo(true);
             string statText = upgradeItem.data.currentStat[i].value.ToString();
@@ -139,7 +191,7 @@ public class UpgradeManager : MonoBehaviour
             currentStats[i].SetText(statText);
             currentStats[i].SetImage(icon);
         }
-        for(int i = len; i < 3; i++)
+        for (int i = len; i < 3; i++)
         {
             currentStats[i].DisplayInfo(false);
         }

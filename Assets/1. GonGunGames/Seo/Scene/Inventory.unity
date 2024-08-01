@@ -5655,6 +5655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d589a1e9548d7042a0b57101f25f34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStat: {fileID: 767146022}
   upgradeSystemButton: {fileID: 1915423117}
   equipItems: []
   equipItemPool: {fileID: 1822404364}
@@ -5664,6 +5665,9 @@ MonoBehaviour:
   previewItem: {fileID: 179839821}
   currentStats: []
   previewStats: []
+  goldText: {fileID: 989329364}
+  diamondText: {fileID: 1608098587}
+  upgradeCostText: {fileID: 997686822}
 --- !u!1 &177279866
 GameObject:
   m_ObjectHideFlags: 0
@@ -23322,7 +23326,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Upgrade
+  m_text: '<sprite name=Gold Icon>0
+
+    Upgrade'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80e5db961a8c22a4d85e7c8de87df8ac, type: 2}
   m_sharedMaterial: {fileID: 734049897934466843, guid: 80e5db961a8c22a4d85e7c8de87df8ac, type: 2}
