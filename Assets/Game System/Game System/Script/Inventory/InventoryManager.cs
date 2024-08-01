@@ -253,6 +253,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         InventoryItem currentItem = ActiveSlot.GetComponentInChildren<InventoryItem>();
         itemStats[(int)statType].gameObject.SetActive(true);
+        Debug.Log(currentItem.data.currentStat[(int)statType]);
         itemStats[(int)statType].statImage.sprite = CheckStatImage(currentItem.data.currentStat[(int)statType]);
         itemStats[(int)statType].statText.text = currentItem.data.currentStat[(int)statType].value.ToString();
     }
