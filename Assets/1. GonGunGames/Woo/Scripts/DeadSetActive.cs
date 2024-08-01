@@ -19,6 +19,7 @@ public class DeadSetActive : MonoBehaviour
     private float bossDefeatTime; // 보스 처치 시간을 기록합니다.
     private bool isPlayerDead = false;
     private bool isBossDead = false;
+    private bool isElliteDead = false;
 
     private void Start()
     {
