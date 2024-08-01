@@ -14,10 +14,10 @@ public class EnemyHealth : MonoBehaviour
     private CommonMobB commonMobB;  // CommonMobB 컴포넌트
     private Weapon weapon;  // 무기 정보
     private Shotgun shotgun;  // 샷건 정보
-    [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
+                              // Dead 상태에서 스폰할 프리팹
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
-    public int deathCount;
+
     public GameObject hitParticlePrefab;
     private void Start()
     {
@@ -144,30 +144,8 @@ public class EnemyHealth : MonoBehaviour
             // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
 
             // 프리팹 인스턴스화
-            Instantiate(deathPrefab, transform.position, transform.rotation);
-            ReleaseToPool();
-            deathCount++;
-            Debug.Log("Enemy");
 
-            // DeathCount 인스턴스를 통해 deathCount를 증가시킴
-            if (DeathCount.Instance != null)
-            {
-                DeathCount.Instance.IncrementDeathCount();
-            }
-        }
-    }
-
-
-    private void ReleaseToPool()
-    {
-        EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
-        if (poolManager != null)
-        {
-            poolManager.ReleaseEnemy(gameObject);
-        }
-        else
-        {
-            Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
         }
     }
 }
+

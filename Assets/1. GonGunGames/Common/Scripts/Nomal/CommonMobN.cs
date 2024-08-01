@@ -14,7 +14,8 @@ public class CommonMobN : BaseFSM
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
     private bool isCooldown = false;
-
+    public int deathCount;
+    [SerializeField] private GameObject deathPrefab;
     public GameObject player;
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
@@ -201,13 +202,36 @@ public class CommonMobN : BaseFSM
 
     protected override IEnumerator Dead()
     {
+        yield return new WaitForSeconds(2f); // Dead 애니메이션 시간만큼 대기
         // Dead 상태에서 추가 로직 처리
         // 예: 애니메이션, 사운드 재생 등
         Debug.Log("Entering Dead State");
-        animator.SetTrigger("Dead");
-        yield return new WaitForSeconds(2f); // Dead 애니메이션 시간만큼 대기
+        Instantiate(deathPrefab, transform.position, transform.rotation);
+        ReleaseToPool();
+        deathCount++;
+        Debug.Log("Enemy");
+
+        // DeathCount 인스턴스를 통해 deathCount를 증가시킴
+        if (DeathCount.Instance != null)
+        {
+            DeathCount.Instance.IncrementDeathCount();
+        }
+      
 
         // 애니메이션 재생 후 오브젝트 소멸
-        Destroy(gameObject);
+   
+    }
+    private void ReleaseToPool()
+    {
+        EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
+        if (poolManager != null)
+        {
+            poolManager.ReleaseEnemy(gameObject);
+        }
+        else
+        {
+            Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
+        }
     }
 }
+

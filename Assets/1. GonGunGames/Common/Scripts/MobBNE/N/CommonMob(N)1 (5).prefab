@@ -970,6 +970,8 @@ MonoBehaviour:
   attackRange: 1.5
   aggroTime: 3
   health: {fileID: 2289045918164563505}
+  deathCount: 0
+  deathPrefab: {fileID: 8578329225272092373, guid: 563e21624c7da234aabfdbb1c13c3bb5, type: 3}
   player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
 --- !u!114 &2289045918164563505
 MonoBehaviour:
@@ -987,10 +989,8 @@ MonoBehaviour:
   currentDamage: 0
   currentHealth: 0
   isHit: 0
-  deathPrefab: {fileID: 8578329225272092373, guid: 563e21624c7da234aabfdbb1c13c3bb5, type: 3}
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
   damageTextSpawnPoint: {fileID: 5270563207681717181}
-  deathCount: 0
   hitParticlePrefab: {fileID: 4186470608034871016, guid: 419d6ca370932a142a195479044cb169, type: 3}
 --- !u!1 &5433246528869025769
 GameObject:
