@@ -307,6 +307,7 @@ MonoBehaviour:
   hitbox: {fileID: 4427019661540087004}
   hitbox2: {fileID: 0}
   hitboxrange: {fileID: 0}
+  isSpecialMob: 0
 --- !u!1 &1948584262811691559
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,9 +535,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2846634222200167899}
-  - component: {fileID: 8932919414859927675}
+  - component: {fileID: 6954856914156598629}
   - component: {fileID: 4355983932494711518}
-  - component: {fileID: 305154987930943852}
+  - component: {fileID: 14570256229389434}
+  - component: {fileID: 7420310571489590913}
   m_Layer: 0
   m_Name: CommonMob (E) (10)
   m_TagString: Enemy
@@ -562,20 +564,20 @@ Transform:
   - {fileID: 6406097333307634370}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &8932919414859927675
+--- !u!114 &6954856914156598629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3097455423403343128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4024f54d8f2d4dc40b2c65461d73e70c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
-  animator: {fileID: 0}
+  state: 4
+  animator: {fileID: 6029974797952462931}
   controller: {fileID: 4355983932494711518}
   idleTime: 0
   moveSpeed: 1
@@ -584,8 +586,8 @@ MonoBehaviour:
   attackRange: 1.5
   fastMoveSpeed: 2
   aggroTime: 3
-  enemyHealth: {fileID: 305154987930943852}
-  player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
+  elliteHealth: {fileID: 14570256229389434}
+  player: {fileID: 0}
 --- !u!143 &4355983932494711518
 CharacterController:
   m_ObjectHideFlags: 0
@@ -612,7 +614,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &305154987930943852
+--- !u!114 &14570256229389434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -621,7 +623,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3097455423403343128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8001e65836200247836d38cbf22f25e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6324a4534e3a2364286698f030b2347b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentId: 10
@@ -629,8 +631,22 @@ MonoBehaviour:
   currentHealth: 0
   isHit: 0
   deathPrefab: {fileID: 7705945740828748442, guid: 0ea8e86424122f94893d83e9040a0822, type: 3}
+  goldPrefab: {fileID: 2212033436154223188, guid: 6a4f3431a7cda3c4d8c650b82d483a85, type: 3}
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
   damageTextSpawnPoint: {fileID: 6406097333307634370}
+--- !u!114 &7420310571489590913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097455423403343128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60246c2ff50838f43baf884777150670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isChoose: 0
 --- !u!1 &3103707303326094981
 GameObject:
   m_ObjectHideFlags: 0

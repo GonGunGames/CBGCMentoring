@@ -437,6 +437,7 @@ MonoBehaviour:
   hitbox: {fileID: 1435555873535927895}
   hitbox2: {fileID: 0}
   hitboxrange: {fileID: 0}
+  isSpecialMob: 0
 --- !u!1 &3890986989479480974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,8 +1260,10 @@ MonoBehaviour:
   currentHealth: 0
   isHit: 0
   deathPrefab: {fileID: 8578329225272092373, guid: 563e21624c7da234aabfdbb1c13c3bb5, type: 3}
+  goldPrefab: {fileID: 2212033436154223188, guid: 6a4f3431a7cda3c4d8c650b82d483a85, type: 3}
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
   damageTextSpawnPoint: {fileID: 830568516733566272}
+  deathCount: 0
 --- !u!1 &7082170825840516392
 GameObject:
   m_ObjectHideFlags: 0

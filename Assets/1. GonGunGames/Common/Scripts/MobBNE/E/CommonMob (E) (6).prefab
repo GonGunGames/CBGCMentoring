@@ -272,7 +272,8 @@ GameObject:
   - component: {fileID: 4231389436170058474}
   - component: {fileID: 4124710009451027945}
   - component: {fileID: 2289158145406588620}
-  - component: {fileID: 4396199912526614043}
+  - component: {fileID: 9210813508990681331}
+  - component: {fileID: 1224590681920194500}
   m_Layer: 0
   m_Name: CommonMob (E) (6)
   m_TagString: Enemy
@@ -320,7 +321,7 @@ MonoBehaviour:
   attackRange: 1.5
   fastMoveSpeed: 2
   aggroTime: 3
-  enemyHealth: {fileID: 4396199912526614043}
+  elliteHealth: {fileID: 0}
   player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
 --- !u!143 &2289158145406588620
 CharacterController:
@@ -348,7 +349,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4396199912526614043
+--- !u!114 &9210813508990681331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,7 +358,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1313451114104010478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8001e65836200247836d38cbf22f25e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6324a4534e3a2364286698f030b2347b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentId: 6
@@ -365,8 +366,22 @@ MonoBehaviour:
   currentHealth: 0
   isHit: 0
   deathPrefab: {fileID: 7705945740828748442, guid: 0ea8e86424122f94893d83e9040a0822, type: 3}
+  goldPrefab: {fileID: 2212033436154223188, guid: 6a4f3431a7cda3c4d8c650b82d483a85, type: 3}
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
   damageTextSpawnPoint: {fileID: 1559201175609677946}
+--- !u!114 &1224590681920194500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313451114104010478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60246c2ff50838f43baf884777150670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isChoose: 0
 --- !u!1 &1406312710556290852
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +495,7 @@ MonoBehaviour:
   hitbox: {fileID: 1824221838549249808}
   hitbox2: {fileID: 0}
   hitboxrange: {fileID: 0}
+  isSpecialMob: 0
 --- !u!1 &2030901805937298324
 GameObject:
   m_ObjectHideFlags: 0

@@ -505,6 +505,7 @@ MonoBehaviour:
   hitbox: {fileID: 7595122482512696777}
   hitbox2: {fileID: 0}
   hitboxrange: {fileID: 0}
+  isSpecialMob: 0
 --- !u!1 &2270515924005267055
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +913,7 @@ Transform:
   m_GameObject: {fileID: 5389754348998464093}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.99989486, z: -0, w: 0.014500856}
-  m_LocalPosition: {x: -0.68, y: 0, z: 34.8}
+  m_LocalPosition: {x: -1.57, y: 0, z: 3.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -987,8 +988,10 @@ MonoBehaviour:
   currentHealth: 0
   isHit: 0
   deathPrefab: {fileID: 8578329225272092373, guid: 563e21624c7da234aabfdbb1c13c3bb5, type: 3}
+  goldPrefab: {fileID: 2212033436154223188, guid: 6a4f3431a7cda3c4d8c650b82d483a85, type: 3}
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
   damageTextSpawnPoint: {fileID: 5270563207681717181}
+  deathCount: 0
 --- !u!1 &5433246528869025769
 GameObject:
   m_ObjectHideFlags: 0

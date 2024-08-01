@@ -15,6 +15,7 @@ public class ElliteHealth : MonoBehaviour
     private Weapon weapon;  // 무기 정보
     private Shotgun shotgun;  // 샷건 정보
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
+    [SerializeField] private GameObject goldPrefab; // Dead 상태에서 스폰할 프리팹
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
     private int deathCount;
@@ -132,7 +133,7 @@ public class ElliteHealth : MonoBehaviour
 
             // 프리팹 인스턴스화
             Instantiate(deathPrefab, transform.position, transform.rotation);
-
+            Instantiate(goldPrefab, transform.position, transform.rotation);
             ReleaseToPool();
             deathCount++;
             Debug.Log("Enemy");
