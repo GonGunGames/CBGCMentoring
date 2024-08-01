@@ -18,7 +18,7 @@ public class EnemyHealth : MonoBehaviour
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
     public int deathCount;
-
+    public GameObject hitParticlePrefab;
     private void Start()
     {
         Initialize();
@@ -34,6 +34,11 @@ public class EnemyHealth : MonoBehaviour
         {
             Debug.LogError("Player를 찾을 수 없습니다.");
         }
+    }
+
+    private void OnEnable()
+    {
+        isDead = false;
     }
 
     public void Initialize()
@@ -122,9 +127,17 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("데미지 적용: " + damage); // 디버그 로그 추가
         currentHealth -= damage;
         isHit = true; // 적과 충돌 시 isHit를 true로 설정
+
+        // 피격 파티클 효과 인스턴스화
+        if (hitParticlePrefab != null)
+        {
+            Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
+        }
+
         commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
         commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
         commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
+
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
@@ -143,6 +156,7 @@ public class EnemyHealth : MonoBehaviour
             }
         }
     }
+
 
     private void ReleaseToPool()
     {

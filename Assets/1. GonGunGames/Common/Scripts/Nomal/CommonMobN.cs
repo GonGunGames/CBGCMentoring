@@ -24,6 +24,17 @@ public class CommonMobN : BaseFSM
         health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        SetState(FSMState.Idle);
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -193,8 +204,8 @@ public class CommonMobN : BaseFSM
         // Dead 상태에서 추가 로직 처리
         // 예: 애니메이션, 사운드 재생 등
         Debug.Log("Entering Dead State");
-
-        yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
+        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(2f); // Dead 애니메이션 시간만큼 대기
 
         // 애니메이션 재생 후 오브젝트 소멸
         Destroy(gameObject);

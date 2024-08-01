@@ -40,7 +40,18 @@ public class BaseFSM : MonoBehaviour
     }
     protected virtual void Start()
     {
+        //StartCoroutine(FSM());
+    }
+
+    protected virtual void OnEnable()
+    {
+        FSMState state = FSMState.Idle;
         StartCoroutine(FSM());
+    }
+
+    protected virtual void OnDisable()
+    {
+        StopCoroutine(FSM());
     }
 
     protected virtual void Update()
