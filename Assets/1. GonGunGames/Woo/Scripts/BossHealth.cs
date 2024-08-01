@@ -96,9 +96,9 @@ public class BossHealth : MonoBehaviour
         ShotgunBullet shotgunBullet = other.GetComponent<ShotgunBullet>();
         if (shotgunBullet != null)
         {
-            float bulletDamage = weapon.attackDamage;
-            ShowDamageText(bulletDamage);
-            ApplyDamage(bulletDamage);
+            float shotgunDamage = shotgun != null ? shotgun.attackDamage : 0f; // 최신 데미지를 가져옴
+            ShowDamageText(shotgunDamage);
+            ApplyDamage(shotgunDamage);
         }
     }
 
