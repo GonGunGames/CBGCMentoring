@@ -205,29 +205,14 @@ public class InventoryManager : Singleton<InventoryManager>
             {
                 stat.gameObject.SetActive(false);
             }
-
-            int statLen = currentItem.data.currentStat.Length;
-            if (statLen <= 5)
+            //int statLen = currentItem.data.currentStat.Length;
+            int statLen = currentItem.data.info.baseStat.stats.Length;
+            for (int i = 0; i < statLen; i++)
             {
-                for (int i = 0; i < statLen; i++)
-                {
-                    itemStats[(int)currentItem.data.info.baseStat.stats[i].type].gameObject.SetActive(true);
-                    itemStats[(int)currentItem.data.info.baseStat.stats[i].type].statImage.sprite = CheckStatImage(currentItem.data.currentStat[i]);
-                    itemStats[(int)currentItem.data.info.baseStat.stats[i].type].statText.text = currentItem.data.currentStat[i].value.ToString();
-                }
-
+                itemStats[i].gameObject.SetActive(true);
+                itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
+                itemStats[i].statText.text = currentItem.data.info.baseStat.stats[i].value.ToString();
             }
-            else
-            {
-                DisplayItemStats(StatType.Attack);
-                DisplayItemStats(StatType.AttackSpeed);
-                DisplayItemStats(StatType.AttackRange);
-                DisplayItemStats(StatType.BulletSpread);
-                DisplayItemStats(StatType.ExplosionRange);
-                DisplayItemStats(StatType.ReloadTime);
-            }
-
-            
         }
 
         //---Then, set main features
@@ -248,52 +233,58 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
     }
-
-    void DisplayItemStats(StatType statType)
+    //Sprite CheckStatImage(ItemInfo.ItemStat.Stat stat)
+    Sprite CheckStatImage(StatType stat)
     {
-        InventoryItem currentItem = ActiveSlot.GetComponentInChildren<InventoryItem>();
-        itemStats[(int)statType].gameObject.SetActive(true);
-        Debug.Log(currentItem.data.currentStat[(int)statType]);
-        itemStats[(int)statType].statImage.sprite = CheckStatImage(currentItem.data.currentStat[(int)statType]);
-        itemStats[(int)statType].statText.text = currentItem.data.currentStat[(int)statType].value.ToString();
-    }
-
-
-    Sprite CheckStatImage(ItemInfo.ItemStat.Stat stat)
-    {
-        if (stat.type == StatType.Attack)
+        switch (stat)
         {
-            return statSprites[0];
+            case StatType.AdditionalAttacksProbability:
+                return statSprites[0];
+            case StatType.Attack:
+                return statSprites[1];
+            case StatType.AttackPowerMultiplier:
+                return statSprites[2];
+            case StatType.AttackPowerMultiplierProbability:
+                return statSprites[3];
+            case StatType.AttackRange:
+                return statSprites[4];
+            case StatType.AttackSpeed:
+                return statSprites[5];
+            case StatType.Branche:
+                return statSprites[6];
+            case StatType.BulletSize:
+                return statSprites[7];
+            case StatType.BulletSpeed:
+                return statSprites[8];
+            case StatType.BulletSpread:
+                return statSprites[9];
+            case StatType.CriticalProbability:
+                return statSprites[10];
+            case StatType.Defense:
+                return statSprites[11];
+            case StatType.ExplosionRange:
+                return statSprites[12];
+            case StatType.GrenadeProbability:
+                return statSprites[13];
+            case StatType.Health:
+                return statSprites[14];
+            case StatType.MagazineSize:
+                return statSprites[15];
+            case StatType.MaxAdditionalAttacks:
+                return statSprites[16];
+            case StatType.MoveSpeed:
+                return statSprites[17];
+            case StatType.NoReloadTimeProbability:
+                return statSprites[18];
+            case StatType.PenetratingPower:
+                return statSprites[19];
+            case StatType.PenetratingProbability:
+                return statSprites[20];
+            case StatType.ReloadTime:
+                return statSprites[21];
+            default:
+                return null;
         }
-        else if (stat.type == StatType.AttackSpeed)
-        {
-            return statSprites[1];
-        }
-        else if (stat.type == StatType.AttackRange)
-        {
-            return statSprites[2];
-        }
-        else if (stat.type == StatType.BulletSpread)
-        {
-            return statSprites[3];
-        }
-        else if (stat.type == StatType.ExplosionRange)
-        {
-            return statSprites[4];
-        }
-        else if (stat.type == StatType.ReloadTime)
-        {
-            return statSprites[5];
-        }
-        else if (stat.type == StatType.Health)
-        {
-            return statSprites[6];
-        }
-        else if (stat.type == StatType.Defense)
-        {
-            return statSprites[7];
-        }
-        return null;
     }
     string GetRarityText(Rarity rarity)
     {
