@@ -16,8 +16,8 @@ public class DataPlayer : ScriptableObject
     public void ResetAllData()
     {
         level = 1;
-        gold = 10000;
-        diamond = 300;
+        gold = 1000;
+        diamond = 100;
         combatPower = 0;
 
         for (int i = 0; i < additionalStats.Length; i++)
