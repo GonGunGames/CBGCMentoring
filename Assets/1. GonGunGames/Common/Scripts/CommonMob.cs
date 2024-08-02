@@ -16,9 +16,7 @@ public class CommonMob : BaseFSM
     private float attackCooldown = 0.7f;
     private bool isCooldown = false;
     private float sAttackDuration = 0.6f;
-
     public GameObject player; // 플레이어를 GameObject로 변경
-
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
     protected override void Start()
@@ -212,14 +210,28 @@ public class CommonMob : BaseFSM
         // Dead 애니메이션 재생
         yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
 
-
-        // 애니메이션 재생 후 오브젝트 소멸
-        Destroy(gameObject);
+        ReleaseToPool();
     }
-
+    private void ReleaseToPool()
+    {
+        EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
+        if (poolManager != null)
+        {
+            poolManager.ReleaseEnemy(gameObject);
+        }
+        else
+        {
+            Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
+        }
+    }
     // 현재 상태를 저장하는 메서드
     public void SaveCurrentState(FSMState state)
     {
         previousState = state;
+    }
+    public void Initialize()
+    {
+        SetState(FSMState.Move);
+        // 초기화 로직 추가
     }
 }

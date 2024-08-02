@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerExp : MonoBehaviour
 {
@@ -10,9 +11,12 @@ public class PlayerExp : MonoBehaviour
     private PlayerGold playergold; // PlayerGold 인스턴스
     private LevelManager levelManager;
     private bool isLevelingUp = false; // 레벨업 중인지 여부를 체크하는 변수
-
+    public GameObject particlePrefab; // 파티클 프리펩
+    public float particleDuration = 1.5f; // 파티클 지속 시간
+    public AudioSource audioSource;
     private void Start()
     {
+        particlePrefab.SetActive(false);
         // 초기화
         currentLevel = DataBase.Instance.playerData.currentLevel;
         currentExp = DataBase.Instance.playerData.currentExp;
@@ -70,7 +74,7 @@ public class PlayerExp : MonoBehaviour
     {
         isLevelingUp = true; // 레벨업 시작
         Time.timeScale = 0f; // 게임 일시 정지
-
+        particlePrefab.SetActive(true);
         currentLevel++;
         currentExp -= expToLevelUp;
         expToLevelUp = CalculateNextLevelExp(); // 다음 레벨에 필요한 경험치 계산
@@ -87,6 +91,9 @@ public class PlayerExp : MonoBehaviour
     {
         isLevelingUp = false; // 레벨업 완료
         Time.timeScale = 1f; // 게임 재개
+        audioSource.Play();
+        // 파티클 활성화
+        StartCoroutine(ActivateParticleEffect());
 
         // 레벨업 후에도 경험치가 충분하면 다시 체크
         CheckLevelUp();
@@ -118,6 +125,26 @@ public class PlayerExp : MonoBehaviour
                 playergold.AddGold(itemGold.goldAmount); // 아이템에서 정의된 골드 양을 플레이어의 골드에 추가
                 Destroy(other.gameObject); // 충돌한 아이템 오브젝트 파괴
             }
+        }
+    }
+
+    private IEnumerator ActivateParticleEffect()
+    {
+        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity, transform); // 플레이어의 자식으로 설정
+        ParticleSystem particleSystem = particleInstance.GetComponent<ParticleSystem>();
+
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+            Debug.Log("Particle started");
+            yield return new WaitForSeconds(particleDuration);
+            particleSystem.Stop();
+            Destroy(particleInstance.gameObject);
+            Debug.Log("Particle stopped");
+        }
+        else
+        {
+            Debug.LogError("No ParticleSystem component found on the particlePrefab.");
         }
     }
 }

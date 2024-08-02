@@ -5,11 +5,13 @@ public class Ellite : MonoBehaviour
 {
     public static event Action OnElliteDestroyed;
     public bool isChoose;
+    private ElliteHealth elliteHealth;
     private ChooseManager chooseManager;
 
     void Start()
     {
         isChoose = false;
+        elliteHealth = GetComponent<ElliteHealth>(); // ElliteHealth 컴포넌트 가져오기
         chooseManager = FindObjectOfType<ChooseManager>();
         if (chooseManager == null)
         {
@@ -17,12 +19,11 @@ public class Ellite : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    public void DeadEllite()
     {
-        // 보스가 파괴될 때 이벤트를 발생시킵니다.
-        if (OnElliteDestroyed != null)
+        if (elliteHealth != null && elliteHealth.isDead)
         {
-            OnElliteDestroyed.Invoke();
+            OnElliteDestroyed?.Invoke();
             ChooseUp();
         }
     }

@@ -20,10 +20,17 @@ public class EnemyHealth : MonoBehaviour
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
     public int deathCount;
 
+    void Awake()
+    {
+        commonMob = GetComponent<CommonMob>();
+        commonMobN = GetComponent<CommonMobN>();
+        commonMobB = GetComponent<CommonMobB>();
+    }
     private void Start()
     {
         Initialize();
 
+        // 적의 상태를 Idle로 설정
         // 무기 정보 초기화
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -40,6 +47,16 @@ public class EnemyHealth : MonoBehaviour
     public void Initialize()
     {
         // 인스펙터에서 설정된 currentId를 사용하여 적 정보를 가져옵니다.
+        isDead = false;
+
+        if (commonMob != null)
+        {
+            commonMob.Initialize();
+        }
+        else if (commonMobN != null)
+        {
+            commonMobN.Initialize();
+        }
         EnemyInfo enemyInfo = DataBase.Instance.GetEnemyInfoById(currentId);
 
         if (enemyInfo != null)
@@ -68,16 +85,17 @@ public class EnemyHealth : MonoBehaviour
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                ShowDamageText(bulletDamage);
+                float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
+                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
                 bullet2.NotifyExplosion();
             }
             else if (bullet != null)
             {
                 // Weaponbullet의 데미지를 처리합니다.
-                Debug.Log("Weaponbullet로 인한 데미지 적용");
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                ShowDamageText(bulletDamage);
-                ApplyDamage(bulletDamage);
+                float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
+                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
+                ApplyDamage(finalDamage);
             }
         }
     }
@@ -118,6 +136,19 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    private float ApplyDoubleDamage(float damage)
+    {
+        if (weapon != null)
+        {
+            bool isDoubleDamage = Random.value <= weapon.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
+            if (isDoubleDamage)
+            {
+                return damage * 2; // 두 배의 데미지 적용
+            }
+        }
+        return damage; // 기본 데미지 반환
+    }
+
     public void ApplyDamage(float damage)
     {
         Debug.Log("데미지 적용: " + damage); // 디버그 로그 추가
@@ -134,10 +165,8 @@ public class EnemyHealth : MonoBehaviour
             // 프리팹 인스턴스화
             Instantiate(deathPrefab, transform.position, transform.rotation);
             Instantiate(goldPrefab, transform.position, transform.rotation);
-            ReleaseToPool();
             deathCount++;
             Debug.Log("Enemy");
-
             // DeathCount 인스턴스를 통해 deathCount를 증가시킴
             if (DeathCount.Instance != null)
             {
@@ -146,16 +175,4 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void ReleaseToPool()
-    {
-        EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
-        if (poolManager != null)
-        {
-            poolManager.ReleaseEnemy(gameObject);
-        }
-        else
-        {
-            Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
-        }
-    }
 }

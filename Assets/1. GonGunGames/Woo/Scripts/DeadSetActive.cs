@@ -89,8 +89,8 @@ public class DeadSetActive : MonoBehaviour
     {
         if (!isElliteDead)
         {
-            isElliteDead = true; 
-            elliteDefeatTime = Time.time; 
+            isElliteDead = true;
+            elliteDefeatTime = Time.time;
 
             // UI 요소를 활성화/비활성화 처리합니다.
             heal.gameObject.SetActive(true);

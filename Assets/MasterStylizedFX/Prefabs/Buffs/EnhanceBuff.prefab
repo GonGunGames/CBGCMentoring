@@ -25,16 +25,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3712118245887311818}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.0000014603138, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -13.58, y: -1.73, z: 3.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5522877178846847617}
-  - {fileID: 6619345389171868113}
+  - {fileID: 4606060168853926835}
   - {fileID: 3598506888287871740}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &7836309938110854699
 ParticleSystem:
@@ -44,7 +44,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3712118245887311818}
   serializedVersion: 8
-  lengthInSec: 10
+  lengthInSec: 2
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -53,7 +53,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 0
   startDelay:
@@ -226,7 +226,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.5811298, b: 0, a: 0.23529412}
+      maxColor: {r: 0.38232803, g: 1, b: 0, a: 0.23529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4873,13 +4873,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 1
   m_VertexStreams: 000103042224
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 8728704203507059511, guid: bb7110d4c4c0dd742bb9887715b516de, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -4914,13 +4916,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6647211385697497677}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.15, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.32825, y: 0.32825, z: 0.32825}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6484341003461444923}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &7231108908346438132
 ParticleSystem:
@@ -4939,7 +4941,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5112,7 +5114,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.85638046, b: 0, a: 1}
+      maxColor: {r: 0.54509807, g: 1, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9701,13 +9703,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 1
   m_VertexStreams: 000103041f
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -9725,6 +9729,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6484341003461444923}
     m_Modifications:
+    - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 4
@@ -9747,11 +9755,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.77448
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
+      value: 0.46165276
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startRotationX.scalar
@@ -9760,6 +9768,18 @@ PrefabInstance:
     - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: m_RootOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.46083
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.46083
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.46083
       objectReference: {fileID: 0}
     - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9817,6 +9837,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bottom
       objectReference: {fileID: 0}
+    - target: {fileID: 8467049747696488175, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9841,6 +9865,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: randomSeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
@@ -9905,11 +9933,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.43137255
+      value: 0.49803922
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
@@ -9917,7 +9945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
+      value: 0.1484611
       objectReference: {fileID: 0}
     - target: {fileID: 1795067396496853075, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: InitialModule.startRotationX.scalar
@@ -10480,6 +10508,18 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5227
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5227
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5227
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -10543,12 +10583,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomRing
       objectReference: {fileID: 0}
+    - target: {fileID: 8467049747696488175, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
---- !u!4 &6619345389171868113 stripped
+--- !u!4 &4606060168853926835 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7219447079455208035, guid: f957e6cdde17bf04990c25b0041b590a, type: 3}
   m_PrefabInstance: {fileID: 6619345389171868112}

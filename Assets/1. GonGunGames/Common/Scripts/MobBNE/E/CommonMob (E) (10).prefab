@@ -571,7 +571,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3097455423403343128}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4024f54d8f2d4dc40b2c65461d73e70c, type: 3}
   m_Name: 
@@ -587,7 +587,7 @@ MonoBehaviour:
   fastMoveSpeed: 2
   aggroTime: 3
   elliteHealth: {fileID: 14570256229389434}
-  player: {fileID: 0}
+  player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
 --- !u!143 &4355983932494711518
 CharacterController:
   m_ObjectHideFlags: 0

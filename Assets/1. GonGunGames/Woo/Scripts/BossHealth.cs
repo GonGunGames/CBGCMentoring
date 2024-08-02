@@ -75,17 +75,18 @@ public class BossHealth : MonoBehaviour
             if (bullet2 != null)
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
-                float bulletDamage = weapon.attackDamage;
-                ShowDamageText(bulletDamage);
+                float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
+                float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
+                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
                 bullet2.NotifyExplosion();
             }
             else if (bullet != null)
             {
                 // Weaponbullet의 데미지를 처리합니다.
-                Debug.Log("Weaponbullet로 인한 데미지 적용");
-                float bulletDamage = weapon.attackDamage;
-                ShowDamageText(bulletDamage);
-                ApplyDamage(bulletDamage);
+                float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
+                float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
+                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
+                ApplyDamage(finalDamage);
             }
         }
     }
@@ -101,7 +102,18 @@ public class BossHealth : MonoBehaviour
             ApplyDamage(shotgunDamage);
         }
     }
-
+    private float ApplyDoubleDamage(float damage)
+    {
+        if (weapon != null)
+        {
+            bool isDoubleDamage = Random.value <= weapon.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
+            if (isDoubleDamage)
+            {
+                return damage * 2; // 두 배의 데미지 적용
+            }
+        }
+        return damage; // 기본 데미지 반환
+    }
     private void ShowDamageText(float damage)
     {
         if (damageTextPrefab != null && damageTextSpawnPoint != null)

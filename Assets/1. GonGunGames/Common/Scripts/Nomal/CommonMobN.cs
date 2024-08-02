@@ -14,10 +14,9 @@ public class CommonMobN : BaseFSM
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
     private bool isCooldown = false;
-
+    private Ellite ellite;
     public GameObject player;
     private FSMState previousState; // Hit 전 상태를 저장할 변수
-
     protected override void Awake()
     {
         base.Awake();
@@ -27,6 +26,7 @@ public class CommonMobN : BaseFSM
     protected override void Start()
     {
         base.Start();
+        ellite = GetComponent<Ellite>();
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player == null)
@@ -195,8 +195,23 @@ public class CommonMobN : BaseFSM
         Debug.Log("Entering Dead State");
 
         yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
-
-        // 애니메이션 재생 후 오브젝트 소멸
-        Destroy(gameObject);
+        ReleaseToPool();
+    }
+    private void ReleaseToPool()
+    {
+        EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
+        if (poolManager != null)
+        {
+            poolManager.ReleaseEnemy(gameObject);
+        }
+        else
+        {
+            Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
+        }
+    }
+    public void Initialize()
+    {
+        SetState(FSMState.Move);
+        // 초기화 로직 추가
     }
 }
