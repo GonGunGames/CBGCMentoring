@@ -62,6 +62,8 @@ MonoBehaviour:
   aggroTime: 3
   elliteHealth: {fileID: 235880851215892417}
   player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
+  deathPrefab: {fileID: 7705945740828748442, guid: 0ea8e86424122f94893d83e9040a0822, type: 3}
+  goldPrefab: {fileID: 2212033436154223188, guid: 6a4f3431a7cda3c4d8c650b82d483a85, type: 3}
 --- !u!143 &2105127268685244311
 CharacterController:
   m_ObjectHideFlags: 0
@@ -104,10 +106,10 @@ MonoBehaviour:
   currentDamage: 0
   currentHealth: 0
   isHit: 0
-  deathPrefab: {fileID: 7705945740828748442, guid: 0ea8e86424122f94893d83e9040a0822, type: 3}
-  goldPrefab: {fileID: 2212033436154223188, guid: 6a4f3431a7cda3c4d8c650b82d483a85, type: 3}
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
   damageTextSpawnPoint: {fileID: 2180318384431675714}
+  deathPrefab: {fileID: 7705945740828748442, guid: 0ea8e86424122f94893d83e9040a0822, type: 3}
+  goldPrefab: {fileID: 2212033436154223188, guid: 6a4f3431a7cda3c4d8c650b82d483a85, type: 3}
 --- !u!114 &2086987167898061736
 MonoBehaviour:
   m_ObjectHideFlags: 0

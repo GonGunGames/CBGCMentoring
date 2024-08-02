@@ -35,7 +35,7 @@ public class EnemyPoolManager : MonoBehaviour
                 },
                 actionOnRelease: (obj) =>
                 {
-                    ResetEnemy(obj);  // 비활성화 시 상태 초기화
+                    ReleaseEnemy(obj);  // 비활성화 시 상태 초기화
                     obj.SetActive(false);
                 },
                 actionOnDestroy: (obj) => Destroy(obj),
@@ -105,31 +105,6 @@ public class EnemyPoolManager : MonoBehaviour
     {
         // 적 초기화 로직 구현 (예: 체력 설정, AI 초기화 등)
         // 적 스크립트를 가져와서 초기화하는 예제
-        var enemyScript = enemy.GetComponent<EnemyHealth>();
-        if (enemyScript != null)
-        {
-            enemyScript.Initialize();
-        }
-        else
-        {
-            var eliteScript = enemy.GetComponent<ElliteHealth>();
-            if (eliteScript != null)
-            {
-                eliteScript.Initialize();
-            }
-        }
-
-        // AI 초기화 로직 추가
-        var aiScript = enemy.GetComponent<CommonMobN>();
-        if (aiScript != null)
-        {
-            aiScript.Initialize();  // AI를 초기화 또는 재시작
-        }
-    }
-
-    void ResetEnemy(GameObject enemy)
-    {
-        // 적 상태를 초기화합니다.
         var enemyScript = enemy.GetComponent<EnemyHealth>();
         if (enemyScript != null)
         {

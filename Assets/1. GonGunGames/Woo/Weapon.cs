@@ -36,6 +36,7 @@ public class Weapon : MonoBehaviour
     public float fireSound2Volume = 0.5f; // 두 번째 발사 소리 볼륨 (0.0 ~ 1.0)
 
     private Coroutine fireBurstCoroutine; // FireBurst 코루틴을 저장하기 위한 변수
+    private Coroutine particleCoroutine;
     private WeaponInfo currentWeapon;
 
     private void Start()
@@ -94,8 +95,9 @@ public class Weapon : MonoBehaviour
             {
                 StopCoroutine(fireBurstCoroutine); // FireBurst 코루틴 중지
                 fireBurstCoroutine = null;
-            }
+            } 
             return; // health.isDead가 true이면 이후 코드는 실행되지 않음
+
         }
 
         // 현재 시간이 nextFireTime을 초과할 때만 발사
@@ -116,7 +118,7 @@ public class Weapon : MonoBehaviour
                 Debug.Log("공격속도가 증가했습니다. 현재 공격속도: " + attackSpeed);
                 if (AttackSpeedCount % 3 == 0)
                 {
-                    attackSpeed -= 0.2f;
+                    attackSpeed -= 0.4f;
                 }
                 break;
 

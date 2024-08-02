@@ -17,15 +17,16 @@ public class CommonMobN : BaseFSM
     private Ellite ellite;
     public GameObject player;
     private FSMState previousState; // Hit 전 상태를 저장할 변수
+
     protected override void Awake()
     {
         base.Awake();
         health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
     }
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
         ellite = GetComponent<Ellite>();
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -33,6 +34,8 @@ public class CommonMobN : BaseFSM
         {
             Debug.LogError("Player with tag 'Player' not found in the scene.");
         }
+
+        SetState(FSMState.Idle); // 초기 상태를 Idle로 설정
     }
 
     protected override IEnumerator Idle()
@@ -52,16 +55,6 @@ public class CommonMobN : BaseFSM
             {
                 SetState(FSMState.Chase);
             }
-
-
-            /*
-            // 체력이 0이면 Dead 상태로 전환
-            if (health.isDead)
-            {
-                SetState(FSMState.Dead);
-            }
-
-            */
 
             yield return null;
         }
@@ -197,6 +190,7 @@ public class CommonMobN : BaseFSM
         yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
         ReleaseToPool();
     }
+
     private void ReleaseToPool()
     {
         EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
@@ -209,9 +203,10 @@ public class CommonMobN : BaseFSM
             Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
         }
     }
+
     public void Initialize()
     {
-        SetState(FSMState.Move);
         // 초기화 로직 추가
+        SetState(FSMState.Idle); // 초기 상태를 Idle로 설정
     }
 }

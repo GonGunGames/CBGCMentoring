@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour
     public float currentDamage;  // 현재 데미지
     public float currentHealth;  // 현재 체력
     public bool isDead { get; private set; } = false;  // 적이 사망했는지 여부
-    public bool isHit = false;  // 적이 피격되었는지 여부
     private CommonMob commonMob;  // CommonMob 컴포넌트
     private CommonMobN commonMobN;  // CommonMobN 컴포넌트
     private CommonMobB commonMobB;  // CommonMobB 컴포넌트
@@ -153,16 +152,12 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log("데미지 적용: " + damage); // 디버그 로그 추가
         currentHealth -= damage;
-        isHit = true; // 적과 충돌 시 isHit를 true로 설정
         commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
         commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
         commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
         if (currentHealth <= 0 && !isDead)
         {
-            isDead = true;
             // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
-
-            // 프리팹 인스턴스화
             Instantiate(deathPrefab, transform.position, transform.rotation);
             Instantiate(goldPrefab, transform.position, transform.rotation);
             deathCount++;

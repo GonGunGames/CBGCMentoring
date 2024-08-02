@@ -23,9 +23,9 @@ public class CommonMobB : BaseFSM
     public GameObject player;
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
         health = GetComponent<BossHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
                                              // player 태그를 가진 오브젝트를 찾아서 할당
         player = GameObject.FindGameObjectWithTag("Player");
