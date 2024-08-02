@@ -24,6 +24,10 @@ public class DataPlayer : ScriptableObject
         {
             additionalStats[i].value = 0;
         }
+        for (int i = 0; i < baseStats.Length; i++)
+        {
+            baseStats[i].value = 0;
+        }
         File.Delete(Application.persistentDataPath + "/player.json");
     }
     public static void SaveData(DataPlayer data)
