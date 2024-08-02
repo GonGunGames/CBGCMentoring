@@ -232,7 +232,9 @@ public class InventoryManager : Singleton<InventoryManager>
         itemImageUI.sprite = currentItem.img.sprite;
         if (itemViewStatGroup.activeInHierarchy)
         {
-            itemLevel.text = "Require Level " + currentItem.data.info.baseStat.requiredLevel.ToString();
+            //itemLevel.text = "Require Level " + currentItem.data.info.baseStat.requiredLevel.ToString();
+            itemLevel.text = "Level " + currentItem.data.currentLevel.ToString();
+
             itemRarity.text = GetRarityText(rarity);
         }
         if (itemSpecialStat.gameObject.activeInHierarchy)
