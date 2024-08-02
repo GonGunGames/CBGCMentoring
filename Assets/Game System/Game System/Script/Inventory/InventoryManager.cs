@@ -207,12 +207,20 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             //int statLen = currentItem.data.currentStat.Length;
             int statLen = currentItem.data.info.baseStat.stats.Length;
-            for (int i = 0; i < statLen; i++)
+            if (statLen <= 5)
             {
-                itemStats[i].gameObject.SetActive(true);
-                itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
-                itemStats[i].statText.text = currentItem.data.info.baseStat.stats[i].value.ToString();
+                for (int i = 0; i < statLen; i++)
+                {
+                    itemStats[i].gameObject.SetActive(true);
+                    itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
+                    itemStats[i].statText.text = currentItem.data.info.baseStat.stats[i].value.ToString();
+                }
             }
+            else
+            {
+                DisplayWeaponStat(currentItem);
+            }
+
         }
 
         //---Then, set main features
@@ -233,6 +241,40 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
     }
+
+    void DisplayWeaponStat(InventoryItem currentItem)
+    {
+        int statLen = currentItem.data.info.baseStat.stats.Length;
+        for (int i = 0; i < statLen; i++)
+        {
+            int k = CkeckWeaponStat(currentItem, i);
+            itemStats[k].gameObject.SetActive(true);
+            itemStats[k].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[k].type);
+            itemStats[k].statText.text = currentItem.data.info.baseStat.stats[k].value.ToString();
+        }
+    }
+
+    int CkeckWeaponStat(InventoryItem currentItem, int i)
+    {
+        switch (currentItem.data.info.baseStat.stats[i].type)
+        {
+            case StatType.Attack:
+                return i;
+            case StatType.AttackRange:
+                return i;
+            case StatType.AttackSpeed:
+                return i;
+            case StatType.BulletSpread:
+                return i;
+            case StatType.ExplosionRange:
+                return i;
+            case StatType.ReloadTime:
+                return i;
+            default:
+                return 0;
+        }
+    }
+
     //Sprite CheckStatImage(ItemInfo.ItemStat.Stat stat)
     Sprite CheckStatImage(StatType stat)
     {
