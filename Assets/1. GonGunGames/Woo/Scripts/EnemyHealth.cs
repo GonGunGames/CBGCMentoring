@@ -18,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
     public int deathCount;
+    public CharacterController characterController; // 캐릭터 컨트롤러
 
     void Awake()
     {
@@ -161,6 +162,10 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(deathPrefab, transform.position, transform.rotation);
             Instantiate(goldPrefab, transform.position, transform.rotation);
             deathCount++;
+            if (characterController != null)
+            {
+                characterController.enabled = false;
+            }
             Debug.Log("Enemy");
             // DeathCount 인스턴스를 통해 deathCount를 증가시킴
             if (DeathCount.Instance != null)

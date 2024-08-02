@@ -21,7 +21,7 @@ public class ElliteHealth : MonoBehaviour
     [SerializeField] private GameObject goldPrefab; // Dead 상태에서 스폰할 프리팹
     private int deathCount;
     private Ellite ellite;
-
+    public CharacterController characterController; // 캐릭터 컨트롤러
 
     private void Awake()
     {
@@ -161,6 +161,10 @@ public class ElliteHealth : MonoBehaviour
         commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
         if (currentHealth <= 0 && !isDead)
         {
+            if (characterController != null)
+            {
+                characterController.enabled = false;
+            }
             Instantiate(deathPrefab, transform.position, transform.rotation);
             Instantiate(goldPrefab, transform.position, transform.rotation);
             isDead = true;

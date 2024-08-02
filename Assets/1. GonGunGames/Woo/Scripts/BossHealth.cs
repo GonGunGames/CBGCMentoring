@@ -18,7 +18,7 @@ public class BossHealth : MonoBehaviour
     private Shotgun shotgun; // 샷건 정보
     public GameObject damageTextPrefab; // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint; // 데미지 텍스트가 생성될 위치
-
+    public CharacterController characterController; // 캐릭터 컨트롤러
     private void Start()
     {
         // 인스펙터에서 설정된 currentId를 사용하여 적 정보를 가져옵니다.
@@ -147,6 +147,10 @@ public class BossHealth : MonoBehaviour
 
         if (currentHealth <= 0 && !isDead)
         {
+            if (characterController != null)
+            {
+                characterController.enabled = false;
+            }
             isDead = true;
             // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
         }

@@ -95,9 +95,9 @@ public class Weapon : MonoBehaviour
             {
                 StopCoroutine(fireBurstCoroutine); // FireBurst 코루틴 중지
                 fireBurstCoroutine = null;
-            } 
+                particlePrefab.SetActive(false); // 파티클 비활성화
+            }
             return; // health.isDead가 true이면 이후 코드는 실행되지 않음
-
         }
 
         // 현재 시간이 nextFireTime을 초과할 때만 발사
