@@ -15,8 +15,8 @@ public class Notice : MonoBehaviour
         if (noticeText != null)
         {
             noticeText.gameObject.SetActive(false);  // 시작할 때 텍스트 비활성화
-            StartCoroutine(DisplayWarning("적들이 몰려옵니다!", 0));  // 3분 후 "a" 표시
-            StartCoroutine(DisplayNotice("a", 10));  // 6분 후 "a" 표시
+            StartCoroutine(DisplayWarning("적들이 몰려옵니다!", 3 * 60));  // 3분 후 "a" 표시
+            StartCoroutine(DisplayNotice("a", 6 * 60));  // 6분 후 "a" 표시
             StartCoroutine(DisplayWarning("b", 5 * 60));  // 5분 후 "b" 표시
             StartCoroutine(DisplayNotice("b", 9 * 60));  // 9분 후 "b" 표시
             StartCoroutine(DisplayNotice("c", 10 * 60));  // 10분 후 "c" 표시

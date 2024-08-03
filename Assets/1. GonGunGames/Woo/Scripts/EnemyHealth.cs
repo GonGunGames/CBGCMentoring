@@ -26,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
         commonMobN = GetComponent<CommonMobN>();
         commonMobB = GetComponent<CommonMobB>();
     }
+
     private void Start()
     {
         Initialize();

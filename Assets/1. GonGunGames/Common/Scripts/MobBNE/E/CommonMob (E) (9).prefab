@@ -838,6 +838,7 @@ MonoBehaviour:
   aggroTime: 3
   elliteHealth: {fileID: 4095514217232523445}
   player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
+  characterController: {fileID: 2325239969189264968}
 --- !u!143 &2325239969189264968
 CharacterController:
   m_ObjectHideFlags: 0
@@ -879,7 +880,6 @@ MonoBehaviour:
   currentId: 9
   currentDamage: 0
   currentHealth: 0
-  isHit: 0
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
   damageTextSpawnPoint: {fileID: 5606537400702929456}
   deathPrefab: {fileID: 7705945740828748442, guid: 0ea8e86424122f94893d83e9040a0822, type: 3}

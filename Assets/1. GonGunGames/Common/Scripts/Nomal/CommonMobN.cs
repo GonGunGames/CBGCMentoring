@@ -207,7 +207,10 @@ public class CommonMobN : BaseFSM
             Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
         }
     }
-
+    public void SaveCurrentState(FSMState state)
+    {
+        previousState = state;
+    }
     public void Initialize()
     {
         // 초기화 로직 추가

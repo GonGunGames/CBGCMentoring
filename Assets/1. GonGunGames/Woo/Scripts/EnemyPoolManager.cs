@@ -125,6 +125,14 @@ public class EnemyPoolManager : MonoBehaviour
         {
             aiScript.Initialize();  // AI를 초기화 또는 재시작
         }
+        else
+        {
+            var aiElliteScript = enemy.GetComponent<CommonMob>();
+            if (aiElliteScript != null)
+            {
+                aiElliteScript.Initialize();
+            }
+        }
     }
 
     Vector3 GetRandomSpawnPosition()

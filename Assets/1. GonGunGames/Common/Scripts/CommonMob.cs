@@ -19,10 +19,16 @@ public class CommonMob : BaseFSM
     public GameObject player; // 플레이어를 GameObject로 변경
     private FSMState previousState; // Hit 전 상태를 저장할 변수
     public CharacterController characterController; // 캐릭터 컨트롤러
+    protected override void Awake()
+    {
+        base.Awake();
+        elliteHealth = GetComponent<ElliteHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+    }
     protected override void OnEnable()
     {
         base.OnEnable();
         elliteHealth = GetComponent<ElliteHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+
         if (characterController != null)
         {
             characterController.enabled = true;
@@ -34,6 +40,7 @@ public class CommonMob : BaseFSM
         {
             Debug.LogError("Player with tag 'Player' not found in the scene.");
         }
+        SetState(FSMState.Idle); // 초기 상태를 Idle로 설정
     }
 
     protected override IEnumerator Idle()
@@ -48,7 +55,7 @@ public class CommonMob : BaseFSM
             {
                 SetState(FSMState.Move);
             }
-            if (player != null && Vector3.Distance(player.transform.position, transform.position) <= chaseRange)
+            if (Vector3.Distance(player.transform.position, transform.position) <= chaseRange)
             {
                 SetState(FSMState.Chase);
             }
