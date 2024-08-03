@@ -17,7 +17,7 @@ public class CommonMobN : BaseFSM
     private Ellite ellite;
     public GameObject player;
     private FSMState previousState; // Hit 전 상태를 저장할 변수
-
+    public CharacterController characterController; // 캐릭터 컨트롤러
     protected override void Awake()
     {
         base.Awake();
@@ -27,7 +27,11 @@ public class CommonMobN : BaseFSM
     protected override void OnEnable()
     {
         base.OnEnable();
-        ellite = GetComponent<Ellite>();
+        health = GetComponent<EnemyHealth>();
+        if (characterController != null)
+        {
+            characterController.enabled = true;
+        }
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player == null)

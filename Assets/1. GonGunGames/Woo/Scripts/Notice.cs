@@ -7,16 +7,17 @@ public class Notice : MonoBehaviour
     public Text noticeText;  // UI Text를 참조할 변수
     public float displayDuration = 5f;  // 텍스트가 표시될 시간 (초)
     public Color warningColor = Color.red;  // 경고 색상
-    public float fadeDuration = 1f;  // 페이드 인/아웃 시간
+    public AudioSource DinoSaur;
+    public AudioSource Warning;
 
     void Start()
     {
         if (noticeText != null)
         {
             noticeText.gameObject.SetActive(false);  // 시작할 때 텍스트 비활성화
-            StartCoroutine(DisplayNotice("a", 3 * 60));  // 3분 후 "a" 표시
-            StartCoroutine(DisplayNotice("a", 6 * 60));  // 6분 후 "a" 표시
-            StartCoroutine(DisplayNotice("b", 5 * 60));  // 5분 후 "b" 표시
+            StartCoroutine(DisplayWarning("적들이 몰려옵니다!", 0));  // 3분 후 "a" 표시
+            StartCoroutine(DisplayNotice("a", 10));  // 6분 후 "a" 표시
+            StartCoroutine(DisplayWarning("b", 5 * 60));  // 5분 후 "b" 표시
             StartCoroutine(DisplayNotice("b", 9 * 60));  // 9분 후 "b" 표시
             StartCoroutine(DisplayNotice("c", 10 * 60));  // 10분 후 "c" 표시
         }
@@ -34,37 +35,37 @@ public class Notice : MonoBehaviour
         {
             noticeText.text = message;  // 텍스트 설정
             noticeText.color = warningColor;  // 경고 색상 설정
+            DinoSaur.Play();
             noticeText.gameObject.SetActive(true);  // 텍스트 활성화
-
-            // 페이드 인
-            yield return StartCoroutine(FadeTextToFullAlpha());
-
-            yield return new WaitForSeconds(displayDuration);  // 표시 시간 대기
-
-            // 페이드 아웃
-            yield return StartCoroutine(FadeTextToZeroAlpha());
-
+            yield return StartCoroutine(BlinkNotice(5, 0.5f));  // 블링크 완료 대기
             noticeText.gameObject.SetActive(false);  // 텍스트 비활성화
         }
     }
 
-    private IEnumerator FadeTextToFullAlpha()
+    private IEnumerator DisplayWarning(string message, float delay)
     {
-        noticeText.color = new Color(noticeText.color.r, noticeText.color.g, noticeText.color.b, 0);
-        while (noticeText.color.a < 1.0f)
+        yield return new WaitForSeconds(delay);  // 지연 시간 대기
+
+        if (noticeText != null)
         {
-            noticeText.color = new Color(noticeText.color.r, noticeText.color.g, noticeText.color.b, noticeText.color.a + (Time.deltaTime / fadeDuration));
-            yield return null;
+            noticeText.text = message;  // 텍스트 설정
+            noticeText.color = warningColor;  // 경고 색상 설정
+            Warning.Play();
+            noticeText.gameObject.SetActive(true);  // 텍스트 활성화
+            yield return StartCoroutine(BlinkNotice(5, 0.5f));  // 블링크 완료 대기
+            noticeText.gameObject.SetActive(false);  // 텍스트 비활성화
         }
     }
 
-    private IEnumerator FadeTextToZeroAlpha()
+    // 빠르게 나타났다 사라지는 함수
+    private IEnumerator BlinkNotice(int blinkCount, float blinkInterval)
     {
-        noticeText.color = new Color(noticeText.color.r, noticeText.color.g, noticeText.color.b, 1);
-        while (noticeText.color.a > 0.0f)
+        for (int i = 0; i < blinkCount; i++)
         {
-            noticeText.color = new Color(noticeText.color.r, noticeText.color.g, noticeText.color.b, noticeText.color.a - (Time.deltaTime / fadeDuration));
-            yield return null;
+            noticeText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(blinkInterval);
+            noticeText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(blinkInterval);
         }
     }
 }
