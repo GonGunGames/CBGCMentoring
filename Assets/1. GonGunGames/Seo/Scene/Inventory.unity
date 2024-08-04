@@ -1484,6 +1484,7 @@ GameObject:
   - component: {fileID: 31574645}
   - component: {fileID: 31574648}
   - component: {fileID: 31574647}
+  - component: {fileID: 31574649}
   m_Layer: 5
   m_Name: ArmorSlot
   m_TagString: Untagged
@@ -1616,6 +1617,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &31574649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31574642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c84f3c28cfad8e418692b15632f30d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &32869384
 GameObject:
   m_ObjectHideFlags: 0
@@ -13008,6 +13021,7 @@ GameObject:
   - component: {fileID: 526277673}
   - component: {fileID: 526277676}
   - component: {fileID: 526277675}
+  - component: {fileID: 526277677}
   m_Layer: 5
   m_Name: HelmetSlot
   m_TagString: Untagged
@@ -13140,6 +13154,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &526277677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526277670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c84f3c28cfad8e418692b15632f30d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &542346174 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8481859418383525407, guid: 9905cc4f3e7a7ea4ba1bd02f08de2241, type: 3}
@@ -18454,6 +18480,7 @@ GameObject:
   - component: {fileID: 774651205}
   - component: {fileID: 774651208}
   - component: {fileID: 774651207}
+  - component: {fileID: 774651209}
   m_Layer: 5
   m_Name: ShoesSlot
   m_TagString: Untagged
@@ -18586,6 +18613,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &774651209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774651202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c84f3c28cfad8e418692b15632f30d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &776908583
 GameObject:
   m_ObjectHideFlags: 0
@@ -18694,7 +18733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &787361760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20104,6 +20143,7 @@ GameObject:
   - component: {fileID: 846876247}
   - component: {fileID: 846876250}
   - component: {fileID: 846876249}
+  - component: {fileID: 846876251}
   m_Layer: 5
   m_Name: RingSlot
   m_TagString: Untagged
@@ -20236,6 +20276,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &846876251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846876244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c84f3c28cfad8e418692b15632f30d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &849154334 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4200662665540989804, guid: 8a93497012bbb6f46a2ab570bf569c86, type: 3}
@@ -23816,6 +23868,7 @@ GameObject:
   - component: {fileID: 1034716463}
   - component: {fileID: 1034716466}
   - component: {fileID: 1034716465}
+  - component: {fileID: 1034716467}
   m_Layer: 5
   m_Name: WeaponSlot
   m_TagString: Untagged
@@ -23948,6 +24001,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1034716467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034716459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c84f3c28cfad8e418692b15632f30d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1044676820
 GameObject:
   m_ObjectHideFlags: 0
@@ -36970,6 +37035,7 @@ GameObject:
   - component: {fileID: 1605366672}
   - component: {fileID: 1605366675}
   - component: {fileID: 1605366674}
+  - component: {fileID: 1605366676}
   m_Layer: 5
   m_Name: NecklaceSlot
   m_TagString: Untagged
@@ -37102,6 +37168,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1605366676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605366669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c84f3c28cfad8e418692b15632f30d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1608098585
 GameObject:
   m_ObjectHideFlags: 0
@@ -50989,6 +51067,10 @@ PrefabInstance:
     - target: {fileID: 8563612600308411079, guid: 9905cc4f3e7a7ea4ba1bd02f08de2241, type: 3}
       propertyPath: m_Name
       value: Item View
+      objectReference: {fileID: 0}
+    - target: {fileID: 8563612600308411079, guid: 9905cc4f3e7a7ea4ba1bd02f08de2241, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8864253774451133302, guid: 9905cc4f3e7a7ea4ba1bd02f08de2241, type: 3}
       propertyPath: m_AnchorMax.x
