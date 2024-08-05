@@ -27,6 +27,7 @@ public class ElliteHealth : MonoBehaviour
         commonMob = GetComponent<CommonMob>();
         commonMobN = GetComponent<CommonMobN>();
         commonMobB = GetComponent<CommonMobB>();
+        ellite = GetComponent<Ellite>(); // Ellite 컴포넌트 초기화
     }
 
     private void Start()
