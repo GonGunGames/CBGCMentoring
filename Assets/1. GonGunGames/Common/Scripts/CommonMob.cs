@@ -226,6 +226,7 @@ public class CommonMob : BaseFSM
         EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
         if (poolManager != null)
         {
+            SetState(FSMState.Idle);
             poolManager.ReleaseEnemy(gameObject);
         }
         else

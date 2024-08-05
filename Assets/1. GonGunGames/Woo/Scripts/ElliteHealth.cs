@@ -33,8 +33,6 @@ public class ElliteHealth : MonoBehaviour
     {
         Initialize();
 
-        // 적의 상태를 Idle로 설정
-        ellite = GetComponent<Ellite>();
         // 무기 정보 초기화
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
