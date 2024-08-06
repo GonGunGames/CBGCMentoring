@@ -9,7 +9,7 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     [Header("General")]
     public Camera mainCamera;
-    public ItemInfo itemInfo;
+    //public ItemInfo itemInfo;
 
     [Header("DataInventory")]
     public DataInventory inventoryData;
