@@ -249,31 +249,34 @@ public class InventoryManager : Singleton<InventoryManager>
         int statLen = currentItem.data.info.baseStat.stats.Length;
         for (int i = 0; i < statLen; i++)
         {
-            int k = CkeckWeaponStat(currentItem, i);
-            itemStats[k].gameObject.SetActive(true);
-            itemStats[k].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[k].type);
-            itemStats[k].statText.text = currentItem.data.info.baseStat.stats[k].value.ToString();
+            if (CkeckWeaponStat(currentItem, i))
+            {
+                itemStats[i].gameObject.SetActive(true);
+                itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
+                itemStats[i].statText.text = currentItem.data.info.baseStat.stats[i].value.ToString();
+            }
+            
         }
     }
 
-    int CkeckWeaponStat(InventoryItem currentItem, int i)
+    bool CkeckWeaponStat(InventoryItem currentItem, int i)
     {
         switch (currentItem.data.info.baseStat.stats[i].type)
         {
             case StatType.Attack:
-                return i;
+                return true;
             case StatType.AttackRange:
-                return i;
+                return true;
             case StatType.AttackSpeed:
-                return i;
+                return true;
             case StatType.BulletSpread:
-                return i;
+                return true;
             case StatType.ExplosionRange:
-                return i;
+                return true;
             case StatType.ReloadTime:
-                return i;
+                return true;
             default:
-                return 0;
+                return false;
         }
     }
 
