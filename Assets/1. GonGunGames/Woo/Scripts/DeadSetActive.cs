@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,13 @@ public class DeadSetActive : MonoBehaviour
     public Button loselobby;
     public Button next;
     public RawImage total;
+    public RawImage choose;
     public Button clearlobby;
+    public Button heal;
+    public Button gold;
+    public Button blank;
+    public Button magnetic;
+    public Text chooseText;
     public Text clearText;
     public Text totalElapsedTimeText; // 시작부터 죽을 때까지의 경과 시간을 표시할 UI Text
     public Text elapsedSinceDeathText; // 죽을 때까지의 경과 시간을 표시할 UI Text
@@ -17,8 +24,10 @@ public class DeadSetActive : MonoBehaviour
     private float startTime;
     private float deathTime;
     private float bossDefeatTime; // 보스 처치 시간을 기록합니다.
+    private float elliteDefeatTime;
     private bool isPlayerDead = false;
     private bool isBossDead = false;
+    private bool isElliteDead = false;
 
     private void Start()
     {
@@ -28,6 +37,7 @@ public class DeadSetActive : MonoBehaviour
         total.gameObject.SetActive(false);
         next.gameObject.SetActive(false);
         clearlobby.gameObject.SetActive(false);
+        choose.gameObject.SetActive(false);
         clearText.gameObject.SetActive(false);
         totalElapsedTimeText.gameObject.SetActive(true);
         elapsedSinceDeathText.gameObject.SetActive(false); // 처음에는 죽을 때까지의 시간은 숨깁니다.
@@ -38,12 +48,14 @@ public class DeadSetActive : MonoBehaviour
 
         // 보스 파괴 이벤트에 대한 리스너를 추가합니다.
         Boss.OnBossDestroyed += HandleBossDestroyed;
+        Ellite.OnElliteDestroyed += HandleElliteDestroyed;
     }
 
     private void OnDestroy()
     {
         // 보스 파괴 이벤트에 대한 리스너를 제거합니다.
         Boss.OnBossDestroyed -= HandleBossDestroyed;
+        Ellite.OnElliteDestroyed -= HandleElliteDestroyed;
     }
 
     void Update()
@@ -70,6 +82,23 @@ public class DeadSetActive : MonoBehaviour
             // 플레이어가 살아 있는 동안의 전체 경과 시간을 계산하여 표시합니다.
             float totalElapsedTime = Time.time - startTime;
             totalElapsedTimeText.text = FormatTime(totalElapsedTime);
+        }
+    }
+
+    void HandleElliteDestroyed()
+    {
+        if (!isElliteDead)
+        {
+            isElliteDead = true;
+            elliteDefeatTime = Time.time;
+
+            // UI 요소를 활성화/비활성화 처리합니다.
+            heal.gameObject.SetActive(true);
+            gold.gameObject.SetActive(true);
+            blank.gameObject.SetActive(true);
+            choose.gameObject.SetActive(true);
+            magnetic.gameObject.SetActive(true);
+            chooseText.gameObject.SetActive(true);
         }
     }
 

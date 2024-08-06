@@ -8,20 +8,30 @@ public class EnemyHealth : MonoBehaviour
     public float currentDamage;  // 현재 데미지
     public float currentHealth;  // 현재 체력
     public bool isDead { get; private set; } = false;  // 적이 사망했는지 여부
-    public bool isHit = false;  // 적이 피격되었는지 여부
     private CommonMob commonMob;  // CommonMob 컴포넌트
     private CommonMobN commonMobN;  // CommonMobN 컴포넌트
     private CommonMobB commonMobB;  // CommonMobB 컴포넌트
     private Weapon weapon;  // 무기 정보
     private Shotgun shotgun;  // 샷건 정보
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
+    [SerializeField] private GameObject goldPrefab; // Dead 상태에서 스폰할 프리팹
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
+    public int deathCount;
+    public CharacterController characterController; // 캐릭터 컨트롤러
+
+    void Awake()
+    {
+        commonMob = GetComponent<CommonMob>();
+        commonMobN = GetComponent<CommonMobN>();
+        commonMobB = GetComponent<CommonMobB>();
+    }
 
     private void Start()
     {
         Initialize();
 
+        // 적의 상태를 Idle로 설정
         // 무기 정보 초기화
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -38,6 +48,16 @@ public class EnemyHealth : MonoBehaviour
     public void Initialize()
     {
         // 인스펙터에서 설정된 currentId를 사용하여 적 정보를 가져옵니다.
+        isDead = false;
+
+        if (commonMob != null)
+        {
+            commonMob.Initialize();
+        }
+        else if (commonMobN != null)
+        {
+            commonMobN.Initialize();
+        }
         EnemyInfo enemyInfo = DataBase.Instance.GetEnemyInfoById(currentId);
 
         if (enemyInfo != null)
@@ -66,16 +86,17 @@ public class EnemyHealth : MonoBehaviour
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                ShowDamageText(bulletDamage);
+                float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
+                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
                 bullet2.NotifyExplosion();
             }
             else if (bullet != null)
             {
                 // Weaponbullet의 데미지를 처리합니다.
-                Debug.Log("Weaponbullet로 인한 데미지 적용");
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                ShowDamageText(bulletDamage);
-                ApplyDamage(bulletDamage);
+                float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
+                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
+                ApplyDamage(finalDamage);
             }
         }
     }
@@ -116,36 +137,43 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    private float ApplyDoubleDamage(float damage)
+    {
+        if (weapon != null)
+        {
+            bool isDoubleDamage = Random.value <= weapon.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
+            if (isDoubleDamage)
+            {
+                return damage * 2; // 두 배의 데미지 적용
+            }
+        }
+        return damage; // 기본 데미지 반환
+    }
+
     public void ApplyDamage(float damage)
     {
         Debug.Log("데미지 적용: " + damage); // 디버그 로그 추가
         currentHealth -= damage;
-        isHit = true; // 적과 충돌 시 isHit를 true로 설정
         commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
         commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
         commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
         if (currentHealth <= 0 && !isDead)
         {
-            isDead = true;
             // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
-
-            // 프리팹 인스턴스화
             Instantiate(deathPrefab, transform.position, transform.rotation);
-            ReleaseToPool();
+            Instantiate(goldPrefab, transform.position, transform.rotation);
+            deathCount++;
+            if (characterController != null)
+            {
+                characterController.enabled = false;
+            }
+            Debug.Log("Enemy");
+            // DeathCount 인스턴스를 통해 deathCount를 증가시킴
+            if (DeathCount.Instance != null)
+            {
+                DeathCount.Instance.IncrementDeathCount();
+            }
         }
-       
     }
 
-    private void ReleaseToPool()
-    {
-        EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
-        if (poolManager != null)
-        {
-            poolManager.ReleaseEnemy(gameObject);
-        }
-        else
-        {
-            Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
-        }
-    }
 }

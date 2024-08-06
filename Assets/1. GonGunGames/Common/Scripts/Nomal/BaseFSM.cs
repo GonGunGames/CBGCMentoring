@@ -38,7 +38,7 @@ public class BaseFSM : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
     }
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
         StartCoroutine(FSM());
     }

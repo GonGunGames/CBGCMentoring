@@ -18,13 +18,22 @@ public class Shotgun : MonoBehaviour
     private int AttackSpeedCount;
     private int AttackChanceCount;
     public int gunId;
-
+    public AudioClip fireSound; // 기본 총알 발사 소리 클립
+    public float fireSoundVolume = 0.5f; // 기본 발사 소리 볼륨 (0.0 ~ 1.0)
+    private AudioSource audioSource; // AudioSource 컴포넌트
     private Coroutine fireBurstCoroutine; // FireBurst 코루틴을 저장하기 위한 변수
     private WeaponInfo currentWeapon;
     private float additionalFireChance; // 추가 발사 확률
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); // 없으면 추가
+        }
+
         currentWeapon = DataBase.Instance.GetWeaponInfoByGunId(gunId);
 
         if (currentWeapon != null)
@@ -154,6 +163,13 @@ public class Shotgun : MonoBehaviour
         if (rb != null)
         {
             rb.velocity = firePoint.forward * bulletSpeed; // 총알의 속도 설정 (firePoint의 forward 방향으로 발사)
+        }
+        if (audioSource != null)
+        {
+              if (fireSound != null)
+            {
+                audioSource.PlayOneShot(fireSound, fireSoundVolume); // 기본 총알 사운드 재생
+            }
         }
     }
 }

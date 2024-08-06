@@ -9,7 +9,7 @@ public class Weaponbullet : Unit
     protected override void Start()
     {
         base.Start();
-        damage = 5f; // 무기 공격력 설정
+        damage = 0f; // 무기 공격력 설정
         StartCoroutine(DestroyAfterDelay());
     }
     private void OnCollisionEnter(Collision collision)

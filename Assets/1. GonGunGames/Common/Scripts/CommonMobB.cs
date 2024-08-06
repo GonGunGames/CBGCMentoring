@@ -19,21 +19,30 @@ public class CommonMobB : BaseFSM
 
     private float roarAttackInterval = 10f; // 10초 간격으로 RoarAttack 발동
     private float lastRoarAttackTime = 0f; // 마지막 RoarAttack 발동 시간
-
+    public CharacterController characterController; // 캐릭터 컨트롤러
     public GameObject player;
     private FSMState previousState; // Hit 전 상태를 저장할 변수
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         health = GetComponent<BossHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
-                                             // player 태그를 가진 오브젝트를 찾아서 할당
+    }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        health = GetComponent<BossHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+        if (characterController != null)
+        {
+            characterController.enabled = true;
+        }                              // player 태그를 가진 오브젝트를 찾아서 할당
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player == null)
         {
             Debug.LogError("Player with tag 'Player' not found in the scene.");
         }
+        SetState(FSMState.Idle); // 초기 상태를 Idle로 설정
     }
 
     protected override IEnumerator Idle()

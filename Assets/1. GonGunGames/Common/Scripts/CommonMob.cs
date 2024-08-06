@@ -10,22 +10,29 @@ public class CommonMob : BaseFSM
     public float attackRange = 1.5f;
     public float fastMoveSpeed = 4f;
     public float aggroTime = 3f;
-    public EnemyHealth enemyHealth;
+    public ElliteHealth elliteHealth;
     private int attackCount = 0;
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
     private bool isCooldown = false;
     private float sAttackDuration = 0.6f;
-
     public GameObject player; // 플레이어를 GameObject로 변경
-
     private FSMState previousState; // Hit 전 상태를 저장할 변수
-
-    protected override void Start()
+    public CharacterController characterController; // 캐릭터 컨트롤러
+    protected override void Awake()
     {
-        base.Start();
-        enemyHealth = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+        base.Awake();
+        elliteHealth = GetComponent<ElliteHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
+    }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        elliteHealth = GetComponent<ElliteHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
 
+        if (characterController != null)
+        {
+            characterController.enabled = true;
+        }
         // player 태그를 가진 오브젝트를 찾아서 할당
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -33,6 +40,7 @@ public class CommonMob : BaseFSM
         {
             Debug.LogError("Player with tag 'Player' not found in the scene.");
         }
+        SetState(FSMState.Idle); // 초기 상태를 Idle로 설정
     }
 
     protected override IEnumerator Idle()
@@ -47,7 +55,7 @@ public class CommonMob : BaseFSM
             {
                 SetState(FSMState.Move);
             }
-            if (player != null && Vector3.Distance(player.transform.position, transform.position) <= chaseRange)
+            if (Vector3.Distance(player.transform.position, transform.position) <= chaseRange)
             {
                 SetState(FSMState.Chase);
             }
@@ -193,7 +201,7 @@ public class CommonMob : BaseFSM
         // 피격 애니메이션 재생 등
         yield return new WaitForSeconds(0.5f); // Hit 애니메이션 시간만큼 대기
         
-        if (enemyHealth.currentHealth <= 0)
+        if (elliteHealth.currentHealth <= 0)
         {
             SetState(FSMState.Dead);
         }
@@ -211,15 +219,29 @@ public class CommonMob : BaseFSM
 
         // Dead 애니메이션 재생
         yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
-
-
-        // 애니메이션 재생 후 오브젝트 소멸
-        Destroy(gameObject);
+        ReleaseToPool();
     }
-
+    private void ReleaseToPool()
+    {
+        EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
+        if (poolManager != null)
+        {
+            SetState(FSMState.Idle);
+            poolManager.ReleaseEnemy(gameObject);
+        }
+        else
+        {
+            Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
+        }
+    }
     // 현재 상태를 저장하는 메서드
     public void SaveCurrentState(FSMState state)
     {
         previousState = state;
+    }
+    public void Initialize()
+    {
+        SetState(FSMState.Move);
+        // 초기화 로직 추가
     }
 }
