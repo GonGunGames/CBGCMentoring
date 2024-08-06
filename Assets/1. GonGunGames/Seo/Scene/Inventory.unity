@@ -13044,7 +13044,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 19753610}
-  itemInfo: {fileID: 0}
   inventoryData: {fileID: 11400000, guid: 7aa33c38de1ceb64e843d5bb25efc770, type: 2}
   Tabs: {fileID: 1278663464}
   Grid: {fileID: 750333577}
@@ -48906,10 +48905,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 880404194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37, y: -123.79999}
-  m_SizeDelta: {x: 409.7, y: 485.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1967457576
 MonoBehaviour:
