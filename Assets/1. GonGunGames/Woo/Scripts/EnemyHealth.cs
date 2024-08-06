@@ -84,10 +84,10 @@ public class EnemyHealth : MonoBehaviour
             if (bullet2 != null)
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
+                bullet2.NotifyExplosion();
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
                 float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
-                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
-                bullet2.NotifyExplosion();
+                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시 
             }
             else if (bullet != null)
             {
@@ -112,7 +112,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void ShowDamageText(float damage)
+    public void ShowDamageText(float damage)
     {
         if (damageTextPrefab != null && damageTextSpawnPoint != null)
         {

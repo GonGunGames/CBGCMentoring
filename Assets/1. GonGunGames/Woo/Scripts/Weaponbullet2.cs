@@ -63,6 +63,7 @@ public class Weaponbullet2 : MonoBehaviour
                 {
                     // 폭발 데미지 적용
                     enemyHealth.ApplyDamage(damage);
+                    enemyHealth.ShowDamageText(damage); // 데미지 텍스트 표시
                 }
 
                 BossHealth bossHealth = hitCollider.GetComponent<BossHealth>();
@@ -70,6 +71,7 @@ public class Weaponbullet2 : MonoBehaviour
                 {
                     // 폭발 데미지 적용
                     bossHealth.ApplyDamage(damage);
+                    bossHealth.ShowDamageText(damage); // 데미지 텍스트 표시
                 }
 
                 ElliteHealth eliteHealth = hitCollider.GetComponent<ElliteHealth>();
@@ -77,6 +79,7 @@ public class Weaponbullet2 : MonoBehaviour
                 {
                     // 폭발 데미지 적용
                     eliteHealth.ApplyDamage(damage);
+                    eliteHealth.ShowDamageText(damage); // 데미지 텍스트 표시
                 }
             }
         }

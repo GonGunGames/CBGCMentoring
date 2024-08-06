@@ -114,7 +114,7 @@ public class ElliteHealth : MonoBehaviour
         }
     }
 
-    private void ShowDamageText(float damage)
+    public void ShowDamageText(float damage)
     {
         if (damageTextPrefab != null && damageTextSpawnPoint != null)
         {

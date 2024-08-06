@@ -114,7 +114,7 @@ public class BossHealth : MonoBehaviour
         }
         return damage; // 기본 데미지 반환
     }
-    private void ShowDamageText(float damage)
+    public void ShowDamageText(float damage)
     {
         if (damageTextPrefab != null && damageTextSpawnPoint != null)
         {
