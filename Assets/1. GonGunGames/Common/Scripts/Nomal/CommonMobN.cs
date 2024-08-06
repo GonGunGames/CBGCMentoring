@@ -28,10 +28,7 @@ public class CommonMobN : BaseFSM
     {
         base.OnEnable();
         health = GetComponent<EnemyHealth>();
-        if (characterController != null)
-        {
-            characterController.enabled = true;
-        }
+       
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player == null)

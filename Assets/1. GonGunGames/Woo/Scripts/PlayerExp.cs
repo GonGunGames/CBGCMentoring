@@ -112,18 +112,11 @@ public class PlayerExp : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             ItemEx itemEx = other.GetComponent<ItemEx>();
-            ItemGold itemGold = other.GetComponent<ItemGold>();
 
             if (itemEx != null)
             {
                 GainExp(itemEx.expAmount); // 아이템에서 정의된 경험치 양을 플레이어의 경험치에 추가
-                Destroy(other.gameObject); // 충돌한 아이템 오브젝트 파괴
-            }
-
-            if (itemGold != null && playergold != null)
-            {
-                playergold.AddGold(itemGold.goldAmount); // 아이템에서 정의된 골드 양을 플레이어의 골드에 추가
-                Destroy(other.gameObject); // 충돌한 아이템 오브젝트 파괴
+                itemEx.ExpGet();//아이템 먹는 이펙트 효과 및 사운드 재생
             }
         }
     }

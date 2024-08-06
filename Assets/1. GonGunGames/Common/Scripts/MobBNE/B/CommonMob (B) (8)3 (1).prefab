@@ -876,7 +876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   animator: {fileID: 0}
-  controller: {fileID: 0}
+  controller: {fileID: 4187499600951976611}
   idleTime: 1
   moveSpeed: 1
   turnSpeed: 180
@@ -885,6 +885,7 @@ MonoBehaviour:
   fastMoveSpeed: 2
   aggroTime: 3
   health: {fileID: 2442653089108791220, guid: 9b55beef7daeca44fa10ba237283d319, type: 3}
+  characterController: {fileID: 4187499600951976611}
   player: {fileID: 8955841640731243231, guid: 4e1b779be2400fb468a84201cf03dc3d, type: 3}
 --- !u!143 &4187499600951976611
 CharacterController:

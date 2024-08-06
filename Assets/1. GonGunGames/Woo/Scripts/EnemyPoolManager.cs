@@ -10,10 +10,10 @@ public class EnemyPoolManager : MonoBehaviour
         public int id;
         public GameObject prefab;
     }
+
     public Transform spawnCenter;  // 플레이어나 특정 오브젝트의 위치를 중심으로 설정
     public float minSpawnDistance = 20f;  // 스폰 최소 거리
     public float maxSpawnDistance = 30f;  // 스폰 최대 거리
-
     public List<EnemyPrefab> enemyPrefabs;  // 적 프리팹 리스트
     public int initialPoolSize = 10;  // 초기 풀 크기
     public float spawnInterval = 5f;  // 적 스폰 간격
@@ -27,12 +27,13 @@ public class EnemyPoolManager : MonoBehaviour
         foreach (var enemyPrefab in enemyPrefabs)
         {
             var pool = new ObjectPool<GameObject>(
-                createFunc: () => Instantiate(enemyPrefab.prefab),
-                actionOnGet: (obj) =>
+                createFunc: () =>
                 {
-                    obj.SetActive(true);
-                    InitializeEnemy(obj);  // 활성화 시 초기화
+                    var obj = Instantiate(enemyPrefab.prefab);
+                    obj.SetActive(false);  // 초기 생성 시 비활성화
+                    return obj;
                 },
+                actionOnGet: (obj) => InitializeEnemy(obj),  // 풀에서 가져올 때 초기화
                 actionOnRelease: (obj) =>
                 {
                     ReleaseEnemy(obj);  // 비활성화 시 상태 초기화
@@ -60,9 +61,10 @@ public class EnemyPoolManager : MonoBehaviour
         GameObject enemy = pool.Get();
         activeEnemies.Add(enemy);
 
-        // 적의 위치와 초기화 로직 설정 (예: 랜덤 위치)
+        // 적의 위치 설정
         enemy.transform.position = GetRandomSpawnPosition();
-        InitializeEnemy(enemy);  // 적의 위치를 설정한 후 초기화
+        // 적 활성화
+        enemy.SetActive(true);
 
         return enemy;
     }
@@ -104,7 +106,6 @@ public class EnemyPoolManager : MonoBehaviour
     void InitializeEnemy(GameObject enemy)
     {
         // 적 초기화 로직 구현 (예: 체력 설정, AI 초기화 등)
-        // 적 스크립트를 가져와서 초기화하는 예제
         var enemyScript = enemy.GetComponent<EnemyHealth>();
         if (enemyScript != null)
         {
@@ -132,6 +133,13 @@ public class EnemyPoolManager : MonoBehaviour
             {
                 aiElliteScript.Initialize();
             }
+        }
+
+        // 적의 위치 설정 후 콜라이더 활성화
+        var characterController = enemy.GetComponent<CharacterController>();
+        if (characterController != null)
+        {
+            characterController.enabled = true;
         }
     }
 

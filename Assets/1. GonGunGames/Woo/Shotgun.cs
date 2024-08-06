@@ -23,10 +23,12 @@ public class Shotgun : MonoBehaviour
     private AudioSource audioSource; // AudioSource 컴포넌트
     private Coroutine fireBurstCoroutine; // FireBurst 코루틴을 저장하기 위한 변수
     private WeaponInfo currentWeapon;
+    private float destroyBullet;
     private float additionalFireChance; // 추가 발사 확률
 
     private void Start()
     {
+        destroyBullet = ShotgunBullet.destroyDelay;
         audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
 
         if (audioSource == null)
@@ -114,11 +116,11 @@ public class Shotgun : MonoBehaviour
                 break;
             case UpgradeOption.AttackChance:
                 AttackChanceCount++;
-                ShotgunBullet.destroyDelay += 0.1f; // ShotgunBullet의 destroyDelay 증가
-                Debug.Log("총알의 생존 시간이 증가했습니다. 현재 생존 시간: " + ShotgunBullet.destroyDelay);
+                destroyBullet += 0.1f; // ShotgunBullet의 destroyDelay 증가
+                Debug.Log("총알의 생존 시간이 증가했습니다. 현재 생존 시간: " + destroyBullet);
                 if (AttackChanceCount == 5)
                 {
-                    ShotgunBullet.destroyDelay += 0.5f;
+                    destroyBullet += 0.5f;
                 };
                 break;
             default:
