@@ -17,7 +17,6 @@ public class ElliteHealth : MonoBehaviour
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
-    [SerializeField] private GameObject goldPrefab; // Dead 상태에서 스폰할 프리팹
     private int deathCount;
     private Ellite ellite;
     public CharacterController characterController; // 캐릭터 컨트롤러
@@ -115,7 +114,7 @@ public class ElliteHealth : MonoBehaviour
         }
     }
 
-    private void ShowDamageText(float damage)
+    public void ShowDamageText(float damage)
     {
         if (damageTextPrefab != null && damageTextSpawnPoint != null)
         {
@@ -161,7 +160,6 @@ public class ElliteHealth : MonoBehaviour
         {
 
             Instantiate(deathPrefab, transform.position, transform.rotation);
-            Instantiate(goldPrefab, transform.position, transform.rotation);
             isDead = true;
 
             // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
