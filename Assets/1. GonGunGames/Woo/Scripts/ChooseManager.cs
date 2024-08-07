@@ -20,11 +20,12 @@ public class ChooseManager : MonoBehaviour
     public Button gold;
     public Text chooseText;
     public RawImage rawImage;
-
+    public GameObject Ui;
     private Action onChooseOptionsClosed; // 콜백을 저장할 변수
     private PlayerHealth playerHealth;
     private void Start()
     {
+        Ui.SetActive(false);
         // 버튼 클릭 이벤트에 메서드 연결
         heal.onClick.AddListener(() => OnChooseButtonClicked(ChooseOption.Heal));
         blank.onClick.AddListener(() => OnChooseButtonClicked(ChooseOption.Blank));
@@ -62,6 +63,7 @@ public class ChooseManager : MonoBehaviour
         }
 
         SetButtonsActive(false); // 선택 후 버튼들을 다시 비활성화
+        Ui.SetActive(false);
         OnChooseOptionsClosed(); // 콜백 호출
     }
 
@@ -76,6 +78,7 @@ public class ChooseManager : MonoBehaviour
     public void ShowChooseOptions()
     {
         Debug.Log("레벨 업! 능력을 업그레이드할 옵션을 선택하세요:");
+        Ui.SetActive(true);
         SetButtonsActive(true); // 버튼들을 활성화
     }
 

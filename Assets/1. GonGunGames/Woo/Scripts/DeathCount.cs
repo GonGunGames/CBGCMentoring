@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,9 +24,19 @@ public class DeathCount : MonoBehaviour
     public void IncrementDeathCount()
     {
         deathCount++;
+        UpdateDeathCountUI();
+    }
+
+    private void UpdateDeathCountUI()
+    {
         if (deathCountText != null)
         {
-            deathCountText.text = ": 0" + deathCount.ToString();
+            deathCountText.text = "" + deathCount.ToString();
         }
+    }
+
+    public int GetDeathCount()
+    {
+        return deathCount;
     }
 }

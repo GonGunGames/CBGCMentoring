@@ -9,6 +9,7 @@ public class Weaponbullet2 : MonoBehaviour
     public float explosionRadius = 5f; // 폭발 범위 반경
     public Weapon weapon; // Weapon 컴포넌트
     public float damage; // 기본 데미지
+    private bool isDoubleDamage; // 두 배 데미지 여부
 
     void Start()
     {
@@ -44,10 +45,11 @@ public class Weaponbullet2 : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Initialize(float baseDamage, float doubleDamageMultiplier)
+    public void Initialize(float baseDamage, float doubleDamageMultiplier, bool isDoubleDamage)
     {
         // 총알의 데미지를 두 배 데미지와 기본 데미지를 기반으로 설정합니다.
         damage = baseDamage * doubleDamageMultiplier;
+        this.isDoubleDamage = isDoubleDamage;
     }
 
     public void NotifyExplosion()
@@ -63,7 +65,7 @@ public class Weaponbullet2 : MonoBehaviour
                 {
                     // 폭발 데미지 적용
                     enemyHealth.ApplyDamage(damage);
-                    enemyHealth.ShowDamageText(damage); // 데미지 텍스트 표시
+                    enemyHealth.ShowDamageText(damage, isDoubleDamage); // 데미지 텍스트 표시
                 }
 
                 BossHealth bossHealth = hitCollider.GetComponent<BossHealth>();
@@ -71,7 +73,7 @@ public class Weaponbullet2 : MonoBehaviour
                 {
                     // 폭발 데미지 적용
                     bossHealth.ApplyDamage(damage);
-                    bossHealth.ShowDamageText(damage); // 데미지 텍스트 표시
+                    bossHealth.ShowDamageText(damage, isDoubleDamage); // 데미지 텍스트 표시
                 }
 
                 ElliteHealth eliteHealth = hitCollider.GetComponent<ElliteHealth>();
@@ -79,7 +81,7 @@ public class Weaponbullet2 : MonoBehaviour
                 {
                     // 폭발 데미지 적용
                     eliteHealth.ApplyDamage(damage);
-                    eliteHealth.ShowDamageText(damage); // 데미지 텍스트 표시
+                    eliteHealth.ShowDamageText(damage, isDoubleDamage); // 데미지 텍스트 표시
                 }
             }
         }

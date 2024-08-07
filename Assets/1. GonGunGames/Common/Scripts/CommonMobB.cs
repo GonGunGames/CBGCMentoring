@@ -327,4 +327,9 @@ public class CommonMobB : BaseFSM
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
+    public void Initialize()
+    {
+        // 초기화 로직 추가
+        SetState(FSMState.Idle); // 초기 상태를 Idle로 설정
+    }
 }

@@ -35003,7 +35003,7 @@ Transform:
   m_GameObject: {fileID: 6436169420861871088}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08250018, y: 2.28, z: -1.2099996}
+  m_LocalPosition: {x: -0.08250018, y: 3.43, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35117,6 +35117,7 @@ MonoBehaviour:
   currentDamage: 0
   currentHealth: 0
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
+  criticalDamageTextPrefab: {fileID: 3949188916532855959, guid: 58349df3013a52341b3a06cbb0e4bf32, type: 3}
   damageTextSpawnPoint: {fileID: 5606537400702929456}
   deathPrefab: {fileID: 7705945740828748442, guid: 0ea8e86424122f94893d83e9040a0822, type: 3}
   characterController: {fileID: 2325239969189264968}

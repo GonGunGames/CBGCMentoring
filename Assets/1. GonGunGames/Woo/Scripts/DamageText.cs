@@ -5,10 +5,14 @@ using System.Collections;
 public class DamageText : MonoBehaviour
 {
     public TextMeshPro damageText;  // TextMeshPro 3D 텍스트 컴포넌트
-    public float displayDuration = 0.5f;  // 텍스트가 표시될 시간
+    public float displayDuration = 0.2f;  // 텍스트가 표시될 시간
     public float fadeSpeed = 0.2f; // 페이드 속도
-    public float moveDistance = 0.2f; // 텍스트가 이동할 거리
+    public float moveDistance = 0.6f; // 텍스트가 이동할 거리
     public float moveSpeed = 3.0f; // 이동 속도
+    public float popScaleFactor = 1.5f; // 텍스트 크기 팝 효과 배율
+    public float popDuration = 0.2f; // 팝 효과 지속 시간
+    public float bounceDistance = 0.5f; // 튀어오르는 최대 거리
+    public float bounceDuration = 0.2f; // 튀어오르는 지속 시간
 
     private void Start()
     {
@@ -27,7 +31,16 @@ public class DamageText : MonoBehaviour
             color.a = 0;
             damageText.color = color;
 
-            StartCoroutine(FadeInOutAndMove());    // 코루틴 시작
+            // 팝 효과를 위한 초기 크기 설정
+            Vector3 startScale = transform.localScale;
+            Vector3 popScale = startScale * popScaleFactor;
+            transform.localScale = popScale;
+
+            // 튀어오르는 애니메이션을 위한 초기 설정
+            Vector3 startPosition = transform.position;
+            Vector3 targetPosition = startPosition + Random.onUnitSphere * moveDistance;
+
+            StartCoroutine(FadeInOutAndMove(startPosition, targetPosition, startScale, popScale));    // 코루틴 시작
         }
         else
         {
@@ -35,24 +48,40 @@ public class DamageText : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeInOutAndMove()
+    private IEnumerator FadeInOutAndMove(Vector3 startPosition, Vector3 targetPosition, Vector3 startScale, Vector3 popScale)
     {
         Color color = damageText.color;
         float elapsedTime = 0f;
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = startPosition + Vector3.up * moveDistance;
 
-        // 서서히 나타나도록 페이드 인
-        while (elapsedTime < fadeSpeed)
+        float popElapsedTime = 0f;
+
+        // 서서히 나타나도록 페이드 인 및 팝 효과 동시에 진행
+        while (elapsedTime < fadeSpeed || popElapsedTime < popDuration)
         {
-            elapsedTime += Time.deltaTime;
-            color.a = Mathf.Lerp(0, 1, elapsedTime / fadeSpeed);
-            damageText.color = color;
+            if (elapsedTime < fadeSpeed)
+            {
+                elapsedTime += Time.deltaTime;
+                color.a = Mathf.Lerp(0, 1, elapsedTime / fadeSpeed);
+                damageText.color = color;
+            }
+
+            if (popElapsedTime < popDuration)
+            {
+                popElapsedTime += Time.deltaTime;
+                float scaleLerp = Mathf.Lerp(popScaleFactor, 1, popElapsedTime / popDuration);
+                transform.localScale = startScale * scaleLerp;
+            }
+
+            // 위치 이동
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / fadeSpeed);
+
             yield return null; // 프레임 대기
         }
-        color.a = 1; // 완전히 불투명하게 설정
+
+        // 페이드 인 완료 및 크기 최종 설정
+        color.a = 1;
         damageText.color = color;
+        transform.localScale = startScale; // 최종 크기로 설정
         transform.position = targetPosition; // 최종 위치로 설정
 
         // 텍스트가 화면에 표시된 후 잠시 대기
@@ -65,7 +94,14 @@ public class DamageText : MonoBehaviour
             elapsedTime += Time.deltaTime;
             color.a = Mathf.Lerp(1, 0, elapsedTime / fadeSpeed);
             damageText.color = color;
+
+            // 텍스트 크기 줄이기
+            float scaleLerp = Mathf.Lerp(1, popScaleFactor, elapsedTime / fadeSpeed);
+            transform.localScale = startScale * scaleLerp;
+
+            // 위치 이동
             transform.position = Vector3.Lerp(targetPosition, startPosition, elapsedTime / fadeSpeed);
+
             yield return null; // 프레임 대기
         }
         color.a = 0; // 완전히 투명하게 설정
