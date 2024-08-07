@@ -252,9 +252,7 @@ public class InventoryManager : Singleton<InventoryManager>
             if (CkeckWeaponStat(currentItem, i))
             {
                 itemStats[i].gameObject.SetActive(true);
-                Debug.Log(currentItem.data.info.baseStat.stats[i].type);
                 itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
-                
                 itemStats[i].statText.text = currentItem.data.info.baseStat.stats[i].value.ToString();
             }
             
