@@ -18,16 +18,28 @@ public class EnemyHealth : MonoBehaviour
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
     public int deathCount;
     public CharacterController characterController; // 캐릭터 컨트롤러
+    public AudioSource hitSound;
+    public AudioSource hitSound2;
+    public GameObject hitEffect;
+    public Transform hitEffectPoint;
+
+    private ParticleSystem hitEffectParticleSystem;  // ParticleSystem 컴포넌트
 
     void Awake()
     {
         commonMob = GetComponent<CommonMob>();
         commonMobN = GetComponent<CommonMobN>();
         commonMobB = GetComponent<CommonMobB>();
+        hitEffectParticleSystem = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        if (hitEffectParticleSystem != null)
+        {
+            hitEffectParticleSystem.Stop(); // ParticleSystem 중지
+        }
+        hitEffect.SetActive(false);
         Initialize();
 
         // 적의 상태를 Idle로 설정
@@ -84,6 +96,7 @@ public class EnemyHealth : MonoBehaviour
             if (bullet2 != null)
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
+                hitSound2.Play();
                 bullet2.NotifyExplosion();
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
                 float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
@@ -92,6 +105,12 @@ public class EnemyHealth : MonoBehaviour
             else if (bullet != null)
             {
                 // Weaponbullet의 데미지를 처리합니다.
+                hitSound.Play();
+                hitEffect.SetActive(true);
+                if (hitEffectParticleSystem != null)
+                {
+                    hitEffectParticleSystem.Play(); // ParticleSystem 시작
+                }
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
                 float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
                 ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
@@ -106,6 +125,7 @@ public class EnemyHealth : MonoBehaviour
         ShotgunBullet shotgunBullet = other.GetComponent<ShotgunBullet>();
         if (shotgunBullet != null)
         {
+            hitSound.Play();
             float shotgunDamage = shotgun != null ? shotgun.attackDamage : 0f; // 최신 데미지를 가져옴
             ShowDamageText(shotgunDamage);
             ApplyDamage(shotgunDamage);
