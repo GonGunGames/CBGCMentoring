@@ -149,7 +149,7 @@ public class PlayerHealth : MonoBehaviour
             else if (hitBoxrange != null)
             {
                 audioSource.Play();
-                float hitAttack3 = hitBoxrange.attackdamage;
+                float hitAttack3 = hitBoxrange.attackdamage + 60;
                 currentHealth -= hitAttack3;
                 _hpBar.value = currentHealth;
                 ShowDamageText(hitAttack3);
