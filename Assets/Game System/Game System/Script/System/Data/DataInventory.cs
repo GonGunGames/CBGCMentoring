@@ -44,6 +44,7 @@ public class DataInventory : ScriptableObject
     public void AddEquipmentData(ItemBase.ItemData data)
     {
         equipmentData.Add(data);
+        GetPlayerInfo.instance.SetPlayerEquipment(data.info.baseStat.IDIDID, data.info.baseStat.type);
     }
     public void RemoveInventoryData(int ID)
     {

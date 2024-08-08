@@ -37,22 +37,18 @@ public class PlayerStat : Singleton<PlayerStat>
         for (int i = 0; i < playerData.baseStats.Length; i++)
         {
             StatType statType = playerData.baseStats[i].type;
-            if (statType == StatType.AttackRange
-                || statType == StatType.AttackSpeed)
-            {
-                if (playerData.additionalStats[i].value == 0) //Mean player dont equip any item => player normal attack (e.g punch) should have attack range and attack speed.
-                {
-                    statsUI[i].statText.text = playerData.baseStats[i].value.ToString();
-                }
-                else
-                {
-                    statsUI[i].statText.text = playerData.additionalStats[i].value.ToString();
-                }
-            }
-            else
-            {
-                statsUI[i].statText.text = (playerData.baseStats[i].value + playerData.additionalStats[i].value).ToString();
-            }
+            if (statType == StatType.Attack)
+                statsUI[0].statText.text = (playerData.baseStats[i].value + playerData.additionalStats[i].value).ToString();
+            else if (statType == StatType.AttackSpeed)
+                statsUI[1].statText.text = (playerData.baseStats[i].value + playerData.additionalStats[i].value).ToString();
+            else if (statType == StatType.AttackRange)
+                statsUI[2].statText.text = (playerData.baseStats[i].value + playerData.additionalStats[i].value).ToString();
+            else if (statType == StatType.Health)
+                statsUI[3].statText.text = (playerData.baseStats[i].value + playerData.additionalStats[i].value).ToString();
+            else if (statType == StatType.Defense)
+                statsUI[4].statText.text = (playerData.baseStats[i].value + playerData.additionalStats[i].value).ToString();
+            else if (statType == StatType.MoveSpeed)
+                statsUI[5].statText.text = (playerData.baseStats[i].value + playerData.additionalStats[i].value).ToString();
         }
     }
     public void AddItemStat(InventoryItem item)
@@ -97,7 +93,7 @@ public class PlayerStat : Singleton<PlayerStat>
             }
         }
         InitializePlayerStatFromData();
-        
+
         playerCP -= cpCalculator.GetItemCP(item);
         playerCP_TMP.text = playerCP.ToString();
         playerData.combatPower = playerCP;

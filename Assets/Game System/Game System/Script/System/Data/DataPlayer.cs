@@ -17,12 +17,16 @@ public class DataPlayer : ScriptableObject
     {
         level = 1;
         gold = 10000;
-        diamond = 300;
+        diamond = 1000;
         combatPower = 0;
 
         for (int i = 0; i < additionalStats.Length; i++)
         {
             additionalStats[i].value = 0;
+        }
+        for (int i = 0; i < baseStats.Length; i++)
+        {
+            baseStats[i].value = 0;
         }
         File.Delete(Application.persistentDataPath + "/player.json");
     }

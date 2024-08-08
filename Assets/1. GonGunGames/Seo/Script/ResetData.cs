@@ -9,5 +9,6 @@ public class ResetData : MonoBehaviour
     {
         dataInventory.ResetAllData();
         dataPlayer.ResetAllData();
+        DataPlayer.LoadData();
     }
 }
