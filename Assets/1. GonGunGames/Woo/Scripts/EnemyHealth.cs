@@ -22,25 +22,31 @@ public class EnemyHealth : MonoBehaviour
     public AudioSource hitSound;
     public AudioSource hitSound2;
     public GameObject hitEffect;
-    public Transform hitEffectPoint;
+    public GameObject hitEffect2;
 
-    private ParticleSystem hitEffectParticleSystem;  // ParticleSystem 컴포넌트
-
+    private ParticleSystem hitRifle;  // ParticleSystem 컴포넌트
+    private ParticleSystem hitShotgun;
     void Awake()
     {
         commonMob = GetComponent<CommonMob>();
         commonMobN = GetComponent<CommonMobN>();
         commonMobB = GetComponent<CommonMobB>();
-        hitEffectParticleSystem = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
+        hitRifle = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
+        hitShotgun = hitEffect2.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
     }
 
     private void OnEnable()
     {
-        if (hitEffectParticleSystem != null)
+        if (hitRifle != null)
         {
-            hitEffectParticleSystem.Stop(); // ParticleSystem 중지
+            hitRifle.Stop(); // ParticleSystem 중지
+        }
+        if (hitShotgun != null)
+        {
+            hitShotgun.Stop(); // ParticleSystem 중지
         }
         hitEffect.SetActive(false);
+        hitEffect2.SetActive(false);
         Initialize();
 
         // 적의 상태를 Idle로 설정
@@ -109,9 +115,9 @@ public class EnemyHealth : MonoBehaviour
                 // Weaponbullet의 데미지를 처리합니다.
                 hitSound.Play();
                 hitEffect.SetActive(true);
-                if (hitEffectParticleSystem != null)
+                if (hitRifle != null)
                 {
-                    hitEffectParticleSystem.Play(); // ParticleSystem 시작
+                    hitRifle.Play(); // ParticleSystem 시작
                 }
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
                 bool isDoubleDamage = false;
@@ -129,6 +135,11 @@ public class EnemyHealth : MonoBehaviour
         if (shotgunBullet != null)
         {
             hitSound.Play();
+            if (hitShotgun != null)
+            {
+                hitShotgun.Play(); // ParticleSystem 시작
+            }
+            hitEffect2.SetActive(true);
             float shotgunDamage = shotgun != null ? shotgun.attackDamage : 0f; // 최신 데미지를 가져옴
             ShowDamageText(shotgunDamage, false);
             ApplyDamage(shotgunDamage);

@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AllUnits;
 
-public class ShotgunBullet : MonoBehaviour 
-{ 
+public class ShotgunBullet : MonoBehaviour
+{
+    public float destroyDelay = 2.0f; // 기본값을 더 길게 설정
 
-    public static float destroyDelay = 0.2f; // 자동 파괴 지연 시간
-       void Start()
+    void Start()
     {
         StartCoroutine(DestroyAfterDelay());
     }
@@ -17,5 +16,11 @@ public class ShotgunBullet : MonoBehaviour
         Debug.Log("Destroying bullet in " + destroyDelay + " seconds.");
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
+    }
+
+    public void SetDestroyDelay(float delay)
+    {
+        destroyDelay = delay;
+        Debug.Log("Updated destroy delay to " + destroyDelay + " seconds.");
     }
 }

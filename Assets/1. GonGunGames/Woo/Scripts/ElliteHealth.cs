@@ -24,25 +24,33 @@ public class ElliteHealth : MonoBehaviour
     public AudioSource hitSound;
     public AudioSource hitSound2;
     public GameObject hitEffect;
+    public GameObject hitEffect2;
 
-    private ParticleSystem hitEffectParticleSystem;  // ParticleSystem 컴포넌트
+    private ParticleSystem hitRIfle;  // ParticleSystem 컴포넌트
+    private ParticleSystem hitShotgun;
     private void Awake()
     {
         commonMob = GetComponent<CommonMob>();
         commonMobN = GetComponent<CommonMobN>();
         commonMobB = GetComponent<CommonMobB>();
         ellite = GetComponent<Ellite>(); // Ellite 컴포넌트 초기화
-        hitEffectParticleSystem = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
+        hitRIfle = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
+        hitShotgun = hitEffect2.GetComponent<ParticleSystem>();
     }
 
     private void OnEnable()
     {
         Initialize();
-        if (hitEffectParticleSystem != null)
+        if (hitRIfle != null)
         {
-            hitEffectParticleSystem.Stop(); // ParticleSystem 중지
+            hitRIfle.Stop(); // ParticleSystem 중지
+        }
+        if (hitShotgun != null)
+        {
+            hitShotgun.Stop(); // ParticleSystem 중지
         }
         hitEffect.SetActive(false);
+        hitEffect2.SetActive(false);
         // 무기 정보 초기화
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -108,9 +116,9 @@ public class ElliteHealth : MonoBehaviour
                 // Weaponbullet의 데미지를 처리합니다.
                 hitSound.Play();
                 hitEffect.SetActive(true);
-                if (hitEffectParticleSystem != null)
+                if (hitRIfle != null)
                 {
-                    hitEffectParticleSystem.Play(); // ParticleSystem 시작
+                    hitRIfle.Play(); // ParticleSystem 시작
                 }
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
                 bool isDoubleDamage = false;
@@ -128,6 +136,11 @@ public class ElliteHealth : MonoBehaviour
         if (shotgunBullet != null)
         {
             hitSound.Play();
+            if (hitShotgun != null)
+            {
+                hitShotgun.Play(); // ParticleSystem 시작
+            }
+            hitEffect2.SetActive(true);
             float shotgunDamage = shotgun != null ? shotgun.attackDamage : 0f; // 최신 데미지를 가져옴
             ShowDamageText(shotgunDamage, false);
             ApplyDamage(shotgunDamage);

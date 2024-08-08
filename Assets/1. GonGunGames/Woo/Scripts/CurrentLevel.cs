@@ -27,7 +27,7 @@ public class CurrentLevel : MonoBehaviour
     {
         if (playerExp != null && levelText != null)
         {
-            levelText.text = "" + playerExp.currentLevel;
+            levelText.text = "Lv." + playerExp.currentLevel;
         }
     }
 }

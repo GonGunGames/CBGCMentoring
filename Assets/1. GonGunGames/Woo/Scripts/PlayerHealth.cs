@@ -175,7 +175,7 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             isHit = true;
-            StartCoroutine(ResetIsHitAfterDelay(3f));
+            StartCoroutine(ResetIsHitAfterDelay(0.5f));
         }
     }
 
@@ -212,6 +212,13 @@ public class PlayerHealth : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         if (collision.collider.CompareTag("Enemy"))
+        {
+            isHit = false; // 적과의 충돌이 끝나면 isHit를 false로 설정
+        }
+    }
+    private void OnTriggerExit(Collider Other)
+    {
+        if (Other.CompareTag("Enemy"))
         {
             isHit = false; // 적과의 충돌이 끝나면 isHit를 false로 설정
         }
