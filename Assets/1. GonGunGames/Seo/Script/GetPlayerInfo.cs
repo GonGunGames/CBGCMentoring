@@ -16,21 +16,32 @@ public class GetPlayerInfo : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
         {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-
-            }
-            else
-            {
-                if (instance != this)
-                    Destroy(this.gameObject);
-
-            }
+            instance = this;
+            DontDestroyOnLoad(gameObject);
 
         }
+        else
+        {
+            if (instance != this)
+                Destroy(this.gameObject);
+
+        }
+
+        /*int Playerdamage;
+        Playerdamage = GetPlayerInfo.instance.GetStat(StatType.Attack);
+
+        weapomID = GetPlayerInfo.instance.GetPlayerEquipmentID(ItemType.Weapon);
+
+        if(weapomID == 100)
+        {
+
+        }*/
+
+
+
+
     }
     public void LoadPlayerData()
     {
@@ -64,7 +75,7 @@ public class GetPlayerInfo : MonoBehaviour
 
     public float[] GetAllAdditionalStats()
     {
-        // 모든 장비 스탯 가져오기
+        // 모든 장비 스탯 가져오기 22ro
         LoadPlayerData();
         for (int i = 0; i < playerData.additionalStats.Length; i++)
         {
@@ -91,10 +102,13 @@ public class GetPlayerInfo : MonoBehaviour
     public float GetStat(StatType statType)
     {
         // 장비 + 플레이어 스탯 하나 가져오기
-        LoadPlayerData();
+        LoadPlayerData();                   
         playerStats[((int)statType)] = playerData.additionalStats[((int)statType)].value + playerData.baseStats[((int)statType)].value;
         return playerStats[((int)statType)];
+
     }
+
+
     public float GetAdditionalStat(StatType statType)
     {
         // 장비 스탯 하나 가져오기
