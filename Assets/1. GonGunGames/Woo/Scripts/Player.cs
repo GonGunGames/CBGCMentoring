@@ -9,7 +9,6 @@ public class Player : PlayerFSM
     public JoystickPlayer Joystick; // JoystickPlayer 클래스 참조
     public Rigidbody rb;
     public PlayerHealth health; // PlayerHealth 클래스 참조
-
      public void Start()
     {
         base.Start();
@@ -85,6 +84,11 @@ public class Player : PlayerFSM
             {
                 Debug.Log("Hit -> Run");
                 PlayerSetState(PlayerFSMState.Run);
+            }
+            if (health != null && health.isDead)
+            {
+                Debug.Log("Dead");
+                PlayerSetState(PlayerFSMState.Dead);
             }
             else
             {

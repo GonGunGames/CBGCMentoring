@@ -15,19 +15,38 @@ public class EnemyHealth : MonoBehaviour
     private Shotgun shotgun;  // 샷건 정보
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
+    public GameObject criticalDamageTextPrefab;  // 두 배 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
     public int deathCount;
     public CharacterController characterController; // 캐릭터 컨트롤러
+    public AudioSource hitSound;
+    public AudioSource hitSound2;
+    public GameObject hitEffect;
+    public GameObject hitEffect2;
 
+    private ParticleSystem hitRifle;  // ParticleSystem 컴포넌트
+    private ParticleSystem hitShotgun;
     void Awake()
     {
         commonMob = GetComponent<CommonMob>();
         commonMobN = GetComponent<CommonMobN>();
         commonMobB = GetComponent<CommonMobB>();
+        hitRifle = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
+        hitShotgun = hitEffect2.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        if (hitRifle != null)
+        {
+            hitRifle.Stop(); // ParticleSystem 중지
+        }
+        if (hitShotgun != null)
+        {
+            hitShotgun.Stop(); // ParticleSystem 중지
+        }
+        hitEffect.SetActive(false);
+        hitEffect2.SetActive(false);
         Initialize();
 
         // 적의 상태를 Idle로 설정
@@ -84,17 +103,26 @@ public class EnemyHealth : MonoBehaviour
             if (bullet2 != null)
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
+                hitSound2.Play();
                 bullet2.NotifyExplosion();
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
-                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시 
+                bool isDoubleDamage = false;
+                float finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
+                ShowDamageText(finalDamage, isDoubleDamage); // 두 배의 데미지를 텍스트로 표시 
             }
             else if (bullet != null)
             {
                 // Weaponbullet의 데미지를 처리합니다.
+                hitSound.Play();
+                hitEffect.SetActive(true);
+                if (hitRifle != null)
+                {
+                    hitRifle.Play(); // ParticleSystem 시작
+                }
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                float finalDamage = ApplyDoubleDamage(bulletDamage); // 두 배의 데미지 적용
-                ShowDamageText(finalDamage); // 두 배의 데미지를 텍스트로 표시
+                bool isDoubleDamage = false;
+                float finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
+                ShowDamageText(finalDamage, isDoubleDamage); // 두 배의 데미지를 텍스트로 표시
                 ApplyDamage(finalDamage);
             }
         }
@@ -106,18 +134,25 @@ public class EnemyHealth : MonoBehaviour
         ShotgunBullet shotgunBullet = other.GetComponent<ShotgunBullet>();
         if (shotgunBullet != null)
         {
+            hitSound.Play();
+            if (hitShotgun != null)
+            {
+                hitShotgun.Play(); // ParticleSystem 시작
+            }
+            hitEffect2.SetActive(true);
             float shotgunDamage = shotgun != null ? shotgun.attackDamage : 0f; // 최신 데미지를 가져옴
-            ShowDamageText(shotgunDamage);
+            ShowDamageText(shotgunDamage, false);
             ApplyDamage(shotgunDamage);
         }
     }
 
-    public void ShowDamageText(float damage)
+    public void ShowDamageText(float damage, bool isDoubleDamage)
     {
-        if (damageTextPrefab != null && damageTextSpawnPoint != null)
+        GameObject textPrefab = isDoubleDamage ? criticalDamageTextPrefab : damageTextPrefab;
+        if (textPrefab != null && damageTextSpawnPoint != null)
         {
             // 데미지 텍스트 프리팹을 생성합니다.
-            GameObject damageTextInstance = Instantiate(damageTextPrefab, damageTextSpawnPoint.position, Quaternion.identity);
+            GameObject damageTextInstance = Instantiate(textPrefab, damageTextSpawnPoint.position, Quaternion.identity);
 
             // TextMeshPro 컴포넌트를 가져옵니다.
             DamageText damageTextScript = damageTextInstance.GetComponent<DamageText>();
@@ -127,20 +162,21 @@ public class EnemyHealth : MonoBehaviour
             }
             else
             {
-                Debug.LogError("DamageText 컴포넌트를 damageTextPrefab에서 찾을 수 없습니다.");
+                Debug.LogError("DamageText 컴포넌트를 textPrefab에서 찾을 수 없습니다.");
             }
         }
         else
         {
-            Debug.LogError("damageTextPrefab 또는 damageTextSpawnPoint가 할당되지 않았습니다.");
+            Debug.LogError("textPrefab 또는 damageTextSpawnPoint가 할당되지 않았습니다.");
         }
     }
 
-    private float ApplyDoubleDamage(float damage)
+    private float ApplyDoubleDamage(float damage, out bool isDoubleDamage)
     {
+        isDoubleDamage = false;
         if (weapon != null)
         {
-            bool isDoubleDamage = Random.value <= weapon.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
+            isDoubleDamage = Random.value <= weapon.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
             if (isDoubleDamage)
             {
                 return damage * 2; // 두 배의 데미지 적용
@@ -173,5 +209,4 @@ public class EnemyHealth : MonoBehaviour
             }
         }
     }
-
 }

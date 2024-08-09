@@ -12,6 +12,7 @@ public class Shotgun : MonoBehaviour
     public float attackChance; // 공격 성공 확률 (0.0 ~ 1.0)
     public int bulletsPerShot; // 한 번에 발사할 총알의 개수
     public float burstInterval; // 연속 발사 간격 (초)
+    public float destroyDelay = 2.0f; // 기본값을 더 길게 설정
     public PlayerHealth health;
     public float nextFireTime; // 다음 발사 가능 시간
     private int AttackDamageCount;
@@ -23,14 +24,12 @@ public class Shotgun : MonoBehaviour
     private AudioSource audioSource; // AudioSource 컴포넌트
     private Coroutine fireBurstCoroutine; // FireBurst 코루틴을 저장하기 위한 변수
     private WeaponInfo currentWeapon;
-    private float destroyBullet;
     private float additionalFireChance; // 추가 발사 확률
 
     private void Start()
     {
-        destroyBullet = ShotgunBullet.destroyDelay;
         audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
-
+        destroyDelay = 0.2f;
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>(); // 없으면 추가
@@ -103,7 +102,7 @@ public class Shotgun : MonoBehaviour
                 if (AttackDamageCount == 5)
                 {
                     attackDamage += 50;
-                };
+                }
                 break;
             case UpgradeOption.AttackSpeed:
                 AttackSpeedCount++;
@@ -112,16 +111,16 @@ public class Shotgun : MonoBehaviour
                 if (AttackSpeedCount == 5)
                 {
                     additionalFireChance += 0.3f;
-                };
+                }
                 break;
             case UpgradeOption.AttackChance:
                 AttackChanceCount++;
-                destroyBullet += 0.1f; // ShotgunBullet의 destroyDelay 증가
-                Debug.Log("총알의 생존 시간이 증가했습니다. 현재 생존 시간: " + destroyBullet);
+                destroyDelay += 0.1f; // ShotgunBullet의 destroyDelay 증가
+                Debug.Log("총알의 생존 시간이 증가했습니다. 현재 생존 시간: " + destroyDelay);
                 if (AttackChanceCount == 5)
                 {
-                    destroyBullet += 0.5f;
-                };
+                    destroyDelay += 0.5f;
+                }
                 break;
             default:
                 Debug.LogError("잘못된 선택입니다.");
@@ -166,9 +165,17 @@ public class Shotgun : MonoBehaviour
         {
             rb.velocity = firePoint.forward * bulletSpeed; // 총알의 속도 설정 (firePoint의 forward 방향으로 발사)
         }
+
+        // 총알의 ShotgunBullet 컴포넌트에 destroyDelay 설정
+        ShotgunBullet shotgunBullet = bullet.GetComponent<ShotgunBullet>();
+        if (shotgunBullet != null)
+        {
+            shotgunBullet.SetDestroyDelay(destroyDelay);
+        }
+
         if (audioSource != null)
         {
-              if (fireSound != null)
+            if (fireSound != null)
             {
                 audioSource.PlayOneShot(fireSound, fireSoundVolume); // 기본 총알 사운드 재생
             }

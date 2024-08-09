@@ -9,7 +9,7 @@ public class PlayerGold : MonoBehaviour
     private void Start()
     {
         // 초기화: 데이터베이스에서 총 골드를 가져오거나 기본값으로 설정
-        totalGold = DataBase.Instance.playerData.gold;
+        totalGold = 0;
 
         // UI 텍스트 초기화
         UpdateGoldText();
@@ -33,5 +33,11 @@ public class PlayerGold : MonoBehaviour
         {
             Debug.LogError("goldText is not assigned in PlayerGold script.");
         }
+    }
+
+    // 현재 골드 값을 반환하는 메서드
+    public int GetTotalGold()
+    {
+        return totalGold;
     }
 }

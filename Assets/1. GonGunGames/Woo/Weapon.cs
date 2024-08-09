@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     public float attackChance; // 공격 성공 확률 (0.0 ~ 1.0)
     public int bulletsPerShot; // 한 번에 발사할 총알의 개수
     public float burstInterval; // 연속 발사 간격 (초)
-    public PlayerHealth health;
+    public PlayerHealth health; // 플레이어 건강 상태
     public float nextFireTime; // 다음 발사 가능 시간
     private int AttackDamageCount;
     private int AttackSpeedCount;
@@ -67,7 +67,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            Debug.LogError("WeaponInfo with gunId 1 not found.");
+            Debug.LogError("WeaponInfo with gunId not found.");
         }
     }
 
@@ -170,6 +170,14 @@ public class Weapon : MonoBehaviour
 
         for (int i = 0; i < bulletsPerShot; i++)
         {
+            if (health != null && health.isDead)
+            {
+                // 플레이어가 죽으면 발사 중지
+                Debug.Log("Player is dead, stopping fire burst.");
+                particlePrefab.SetActive(false);
+                yield break;
+            }
+
             Fire();
             yield return new WaitForSeconds(burstInterval); // 연속 발사 간격만큼 대기
         }
@@ -208,7 +216,7 @@ public class Weapon : MonoBehaviour
         if (weaponBullet2 != null)
         {
             // 두 배 데미지를 적용할지 여부를 판단하고 데미지를 설정합니다.
-            weaponBullet2.Initialize(attackDamage, isDoubleDamage ? 2f : 1f);
+            weaponBullet2.Initialize(attackDamage, isDoubleDamage ? 2f : 1f, isDoubleDamage);
         }
 
         // 총알 발사 소리 재생

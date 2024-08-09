@@ -5,6 +5,7 @@ using System;
 public class LevelManager : MonoBehaviour
 {
     public PlayerExp playerExp;
+    public GameObject Ui;
     public Weapon weapon;
     public Shotgun shotgun;
     public Button attackSpeedButton;
@@ -18,6 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        Ui.SetActive(false);
         // 버튼 클릭 이벤트에 메서드 연결
         attackSpeedButton.onClick.AddListener(() => OnUpgradeButtonClicked(UpgradeOption.AttackSpeed));
         attackDamageButton.onClick.AddListener(() => OnUpgradeButtonClicked(UpgradeOption.AttackDamage));
@@ -32,12 +34,14 @@ public class LevelManager : MonoBehaviour
         weapon.UpgradeStat(option);
         shotgun.UpgradeStat(option);
         SetButtonsActive(false); // 선택 후 버튼들을 다시 비활성화
+        Ui.SetActive(false );
         OnUpgradeOptionsClosed(); // 콜백 호출
     }
 
     public void ShowUpgradeOptions()
     {
         Debug.Log("레벨 업! 능력을 업그레이드할 옵션을 선택하세요:");
+        Ui.SetActive(true);
         SetButtonsActive(true); // 버튼들을 활성화
     }
 
