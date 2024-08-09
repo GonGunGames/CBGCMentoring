@@ -40,6 +40,7 @@ public class GetPlayerInfo : MonoBehaviour
 
         }
         playerStats = new float[playerData.baseStats.Length];
+
     }
 
     public int GetStatsLength()
@@ -63,6 +64,7 @@ public class GetPlayerInfo : MonoBehaviour
 
     public float[] GetAllAdditionalStats()
     {
+        // 모든 장비 스탯 가져오기
         LoadPlayerData();
         for (int i = 0; i < playerData.additionalStats.Length; i++)
         {
@@ -75,6 +77,7 @@ public class GetPlayerInfo : MonoBehaviour
 
     public float[] GetAllBaseStats()
     {
+        // 모든 플레이어 스탯 가져오기
         LoadPlayerData();
         for (int i = 0; i < playerData.baseStats.Length; i++)
         {
@@ -87,26 +90,26 @@ public class GetPlayerInfo : MonoBehaviour
 
     public float GetStat(StatType statType)
     {
-        // 장비 + 플레이어 스탯
+        // 장비 + 플레이어 스탯 하나 가져오기
         LoadPlayerData();
         playerStats[((int)statType)] = playerData.additionalStats[((int)statType)].value + playerData.baseStats[((int)statType)].value;
         return playerStats[((int)statType)];
     }
     public float GetAdditionalStat(StatType statType)
     {
-        // 장비 스탯
+        // 장비 스탯 하나 가져오기
         LoadPlayerData();
         return playerData.baseStats[((int)statType)].value;
     }
 
     public float GetBaseStat(StatType statType)
     {
-        // 플레이어 스탯
+        // 플레이어 스탯 하나 가져오기
         LoadPlayerData();
         return playerData.additionalStats[((int)statType)].value;
     }
 
-    public void SetPlayerEquipment(int ID, ItemType itemType)
+    public void SetPlayerEquipmentID(int ID, ItemType itemType)
     {
         switch (itemType)
         {
@@ -132,6 +135,7 @@ public class GetPlayerInfo : MonoBehaviour
 
     public int GetPlayerEquipmentID(ItemType itemType)
     {
+        // 해당 장비의 ID 값 가져오기
         switch (itemType)
         {
             case ItemType.Weapon:
