@@ -139,10 +139,12 @@ public class EnemyHealth : MonoBehaviour
             {
                 hitShotgun.Play(); // ParticleSystem 시작
             }
-            hitEffect2.SetActive(true);
+            hitEffect2.SetActive(true);   
             float shotgunDamage = shotgun != null ? shotgun.attackDamage : 0f; // 최신 데미지를 가져옴
-            ShowDamageText(shotgunDamage, false);
-            ApplyDamage(shotgunDamage);
+            bool isDoubleDamage = false;
+            float finalDamage = ApplyDoubleDamage(shotgunDamage, out isDoubleDamage); // 두 배의 데미지 적용
+            ShowDamageText(finalDamage, isDoubleDamage);
+            ApplyDamage(finalDamage);
         }
     }
 
@@ -177,6 +179,14 @@ public class EnemyHealth : MonoBehaviour
         if (weapon != null)
         {
             isDoubleDamage = Random.value <= weapon.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
+            if (isDoubleDamage)
+            {
+                return damage * 2; // 두 배의 데미지 적용
+            }
+        }
+        else if (shotgun != null)
+        {
+            isDoubleDamage = Random.value <= shotgun.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
             if (isDoubleDamage)
             {
                 return damage * 2; // 두 배의 데미지 적용

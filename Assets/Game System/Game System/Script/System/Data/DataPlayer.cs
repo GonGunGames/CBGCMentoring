@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityEditor.Searcher;
 [CreateAssetMenu(fileName = "new data", menuName = "DataPlayer")]
 public class DataPlayer : ScriptableObject
 {

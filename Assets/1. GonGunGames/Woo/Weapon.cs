@@ -18,7 +18,7 @@ public class Weapon : MonoBehaviour
     public float attackDamage; // 무기 데미지 
     public float doubleDamage; // 두 배의 공격력
     public float attackChance; // 공격 성공 확률 (0.0 ~ 1.0)
-    public int bulletsPerShot; // 한 번에 발사할 총알의 개수
+    public float bulletsPerShot; // 한 번에 발사할 총알의 개수
     public float burstInterval; // 연속 발사 간격 (초)
     public PlayerHealth health; // 플레이어 건강 상태
     public float nextFireTime; // 다음 발사 가능 시간
@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
     private Coroutine particleCoroutine;
     private WeaponInfo currentWeapon;
 
-    private void Start()
+    private void Awake()
     {
         particlePrefab.SetActive(false);
         audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
@@ -48,46 +48,21 @@ public class Weapon : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>(); // 없으면 추가
         }
+                // WeaponInfo에서 값을 가져와서 클래스 필드에 할당
+                bulletSpeed = GetPlayerInfo.instance.GetStat(StatType.BulletSpeed);
+                attackChance = GetPlayerInfo.instance.GetStat(StatType.GrenadeProbability);
+                attackSpeed = GetPlayerInfo.instance.GetStat(StatType.AttackSpeed);
+                attackDamage = GetPlayerInfo.instance.GetStat(StatType.Attack);
+                doubleDamage = attackDamage * 2; // 두 배의 공격력
+                bulletsPerShot = GetPlayerInfo.instance.GetStat(StatType.MagazineSize);
+                burstInterval = GetPlayerInfo.instance.GetStat(StatType.ReloadTime);
 
-        currentWeapon = DataBase.Instance.GetWeaponInfoByGunId(gunId);
-
-        if (currentWeapon != null)
-        {
-            // WeaponInfo에서 값을 가져와서 클래스 필드에 할당
-            bulletSpeed = currentWeapon.bulletSpeed;
-            attackChance = currentWeapon.attackChance;
-            attackSpeed = currentWeapon.attackSpeed;
-            attackDamage = currentWeapon.attackDamage;
-            doubleDamage = attackDamage * 2; // 두 배의 공격력
-            bulletsPerShot = currentWeapon.bulletsPerShot;
-            burstInterval = currentWeapon.burstInterval;
-
-            // Debug 로그로 값 확인
-            Debug.Log($"Weapon initialized: AttackChance={attackChance}, AttackSpeed={attackSpeed}, AttackDamage={attackDamage}, BulletsPerShot={bulletsPerShot}, BurstInterval={burstInterval}");
         }
-        else
+
+
+
+        private void Update()
         {
-            Debug.LogError("WeaponInfo with gunId not found.");
-        }
-    }
-
-    public void InitializeWeapon(WeaponInfo weaponInfo)
-    {
-        // WeaponInfo에서 값을 가져와서 클래스 필드에 할당
-        bulletSpeed = weaponInfo.bulletSpeed;
-        attackChance = weaponInfo.attackChance;
-        attackSpeed = weaponInfo.attackSpeed;
-        attackDamage = weaponInfo.attackDamage;
-        doubleDamage = attackDamage * 2; // 두 배의 공격력
-        bulletsPerShot = weaponInfo.bulletsPerShot;
-        burstInterval = weaponInfo.burstInterval;
-
-        // Debug 로그로 값 확인
-        Debug.Log($"Weapon initialized: AttackChance={attackChance}, AttackSpeed={attackSpeed}, AttackDamage={attackDamage}, BulletsPerShot={bulletsPerShot}, BurstInterval={burstInterval}");
-    }
-
-    private void Update()
-    {
         if (health != null && health.isDead)
         {
             Debug.Log("Fireburst Stop");

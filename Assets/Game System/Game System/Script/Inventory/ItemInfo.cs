@@ -46,5 +46,5 @@ public class ItemInfo : ScriptableObject
     }
     public ItemProperties prop;
     public ItemStat baseStat;
-  
+
 }
