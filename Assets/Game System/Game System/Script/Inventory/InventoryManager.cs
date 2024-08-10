@@ -73,6 +73,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
 
         DataInventory.LoadData(inventoryData);
+        Debug.Log(inventoryData);
 
         //Hide all the item stats in baseStat view
         itemStats = itemViewStatGroup.GetComponentsInChildren<UIStat>();
@@ -391,6 +392,7 @@ public class InventoryManager : Singleton<InventoryManager>
         inventoryData.AddEquipmentData(thisItem.data);
 
         playerStat.AddItemStat(thisItem);
+        DataInventory.SaveData(inventoryData);
     }
     /// <summary>
     /// Unequip the item
@@ -419,6 +421,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 break;
             }
         }
+        DataInventory.SaveData(inventoryData);
     }
 
     /// <summary>
@@ -461,6 +464,7 @@ public class InventoryManager : Singleton<InventoryManager>
             thisItem.SetPosition(inventorySlot.transform);
             ActiveSlot.GetComponent<InventorySlot>().isEmpty = false;
         }
+        DataInventory.SaveData(inventoryData);
     }
 
     public void AddAmountOfItem(ItemBase.ItemData data, int amount, int id)
@@ -531,6 +535,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
+        DataInventory.SaveData(inventoryData);
     }
     public void RemoveAmountOfItem(ItemInfo info, int amount)
     {
@@ -559,6 +564,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
+        DataInventory.SaveData(inventoryData);
     }
 
     /// <summary>
@@ -572,8 +578,9 @@ public class InventoryManager : Singleton<InventoryManager>
             inventoryData.RemoveInventoryData(activeSlot.GetComponentInChildren<InventoryItem>().data.ID);
             activeSlot.DestroyItem();
         }
-
+        DataInventory.SaveData(inventoryData);
     }
+
     public int GenerateID()
     {
         int randNum;
@@ -675,6 +682,11 @@ public class InventoryManager : Singleton<InventoryManager>
                 InventoryItem item = itemAdd.GetComponent<InventoryItem>();
                 item.data = data;
 
+                Debug.Log("data " + data);
+                Debug.Log("info " + data.info);
+                Debug.Log("prop " + data.info.prop);
+                Debug.Log("countable " + data.info.prop.countable);
+
 
                 if (data.info.prop.countable)
                 {
@@ -760,6 +772,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public void QuitGame()
     {
         Debug.Log("종료1");
+        DataInventory.SaveData(inventoryData);
         Application.Quit();
         Debug.Log("종료2");
     }
