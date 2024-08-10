@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
     private Animator myAnim;
     private Renderer playerRenderer;  // 플레이어의 Renderer 컴포넌트 참조
     [SerializeField] private Slider _hpBar;
+    [SerializeField] private RawImage rawImage;
+    [SerializeField] private Slider exp;
     public bool isDead { get; private set; } = false;
     public bool isHit = false;
     public float deathTime;
@@ -38,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = GetPlayerInfo.instance.GetStat(StatType.Health);
         currentDefense = GetPlayerInfo.instance.GetStat(StatType.Defense);
         SetMaxHealth(currentHealth);
+
     }
 
     private void Update()
@@ -187,6 +190,16 @@ public class PlayerHealth : MonoBehaviour
                 collider.enabled = false;
             }
             // Death 처리 로직 추가
+            if (_hpBar == null)
+            {
+                Destroy(_hpBar);
+            }
+            Destroy(rawImage);
+            if (exp == null)
+            {
+                Destroy(exp);
+            }
+            
         }
         else
         {

@@ -111,9 +111,7 @@ public class ElliteHealth : MonoBehaviour
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
                 hitSound2.Play();
-                bullet2.NotifyExplosion();
-                float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
+                // Weaponbullet2에 의한 텍스트 표시를 제거
             }
             else if (bullet != null)
             {
@@ -126,11 +124,11 @@ public class ElliteHealth : MonoBehaviour
                 }
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
                 finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
-            }
 
-            // 방어력 적용 후 최종 데미지로 체력 차감
-            float damageAfterDefense = ApplyDamage(finalDamage);
-            ShowDamageText(damageAfterDefense, isDoubleDamage); // 방어력 적용 후 데미지를 텍스트로 표시
+                // 방어력 적용 후 최종 데미지로 체력 차감
+                float damageAfterDefense = ApplyDamage(finalDamage);
+                ShowDamageText(damageAfterDefense, isDoubleDamage); // 방어력 적용 후 데미지를 텍스트로 표시
+            }
         }
     }
 
@@ -179,7 +177,6 @@ public class ElliteHealth : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
-            ellite.DeadEllite();
             Instantiate(deathPrefab, transform.position, transform.rotation);
             deathCount++;
             if (characterController != null)
@@ -196,6 +193,7 @@ public class ElliteHealth : MonoBehaviour
 
             // 적이 사망 상태임을 표시
             isDead = true;
+            StartCoroutine(HandleDeath());
         }
 
         return damageAfterDefense; // 최종 데미지를 반환

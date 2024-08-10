@@ -109,9 +109,8 @@ public class EnemyHealth : MonoBehaviour
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
                 hitSound2.Play();
-                bullet2.NotifyExplosion();
-                float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
+
+                // Weaponbullet2에 의한 텍스트 표시를 제거
             }
             else if (bullet != null)
             {
@@ -124,15 +123,14 @@ public class EnemyHealth : MonoBehaviour
                 }
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
                 finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
+
+                // 방어력 적용 후 최종 데미지로 체력 차감
+                float damageAfterDefense = ApplyDamage(finalDamage);
+                ShowDamageText(damageAfterDefense, isDoubleDamage); // 방어력 적용 후 데미지를 텍스트로 표시
             }
-
-            // 방어력 적용 후 최종 데미지로 체력 차감
-            float damageAfterDefense = ApplyDamage(finalDamage);
-
-            // 방어력 적용 후 데미지 텍스트 표시
-            ShowDamageText(damageAfterDefense, isDoubleDamage);
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

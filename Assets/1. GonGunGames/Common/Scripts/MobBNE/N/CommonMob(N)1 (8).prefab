@@ -79289,7 +79289,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   controller: {fileID: 3850078412827162875}
   idleTime: 0
-  moveSpeed: 1
+  moveSpeed: 2
   turnSpeed: 180
   chaseRange: 10
   attackRange: 1.5
@@ -79312,6 +79312,7 @@ MonoBehaviour:
   currentId: 4
   currentDamage: 0
   currentHealth: 0
+  currentDefense: 0
   deathPrefab: {fileID: 8578329225272092373, guid: 563e21624c7da234aabfdbb1c13c3bb5, type: 3}
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}
   criticalDamageTextPrefab: {fileID: 3949188916532855959, guid: 58349df3013a52341b3a06cbb0e4bf32, type: 3}
