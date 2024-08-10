@@ -25,7 +25,8 @@ public enum StatType
     PenetratingPower,                   // 관통력
     PenetratingProbability,             // 관통 확률
     ReloadTime,                         // 재장전 시간
-    GunID,                              // 무기 ID
+    RifleID,                            // 무기 ID
+    ShotgunID,                          // 무기 ID
     ArmorID,                            // 상의 ID
     GlovesID,                           // 장갑 ID
     HelmetID,                           // 헬멧 ID

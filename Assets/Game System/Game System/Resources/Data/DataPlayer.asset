@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DataPlayer
   m_EditorClassIdentifier: 
   level: 1
-  gold: 9930
-  diamond: 973
-  combatPower: 4538
+  gold: 9340
+  diamond: 939
+  combatPower: 10906
   baseStats:
   - type: 0
     value: 0
@@ -71,15 +71,17 @@ MonoBehaviour:
     value: 0
   - type: 26
     value: 0
+  - type: 27
+    value: 0
   additionalStats:
   - type: 0
     value: 0
   - type: 1
-    value: 100
+    value: 40
   - type: 2
     value: 2
   - type: 3
-    value: 30
+    value: 10
   - type: 4
     value: 1
   - type: 5
@@ -89,25 +91,25 @@ MonoBehaviour:
   - type: 7
     value: 0
   - type: 8
-    value: 30
+    value: 20
   - type: 9
     value: 1
   - type: 10
     value: 0
   - type: 11
-    value: 50
+    value: 230
   - type: 12
-    value: 2
+    value: 1
   - type: 13
     value: 0
   - type: 14
-    value: 500
+    value: 2300
   - type: 15
-    value: 7
+    value: 5
   - type: 16
     value: 0
   - type: 17
-    value: 0
+    value: 1.1
   - type: 18
     value: 100
   - type: 19
@@ -117,12 +119,14 @@ MonoBehaviour:
   - type: 21
     value: 0.1
   - type: 22
-    value: 113
+    value: 111
   - type: 23
-    value: 100
+    value: 0
   - type: 24
-    value: 103
+    value: 102
   - type: 25
-    value: 0
+    value: 105
   - type: 26
-    value: 0
+    value: 108
+  - type: 27
+    value: 110

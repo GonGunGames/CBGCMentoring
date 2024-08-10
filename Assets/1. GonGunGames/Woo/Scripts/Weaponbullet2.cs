@@ -20,7 +20,8 @@ public class Weaponbullet2 : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-            Explode();
+            Explode(); // 폭발 효과 생성
+            NotifyExplosion(); // 폭발 범위 내 적들에게 데미지 적용
             Destroy(gameObject); // 총알 파괴
         }
     }
@@ -64,26 +65,71 @@ public class Weaponbullet2 : MonoBehaviour
                 if (enemyHealth != null)
                 {
                     // 폭발 데미지 적용
-                    enemyHealth.ApplyDamage(damage);
-                    enemyHealth.ShowDamageText(damage, isDoubleDamage); // 데미지 텍스트 표시
+                    float finalDamage = ApplyDamage(enemyHealth, damage);
+                    enemyHealth.ApplyDamage(finalDamage); // 데미지 적용
+                    enemyHealth.ShowDamageText(finalDamage, isDoubleDamage); // 데미지 텍스트 표시
                 }
 
                 BossHealth bossHealth = hitCollider.GetComponent<BossHealth>();
                 if (bossHealth != null)
                 {
                     // 폭발 데미지 적용
-                    bossHealth.ApplyDamage(damage);
-                    bossHealth.ShowDamageText(damage, isDoubleDamage); // 데미지 텍스트 표시
+                    float finalDamage = ApplyDamage(bossHealth, damage);
+                    bossHealth.ApplyDamage(finalDamage); // 데미지 적용
+                    bossHealth.ShowDamageText(finalDamage, isDoubleDamage); // 데미지 텍스트 표시
                 }
 
                 ElliteHealth eliteHealth = hitCollider.GetComponent<ElliteHealth>();
                 if (eliteHealth != null)
                 {
                     // 폭발 데미지 적용
-                    eliteHealth.ApplyDamage(damage);
-                    eliteHealth.ShowDamageText(damage, isDoubleDamage); // 데미지 텍스트 표시
+                    float finalDamage = ApplyDamage(eliteHealth, damage);
+                    eliteHealth.ApplyDamage(finalDamage); // 데미지 적용
+                    eliteHealth.ShowDamageText(finalDamage, isDoubleDamage); // 데미지 텍스트 표시
                 }
             }
         }
+    }
+
+    private float ApplyDamage(EnemyHealth enemyHealth, float baseDamage)
+    {
+        // 방어력 적용 후 최종 데미지를 계산
+        float damageAfterDefense = baseDamage;
+
+        if (enemyHealth != null)
+        {
+            damageAfterDefense = baseDamage * (1 - (enemyHealth.currentDefense / (100 + enemyHealth.currentDefense)));
+            damageAfterDefense = Mathf.Round(damageAfterDefense * 10) / 10;
+        }
+
+        return damageAfterDefense;
+    }
+
+    private float ApplyDamage(BossHealth bossHealth, float baseDamage)
+    {
+        // 방어력 적용 후 최종 데미지를 계산
+        float damageAfterDefense = baseDamage;
+
+        if (bossHealth != null)
+        {
+            damageAfterDefense = baseDamage * (1 - (bossHealth.currentDefense / (100 + bossHealth.currentDefense)));
+            damageAfterDefense = Mathf.Round(damageAfterDefense * 10) / 10;
+        }
+
+        return damageAfterDefense;
+    }
+
+    private float ApplyDamage(ElliteHealth eliteHealth, float baseDamage)
+    {
+        // 방어력 적용 후 최종 데미지를 계산
+        float damageAfterDefense = baseDamage;
+
+        if (eliteHealth != null)
+        {
+            damageAfterDefense = baseDamage * (1 - (eliteHealth.currentDefense / (100 + eliteHealth.currentDefense)));
+            damageAfterDefense = Mathf.Round(damageAfterDefense * 10) / 10;
+        }
+
+        return damageAfterDefense;
     }
 }

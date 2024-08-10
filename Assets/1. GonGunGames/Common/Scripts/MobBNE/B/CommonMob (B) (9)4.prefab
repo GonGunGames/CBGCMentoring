@@ -54460,7 +54460,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.0007629, y: 1606.9998}
+  m_AnchoredPosition: {x: 1.0007629, y: 1266}
   m_SizeDelta: {x: 1551, y: 432.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3982792710360558164
@@ -114578,6 +114578,7 @@ MonoBehaviour:
   currentId: 12
   currentDamage: 0
   currentHealth: 0
+  currentDefense: 0
   B_hpBar: {fileID: 3982792710360558164}
   isHit: 0
   damageTextPrefab: {fileID: 3949188916532855959, guid: c494eb4dc615262459a6f4a7dd267a8d, type: 3}

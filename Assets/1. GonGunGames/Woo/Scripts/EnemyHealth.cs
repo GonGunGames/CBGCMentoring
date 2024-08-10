@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour
     public int currentId;  // 인스펙터에서 설정할 수 있도록 public으로 설정
     public float currentDamage;  // 현재 데미지
     public float currentHealth;  // 현재 체력
+    public float currentDefense;
     public bool isDead { get; private set; } = false;  // 적이 사망했는지 여부
     private CommonMob commonMob;  // CommonMob 컴포넌트
     private CommonMobN commonMobN;  // CommonMobN 컴포넌트
@@ -83,6 +84,7 @@ public class EnemyHealth : MonoBehaviour
             currentId = enemyInfo.id;
             currentHealth = enemyInfo.maxHealth;
             currentDamage = enemyInfo.damage;
+            currentDefense = enemyInfo.defense;
         }
         else
         {
@@ -100,15 +102,16 @@ public class EnemyHealth : MonoBehaviour
             Weaponbullet bullet = collision.collider.GetComponent<Weaponbullet>();
             Weaponbullet2 bullet2 = collision.collider.GetComponent<Weaponbullet2>();
 
+            float finalDamage = 0f;
+            bool isDoubleDamage = false;
+
             if (bullet2 != null)
             {
                 // Weaponbullet2의 폭발 범위 내의 적에게 데미지를 입히는 메서드를 호출합니다.
                 hitSound2.Play();
                 bullet2.NotifyExplosion();
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                bool isDoubleDamage = false;
-                float finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
-                ShowDamageText(finalDamage, isDoubleDamage); // 두 배의 데미지를 텍스트로 표시 
+                finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
             }
             else if (bullet != null)
             {
@@ -120,11 +123,14 @@ public class EnemyHealth : MonoBehaviour
                     hitRifle.Play(); // ParticleSystem 시작
                 }
                 float bulletDamage = weapon != null ? weapon.attackDamage : 0f; // 최신 데미지를 가져옴
-                bool isDoubleDamage = false;
-                float finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
-                ShowDamageText(finalDamage, isDoubleDamage); // 두 배의 데미지를 텍스트로 표시
-                ApplyDamage(finalDamage);
+                finalDamage = ApplyDoubleDamage(bulletDamage, out isDoubleDamage); // 두 배의 데미지 적용
             }
+
+            // 방어력 적용 후 최종 데미지로 체력 차감
+            float damageAfterDefense = ApplyDamage(finalDamage);
+
+            // 방어력 적용 후 데미지 텍스트 표시
+            ShowDamageText(damageAfterDefense, isDoubleDamage);
         }
     }
 
@@ -139,15 +145,82 @@ public class EnemyHealth : MonoBehaviour
             {
                 hitShotgun.Play(); // ParticleSystem 시작
             }
-            hitEffect2.SetActive(true);   
+            hitEffect2.SetActive(true);
             float shotgunDamage = shotgun != null ? shotgun.attackDamage : 0f; // 최신 데미지를 가져옴
             bool isDoubleDamage = false;
             float finalDamage = ApplyDoubleDamage(shotgunDamage, out isDoubleDamage); // 두 배의 데미지 적용
-            ShowDamageText(finalDamage, isDoubleDamage);
-            ApplyDamage(finalDamage);
+
+            // 방어력 적용 후 최종 데미지로 체력 차감
+            float damageAfterDefense = ApplyDamage(finalDamage);
+
+            // 방어력 적용 후 데미지 텍스트 표시
+            ShowDamageText(damageAfterDefense, isDoubleDamage);
         }
     }
+    public float ApplyDamage(float damage)
+    {
+        // 방어력 적용 후 최종 데미지를 계산
+        float damageAfterDefense = damage * (1 - (currentDefense / (100 + currentDefense)));
 
+        // 소수점 첫째 자리에서 반올림
+        damageAfterDefense = Mathf.Round(damageAfterDefense * 10) / 10;
+
+        // 최종 데미지를 현재 체력에서 차감
+        currentHealth -= damageAfterDefense;
+
+        // 디버그 로그 추가
+        Debug.Log($"데미지 적용: {damage} -> 방어력 적용 후: {damageAfterDefense} -> 남은 체력: {currentHealth}");
+
+        // 적의 상태를 Hit로 전환
+        commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
+        commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
+        commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
+
+        // 체력이 0 이하이고 적이 아직 사망하지 않았다면
+        if (currentHealth <= 0 && !isDead)
+        {
+            // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
+            Instantiate(deathPrefab, transform.position, transform.rotation);
+            deathCount++;
+            if (characterController != null)
+            {
+                characterController.enabled = false;
+            }
+            Debug.Log("Enemy");
+
+            // DeathCount 인스턴스를 통해 deathCount를 증가시킴
+            if (DeathCount.Instance != null)
+            {
+                DeathCount.Instance.IncrementDeathCount();
+            }
+
+            // 적이 사망 상태임을 표시
+            isDead = true;
+        }
+
+        return damageAfterDefense; // 최종 데미지를 반환
+    }
+    private float ApplyDoubleDamage(float damage, out bool isDoubleDamage)
+    {
+        isDoubleDamage = false;
+        if (weapon != null)
+        {
+            isDoubleDamage = Random.value <= weapon.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
+            if (isDoubleDamage)
+            {
+                return damage * 2; // 두 배의 데미지 적용
+            }
+        }
+        else if (shotgun != null)
+        {
+            isDoubleDamage = Random.value <= shotgun.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
+            if (isDoubleDamage)
+            {
+                return damage * 2; // 두 배의 데미지 적용
+            }
+        }
+        return damage; // 기본 데미지 반환
+    }
     public void ShowDamageText(float damage, bool isDoubleDamage)
     {
         GameObject textPrefab = isDoubleDamage ? criticalDamageTextPrefab : damageTextPrefab;
@@ -173,50 +246,6 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private float ApplyDoubleDamage(float damage, out bool isDoubleDamage)
-    {
-        isDoubleDamage = false;
-        if (weapon != null)
-        {
-            isDoubleDamage = Random.value <= weapon.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
-            if (isDoubleDamage)
-            {
-                return damage * 2; // 두 배의 데미지 적용
-            }
-        }
-        else if (shotgun != null)
-        {
-            isDoubleDamage = Random.value <= shotgun.doubleDamageChance; // 현재 두 배의 공격력 확률 사용
-            if (isDoubleDamage)
-            {
-                return damage * 2; // 두 배의 데미지 적용
-            }
-        }
-        return damage; // 기본 데미지 반환
-    }
+   
 
-    public void ApplyDamage(float damage)
-    {
-        Debug.Log("데미지 적용: " + damage); // 디버그 로그 추가
-        currentHealth -= damage;
-        commonMob?.SetState(FSMState.Hit); // CommonMob의 Hit 상태로 전환
-        commonMobN?.SetState(FSMState.Hit); // CommonMobN의 Hit 상태로 전환
-        commonMobB?.SetState(FSMState.Hit); // CommonMobB의 Hit 상태로 전환
-        if (currentHealth <= 0 && !isDead)
-        {
-            // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
-            Instantiate(deathPrefab, transform.position, transform.rotation);
-            deathCount++;
-            if (characterController != null)
-            {
-                characterController.enabled = false;
-            }
-            Debug.Log("Enemy");
-            // DeathCount 인스턴스를 통해 deathCount를 증가시킴
-            if (DeathCount.Instance != null)
-            {
-                DeathCount.Instance.IncrementDeathCount();
-            }
-        }
-    }
 }
