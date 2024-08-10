@@ -682,10 +682,10 @@ public class InventoryManager : Singleton<InventoryManager>
                 InventoryItem item = itemAdd.GetComponent<InventoryItem>();
                 item.data = data;
 
-                Debug.Log("data " + data);
-                Debug.Log("info " + data.info);
-                Debug.Log("prop " + data.info.prop);
-                Debug.Log("countable " + data.info.prop.countable);
+                //Debug.Log("data " + data);
+                //Debug.Log("info " + data.info);
+                //Debug.Log("prop " + data.info.prop);
+                //Debug.Log("countable " + data.info.prop.countable);
 
 
                 if (data.info.prop.countable)
