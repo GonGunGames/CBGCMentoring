@@ -43,6 +43,13 @@ public class GetPlayerInfo : MonoBehaviour
 
 
     }
+
+    public void SavePlayerData()
+    {
+        DataPlayer.SaveData(playerData);
+        DataInventory.SaveData(playerInventory);
+    }
+
     public void LoadPlayerData()
     {
         if (DataPlayer.LoadData() != null)

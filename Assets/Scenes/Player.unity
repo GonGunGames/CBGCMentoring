@@ -16744,16 +16744,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
-        m_MethodName: PlayButtonSound
-        m_Mode: 1
+      - m_Target: {fileID: 8771091247702964546}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: SceneChange
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Lobby
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!4 &1826508973674597447
@@ -22834,6 +22834,7 @@ GameObject:
   - component: {fileID: 2042970314817529781}
   - component: {fileID: 8771091247702964545}
   - component: {fileID: 1826224172536118619}
+  - component: {fileID: 8771091247702964546}
   m_Layer: 5
   m_Name: Lobby
   m_TagString: Untagged
@@ -26646,6 +26647,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8771091247702964546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766649879883713046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2901b7f68f2579545a6823041231c1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8774462610625494195
 Transform:
   m_ObjectHideFlags: 0
@@ -26726,6 +26739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rifle: {fileID: 855801736952997985}
   shotgun: {fileID: 6827193228731634854}
+  weaponID: 0
 --- !u!1 &8804429788999355871
 GameObject:
   m_ObjectHideFlags: 0
