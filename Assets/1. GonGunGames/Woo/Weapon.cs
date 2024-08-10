@@ -216,9 +216,17 @@ public class Weapon : MonoBehaviour
 
         if (particleSystem != null)
         {
+            // ParticleSystem의 MainModule을 가져옴
+            var mainModule = particleSystem.main;
+
+            // playbackSpeed를 3으로 설정
+            mainModule.simulationSpeed = 6.0f;
+
             particleSystem.Play();
-            Debug.Log("Particle started");
+            Debug.Log("Particle started with playback speed of 3");
+
             yield return new WaitForSeconds(bulletsPerShot * burstInterval); // 총알 발사 시간 동안 대기
+
             particleSystem.Stop();
             Debug.Log("Particle stopped");
         }
