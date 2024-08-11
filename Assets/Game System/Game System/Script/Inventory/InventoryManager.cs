@@ -60,6 +60,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public Sprite[] statSprites;
 
     public Button equipButton;
+    public Button unequipButton;
     public EquipmentSlot equipableSlot;
 
     [Header("InventoryTab")]
@@ -252,15 +253,36 @@ public class InventoryManager : Singleton<InventoryManager>
             if (!currentItem.data.info.prop.countable)
             {
                 equipableSlot = equipmentSlots.Single(i => i.type == currentItem.data.info.baseStat.type);
+                if (equipableSlot != null && !equipableSlot.isEquip)
+                {
+                    EquipItem(currentItem, equipableSlot);
+
+                }/*
+                else
+                {
+                    InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
+                    ReplaceItem(currentItem, equippedItem);
+                }*/
             }
 
-            if (equipableSlot != null && equipableSlot.isEquip)
+
+        });
+
+        unequipButton.onClick.AddListener(() =>
+        {
+            if (!currentItem.data.info.prop.countable)
             {
-                UnequipItem(currentItem);
-            }
-            else if (equipableSlot != null && !equipableSlot.isEquip)
-            {
-                EquipItem(currentItem, equipableSlot);
+                equipableSlot = equipmentSlots.Single(i => i.type == currentItem.data.info.baseStat.type);
+
+                if (equipableSlot != null && equipableSlot.isEquip)
+                {
+                    UnequipItem(currentItem);
+                }
+                /*else
+                {
+                    InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
+                    ReplaceItem(currentItem, equippedItem);
+                }*/
             }
         });
     }
@@ -276,7 +298,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
                 itemStats[i].statText.text = currentItem.data.info.baseStat.stats[i].value.ToString();
             }
-            
+
         }
     }
 

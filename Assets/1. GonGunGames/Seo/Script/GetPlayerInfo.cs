@@ -6,6 +6,9 @@ public class GetPlayerInfo : MonoBehaviour
     public DataPlayer playerData;
     public DataInventory playerInventory;
 
+    //public PlayerStat player;
+    //public InventoryManager inventoryManager;
+
     float[] playerStats;
 
     int playerEquipmentsWeaponID;
