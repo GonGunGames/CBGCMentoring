@@ -19,8 +19,13 @@ public class WelcomPackage : MonoBehaviour
             InventoryManager.Instance.AddAmountOfItem(item[1], 1, 111);
             InventoryManager.Instance.AddAmountOfItem(item[2], 1, 114);
             dataPlayer.baseStats[23].value++;
+
         }
-        targetObject.SetActive(false);
+        else
+        {
+            targetObject.SetActive(false);
+
+        }
     }
 
     public void Onclick()
