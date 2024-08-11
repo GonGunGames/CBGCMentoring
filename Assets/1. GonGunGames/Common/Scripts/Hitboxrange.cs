@@ -2,43 +2,86 @@ using System.Collections;
 using UnityEngine;
 using AllUnits;
 
-public class HitBoxrange : Unit
+public class HitBoxrange : MonoBehaviour
 {
     public float attackdamage;
 
     private MeshRenderer meshRenderer;
+    public GameObject jumpEffect;
+    private ParticleSystem jumpParticleSystem;
+    private BossHealth bossHealth;
+    public CapsuleCollider capsuleCollider;
+    private bool isParticleSystemPlaying = false;
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-        attackdamage = damage;  // 'damage'가 제대로 초기화되었는지 확인
-
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        capsuleCollider.enabled = false;
         meshRenderer = GetComponent<MeshRenderer>();
+        bossHealth = GetComponentInParent<BossHealth>();// 부모 객체에서 EnemyHealth 컴포넌트를 가져옵니다.
+        if (bossHealth != null)
+        {
+            attackdamage = bossHealth.currentDamage;
+        }
 
-        // 초기 상태 비활성화
         if (meshRenderer != null)
         {
             meshRenderer.enabled = false;
         }
+
+        if (jumpEffect != null)
+        {
+            jumpParticleSystem = jumpEffect.GetComponent<ParticleSystem>();
+            if (jumpParticleSystem == null)
+            {
+                Debug.LogError("No ParticleSystem component found on jumpEffect.");
+            }
+        }
     }
 
-    // 메시 렌더러 활성화 메서드
     public void EnableHitBoxrange()
     {
         if (meshRenderer != null)
         {
             meshRenderer.enabled = true;
-            StartCoroutine(DisableMeshRendererAfterDelay(3.9f)); // 0.1초 후에 메시 렌더러 비활성화
+            StartCoroutine(DisableMeshRendererAfterDelay(3.9f));
+        }
+
+        if (jumpParticleSystem != null && !isParticleSystemPlaying)
+        {
+            StartCoroutine(PlayParticleSystemWithDelay(2f));
         }
     }
 
-    // 메시 렌더러 비활성화 메서드
     private IEnumerator DisableMeshRendererAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         if (meshRenderer != null)
         {
-            meshRenderer.enabled = false; // 메시 렌더러 비활성화
+            meshRenderer.enabled = false;
+            capsuleCollider.enabled = false;
+        }
+    }
+
+    private IEnumerator PlayParticleSystemWithDelay(float delay)
+    {
+        isParticleSystemPlaying = true;
+        yield return new WaitForSeconds(delay);
+        if (jumpParticleSystem != null)
+        {
+            jumpParticleSystem.Play();
+            capsuleCollider.enabled = true;
+            StartCoroutine(StopParticleSystemAfterDelay(jumpParticleSystem.main.duration));
+        }
+    }
+
+    private IEnumerator StopParticleSystemAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (jumpParticleSystem != null)
+        {
+            jumpParticleSystem.Stop();
+            isParticleSystemPlaying = false;
         }
     }
 }

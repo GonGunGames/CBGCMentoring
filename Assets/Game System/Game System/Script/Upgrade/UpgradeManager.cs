@@ -172,7 +172,7 @@ public class UpgradeManager : MonoBehaviour
     public void UpgradeCostUpdate()
     {
         cost = (int)(upgradeItem.data.currentLevel * (int)upgradeItem.data.info.baseStat.rarity * 50);
-        upgradeCostText.text = $"<sprite name=Gold Icon>{cost}\nUpgrade";
+        upgradeCostText.text = cost + "\nUpgrade";
     }
 
 

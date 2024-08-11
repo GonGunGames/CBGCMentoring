@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
 
-/// <summary>
-/// Reference: https://www.youtube.com/watch?v=kWRyZ3hb1Vc&ab_channel=CocoCode
-/// </summary>
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Image image;
@@ -22,7 +17,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private InventoryItem thisItem;
 
-    
     private bool allowDrag = true;
     private bool allowEquip = false;
     private bool allowUnequip = false;
@@ -32,7 +26,47 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         allowEquip = false;
         allowUnequip = false;
     }
+
     public void OnBeginDrag(PointerEventData eventData)
+    {
+        PrepareForDrag();
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (!allowDrag) return;
+
+        HandleDragging(eventData);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        HandleDrop(eventData);
+    }
+
+    public void OnEquipButtonClick()
+    {
+        thisItem = GetComponent<InventoryItem>();
+        if (thisItem.gameObject.GetComponentInParent<Toggle>().isOn != true)
+        {
+            allowDrag = false;
+            return;
+        }
+
+        Debug.Log(thisItem.data.info.name);
+
+        // If the item is already in an equipment slot, unequip it
+        if (equipmentSlot != null && equipmentSlot.isEquip)
+        {
+            InventoryManager.Instance.UnequipItem(thisItem);
+        }
+        else if (equipableSlot != null && !equipableSlot.isEquip)
+        {
+            InventoryManager.Instance.EquipItem(thisItem, equipableSlot);
+        }
+    }
+
+    private void PrepareForDrag()
     {
         thisItem = GetComponent<InventoryItem>();
         if (thisItem.gameObject.GetComponentInParent<Toggle>().isOn != true)
@@ -41,28 +75,25 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             return;
         }
         
-        Debug.Log("Begin drag");
 
         initialParent = transform.parent;
         parentAfterDrag = transform.parent;
 
-        // Attempt to get the InventorySlot component
         inventorySlot = transform.parent.GetComponent<InventorySlot>();
         if (inventorySlot != null)
         {
             allowEquip = true;
             inventorySlot.DisplayCountText(false, 0);
             inventorySlot.isEmpty = true;
-            InventoryManager.Instance.scrollRect.vertical = false;// Avoid moving inventory with mouse
+            InventoryManager.Instance.scrollRect.vertical = false;
 
-            if (GetComponent<InventoryItem>().data.info.prop.countable == false)
+            if (!thisItem.data.info.prop.countable)
             {
-                equipableSlot = InventoryManager.Instance.equipmentSlots.Single(i => i.type == thisItem.data.info.baseStat.type); //If the item is stackable, Single() will throw exception
+                equipableSlot = InventoryManager.Instance.equipmentSlots
+                    .Single(i => i.type == thisItem.data.info.baseStat.type);
             }
-            Debug.Log(equipableSlot);
         }
 
-        // Attempt to get the EquipmentSlot component
         equipmentSlot = transform.parent.GetComponent<EquipmentSlot>();
         if (equipmentSlot != null)
         {
@@ -75,21 +106,16 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = false;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    private void HandleDragging(PointerEventData eventData)
     {
-        if (!allowDrag) return;
-        //Debug.Log("Dragging");
-
         Vector3 mousePositionScreen = Input.mousePosition;
-        mousePositionScreen.z = 0; // Set the z-component to 0
+        mousePositionScreen.z = 0;
         mousePositionScreen.x -= Screen.width / 2;
         mousePositionScreen.y -= Screen.height / 2;
 
         transform.localPosition = mousePositionScreen;
 
         GameObject target = eventData.pointerCurrentRaycast.gameObject;
-        //Debug.Log("Target:" + target);
-
 
         if (InventoryManager.Instance.ActiveSlot.GetComponentInChildren<InventorySlot>() != null)
         {
@@ -98,14 +124,14 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             {
                 InventoryManager.Instance.equipField.SetActive(true);
                 equipableSlot.ShowCanEquip();
-            } 
+            }
             else
             {
                 InventoryManager.Instance.equipField.SetActive(false);
                 equipableSlot.ShowCannotEquip();
             }
-        } 
-        else 
+        }
+        else
         {
             if (allowUnequip && target.CompareTag("InventoryField"))
             {
@@ -118,39 +144,32 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    private void HandleDrop(PointerEventData eventData)
     {
         if (!allowDrag)
         {
             allowDrag = true;
             return;
         }
-        Debug.Log("End drag");
 
         thisItem.SetPosition(parentAfterDrag);
-        Debug.Log("ParentAfterDrag: " + parentAfterDrag);
 
         InventoryManager.Instance.inventoryField.SetActive(false);
         InventoryManager.Instance.equipField.SetActive(false);
         InventoryManager.Instance.scrollRect.vertical = true;
 
-
         GameObject target = eventData.pointerEnter;
-        // Check that the target we drop the item is InventorySlot, EquipmentSlot or InventoryItem
-        Debug.Log(target);
-
 
         if (!thisItem.data.info.prop.countable)
         {
             if (target.CompareTag("InventoryField"))
             {
-                Debug.Log(allowUnequip);
                 InventoryManager.Instance.UnequipItem(thisItem);
             }
 
             if (target.CompareTag("EquipField"))
             {
-                if (!equipableSlot.isEquip) // EquipItem
+                if (!equipableSlot.isEquip)
                 {
                     InventoryManager.Instance.EquipItem(thisItem, equipableSlot);
                 }
@@ -159,10 +178,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
                     InventoryManager.Instance.ReplaceItem(thisItem, equippedItem);
                 }
-
             }
         }
-        // Attempt to get the InventoryItem component => For swaping 2 item's positions in inventory
 
         InventoryItem targetItem = target.GetComponent<InventoryItem>();
         if (targetItem != null)
@@ -188,5 +205,4 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         ResetParam();
         image.raycastTarget = true;
     }
-    
 }

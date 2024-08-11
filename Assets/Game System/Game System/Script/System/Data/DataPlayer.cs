@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityEditor.Searcher;
 [CreateAssetMenu(fileName = "new data", menuName = "DataPlayer")]
 public class DataPlayer : ScriptableObject
 {
@@ -16,13 +17,17 @@ public class DataPlayer : ScriptableObject
     public void ResetAllData()
     {
         level = 1;
-        gold = 1000;
-        diamond = 100;
+        gold = 10000;
+        diamond = 1000;
         combatPower = 0;
 
         for (int i = 0; i < additionalStats.Length; i++)
         {
             additionalStats[i].value = 0;
+        }
+        for (int i = 0; i < baseStats.Length; i++)
+        {
+            baseStats[i].value = 0;
         }
         File.Delete(Application.persistentDataPath + "/player.json");
     }

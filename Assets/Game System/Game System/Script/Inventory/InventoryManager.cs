@@ -9,7 +9,7 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     [Header("General")]
     public Camera mainCamera;
-    public ItemInfo itemInfo;
+    //public ItemInfo itemInfo;
 
     [Header("DataInventory")]
     public DataInventory inventoryData;
@@ -59,6 +59,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public Sprite[] statSprites;
 
+    public Button equipButton;
+    public Button unequipButton;
+    public EquipmentSlot equipableSlot;
 
     [Header("InventoryTab")]
     public ToggleGroup inventoryTabPool;
@@ -73,6 +76,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
 
         DataInventory.LoadData(inventoryData);
+        //Debug.Log(inventoryData);
 
         //Hide all the item stats in baseStat view
         itemStats = itemViewStatGroup.GetComponentsInChildren<UIStat>();
@@ -158,7 +162,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <summary>
     /// Display item information in the display field.
     /// </summary>
-    private void DisplayItemViewPanel()
+    public void DisplayItemViewPanel()
     {
         if (ActiveSlot.GetComponentInChildren<InventoryItem>() == null) //Item Information disappear
         {
@@ -242,6 +246,45 @@ public class InventoryManager : Singleton<InventoryManager>
             itemSpecialStat.text = currentItem.data.info.prop.specialStat;
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
+
+
+        equipButton.onClick.AddListener(() =>
+        {
+            if (!currentItem.data.info.prop.countable)
+            {
+                equipableSlot = equipmentSlots.Single(i => i.type == currentItem.data.info.baseStat.type);
+                if (equipableSlot != null && !equipableSlot.isEquip)
+                {
+                    EquipItem(currentItem, equipableSlot);
+
+                }/*
+                else
+                {
+                    InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
+                    ReplaceItem(currentItem, equippedItem);
+                }*/
+            }
+
+
+        });
+
+        unequipButton.onClick.AddListener(() =>
+        {
+            if (!currentItem.data.info.prop.countable)
+            {
+                equipableSlot = equipmentSlots.Single(i => i.type == currentItem.data.info.baseStat.type);
+
+                if (equipableSlot != null && equipableSlot.isEquip)
+                {
+                    UnequipItem(currentItem);
+                }
+                /*else
+                {
+                    InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
+                    ReplaceItem(currentItem, equippedItem);
+                }*/
+            }
+        });
     }
 
     void DisplayWeaponStat(InventoryItem currentItem)
@@ -249,31 +292,34 @@ public class InventoryManager : Singleton<InventoryManager>
         int statLen = currentItem.data.info.baseStat.stats.Length;
         for (int i = 0; i < statLen; i++)
         {
-            int k = CkeckWeaponStat(currentItem, i);
-            itemStats[k].gameObject.SetActive(true);
-            itemStats[k].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[k].type);
-            itemStats[k].statText.text = currentItem.data.info.baseStat.stats[k].value.ToString();
+            if (CkeckWeaponStat(currentItem, i))
+            {
+                itemStats[i].gameObject.SetActive(true);
+                itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
+                itemStats[i].statText.text = currentItem.data.info.baseStat.stats[i].value.ToString();
+            }
+
         }
     }
 
-    int CkeckWeaponStat(InventoryItem currentItem, int i)
+    bool CkeckWeaponStat(InventoryItem currentItem, int i)
     {
         switch (currentItem.data.info.baseStat.stats[i].type)
         {
             case StatType.Attack:
-                return i;
+                return true;
             case StatType.AttackRange:
-                return i;
+                return true;
             case StatType.AttackSpeed:
-                return i;
+                return true;
             case StatType.BulletSpread:
-                return i;
+                return true;
             case StatType.ExplosionRange:
-                return i;
+                return true;
             case StatType.ReloadTime:
-                return i;
+                return true;
             default:
-                return 0;
+                return false;
         }
     }
 
@@ -388,6 +434,7 @@ public class InventoryManager : Singleton<InventoryManager>
         inventoryData.AddEquipmentData(thisItem.data);
 
         playerStat.AddItemStat(thisItem);
+        DataInventory.SaveData(inventoryData);
     }
     /// <summary>
     /// Unequip the item
@@ -416,6 +463,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 break;
             }
         }
+        DataInventory.SaveData(inventoryData);
     }
 
     /// <summary>
@@ -458,6 +506,7 @@ public class InventoryManager : Singleton<InventoryManager>
             thisItem.SetPosition(inventorySlot.transform);
             ActiveSlot.GetComponent<InventorySlot>().isEmpty = false;
         }
+        DataInventory.SaveData(inventoryData);
     }
 
     public void AddAmountOfItem(ItemBase.ItemData data, int amount, int id)
@@ -528,6 +577,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
+        DataInventory.SaveData(inventoryData);
     }
     public void RemoveAmountOfItem(ItemInfo info, int amount)
     {
@@ -556,6 +606,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
+        DataInventory.SaveData(inventoryData);
     }
 
     /// <summary>
@@ -569,8 +620,9 @@ public class InventoryManager : Singleton<InventoryManager>
             inventoryData.RemoveInventoryData(activeSlot.GetComponentInChildren<InventoryItem>().data.ID);
             activeSlot.DestroyItem();
         }
-
+        DataInventory.SaveData(inventoryData);
     }
+
     public int GenerateID()
     {
         int randNum;
@@ -672,6 +724,11 @@ public class InventoryManager : Singleton<InventoryManager>
                 InventoryItem item = itemAdd.GetComponent<InventoryItem>();
                 item.data = data;
 
+                //Debug.Log("data " + data);
+                //Debug.Log("info " + data.info);
+                //Debug.Log("prop " + data.info.prop);
+                //Debug.Log("countable " + data.info.prop.countable);
+
 
                 if (data.info.prop.countable)
                 {
@@ -757,6 +814,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public void QuitGame()
     {
         Debug.Log("종료1");
+        DataInventory.SaveData(inventoryData);
         Application.Quit();
         Debug.Log("종료2");
     }

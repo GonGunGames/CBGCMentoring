@@ -174,6 +174,7 @@ public class PlayerData
     public int expToLevelUp;
     public string[] items;
     public int weaponId; // 플레이어가 장착한 무기의 ID 추가
+    public int gold;
 }
 
 [System.Serializable]

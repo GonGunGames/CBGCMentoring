@@ -24,5 +24,7 @@ public enum StatType
     NoReloadTimeProbability,            // 재장전 시간 없음 확률
     PenetratingPower,                   // 관통력
     PenetratingProbability,             // 관통 확률
-    ReloadTime                          // 재장전 시간
+    ReloadTime,                         // 재장전 시간
+    GunID,                              // 장착 무기 ID
+    Login                               // 최초 로그인 여부
 }

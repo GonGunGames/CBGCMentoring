@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Uncommon - Assault Rifle
   m_EditorClassIdentifier: 
   prop:
-    image: {fileID: -1210035599, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
+    image: {fileID: 21300000, guid: 0c4501275e7a3ac4f95e1b68dfad1f99, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
     countable: 0
     itemName: Assault Rifle
@@ -26,26 +26,28 @@ MonoBehaviour:
     requiredLevel: 1
     stats:
     - type: 1
-      value: 20
+      value: 60
+    - type: 5
+      value: 1
+    - type: 4
+      value: 1
     - type: 2
       value: 2
     - type: 3
       value: 20
-    - type: 4
-      value: 1.5
-    - type: 5
-      value: 1.5
     - type: 8
-      value: 1.5
-    - type: 9
-      value: 0.9
-    - type: 12
-      value: 1.5
-    - type: 13
       value: 20
+    - type: 9
+      value: 1
+    - type: 12
+      value: 1
+    - type: 13
+      value: 0
     - type: 15
-      value: 50
+      value: 6
     - type: 18
-      value: 40
+      value: 100
     - type: 21
-      value: 2
+      value: 0.1
+    - type: 22
+      value: 112

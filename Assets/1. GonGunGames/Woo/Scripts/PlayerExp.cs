@@ -1,23 +1,35 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerExp : MonoBehaviour
 {
     public int currentLevel;
     public double currentExp;
     public double expToLevelUp; // 레벨업에 필요한 경험치
-
+    public Slider expSlider; // 경험치 슬라이더 UI
+    private PlayerGold playergold; // PlayerGold 인스턴스
     private LevelManager levelManager;
     private bool isLevelingUp = false; // 레벨업 중인지 여부를 체크하는 변수
-
-    public Slider expSlider; // 경험치 슬라이더 UI
-
+    public GameObject particlePrefab; // 파티클 프리펩
+    public float particleDuration = 1.5f; // 파티클 지속 시간
+    public AudioSource audioSource;
     private void Start()
     {
+        particlePrefab.SetActive(false);
+        // 초기화
         currentLevel = DataBase.Instance.playerData.currentLevel;
         currentExp = DataBase.Instance.playerData.currentExp;
         expToLevelUp = DataBase.Instance.playerData.expToLevelUp;
         levelManager = FindObjectOfType<LevelManager>();
+
+        // PlayerGold 스크립트 찾기
+        playergold = FindObjectOfType<PlayerGold>();
+
+        if (playergold == null)
+        {
+            Debug.LogError("PlayerGold instance not found.");
+        }
 
         // 슬라이더 초기화
         expSlider.maxValue = (float)expToLevelUp;
@@ -47,7 +59,6 @@ public class PlayerExp : MonoBehaviour
     // 레벨업 체크 메서드
     private void CheckLevelUp()
     {
-        // 레벨업 가능할 때까지 계속 반복
         while (currentExp >= expToLevelUp)
         {
             LevelUp();
@@ -63,7 +74,7 @@ public class PlayerExp : MonoBehaviour
     {
         isLevelingUp = true; // 레벨업 시작
         Time.timeScale = 0f; // 게임 일시 정지
-
+        particlePrefab.SetActive(true);
         currentLevel++;
         currentExp -= expToLevelUp;
         expToLevelUp = CalculateNextLevelExp(); // 다음 레벨에 필요한 경험치 계산
@@ -80,6 +91,9 @@ public class PlayerExp : MonoBehaviour
     {
         isLevelingUp = false; // 레벨업 완료
         Time.timeScale = 1f; // 게임 재개
+        audioSource.Play();
+        // 파티클 활성화
+        StartCoroutine(ActivateParticleEffect());
 
         // 레벨업 후에도 경험치가 충분하면 다시 체크
         CheckLevelUp();
@@ -97,12 +111,33 @@ public class PlayerExp : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
-            ItemEx item = other.GetComponent<ItemEx>();
-            if (item != null)
+            ItemEx itemEx = other.GetComponent<ItemEx>();
+
+            if (itemEx != null)
             {
-                GainExp(item.expAmount); // 아이템에서 정의된 경험치 양을 플레이어의 경험치에 추가
-                Destroy(other.gameObject); // 충돌한 아이템 오브젝트 파괴
+                GainExp(itemEx.expAmount); // 아이템에서 정의된 경험치 양을 플레이어의 경험치에 추가
+                itemEx.ExpGet();//아이템 먹는 이펙트 효과 및 사운드 재생
             }
+        }
+    }
+
+    private IEnumerator ActivateParticleEffect()
+    {
+        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity, transform); // 플레이어의 자식으로 설정
+        ParticleSystem particleSystem = particleInstance.GetComponent<ParticleSystem>();
+
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+            Debug.Log("Particle started");
+            yield return new WaitForSeconds(particleDuration);
+            particleSystem.Stop();
+            Destroy(particleInstance.gameObject);
+            Debug.Log("Particle stopped");
+        }
+        else
+        {
+            Debug.LogError("No ParticleSystem component found on the particlePrefab.");
         }
     }
 }

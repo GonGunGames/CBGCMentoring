@@ -10,10 +10,10 @@ public class EnemyPoolManager : MonoBehaviour
         public int id;
         public GameObject prefab;
     }
+
     public Transform spawnCenter;  // 플레이어나 특정 오브젝트의 위치를 중심으로 설정
     public float minSpawnDistance = 20f;  // 스폰 최소 거리
     public float maxSpawnDistance = 30f;  // 스폰 최대 거리
-
     public List<EnemyPrefab> enemyPrefabs;  // 적 프리팹 리스트
     public int initialPoolSize = 10;  // 초기 풀 크기
     public float spawnInterval = 5f;  // 적 스폰 간격
@@ -27,9 +27,18 @@ public class EnemyPoolManager : MonoBehaviour
         foreach (var enemyPrefab in enemyPrefabs)
         {
             var pool = new ObjectPool<GameObject>(
-                createFunc: () => Instantiate(enemyPrefab.prefab),
-                actionOnGet: (obj) => obj.SetActive(true),
-                actionOnRelease: (obj) => obj.SetActive(false),
+                createFunc: () =>
+                {
+                    var obj = Instantiate(enemyPrefab.prefab);
+                    obj.SetActive(false);  // 초기 생성 시 비활성화
+                    return obj;
+                },
+                actionOnGet: (obj) => InitializeEnemy(obj),  // 풀에서 가져올 때 초기화
+                actionOnRelease: (obj) =>
+                {
+                    ReleaseEnemy(obj);  // 비활성화 시 상태 초기화
+                    obj.SetActive(false);
+                },
                 actionOnDestroy: (obj) => Destroy(obj),
                 collectionCheck: false,
                 defaultCapacity: initialPoolSize,
@@ -52,9 +61,10 @@ public class EnemyPoolManager : MonoBehaviour
         GameObject enemy = pool.Get();
         activeEnemies.Add(enemy);
 
-        // 적의 위치와 초기화 로직 설정 (예: 랜덤 위치)
+        // 적의 위치 설정
         enemy.transform.position = GetRandomSpawnPosition();
-        InitializeEnemy(enemy);
+        // 적 활성화
+        enemy.SetActive(true);
 
         return enemy;
     }
@@ -65,14 +75,29 @@ public class EnemyPoolManager : MonoBehaviour
         {
             activeEnemies.Remove(enemy);
 
-            int enemyId = enemy.GetComponent<EnemyHealth>().currentId;
-            if (pools.ContainsKey(enemyId))
+            int enemyId = -1;
+
+            // EnemyHealth 또는 ElliteHealth 컴포넌트 확인
+            var enemyHealth = enemy.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyId = enemyHealth.currentId;
+            }
+            else
+            {
+                var eliteHealth = enemy.GetComponent<ElliteHealth>();
+                if (eliteHealth != null)
+                {
+                    enemyId = eliteHealth.currentId;
+                }
+            }
+
+            if (enemyId != -1 && pools.ContainsKey(enemyId))
             {
                 pools[enemyId].Release(enemy);
             }
             else
-            {       // 프리팹 인스턴스화
-                
+            {
                 Destroy(enemy);
             }
         }
@@ -81,11 +106,40 @@ public class EnemyPoolManager : MonoBehaviour
     void InitializeEnemy(GameObject enemy)
     {
         // 적 초기화 로직 구현 (예: 체력 설정, AI 초기화 등)
-        // 적 스크립트를 가져와서 초기화하는 예제
-        EnemyHealth enemyScript = enemy.GetComponent<EnemyHealth>();
+        var enemyScript = enemy.GetComponent<EnemyHealth>();
         if (enemyScript != null)
         {
             enemyScript.Initialize();
+        }
+        else
+        {
+            var eliteScript = enemy.GetComponent<ElliteHealth>();
+            if (eliteScript != null)
+            {
+                eliteScript.Initialize();
+            }
+        }
+
+        // AI 초기화 로직 추가
+        var aiScript = enemy.GetComponent<CommonMobN>();
+        if (aiScript != null)
+        {
+            aiScript.Initialize();  // AI를 초기화 또는 재시작
+        }
+        else
+        {
+            var aiElliteScript = enemy.GetComponent<CommonMob>();
+            if (aiElliteScript != null)
+            {
+                aiElliteScript.Initialize();
+            }
+        }
+
+        // 적의 위치 설정 후 콜라이더 활성화
+        var characterController = enemy.GetComponent<CharacterController>();
+        if (characterController != null)
+        {
+            characterController.enabled = true;
         }
     }
 

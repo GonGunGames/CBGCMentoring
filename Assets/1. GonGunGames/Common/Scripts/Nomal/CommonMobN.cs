@@ -14,25 +14,29 @@ public class CommonMobN : BaseFSM
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
     private bool isCooldown = false;
-
+    private Ellite ellite;
     public GameObject player;
     private FSMState previousState; // Hit 전 상태를 저장할 변수
-
+    public CharacterController characterController; // 캐릭터 컨트롤러
     protected override void Awake()
     {
         base.Awake();
         health = GetComponent<EnemyHealth>(); // EnemyHealth 컴포넌트를 가져옵니다.
     }
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
+        health = GetComponent<EnemyHealth>();
+       
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player == null)
         {
             Debug.LogError("Player with tag 'Player' not found in the scene.");
         }
+
+        SetState(FSMState.Idle); // 초기 상태를 Idle로 설정
     }
 
     protected override IEnumerator Idle()
@@ -52,16 +56,6 @@ public class CommonMobN : BaseFSM
             {
                 SetState(FSMState.Chase);
             }
-
-
-            /*
-            // 체력이 0이면 Dead 상태로 전환
-            if (health.isDead)
-            {
-                SetState(FSMState.Dead);
-            }
-
-            */
 
             yield return null;
         }
@@ -194,11 +188,30 @@ public class CommonMobN : BaseFSM
         // 예: 애니메이션, 사운드 재생 등
         Debug.Log("Entering Dead State");
 
-        // Dead 애니메이션 재생
-        animator.SetTrigger("Dead"); // Dead 애니메이션 트리거
         yield return new WaitForSeconds(1f); // Dead 애니메이션 시간만큼 대기
+        ReleaseToPool();
+    }
 
-        // 애니메이션 재생 후 오브젝트 소멸
-        Destroy(gameObject);
+    private void ReleaseToPool()
+    {
+        EnemyPoolManager poolManager = FindObjectOfType<EnemyPoolManager>();
+        if (poolManager != null)
+        {
+            SetState(FSMState.Idle);
+            poolManager.ReleaseEnemy(gameObject);
+        }
+        else
+        {
+            Debug.LogError("EnemyPoolManager를 찾을 수 없습니다.");
+        }
+    }
+    public void SaveCurrentState(FSMState state)
+    {
+        previousState = state;
+    }
+    public void Initialize()
+    {
+        // 초기화 로직 추가
+        SetState(FSMState.Idle); // 초기 상태를 Idle로 설정
     }
 }

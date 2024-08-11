@@ -62,10 +62,6 @@ public class ShopManager : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-    }
-
-    public void Start()
-    {
         Diamond = playerStat.playerData.diamond;
         Gold = playerStat.playerData.gold;
         for (int i = 0; i < shopMenu.Length; i++)
@@ -73,8 +69,12 @@ public class ShopManager : MonoBehaviour
             DisplayMenu(i);
             Refresh(i);
         }
-        DisplayMenu(0);
+    }
+
+    public void Start()
+    {
         StartCoroutine(RefreshTime());
+        DisplayMenu(0);
     }
 
     IEnumerator RefreshTime()
