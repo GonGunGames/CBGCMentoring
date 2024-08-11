@@ -30,6 +30,8 @@ public class BossHealth : MonoBehaviour
 
     private ParticleSystem hitRifle;  // ParticleSystem 컴포넌트
     private ParticleSystem hitShotgun;
+
+    private PlayerGold playerGold;
     private void Awake()
     {
         commonMob = GetComponent<CommonMob>();
@@ -38,6 +40,7 @@ public class BossHealth : MonoBehaviour
         boss = GetComponent<Boss>(); // Ellite 컴포넌트 초기화
         hitRifle = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
         hitShotgun = hitEffect2.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
+        playerGold = FindObjectOfType<PlayerGold>();
     }
 
     private void OnEnable()
@@ -194,7 +197,11 @@ public class BossHealth : MonoBehaviour
         // 체력이 0 이하이고 적이 아직 사망하지 않았다면
         if (currentHealth <= 0 && !isDead)
         {
-
+            if (playerGold != null)
+            {
+                int goldAmount = Random.Range(100, 200); // 10에서 100 사이의 랜덤 골드 생성
+                playerGold?.AddGold(goldAmount); // 플레이어에게 골드 추rk
+            }
             if (characterController != null)
             {
                 characterController.enabled = false;

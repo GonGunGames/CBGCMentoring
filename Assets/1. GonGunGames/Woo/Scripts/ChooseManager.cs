@@ -21,6 +21,9 @@ public class ChooseManager : MonoBehaviour
     public Text chooseText;
     public RawImage rawImage;
     public GameObject Ui;
+    private EnemyHealth enemyHealth;
+    private ElliteHealth elliteHealth;
+    private BossHealth bossHealth;
     private Action onChooseOptionsClosed; // 콜백을 저장할 변수
     private PlayerHealth playerHealth;
     private void Start()
@@ -132,21 +135,63 @@ public class ChooseManager : MonoBehaviour
         if (enemy == null)
             yield break;
 
-        CommonMob enemyAI = enemy.GetComponent<CommonMob>(); // 적의 AI 스크립트를 가져옵니다.
-        CommonMob commonMob = enemy.GetComponent<CommonMob>(); // CommonMob 스크립트를 가져옵니다.
+        // 각 클래스의 movementSpeed를 가져옵니다.
+        CommonMob commonMob = enemy.GetComponent<CommonMob>();
+        CommonMobB commonMobB = enemy.GetComponent<CommonMobB>();
+        CommonMobN commonMobN = enemy.GetComponent<CommonMobN>();
+
+        // 원래 속도를 저장합니다.
+        float originalSpeed = 0f;
+        float originalSpeedB = 0f;
+        float originalSpeedN = 0f;
+
         if (commonMob != null)
         {
-            enemyAI.enabled = false; // 적의 AI를 비활성화합니다.
-            commonMob.SetState(FSMState.Idle); // 적을 Idle 상태로 설정합니다.
+            originalSpeed = commonMob.moveSpeed;
+            commonMob.moveSpeed = 0f; // 속도를 0으로 설정하여 멈춤
+            commonMob.SetState(FSMState.Hit); // Hit 상태로 전환
+            yield return new WaitForSeconds(0.1f); // Hit 애니메이션을 잠깐 보여줌
+            commonMob.SetState(FSMState.Idle); // 바로 Idle 상태로 전환
+        }
+        if (commonMobB != null)
+        {
+            originalSpeedB = commonMobB.moveSpeed;
+            commonMobB.moveSpeed = 0f; // 속도를 0으로 설정하여 멈춤
+            commonMobB.SetState(FSMState.Hit); // Hit 상태로 전환
+            yield return new WaitForSeconds(0.1f); // Hit 애니메이션을 잠깐 보여줌
+            commonMobB.SetState(FSMState.Idle); // 바로 Idle 상태로 전환
+        }
+        if (commonMobN != null)
+        {
+            originalSpeedN = commonMobN.moveSpeed;
+            commonMobN.moveSpeed = 0f; // 속도를 0으로 설정하여 멈춤
+            commonMobN.SetState(FSMState.Hit); // Hit 상태로 전환
+            yield return new WaitForSeconds(0.1f); // Hit 애니메이션을 잠깐 보여줌
+            commonMobN.SetState(FSMState.Idle); // 바로 Idle 상태로 전환
         }
 
-        yield return new WaitForSeconds(seconds);
+        // Hit 상태에서 Idle로 전환된 후, 전체 지속 시간 동안 대기
+        yield return new WaitForSeconds(seconds - 0.1f);
 
+        // 원래 속도로 복구
         if (commonMob != null)
         {
-            enemyAI.enabled = true; // 적의 AI를 다시 활성화합니다.
+            commonMob.moveSpeed = originalSpeed;
+            commonMob.SetState(FSMState.Move); // 바로 Idle 상태로 전
+        }
+        if (commonMobB != null)
+        {
+            commonMobB.moveSpeed = originalSpeedB;
+            commonMobB.SetState(FSMState.Move); // 바로 Idle 상태로 전
+        }
+        if (commonMobN != null)
+        {
+            commonMobN.moveSpeed = originalSpeedN;
+            commonMobN.SetState(FSMState.Move); // 바로 Idle 상태로 전
         }
     }
+
+
     private void SetButtonsActive(bool isActive)
     {
         heal.gameObject.SetActive(isActive);

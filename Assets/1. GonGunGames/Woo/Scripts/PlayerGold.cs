@@ -3,12 +3,13 @@ using UnityEngine.UI;
 
 public class PlayerGold : MonoBehaviour
 {
-    public int totalGold; // 플레이어의 총 골드
+    public int totalGold; // 게임 내에서 관리하는 총 골드
     public Text goldText; // 골드를 표시할 UI 텍스트
+    public DataPlayer dataPlayer; // DataPlayer 참조
 
-    private void Start()
+    private void Awake()
     {
-        // 초기화: 데이터베이스에서 총 골드를 가져오거나 기본값으로 설정
+        // 게임 시작 시 totalGold를 0으로 초기화
         totalGold = 0;
 
         // UI 텍스트 초기화
@@ -19,6 +20,14 @@ public class PlayerGold : MonoBehaviour
     public void AddGold(int amount)
     {
         totalGold += amount;
+
+        // DataPlayer의 gold 필드에 추가된 골드를 저장
+        if (dataPlayer != null)
+        {
+            dataPlayer.gold += amount; // 데이터에 골드를 추가
+            DataPlayer.SaveData(dataPlayer); // 업데이트된 데이터를 저장
+        }
+
         UpdateGoldText(); // 골드 UI 업데이트
     }
 
@@ -27,17 +36,11 @@ public class PlayerGold : MonoBehaviour
     {
         if (goldText != null)
         {
-            goldText.text = "Gold: " + totalGold.ToString();
+            goldText.text = "Gold: " + totalGold.ToString(); // 게임 내 골드 값 표시
         }
         else
         {
             Debug.LogError("goldText is not assigned in PlayerGold script.");
         }
-    }
-
-    // 현재 골드 값을 반환하는 메서드
-    public int GetTotalGold()
-    {
-        return totalGold;
     }
 }

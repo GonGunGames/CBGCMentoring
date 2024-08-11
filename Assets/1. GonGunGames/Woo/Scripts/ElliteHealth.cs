@@ -30,6 +30,7 @@ public class ElliteHealth : MonoBehaviour
     private ParticleSystem hitRIfle;  // ParticleSystem 컴포넌트
     private ParticleSystem hitShotgun;
 
+    private PlayerGold playerGold;
     private void Awake()
     {
         commonMob = GetComponent<CommonMob>();
@@ -38,6 +39,7 @@ public class ElliteHealth : MonoBehaviour
         ellite = GetComponent<Ellite>(); // Ellite 컴포넌트 초기화
         hitRIfle = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
         hitShotgun = hitEffect2.GetComponent<ParticleSystem>();
+        playerGold = FindObjectOfType<PlayerGold>();
     }
 
     private void OnEnable()
@@ -177,6 +179,11 @@ public class ElliteHealth : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             // 적 사망 시 추가 로직 처리 (예: 애니메이션, 아이템 드랍 등)
+            if (playerGold != null)
+            {
+                int goldAmount = Random.Range(50, 100); // 10에서 100 사이의 랜덤 골드 생성
+                playerGold?.AddGold(goldAmount); // 플레이어에게 골드 추가
+            }
             Instantiate(deathPrefab, transform.position, transform.rotation);
             deathCount++;
             if (characterController != null)

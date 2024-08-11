@@ -156,13 +156,8 @@ public class CommonMobN : BaseFSM
 
     protected override IEnumerator Hit()
     {
-        // Hit 상태로 전환 전에 현재 상태 저장
-        previousState = state;
-
         // Hit 상태 로직
         // 피격 애니메이션 재생 등
-        animator.SetTrigger("Hit"); // Hit 애니메이션 트리거
-
         yield return new WaitForSeconds(0.5f); // Hit 애니메이션 시간만큼 대기
 
         if (health.currentHealth <= 0)
@@ -171,14 +166,7 @@ public class CommonMobN : BaseFSM
         }
         else
         {
-            if (previousState == FSMState.Idle || previousState == FSMState.Move || previousState == FSMState.Chase || previousState == FSMState.Attack)
-            {
-                SetState(previousState); // 원래 상태로 복귀
-            }
-            else
-            {
-                SetState(FSMState.Idle); // 다른 경우에는 Idle 상태로 복귀
-            }
+            SetState(previousState); // 원래 상태로 복귀
         }
     }
 
