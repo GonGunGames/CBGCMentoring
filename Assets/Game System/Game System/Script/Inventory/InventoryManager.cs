@@ -59,6 +59,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public Sprite[] statSprites;
 
+    public Button equipButton;
+    public EquipmentSlot equipableSlot;
 
     [Header("InventoryTab")]
     public ToggleGroup inventoryTabPool;
@@ -73,7 +75,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
 
         DataInventory.LoadData(inventoryData);
-        Debug.Log(inventoryData);
+        //Debug.Log(inventoryData);
 
         //Hide all the item stats in baseStat view
         itemStats = itemViewStatGroup.GetComponentsInChildren<UIStat>();
@@ -159,7 +161,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <summary>
     /// Display item information in the display field.
     /// </summary>
-    private void DisplayItemViewPanel()
+    public void DisplayItemViewPanel()
     {
         if (ActiveSlot.GetComponentInChildren<InventoryItem>() == null) //Item Information disappear
         {
@@ -243,6 +245,24 @@ public class InventoryManager : Singleton<InventoryManager>
             itemSpecialStat.text = currentItem.data.info.prop.specialStat;
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
+
+
+        equipButton.onClick.AddListener(() =>
+        {
+            if (!currentItem.data.info.prop.countable)
+            {
+                equipableSlot = equipmentSlots.Single(i => i.type == currentItem.data.info.baseStat.type);
+            }
+
+            if (equipableSlot != null && equipableSlot.isEquip)
+            {
+                UnequipItem(currentItem);
+            }
+            else if (equipableSlot != null && !equipableSlot.isEquip)
+            {
+                EquipItem(currentItem, equipableSlot);
+            }
+        });
     }
 
     void DisplayWeaponStat(InventoryItem currentItem)
