@@ -6,7 +6,7 @@ public class PlayerGold : MonoBehaviour
     public int totalGold; // 게임 내에서 관리하는 총 골드
     public Text goldText; // 골드를 표시할 UI 텍스트
     public DataPlayer dataPlayer; // DataPlayer 참조
-
+    public PlayerStat playerStat;
     private void Awake()
     {
         // 게임 시작 시 totalGold를 0으로 초기화
@@ -25,9 +25,12 @@ public class PlayerGold : MonoBehaviour
         if (dataPlayer != null)
         {
             dataPlayer.gold += amount; // 데이터에 골드를 추가
-            DataPlayer.SaveData(dataPlayer); // 업데이트된 데이터를 저장
-        }
 
+        }
+        if (playerStat != null)
+        {
+            playerStat.playerData.gold += amount;
+        }
         UpdateGoldText(); // 골드 UI 업데이트
     }
 

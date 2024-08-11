@@ -186,11 +186,6 @@ public class ElliteHealth : MonoBehaviour
             }
             Instantiate(deathPrefab, transform.position, transform.rotation);
             deathCount++;
-            if (characterController != null)
-            {
-                characterController.enabled = false;
-            }
-            Debug.Log("Enemy");
 
             // DeathCount 인스턴스를 통해 deathCount를 증가시킴
             if (DeathCount.Instance != null)

@@ -26,6 +26,8 @@ public class ChooseManager : MonoBehaviour
     private BossHealth bossHealth;
     private Action onChooseOptionsClosed; // 콜백을 저장할 변수
     private PlayerHealth playerHealth;
+    private PlayerGold playerGold; // PlayerGold 참조 추가
+
     private void Start()
     {
         Ui.SetActive(false);
@@ -44,6 +46,13 @@ public class ChooseManager : MonoBehaviour
         {
             Debug.LogError("PlayerHealth를 찾을 수 없습니다.");
         }
+
+        // PlayerGold 컴포넌트를 찾습니다.
+        playerGold = FindObjectOfType<PlayerGold>();
+        if (playerGold == null)
+        {
+            Debug.LogError("PlayerGold를 찾을 수 없습니다.");
+        }
     }
 
     private void OnChooseButtonClicked(ChooseOption option)
@@ -60,8 +69,7 @@ public class ChooseManager : MonoBehaviour
                 ApplyBlankEffect();
                 break;
             case ChooseOption.Gold:
-
-                // Gold 관련 로직을 여기에 추가하세요.
+                GrantRandomGold();
                 break;
         }
 
@@ -75,6 +83,16 @@ public class ChooseManager : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.HealToMax(); // PlayerHealth의 체력을 최대 값으로 설정
+        }
+    }
+
+    private void GrantRandomGold()
+    {
+        if (playerGold != null)
+        {
+            // 500~1000 사이의 랜덤 골드 생성
+            int randomGoldAmount = UnityEngine.Random.Range(500, 1001);
+            playerGold.AddGold(randomGoldAmount); // PlayerGold에 랜덤 골드 추가
         }
     }
 
@@ -97,6 +115,7 @@ public class ChooseManager : MonoBehaviour
             onChooseOptionsClosed.Invoke(); // 콜백 호출
         }
     }
+
     private void ApplyMagneticEffect()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -121,6 +140,7 @@ public class ChooseManager : MonoBehaviour
             yield return null;
         }
     }
+
     private void ApplyBlankEffect()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -190,7 +210,6 @@ public class ChooseManager : MonoBehaviour
             commonMobN.SetState(FSMState.Move); // 바로 Idle 상태로 전
         }
     }
-
 
     private void SetButtonsActive(bool isActive)
     {

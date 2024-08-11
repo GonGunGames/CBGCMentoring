@@ -24,8 +24,7 @@ public class Shotgun : MonoBehaviour
     public float fireSoundVolume = 0.5f; // 기본 발사 소리 볼륨 (0.0 ~ 1.0)
     private AudioSource audioSource; // AudioSource 컴포넌트
     private Coroutine fireBurstCoroutine; // FireBurst 코루틴을 저장하기 위한 변수
-    private WeaponInfo currentWeapon;
-    private float additionalFireChance; // 추가 발사 확률
+    public float additionalFireChance; // 추가 발사 확률
 
     private void Awake()
     {
@@ -39,8 +38,7 @@ public class Shotgun : MonoBehaviour
 
         // WeaponInfo에서 값을 가져와서 클래스 필드에 할당
         bulletSpeed = GetPlayerInfo.instance.GetStat(StatType.BulletSpeed);
-        attackChance = GetPlayerInfo.instance.GetStat(StatType.GrenadeProbability);
-        attackSpeed = GetPlayerInfo.instance.GetStat(StatType.AttackSpeed);
+        additionalFireChance = GetPlayerInfo.instance.GetStat(StatType.AdditionalAttacksProbability);
         attackDamage = GetPlayerInfo.instance.GetStat(StatType.Attack);
         doubleDamage = attackDamage * 2; // 두 배의 공격력
         bulletsPerShot = GetPlayerInfo.instance.GetStat(StatType.MagazineSize);
@@ -91,9 +89,9 @@ public class Shotgun : MonoBehaviour
                 additionalFireChance += 0.2f; // 추가 발사 확률 증가
                 Debug.Log("추가 발사 확률이 증가했습니다. 현재 추가 발사 확률: " + additionalFireChance);
 
-                if (AttackSpeedCount == 5)
+                if (AttackSpeedCount % 5 == 0)
                 {
-                    additionalFireChance += 0.3f;
+                    additionalFireChance += 0.3f; // 추가 발사 확률 추가 증가
                 }
                 break;
 
@@ -102,7 +100,7 @@ public class Shotgun : MonoBehaviour
                 destroyDelay += 0.1f; // ShotgunBullet의 destroyDelay 증가
                 Debug.Log("총알의 생존 시간이 증가했습니다. 현재 생존 시간: " + destroyDelay);
 
-                if (AttackChanceCount == 5)
+                if (AttackChanceCount % 5 == 0)
                 {
                     destroyDelay += 0.5f;
                 }
@@ -128,12 +126,14 @@ public class Shotgun : MonoBehaviour
             yield break;
         }
 
-        Fire();
+        // 발사할 총알을 bulletsPerShot 개수만큼 발사
+
+            Fire();
+
 
         // 추가 발사 확률이 있는 경우 한 번 더 발사
         if (Random.value < additionalFireChance)
         {
-            yield return new WaitForSeconds(burstInterval);
             Fire();
         }
 
