@@ -13,6 +13,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [Header("DataInventory")]
     public DataInventory inventoryData;
+    public DataPlayer playerData;
 
     [Header("Inventory")]
     public Transform Tabs;
@@ -423,6 +424,8 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="equipableSlot"></param> the slot that can be equipped.
     public void EquipItem(InventoryItem thisItem, EquipmentSlot equipableSlot)
     {
+        Debug.Log("EquipItem");
+
         if (ActiveSlot.GetComponentInChildren<InventorySlot>() == null) return;
 
         thisItem.SetPosition(equipableSlot.transform);
@@ -433,8 +436,15 @@ public class InventoryManager : Singleton<InventoryManager>
         inventoryData.RemoveInventoryData(thisItem.data.ID);
         inventoryData.AddEquipmentData(thisItem.data);
 
+
         playerStat.AddItemStat(thisItem);
+
+        if (thisItem.data.info.baseStat.type == ItemType.Weapon)
+        {
+            playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+        }
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
     /// <summary>
     /// Unequip the item
@@ -442,6 +452,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="thisItem"></param> current item
     public void UnequipItem(InventoryItem thisItem)
     {
+        Debug.Log("UnequipItem");
         if (ActiveSlot.GetComponentInChildren<EquipmentSlot>() == null) return;
 
         //-----Step 1: Put item into nearest Slot that is Empty
@@ -463,7 +474,9 @@ public class InventoryManager : Singleton<InventoryManager>
                 break;
             }
         }
+        playerData.additionalStats[(int)StatType.GunID].value = 0;
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     /// <summary>
@@ -473,6 +486,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="targetItem"></param> Other Item
     public void ReplaceItem(InventoryItem thisItem, InventoryItem targetItem)
     {
+        Debug.Log("ReplaceItem");
         EquipmentSlot equipmentSlot = targetItem.GetComponentInParent<EquipmentSlot>();
         if (equipmentSlot != null) // Swap with equipped item
         {
@@ -496,6 +510,12 @@ public class InventoryManager : Singleton<InventoryManager>
 
             playerStat.RemoveItemStat(targetItem);
             playerStat.AddItemStat(thisItem);
+            if (thisItem.data.info.baseStat.type == ItemType.Weapon)
+            {
+                playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+            }
+            DataInventory.SaveData(inventoryData);
+            DataPlayer.SaveData(playerData);
             return;
         }
 
@@ -506,7 +526,11 @@ public class InventoryManager : Singleton<InventoryManager>
             thisItem.SetPosition(inventorySlot.transform);
             ActiveSlot.GetComponent<InventorySlot>().isEmpty = false;
         }
+
+        
+
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     public void AddAmountOfItem(ItemBase.ItemData data, int amount, int id)
@@ -578,6 +602,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
     public void RemoveAmountOfItem(ItemInfo info, int amount)
     {
@@ -607,6 +632,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     /// <summary>
@@ -621,6 +647,7 @@ public class InventoryManager : Singleton<InventoryManager>
             activeSlot.DestroyItem();
         }
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     public int GenerateID()
