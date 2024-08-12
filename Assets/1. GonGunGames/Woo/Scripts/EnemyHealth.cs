@@ -72,6 +72,13 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+
+    public void Update()
+    {
+        if (enabled != true) {
+            currentHealth *= 1.5f;
+        }
+    }
     public void Initialize()
     {
         isDead = false;
@@ -97,7 +104,6 @@ public class EnemyHealth : MonoBehaviour
         {
             Debug.LogError("ID " + currentId + "의 적을 찾을 수 없습니다.");
         }
-
         commonMob = GetComponent<CommonMob>();
     }
 

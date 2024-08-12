@@ -2025,7 +2025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6627577164662897102, guid: 48e3a9435dd704d4abf849b885f78dda, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6627577164662897102, guid: 48e3a9435dd704d4abf849b885f78dda, type: 3}
       propertyPath: m_TagString
@@ -2424,7 +2424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cc6dece28c53edb4f898a2eb05b16faa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cc6dece28c53edb4f898a2eb05b16faa, type: 3}
       propertyPath: m_TagString
@@ -2464,7 +2464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8315506111298127307, guid: 485966ed5b70ae44d853dca664bc5056, type: 3}
-  bulletPrefab2: {fileID: 8315506111298127307, guid: 5baa1c26a50321f4ab2c14dc11a70c29, type: 3}
+  bulletPrefab2: {fileID: 8315506111298127307, guid: 2425394a743e7a64885ee95d168fee02, type: 3}
   firePoint: {fileID: 684771408}
   bulletSpeed: 0
   attackSpeed: 0
@@ -2549,7 +2549,7 @@ MonoBehaviour:
   spawnSchedules:
   - tableId: 1
     triggerTime: 1
-    interval: 30
+    interval: 10
   - tableId: 2
     triggerTime: 10
     interval: 30
@@ -2578,8 +2578,11 @@ MonoBehaviour:
     triggerTime: 180
     interval: 60
   - tableId: 11
-    triggerTime: 600
-    interval: 300
+    triggerTime: 300
+    interval: 600
+  - tableId: 12
+    triggerTime: 60
+    interval: 7
   enemyPoolManager: {fileID: 1436611600}
 --- !u!4 &1017870923
 Transform:
@@ -2886,7 +2889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6627577164662897102, guid: 48e3a9435dd704d4abf849b885f78dda, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6627577164662897102, guid: 48e3a9435dd704d4abf849b885f78dda, type: 3}
       propertyPath: m_TagString
@@ -3853,58 +3856,58 @@ MonoBehaviour:
     enemyData:
     - id: 1
       name: Base_01
-      maxHealth: 120
-      damage: 20
+      maxHealth: 300
+      damage: 60
       defense: 10
     - id: 2
       name: Base_02
-      maxHealth: 140
-      damage: 30
+      maxHealth: 340
+      damage: 80
       defense: 20
     - id: 3
       name: Base_03
-      maxHealth: 160
-      damage: 40
+      maxHealth: 360
+      damage: 80
       defense: 30
     - id: 4
       name: Base_04
-      maxHealth: 180
-      damage: 60
+      maxHealth: 360
+      damage: 80
       defense: 40
     - id: 5
       name: Base_05
-      maxHealth: 200
+      maxHealth: 400
       damage: 80
       defense: 50
     - id: 6
       name: Elite_06
-      maxHealth: 400
-      damage: 60
+      maxHealth: 800
+      damage: 120
       defense: 100
     - id: 7
       name: Elite_07
-      maxHealth: 400
-      damage: 60
+      maxHealth: 800
+      damage: 120
       defense: 110
     - id: 8
       name: Elite_08
-      maxHealth: 400
-      damage: 60
+      maxHealth: 800
+      damage: 112
       defense: 120
     - id: 9
       name: Elite_09
-      maxHealth: 400
-      damage: 60
+      maxHealth: 800
+      damage: 140
       defense: 130
     - id: 10
       name: Elite_10
-      maxHealth: 400
-      damage: 60
+      maxHealth: 800
+      damage: 134
       defense: 140
     - id: 11
       name: Boss_1
-      maxHealth: 1000
-      damage: 60
+      maxHealth: 10000
+      damage: 240
       defense: 200
     - id: 12
       name: Boss_2
@@ -3968,6 +3971,8 @@ MonoBehaviour:
     monsterIds: 0900000006000000
   - tableId: 11
     monsterIds: 0b000000
+  - tableId: 12
+    monsterIds: 0100000002000000030000000400000005000000
   monsterPrefabs:
   - {fileID: 4616057464654614811, guid: a68ac786c7ed82e45914c88533bbba03, type: 3}
   - {fileID: 2600647481663648355, guid: c106689c162edc64e96a70383d1824c5, type: 3}
@@ -4375,7 +4380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cc6dece28c53edb4f898a2eb05b16faa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cc6dece28c53edb4f898a2eb05b16faa, type: 3}
       propertyPath: m_TagString
@@ -4488,7 +4493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8315506111298127307, guid: 485966ed5b70ae44d853dca664bc5056, type: 3}
-  bulletPrefab2: {fileID: 8315506111298127307, guid: 5baa1c26a50321f4ab2c14dc11a70c29, type: 3}
+  bulletPrefab2: {fileID: 8315506111298127307, guid: 2425394a743e7a64885ee95d168fee02, type: 3}
   firePoint: {fileID: 1003693076}
   bulletSpeed: 0
   attackSpeed: 0
@@ -5241,7 +5246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5053228397279281820, guid: d6693c857a7bd864ab8f1cd5f11772ba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5053228397279281820, guid: d6693c857a7bd864ab8f1cd5f11772ba, type: 3}
       propertyPath: m_TagString
@@ -5486,7 +5491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cc6dece28c53edb4f898a2eb05b16faa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cc6dece28c53edb4f898a2eb05b16faa, type: 3}
       propertyPath: m_TagString
@@ -5526,7 +5531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8315506111298127307, guid: 485966ed5b70ae44d853dca664bc5056, type: 3}
-  bulletPrefab2: {fileID: 8315506111298127307, guid: 5baa1c26a50321f4ab2c14dc11a70c29, type: 3}
+  bulletPrefab2: {fileID: 8315506111298127307, guid: 2425394a743e7a64885ee95d168fee02, type: 3}
   firePoint: {fileID: 271779757}
   bulletSpeed: 0
   attackSpeed: 0
@@ -6105,7 +6110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3960879644723491920, guid: 9c32f2e3b18a3a94fa0cb90a4ac1c2fd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4448447718370701034, guid: 9c32f2e3b18a3a94fa0cb90a4ac1c2fd, type: 3}
       propertyPath: m_LocalScale.x
@@ -17043,9 +17048,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3856767639454879485}
         m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
-        m_MethodName: PlayButtonSound
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18298,7 +18303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5053228397279281820, guid: d6693c857a7bd864ab8f1cd5f11772ba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5053228397279281820, guid: d6693c857a7bd864ab8f1cd5f11772ba, type: 3}
       propertyPath: m_TagString
@@ -22220,7 +22225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.028442, y: 650}
+  m_AnchoredPosition: {x: -0.028442, y: 545}
   m_SizeDelta: {x: 544.3, y: 98.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4648805091354697531
@@ -22630,6 +22635,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Lobby
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5602131684507561734}
+        m_TargetAssemblyTypeName: DeadSetActive, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!137 &4996897197965049842
@@ -25024,7 +25041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6627577164662897102, guid: 48e3a9435dd704d4abf849b885f78dda, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6627577164662897102, guid: 48e3a9435dd704d4abf849b885f78dda, type: 3}
       propertyPath: m_TagString
