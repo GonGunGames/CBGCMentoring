@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
 
     public List<Weapon> weapons;  // 인스펙터에서 설정할 수 있는 Weapon 리스트
     public List<Shotgun> shotguns; // 인스펙터에서 설정할 수 있는 Shotgun 리스트
-
+    public List<Sniper> snipers;
     private void Start()
     {
         Ui.SetActive(false);
@@ -41,7 +41,10 @@ public class LevelManager : MonoBehaviour
         {
             shotgun.UpgradeStat(option);
         }
-
+        foreach (var sniper in snipers)
+        {
+            sniper.UpgradeStat(option);
+        }
         SetButtonsActive(false); // 선택 후 버튼들을 다시 비활성화
         Ui.SetActive(false);
         OnUpgradeOptionsClosed(); // 콜백 호출

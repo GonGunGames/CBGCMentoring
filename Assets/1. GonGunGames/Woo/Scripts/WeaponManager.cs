@@ -8,8 +8,12 @@ public class WeaponManager : MonoBehaviour
     public GameObject shotgun_common;
     public GameObject shotgun_uncommon;
     public GameObject shotgun_rare;
+    public GameObject sniper_common;
+    public GameObject sniper_uncommon;
+    public GameObject sniper_rare;
     public float rifleID;
     public float shotgunID;
+    public float sniperID;
     void Awake()
     {
         rifle_common.SetActive(false);
@@ -18,8 +22,13 @@ public class WeaponManager : MonoBehaviour
         shotgun_common.SetActive(false);
         shotgun_uncommon.SetActive(false);
         shotgun_rare.SetActive(false);
+        sniper_common.SetActive (false);
+        sniper_uncommon.SetActive(false);
+        sniper_rare.SetActive(false);
+
         rifleID = GetPlayerInfo.instance.GetStat(StatType.RifleID);
         shotgunID = GetPlayerInfo.instance.GetStat(StatType.ShotgunID);
+        sniperID = GetPlayerInfo.instance.GetStat(StatType.SniperID);
         // 게임 시작 시 데이터 로드
         GetPlayerInfo.instance.LoadPlayerData();
     }
@@ -54,6 +63,18 @@ public class WeaponManager : MonoBehaviour
         if (shotgunID == 116)
         {
             shotgun_rare.SetActive(true);
+        }
+        if (sniperID == 117)
+        {
+            sniper_common.SetActive(true);
+        }
+        if (sniperID == 118)
+        {
+            sniper_uncommon.SetActive(true);
+        }
+        if (sniperID == 119)
+        {
+            sniper_rare.SetActive(true);
         }
     }
 }

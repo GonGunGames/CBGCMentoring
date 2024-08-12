@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     private CommonMobB commonMobB;
     private Weapon weapon;
     private Shotgun shotgun;
+    private Sniper sniper;
     [SerializeField] private GameObject deathPrefab;
     public GameObject damageTextPrefab;
     public GameObject criticalDamageTextPrefab;
@@ -23,11 +24,13 @@ public class EnemyHealth : MonoBehaviour
     public AudioSource hitSound2;
     public GameObject hitEffect;
     public GameObject hitEffect2;
+    public GameObject hitEffect3;
 
     private ParticleSystem hitRifle;
     private ParticleSystem hitShotgun;
+    private ParticleSystem hitSniper;
 
-    // PlayerGold 참조
+    // PlayerGold 참조0
     private PlayerGold playerGold;
 
     void Awake()
@@ -37,6 +40,7 @@ public class EnemyHealth : MonoBehaviour
         commonMobB = GetComponent<CommonMobB>();
         hitRifle = hitEffect.GetComponent<ParticleSystem>();
         hitShotgun = hitEffect2.GetComponent<ParticleSystem>();
+        hitSniper = hitEffect3.GetComponent<ParticleSystem>();
         playerGold = FindObjectOfType<PlayerGold>();
     }
 
@@ -52,6 +56,7 @@ public class EnemyHealth : MonoBehaviour
         }
         hitEffect.SetActive(false);
         hitEffect2.SetActive(false);
+        hitEffect3.SetActive(false);
         Initialize();
 
         GameObject player = GameObject.FindWithTag("Player");
@@ -59,6 +64,7 @@ public class EnemyHealth : MonoBehaviour
         {
             weapon = player.GetComponentInChildren<Weapon>();
             shotgun = player.GetComponentInChildren<Shotgun>();
+            sniper = player.GetComponentInChildren<Sniper>();
         }
         else
         {
@@ -140,6 +146,23 @@ public class EnemyHealth : MonoBehaviour
             float shotgunDamage = shotgun != null ? shotgun.attackDamage : 0f;
             bool isDoubleDamage = false;
             float finalDamage = ApplyDoubleDamage(shotgunDamage, out isDoubleDamage);
+
+            float damageAfterDefense = ApplyDamage(finalDamage);
+
+            ShowDamageText(damageAfterDefense, isDoubleDamage);
+        }
+        SniperBullet sniperBullet = other.GetComponent<SniperBullet>();
+        if (sniperBullet != null)
+        {
+            hitSound.Play();
+            if (hitShotgun != null)
+            {
+                hitShotgun.Play();
+            }
+            hitEffect3.SetActive(true);
+            float sniperDamage = sniper != null ? sniper.attackDamage : 0f;
+            bool isDoubleDamage = false;
+            float finalDamage = ApplyDoubleDamage(sniperDamage, out isDoubleDamage);
 
             float damageAfterDefense = ApplyDamage(finalDamage);
 

@@ -27,6 +27,7 @@ public enum StatType
     ReloadTime,                         // 재장전 시간
     RifleID,                            // 무기 ID
     ShotgunID,                          // 무기 ID
+    SniperID,
     ArmorID,                            // 상의 ID
     GlovesID,                           // 장갑 ID
     HelmetID,                           // 헬멧 ID

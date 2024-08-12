@@ -15,6 +15,7 @@ public class ElliteHealth : MonoBehaviour
     private CommonMobB commonMobB;  // CommonMobB 컴포넌트
     private Weapon weapon;  // 무기 정보
     private Shotgun shotgun;  // 샷건 정보
+    private Sniper sniper;
     public GameObject damageTextPrefab;  // 데미지 텍스트 프리팹
     public GameObject criticalDamageTextPrefab;  // 두 배 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
@@ -26,9 +27,11 @@ public class ElliteHealth : MonoBehaviour
     public AudioSource hitSound2;
     public GameObject hitEffect;
     public GameObject hitEffect2;
+    public GameObject hitEffect3;
 
     private ParticleSystem hitRIfle;  // ParticleSystem 컴포넌트
     private ParticleSystem hitShotgun;
+    private ParticleSystem hitSniper;
 
     private PlayerGold playerGold;
     private void Awake()
@@ -39,6 +42,7 @@ public class ElliteHealth : MonoBehaviour
         ellite = GetComponent<Ellite>(); // Ellite 컴포넌트 초기화
         hitRIfle = hitEffect.GetComponent<ParticleSystem>(); // ParticleSystem 컴포넌트 가져오기
         hitShotgun = hitEffect2.GetComponent<ParticleSystem>();
+        hitSniper = hitEffect3.GetComponent<ParticleSystem>();
         playerGold = FindObjectOfType<PlayerGold>();
     }
 
@@ -55,12 +59,14 @@ public class ElliteHealth : MonoBehaviour
         }
         hitEffect.SetActive(false);
         hitEffect2.SetActive(false);
+        hitEffect3.SetActive(false);
         // 무기 정보 초기화
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
             weapon = player.GetComponentInChildren<Weapon>();
             shotgun = player.GetComponentInChildren<Shotgun>();
+            sniper = player.GetComponentInChildren<Sniper>();
         }
         else
         {
@@ -153,6 +159,23 @@ public class ElliteHealth : MonoBehaviour
             // 방어력 적용 후 최종 데미지로 체력 차감
             float damageAfterDefense = ApplyDamage(finalDamage);
             ShowDamageText(damageAfterDefense, isDoubleDamage); // 방어력 적용 후 데미지를 텍스트로 표시
+        }
+        SniperBullet sniperBullet = other.GetComponent<SniperBullet>();
+        if (sniperBullet != null)
+        {
+            hitSound.Play();
+            if (hitShotgun != null)
+            {
+                hitShotgun.Play();
+            }
+            hitEffect3.SetActive(true);
+            float sniperDamage = sniper != null ? sniper.attackDamage : 0f;
+            bool isDoubleDamage = false;
+            float finalDamage = ApplyDoubleDamage(sniperDamage, out isDoubleDamage);
+
+            float damageAfterDefense = ApplyDamage(finalDamage);
+
+            ShowDamageText(damageAfterDefense, isDoubleDamage);
         }
     }
 
