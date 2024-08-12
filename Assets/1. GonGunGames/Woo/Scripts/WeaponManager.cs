@@ -2,17 +2,33 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public GameObject rifle;
-    public GameObject shotgun;
-    public float weaponID;
+    public GameObject rifle_common;
+    public GameObject rifle_uncommon;
+    public GameObject rifle_rare;
+    public GameObject shotgun_common;
+    public GameObject shotgun_uncommon;
+    public GameObject shotgun_rare;
+    public GameObject sniper_common;
+    public GameObject sniper_uncommon;
+    public GameObject sniper_rare;
+    public float rifleID;
+    public float shotgunID;
+    public float sniperID;
     void Awake()
     {
-        rifle = GameObject.FindWithTag("Rifle");
-        shotgun = GameObject.FindWithTag("Shotgun");
-        rifle.SetActive(false);
-        shotgun.SetActive(false);
-        weaponID = GetPlayerInfo.instance.GetStat(StatType.GunID);
-        Debug.Log(weaponID);
+        rifle_common.SetActive(false);
+        rifle_uncommon.SetActive(false);
+        rifle_rare.SetActive(false);
+        shotgun_common.SetActive(false);
+        shotgun_uncommon.SetActive(false);
+        shotgun_rare.SetActive(false);
+        sniper_common.SetActive (false);
+        sniper_uncommon.SetActive(false);
+        sniper_rare.SetActive(false);
+
+        rifleID = GetPlayerInfo.instance.GetStat(StatType.RifleID);
+        shotgunID = GetPlayerInfo.instance.GetStat(StatType.ShotgunID);
+        sniperID = GetPlayerInfo.instance.GetStat(StatType.SniperID);
         // 게임 시작 시 데이터 로드
         GetPlayerInfo.instance.LoadPlayerData();
     }
@@ -22,27 +38,43 @@ public class WeaponManager : MonoBehaviour
         // 데이터를 제대로 불러왔는지 확인
         if (GetPlayerInfo.instance.playerData == null)
         {
-            Debug.LogError("Player data is not loaded. Please check the data loading process.");
             return;
         }
-
-        
-        Debug.Log("Player's Weapon ID: " + weaponID);
-
-        // 무기 ID에 따라 무기 활성화
-        if (111 <= weaponID && weaponID <= 113)
+        if (rifleID == 111)
         {
-            rifle.SetActive(true);
-            Debug.Log("Rifle activated based on ID");
+            rifle_common.SetActive (true);
         }
-        else if (114 <= weaponID && weaponID <= 116)
+        if (rifleID == 112)
         {
-            shotgun.SetActive(true);
-            Debug.Log("Shotgun activated based on ID");
+            rifle_uncommon.SetActive(true);
         }
-        else
+        if (rifleID == 113)
         {
-            Debug.Log("No matching weapon found for ID: " + weaponID);
+          rifle_rare.SetActive(true);
+        }
+        if (shotgunID == 114)
+        {
+            shotgun_common.SetActive(true);
+        }
+        if (shotgunID == 115)
+        {
+            shotgun_uncommon.SetActive(true);
+        }
+        if (shotgunID == 116)
+        {
+            shotgun_rare.SetActive(true);
+        }
+        if (sniperID == 117)
+        {
+            sniper_common.SetActive(true);
+        }
+        if (sniperID == 118)
+        {
+            sniper_uncommon.SetActive(true);
+        }
+        if (sniperID == 119)
+        {
+            sniper_rare.SetActive(true);
         }
     }
 }

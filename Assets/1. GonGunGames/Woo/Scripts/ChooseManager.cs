@@ -21,8 +21,17 @@ public class ChooseManager : MonoBehaviour
     public Text chooseText;
     public RawImage rawImage;
     public GameObject Ui;
+    private EnemyHealth enemyHealth;
+    private ElliteHealth elliteHealth;
+    private BossHealth bossHealth;
     private Action onChooseOptionsClosed; // 콜백을 저장할 변수
     private PlayerHealth playerHealth;
+    private PlayerGold playerGold; // PlayerGold 참조 추가
+    public AudioSource healSound;
+    public AudioSource magneticSound;
+    public AudioSource blankSound;
+    public AudioSource goldSound;
+
     private void Start()
     {
         Ui.SetActive(false);
@@ -41,6 +50,13 @@ public class ChooseManager : MonoBehaviour
         {
             Debug.LogError("PlayerHealth를 찾을 수 없습니다.");
         }
+
+        // PlayerGold 컴포넌트를 찾습니다.
+        playerGold = FindObjectOfType<PlayerGold>();
+        if (playerGold == null)
+        {
+            Debug.LogError("PlayerGold를 찾을 수 없습니다.");
+        }
     }
 
     private void OnChooseButtonClicked(ChooseOption option)
@@ -57,8 +73,7 @@ public class ChooseManager : MonoBehaviour
                 ApplyBlankEffect();
                 break;
             case ChooseOption.Gold:
-
-                // Gold 관련 로직을 여기에 추가하세요.
+                GrantRandomGold();
                 break;
         }
 
@@ -72,6 +87,18 @@ public class ChooseManager : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.HealToMax(); // PlayerHealth의 체력을 최대 값으로 설정
+            healSound.Play();
+        }
+    }
+
+    private void GrantRandomGold()
+    {
+        if (playerGold != null)
+        {
+            // 500~1000 사이의 랜덤 골드 생성
+            int randomGoldAmount = UnityEngine.Random.Range(500, 1001);
+            playerGold.AddGold(randomGoldAmount); // PlayerGold에 랜덤 골드 추가
+            goldSound.Play();
         }
     }
 
@@ -94,6 +121,7 @@ public class ChooseManager : MonoBehaviour
             onChooseOptionsClosed.Invoke(); // 콜백 호출
         }
     }
+
     private void ApplyMagneticEffect()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -107,6 +135,7 @@ public class ChooseManager : MonoBehaviour
         foreach (GameObject item in items)
         {
             StartCoroutine(MoveItemToPlayer(item, player));
+            magneticSound.Play();
         }
     }
 
@@ -118,12 +147,14 @@ public class ChooseManager : MonoBehaviour
             yield return null;
         }
     }
+
     private void ApplyBlankEffect()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
             StartCoroutine(FreezeEnemyForSeconds(enemy, 3f)); // 3초 동안 적을 얼립니다.
+            blankSound.Play();
         }
     }
 
@@ -132,21 +163,62 @@ public class ChooseManager : MonoBehaviour
         if (enemy == null)
             yield break;
 
-        CommonMob enemyAI = enemy.GetComponent<CommonMob>(); // 적의 AI 스크립트를 가져옵니다.
-        CommonMob commonMob = enemy.GetComponent<CommonMob>(); // CommonMob 스크립트를 가져옵니다.
+        // 각 클래스의 movementSpeed를 가져옵니다.
+        CommonMob commonMob = enemy.GetComponent<CommonMob>();
+        CommonMobB commonMobB = enemy.GetComponent<CommonMobB>();
+        CommonMobN commonMobN = enemy.GetComponent<CommonMobN>();
+
+        // 원래 속도를 저장합니다.
+        float originalSpeed = 0f;
+        float originalSpeedB = 0f;
+        float originalSpeedN = 0f;
+
         if (commonMob != null)
         {
-            enemyAI.enabled = false; // 적의 AI를 비활성화합니다.
-            commonMob.SetState(FSMState.Idle); // 적을 Idle 상태로 설정합니다.
+            originalSpeed = commonMob.moveSpeed;
+            commonMob.moveSpeed = 0f; // 속도를 0으로 설정하여 멈춤
+            commonMob.SetState(FSMState.Hit); // Hit 상태로 전환
+            yield return new WaitForSeconds(0.1f); // Hit 애니메이션을 잠깐 보여줌
+            commonMob.SetState(FSMState.Idle); // 바로 Idle 상태로 전환
+        }
+        if (commonMobB != null)
+        {
+            originalSpeedB = commonMobB.moveSpeed;
+            commonMobB.moveSpeed = 0f; // 속도를 0으로 설정하여 멈춤
+            commonMobB.SetState(FSMState.Hit); // Hit 상태로 전환
+            yield return new WaitForSeconds(0.1f); // Hit 애니메이션을 잠깐 보여줌
+            commonMobB.SetState(FSMState.Idle); // 바로 Idle 상태로 전환
+        }
+        if (commonMobN != null)
+        {
+            originalSpeedN = commonMobN.moveSpeed;
+            commonMobN.moveSpeed = 0f; // 속도를 0으로 설정하여 멈춤
+            commonMobN.SetState(FSMState.Hit); // Hit 상태로 전환
+            yield return new WaitForSeconds(0.1f); // Hit 애니메이션을 잠깐 보여줌
+            commonMobN.SetState(FSMState.Idle); // 바로 Idle 상태로 전환
         }
 
-        yield return new WaitForSeconds(seconds);
+        // Hit 상태에서 Idle로 전환된 후, 전체 지속 시간 동안 대기
+        yield return new WaitForSeconds(seconds - 0.1f);
 
+        // 원래 속도로 복구
         if (commonMob != null)
         {
-            enemyAI.enabled = true; // 적의 AI를 다시 활성화합니다.
+            commonMob.moveSpeed = originalSpeed;
+            commonMob.SetState(FSMState.Move); // 바로 Idle 상태로 전
+        }
+        if (commonMobB != null)
+        {
+            commonMobB.moveSpeed = originalSpeedB;
+            commonMobB.SetState(FSMState.Move); // 바로 Idle 상태로 전
+        }
+        if (commonMobN != null)
+        {
+            commonMobN.moveSpeed = originalSpeedN;
+            commonMobN.SetState(FSMState.Move); // 바로 Idle 상태로 전
         }
     }
+
     private void SetButtonsActive(bool isActive)
     {
         heal.gameObject.SetActive(isActive);

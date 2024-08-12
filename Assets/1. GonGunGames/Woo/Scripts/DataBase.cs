@@ -204,6 +204,7 @@ public class EnemyInfo
     public string name;
     public float maxHealth;
     public float damage;
+    public float defense;
 }
 
 [System.Serializable]
