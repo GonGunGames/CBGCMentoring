@@ -2079,7 +2079,7 @@ MonoBehaviour:
     triggerTime: 30
     interval: 60
   - tableId: 7
-    triggerTime: 1
+    triggerTime: 180
     interval: 60
   - tableId: 8
     triggerTime: 60
@@ -3328,25 +3328,25 @@ MonoBehaviour:
     nextFireTime: 0
   spawnTables:
   - tableId: 1
-    monsterIds: 010000000200000003000000
+    monsterIds: 01000000020000000300000004000000030000000200000001000000
   - tableId: 2
-    monsterIds: 040000000500000001000000
+    monsterIds: 04000000050000000100000002000000040000000200000003000000
   - tableId: 3
-    monsterIds: 01000000020000000400000005000000
+    monsterIds: 01000000020000000300000004000000
   - tableId: 4
-    monsterIds: 010000000200000004000000
+    monsterIds: 010000000200000005000000060000000100000002000000
   - tableId: 5
-    monsterIds: 010000000200000004000000
+    monsterIds: 01000000020000000400000004000000050000000200000001000000
   - tableId: 6
-    monsterIds: 06000000
+    monsterIds: 0600000007000000
   - tableId: 7
-    monsterIds: 07000000
+    monsterIds: 0700000009000000
   - tableId: 8
-    monsterIds: 08000000
+    monsterIds: 080000000a000000
   - tableId: 9
-    monsterIds: 09000000
+    monsterIds: 0900000006000000
   - tableId: 10
-    monsterIds: 0100000006000000
+    monsterIds: 0900000006000000
   - tableId: 11
     monsterIds: 0b000000
   monsterPrefabs:
@@ -4243,7 +4243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6059416754046813462, guid: d6693c857a7bd864ab8f1cd5f11772ba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9161654333074609031, guid: d6693c857a7bd864ab8f1cd5f11772ba, type: 3}
       propertyPath: gunId
@@ -4400,7 +4400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1336949550903370, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16863,7 +16863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6059416754046813462, guid: d6693c857a7bd864ab8f1cd5f11772ba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9161654333074609031, guid: d6693c857a7bd864ab8f1cd5f11772ba, type: 3}
       propertyPath: gunId
