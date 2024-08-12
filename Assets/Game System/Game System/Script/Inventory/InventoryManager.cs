@@ -441,7 +441,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         if (thisItem.data.info.baseStat.type == ItemType.Weapon)
         {
-            playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+            playerData.additionalStats[(int)StatType.RifleID].value = thisItem.data.info.baseStat.IDIDID;
+            playerData.additionalStats[(int)StatType.ShotgunID].value = thisItem.data.info.baseStat.IDIDID;
+            playerData.additionalStats[(int)StatType.SniperID].value = thisItem.data.info.baseStat.IDIDID;
         }
         DataInventory.SaveData(inventoryData);
         DataPlayer.SaveData(playerData);
@@ -474,7 +476,9 @@ public class InventoryManager : Singleton<InventoryManager>
                 break;
             }
         }
-        playerData.additionalStats[(int)StatType.GunID].value = 0;
+        playerData.additionalStats[(int)StatType.RifleID].value = 0;
+        playerData.additionalStats[(int)StatType.ShotgunID].value = 0;
+        playerData.additionalStats[(int)StatType.SniperID].value = 0;
         DataInventory.SaveData(inventoryData);
         DataPlayer.SaveData(playerData);
     }
@@ -512,7 +516,9 @@ public class InventoryManager : Singleton<InventoryManager>
             playerStat.AddItemStat(thisItem);
             if (thisItem.data.info.baseStat.type == ItemType.Weapon)
             {
-                playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+                playerData.additionalStats[(int)StatType.RifleID].value = thisItem.data.info.baseStat.IDIDID;
+                playerData.additionalStats[(int)StatType.ShotgunID].value = thisItem.data.info.baseStat.IDIDID;
+                playerData.additionalStats[(int)StatType.ShotgunID].value = thisItem.data.info.baseStat.IDIDID;
             }
             DataInventory.SaveData(inventoryData);
             DataPlayer.SaveData(playerData);
