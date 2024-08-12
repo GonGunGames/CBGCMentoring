@@ -112,7 +112,7 @@ public class GetPlayerInfo : MonoBehaviour
     public float GetStat(StatType statType)
     {
         // 장비 + 플레이어 스탯 하나 가져오기
-        LoadPlayerData();                   
+        LoadPlayerData();
         playerStats[((int)statType)] = playerData.additionalStats[((int)statType)].value + playerData.baseStats[((int)statType)].value;
         return playerStats[((int)statType)];
 
