@@ -27,6 +27,10 @@ public class ChooseManager : MonoBehaviour
     private Action onChooseOptionsClosed; // 콜백을 저장할 변수
     private PlayerHealth playerHealth;
     private PlayerGold playerGold; // PlayerGold 참조 추가
+    public AudioSource healSound;
+    public AudioSource magneticSound;
+    public AudioSource blankSound;
+    public AudioSource goldSound;
 
     private void Start()
     {
@@ -83,6 +87,7 @@ public class ChooseManager : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.HealToMax(); // PlayerHealth의 체력을 최대 값으로 설정
+            healSound.Play();
         }
     }
 
@@ -93,6 +98,7 @@ public class ChooseManager : MonoBehaviour
             // 500~1000 사이의 랜덤 골드 생성
             int randomGoldAmount = UnityEngine.Random.Range(500, 1001);
             playerGold.AddGold(randomGoldAmount); // PlayerGold에 랜덤 골드 추가
+            goldSound.Play();
         }
     }
 
@@ -129,6 +135,7 @@ public class ChooseManager : MonoBehaviour
         foreach (GameObject item in items)
         {
             StartCoroutine(MoveItemToPlayer(item, player));
+            magneticSound.Play();
         }
     }
 
@@ -147,6 +154,7 @@ public class ChooseManager : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             StartCoroutine(FreezeEnemyForSeconds(enemy, 3f)); // 3초 동안 적을 얼립니다.
+            blankSound.Play();
         }
     }
 
