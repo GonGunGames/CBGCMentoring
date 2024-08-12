@@ -1,22 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
-    public PlayerExp playerExp;
     public GameObject Ui;
-    public Weapon weapon;
-    public Shotgun shotgun;
     public Button attackSpeedButton;
     public Button attackDamageButton;
     public Button attackRangeButton;
     public RawImage rawImage;
     public Text leveltext;
     public Text noticetext;
-
     private Action onUpgradeOptionsClosed; // 콜백을 저장할 변수
 
+    public List<Weapon> weapons;  // 인스펙터에서 설정할 수 있는 Weapon 리스트
+    public List<Shotgun> shotguns; // 인스펙터에서 설정할 수 있는 Shotgun 리스트
+    public List<Sniper> snipers;
     private void Start()
     {
         Ui.SetActive(false);
@@ -31,10 +31,22 @@ public class LevelManager : MonoBehaviour
 
     private void OnUpgradeButtonClicked(UpgradeOption option)
     {
-        weapon.UpgradeStat(option);
-        shotgun.UpgradeStat(option);
+        // 모든 Weapon 및 Shotgun 오브젝트에 업그레이드 적용
+        foreach (var weapon in weapons)
+        {
+            weapon.UpgradeStat(option);
+        }
+
+        foreach (var shotgun in shotguns)
+        {
+            shotgun.UpgradeStat(option);
+        }
+        foreach (var sniper in snipers)
+        {
+            sniper.UpgradeStat(option);
+        }
         SetButtonsActive(false); // 선택 후 버튼들을 다시 비활성화
-        Ui.SetActive(false );
+        Ui.SetActive(false);
         OnUpgradeOptionsClosed(); // 콜백 호출
     }
 
@@ -52,10 +64,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnUpgradeOptionsClosed()
     {
-        if (onUpgradeOptionsClosed != null)
-        {
-            onUpgradeOptionsClosed.Invoke(); // 콜백 호출
-        }
+        onUpgradeOptionsClosed?.Invoke(); // 콜백 호출
     }
 
     private void SetButtonsActive(bool isActive)

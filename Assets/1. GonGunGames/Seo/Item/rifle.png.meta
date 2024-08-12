@@ -1,0 +1,1142 @@
+fileFormatVersion: 2
+guid: 43090957b4f038941ae71caf828aab56
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rifle_2
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 1288
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dbe4fb38339cc943b7f1adc675fde9d
+      internalID: 356151004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_4
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 1284
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1630ed6b3ed9a4c47adec266a5e54b78
+      internalID: 1468294023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1320
+        width: 164
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a9b2bb8307bf834a8a418add1635d13
+      internalID: 898581724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_6
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 1289
+        width: 187
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab170f94e529bd54a81f4a2e8c869115
+      internalID: 1597386998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_7
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 1304
+        width: 192
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12e115856ae5c314c9f0c210b78ac84d
+      internalID: -1501577716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_8
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 1296
+        width: 208
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70b2b4a90ca7d40418ecb6d260edf193
+      internalID: -124745280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_9
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 1170
+        width: 12
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b9c9c981b257bb44912be91ec6de869
+      internalID: -1502928132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_15
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 1044
+        width: 198
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65e14fa7bad6784f988558fff331a93
+      internalID: -1370485777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_17
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 1072
+        width: 224
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f5ed26103a867d4e8fcd6c25ba2bf52
+      internalID: 87661518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_18
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 1048
+        width: 224
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 318b46ffedc741940a22a06d6f2e64dd
+      internalID: 666140487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_22
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 1064
+        width: 224
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc2ea8980e851c741a58114712192002
+      internalID: 1673273979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_24
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 1046
+        width: 162
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d141f055e9ddb468038ceb580f04ba
+      internalID: -806775384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_26
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 1054
+        width: 136
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cc14afa9e244a747a92ad35de2b0425
+      internalID: 496899599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_41
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 924
+        width: 12
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9be7bf5631f778a4da042b0d73790484
+      internalID: -416250880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_56
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 816
+        width: 240
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 714a0684aab6ea84492f3560885dc50a
+      internalID: -1417515955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_57
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 808
+        width: 240
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 103af7fe68d9686499df1f4a6240352f
+      internalID: -854130760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_59
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 782
+        width: 186
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cad6172a2296988449130f7e2e1fcfd4
+      internalID: 2089546120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_60
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 808
+        width: 208
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ce4d11b9f2f731478b4aaa652cc2c2c
+      internalID: -24359896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_62
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 802
+        width: 157
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62918447401a1be47b79e3dd8e389a52
+      internalID: -2131559111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_64
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 798
+        width: 192
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6458df47eccfe045af3e6f63e0e781d
+      internalID: -1257658021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_78
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 24
+        width: 12
+        height: 822
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1ea5220d7ce3414eb3fa983f54604de
+      internalID: -1892019112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_81
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 538
+        width: 224
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88769cfb632fa7943b5a1b16b31ac8e0
+      internalID: 774254794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_84
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 528
+        width: 243
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37bfd93fd975c2645a275a615e720aa9
+      internalID: -1361014562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_86
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 533
+        width: 256
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 363dc59c2b28c39439ce9e2a85736201
+      internalID: -555123614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_87
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 544
+        width: 192
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eac54571107cfbe4083e290f27cfd122
+      internalID: 993689629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_88
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 544
+        width: 192
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eab5128bf4cc9a9419e0c8f2451d26cc
+      internalID: -37093744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_89
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 536
+        width: 192
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c696a2797f669634699a034aa56de355
+      internalID: -718704481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_95
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 300
+        width: 162
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc607caf46c8c274ca392bc86032fe46
+      internalID: 225149473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_96
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 304
+        width: 186
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bebef726cb01124fbd3473ffa39aec3
+      internalID: -107227371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_97
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 306
+        width: 168
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cd83c45e99387241a7dd0513e97afdc
+      internalID: 918948099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_98
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 296
+        width: 192
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3f03d61f50dac942992223a5147a9f6
+      internalID: 2022946435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_99
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 288
+        width: 160
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f1d6b61bdadc464eb81d067bd5e8f25
+      internalID: -1402475640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_100
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 264
+        width: 192
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96d7f632cbe3c85478874b2dbede4c5c
+      internalID: 1467806657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_101
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 42
+        width: 130
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87e5373b2eed51e42ab0030dc9c153eb
+      internalID: 146566732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_102
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 25
+        width: 170
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d38b81c4bbc9d49488509d1fda9fd13a
+      internalID: -1698890457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_104
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 46
+        width: 206
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16d4c9a210e040a47b034672349fbfd6
+      internalID: -1448114292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_105
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 48
+        width: 176
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e28c2fd03e7dc9439d1c59dc2ff2da4
+      internalID: 175680704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_106
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 32
+        width: 160
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d82a976f80ee93b45b2678135998aee5
+      internalID: 1557943213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_107
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 24
+        width: 192
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32239faeef91557458eea9632ef8f6fa
+      internalID: 549089794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_108
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 17
+        width: 52
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c4fc3b7b4f10de409a8668d0b964d22
+      internalID: -1898767497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_109
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 1
+        width: 52
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f3f178777eea9841970056da47bac4a
+      internalID: 1263862878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_110
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 0
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5c915f551617a9499184e46486ef368
+      internalID: 1498693202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rifle_111
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 0
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7253f6d25492ab4dbf799f2f0411279
+      internalID: -1853358026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a45c34a79c946da4884238e80d83c7aa
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      rifle_0: 999064975
+      rifle_1: -185609842
+      rifle_10: -1473620376
+      rifle_100: 1467806657
+      rifle_101: 146566732
+      rifle_102: -1698890457
+      rifle_103: -1125847322
+      rifle_104: -1448114292
+      rifle_105: 175680704
+      rifle_106: 1557943213
+      rifle_107: 549089794
+      rifle_108: -1898767497
+      rifle_109: 1263862878
+      rifle_11: 1709047391
+      rifle_110: 1498693202
+      rifle_111: -1853358026
+      rifle_12: 194163619
+      rifle_13: 1010553094
+      rifle_14: 218167583
+      rifle_15: -1370485777
+      rifle_16: -1904619507
+      rifle_17: 87661518
+      rifle_18: 666140487
+      rifle_19: -562689976
+      rifle_2: 356151004
+      rifle_20: -60196439
+      rifle_21: -1334686894
+      rifle_22: 1673273979
+      rifle_23: -264734117
+      rifle_24: -806775384
+      rifle_25: -2047268741
+      rifle_26: 496899599
+      rifle_27: -1180358840
+      rifle_28: -1806556513
+      rifle_29: -768752905
+      rifle_3: -136709338
+      rifle_30: 1011158784
+      rifle_31: 306458330
+      rifle_32: 1973279062
+      rifle_33: 150883403
+      rifle_34: 2095099800
+      rifle_35: 2088724719
+      rifle_36: 1012478320
+      rifle_37: -1922195821
+      rifle_38: -201333142
+      rifle_39: 2019696871
+      rifle_4: 1468294023
+      rifle_40: 750134144
+      rifle_41: -416250880
+      rifle_42: -1555741006
+      rifle_43: -918709669
+      rifle_44: 587588600
+      rifle_45: -1778691101
+      rifle_46: 1147667788
+      rifle_47: -822463658
+      rifle_48: -1343313506
+      rifle_49: 1361032077
+      rifle_5: 898581724
+      rifle_50: 376200084
+      rifle_51: 1792374668
+      rifle_52: 747030399
+      rifle_53: -1305693064
+      rifle_54: -3984336
+      rifle_55: -366088653
+      rifle_56: -1417515955
+      rifle_57: -854130760
+      rifle_58: 1930020787
+      rifle_59: 2089546120
+      rifle_6: 1597386998
+      rifle_60: -24359896
+      rifle_61: 2096737830
+      rifle_62: -2131559111
+      rifle_63: 1043208841
+      rifle_64: -1257658021
+      rifle_65: -1972566875
+      rifle_66: -202581410
+      rifle_67: -421115434
+      rifle_68: 501100731
+      rifle_69: -344785306
+      rifle_7: -1501577716
+      rifle_70: -1766629143
+      rifle_71: -1221003464
+      rifle_72: -836284744
+      rifle_73: 482793594
+      rifle_74: 1594174603
+      rifle_75: 523271162
+      rifle_76: -1769515439
+      rifle_77: 1859291630
+      rifle_78: -1892019112
+      rifle_79: -2009917776
+      rifle_8: -124745280
+      rifle_80: 957033687
+      rifle_81: 774254794
+      rifle_82: 1500720346
+      rifle_83: 1726342333
+      rifle_84: -1361014562
+      rifle_85: 656173734
+      rifle_86: -555123614
+      rifle_87: 993689629
+      rifle_88: -37093744
+      rifle_89: -718704481
+      rifle_9: -1502928132
+      rifle_90: -871418863
+      rifle_91: 521143025
+      rifle_92: 1071151260
+      rifle_93: -247867610
+      rifle_94: -222579466
+      rifle_95: 225149473
+      rifle_96: -107227371
+      rifle_97: 918948099
+      rifle_98: 2022946435
+      rifle_99: -1402475640
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

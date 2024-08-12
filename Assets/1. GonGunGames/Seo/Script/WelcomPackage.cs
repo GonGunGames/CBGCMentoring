@@ -12,13 +12,14 @@ public class WelcomPackage : MonoBehaviour
 
     void Start()
     {
-        if (dataPlayer.baseStats[23].value == 0)
+        if (dataPlayer.baseStats[(int)StatType.Login].value == 0)
         {
             targetObject.SetActive(true);
             InventoryManager.Instance.AddAmountOfItem(item[0], 1, 100);
             InventoryManager.Instance.AddAmountOfItem(item[1], 1, 111);
             InventoryManager.Instance.AddAmountOfItem(item[2], 1, 114);
-            dataPlayer.baseStats[23].value++;
+            InventoryManager.Instance.AddAmountOfItem(item[3], 1, 117);
+            dataPlayer.baseStats[(int)StatType.Login].value++;
 
         }
         else

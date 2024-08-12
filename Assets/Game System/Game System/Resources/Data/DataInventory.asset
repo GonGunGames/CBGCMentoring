@@ -13,4 +13,46 @@ MonoBehaviour:
   m_Name: DataInventory
   m_EditorClassIdentifier: 
   inventoryData: []
-  equipmentData: []
+  equipmentData:
+  - ID: 107
+    info: {fileID: 11400000, guid: ba7567975af4b124e9a6dd6f4f5c8197, type: 2}
+    amount: 1
+    currentLevel: 1
+    currentStat:
+    - type: 11
+      value: 40
+    - type: 14
+      value: 400
+    - type: 26
+      value: 107
+  - ID: 112
+    info: {fileID: 11400000, guid: be6b3de2da61f7240b572042496ebcde, type: 2}
+    amount: 1
+    currentLevel: 1
+    currentStat:
+    - type: 1
+      value: 60
+    - type: 5
+      value: 1
+    - type: 4
+      value: 1
+    - type: 2
+      value: 2
+    - type: 3
+      value: 20
+    - type: 8
+      value: 20
+    - type: 9
+      value: 1
+    - type: 12
+      value: 1
+    - type: 13
+      value: 0
+    - type: 15
+      value: 6
+    - type: 18
+      value: 100
+    - type: 21
+      value: 0.1
+    - type: 22
+      value: 112
