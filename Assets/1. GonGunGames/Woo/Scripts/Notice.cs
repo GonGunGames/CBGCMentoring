@@ -16,10 +16,10 @@ public class Notice : MonoBehaviour
         {
             noticeText.gameObject.SetActive(false);  // 시작할 때 텍스트 비활성화
             StartCoroutine(DisplayWarning("적들이 몰려옵니다!", 3 * 60));  // 3분 후 "a" 표시
-            StartCoroutine(DisplayNotice("a", 6 * 60));  // 6분 후 "a" 표시
-            StartCoroutine(DisplayWarning("b", 5 * 60));  // 5분 후 "b" 표시
-            StartCoroutine(DisplayNotice("b", 9 * 60));  // 9분 후 "b" 표시
-            StartCoroutine(DisplayNotice("c", 10 * 60));  // 10분 후 "c" 표시
+            StartCoroutine(DisplayNotice("적들이 몰려옵니다!", 6 * 60));  // 6분 후 "a" 표시
+            StartCoroutine(DisplayWarning("어디선가 울음소리가 들려옵니다!", 5 * 60));  // 5분 후 "b" 표시
+            StartCoroutine(DisplayNotice("어디선가 울음소리가 들려옵니다!", 9 * 60));  // 9분 후 "b" 표시
+            StartCoroutine(DisplayNotice("울음소리가 가까워졌습니다!", 10 * 60));  // 10분 후 "c" 표시
         }
         else
         {
