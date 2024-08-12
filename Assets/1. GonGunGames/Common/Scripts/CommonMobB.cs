@@ -11,6 +11,7 @@ public class CommonMobB : BaseFSM
     public float fastMoveSpeed = 2f;
     public float aggroTime = 3f;
     public BossHealth health;
+    public bool IsFrozen { get; set; } = false; // IsFrozen 플래그 추가
     private int attackCount = 0;
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;

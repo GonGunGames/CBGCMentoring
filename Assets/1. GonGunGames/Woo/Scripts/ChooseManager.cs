@@ -163,10 +163,41 @@ public class ChooseManager : MonoBehaviour
         if (enemy == null)
             yield break;
 
+        // 중복 실행 방지를 위한 플래그 변수
+        bool isFrozen = false;
+
         // 각 클래스의 movementSpeed를 가져옵니다.
         CommonMob commonMob = enemy.GetComponent<CommonMob>();
         CommonMobB commonMobB = enemy.GetComponent<CommonMobB>();
         CommonMobN commonMobN = enemy.GetComponent<CommonMobN>();
+
+        // 이미 코루틴이 실행 중인 적인지 확인
+        if (commonMob != null && commonMob.IsFrozen)
+        {
+            yield break;
+        }
+        if (commonMobB != null && commonMobB.IsFrozen)
+        {
+            yield break;
+        }
+        if (commonMobN != null && commonMobN.IsFrozen)
+        {
+            yield break;
+        }
+
+        // 적을 얼린다는 표시를 설정
+        if (commonMob != null)
+        {
+            commonMob.IsFrozen = true;
+        }
+        if (commonMobB != null)
+        {
+            commonMobB.IsFrozen = true;
+        }
+        if (commonMobN != null)
+        {
+            commonMobN.IsFrozen = true;
+        }
 
         // 원래 속도를 저장합니다.
         float originalSpeed = 0f;
@@ -205,19 +236,23 @@ public class ChooseManager : MonoBehaviour
         if (commonMob != null)
         {
             commonMob.moveSpeed = originalSpeed;
-            commonMob.SetState(FSMState.Move); // 바로 Idle 상태로 전
+            commonMob.SetState(FSMState.Move); // 다시 Move 상태로 전환
+            commonMob.IsFrozen = false; // 얼림 상태 해제
         }
         if (commonMobB != null)
         {
             commonMobB.moveSpeed = originalSpeedB;
-            commonMobB.SetState(FSMState.Move); // 바로 Idle 상태로 전
+            commonMobB.SetState(FSMState.Move); // 다시 Move 상태로 전환
+            commonMobB.IsFrozen = false; // 얼림 상태 해제
         }
         if (commonMobN != null)
         {
             commonMobN.moveSpeed = originalSpeedN;
-            commonMobN.SetState(FSMState.Move); // 바로 Idle 상태로 전
+            commonMobN.SetState(FSMState.Move); // 다시 Move 상태로 전환
+            commonMobN.IsFrozen = false; // 얼림 상태 해제
         }
     }
+
 
     private void SetButtonsActive(bool isActive)
     {
