@@ -13,6 +13,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [Header("DataInventory")]
     public DataInventory inventoryData;
+    public DataPlayer playerData;
 
     [Header("Inventory")]
     public Transform Tabs;
@@ -433,8 +434,14 @@ public class InventoryManager : Singleton<InventoryManager>
         inventoryData.RemoveInventoryData(thisItem.data.ID);
         inventoryData.AddEquipmentData(thisItem.data);
 
+        if(thisItem.data.info.baseStat.type == ItemType.Weapon)
+        {
+            playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+        }
+
         playerStat.AddItemStat(thisItem);
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
     /// <summary>
     /// Unequip the item
@@ -464,6 +471,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     /// <summary>
@@ -506,7 +514,14 @@ public class InventoryManager : Singleton<InventoryManager>
             thisItem.SetPosition(inventorySlot.transform);
             ActiveSlot.GetComponent<InventorySlot>().isEmpty = false;
         }
+
+        if (thisItem.data.info.baseStat.type == ItemType.Weapon)
+        {
+            playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+        }
+
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     public void AddAmountOfItem(ItemBase.ItemData data, int amount, int id)
@@ -578,6 +593,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
     public void RemoveAmountOfItem(ItemInfo info, int amount)
     {
@@ -607,6 +623,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     /// <summary>
@@ -621,6 +638,7 @@ public class InventoryManager : Singleton<InventoryManager>
             activeSlot.DestroyItem();
         }
         DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     public int GenerateID()
