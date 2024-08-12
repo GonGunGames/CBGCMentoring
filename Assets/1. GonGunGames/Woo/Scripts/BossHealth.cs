@@ -208,7 +208,7 @@ public class BossHealth : MonoBehaviour
 
         // 최종 데미지를 현재 체력에서 차감
         currentHealth -= damageAfterDefense;
-
+        B_hpBar.value = currentHealth;
         // 디버그 로그 추가
         Debug.Log($"데미지 적용: {damage} -> 방어력 적용 후: {damageAfterDefense} -> 남은 체력: {currentHealth}");
 
