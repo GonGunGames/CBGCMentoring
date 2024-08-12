@@ -212,7 +212,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             //int statLen = currentItem.data.currentStat.Length;
             int statLen = currentItem.data.info.baseStat.stats.Length;
-            if (statLen <= 2)
+            if (statLen <= 3)
             {
                 for (int i = 0; i < statLen; i++)
                 {
