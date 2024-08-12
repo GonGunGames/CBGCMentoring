@@ -10,6 +10,7 @@ public class CommonMobN : BaseFSM
     public float attackRange = 1.5f;
     public float aggroTime = 3f;
     public EnemyHealth health;
+    public bool IsFrozen { get; set; } = false; // IsFrozen 플래그 추가
     private int attackCount = 0;
     private int maxAttacks = 3;
     private float attackCooldown = 0.7f;
