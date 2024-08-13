@@ -25,6 +25,11 @@ public class DeadSetActive : MonoBehaviour
     private bool isBossDead = false;
     private bool isElliteDead = false;
 
+
+    private void Awake()
+    {
+        ResumeGame();
+    }
     private void Start()
     {
         // UI 요소를 초기화합니다.
@@ -143,9 +148,20 @@ public class DeadSetActive : MonoBehaviour
                 int totalGold = playerGold.totalGold;
                 totalGoldText.text = "" + totalGold.ToString();
             }
+            PauseGame();
         }
     }
-
+    // 게임을 정지시키는 메서드
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        Debug.Log("게임이 정지되었습니다.");
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("게임이 정지되었습니다.");
+    }
     string FormatTime(float timeToFormat)
     {
         // 시간을 분과 초로 변환하여 포맷합니다.

@@ -20,7 +20,7 @@ public class ElliteHealth : MonoBehaviour
     public GameObject criticalDamageTextPrefab;  // 두 배 데미지 텍스트 프리팹
     public Transform damageTextSpawnPoint;  // 데미지 텍스트가 생성될 위치
     [SerializeField] private GameObject deathPrefab; // Dead 상태에서 스폰할 프리팹
-    private int deathCount;
+    public int deathCount;
     private Ellite ellite;
     public CharacterController characterController; // 캐릭터 컨트롤러
     public AudioSource hitSound;
@@ -271,7 +271,7 @@ public class ElliteHealth : MonoBehaviour
         }
     }
 
-    private IEnumerator HandleDeath()
+    public IEnumerator HandleDeath()
     {
         yield return new WaitForSeconds(1f);
         ellite.DeadEllite();

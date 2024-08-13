@@ -153,7 +153,7 @@ public class ChooseManager : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
-            StartCoroutine(FreezeEnemyForSeconds(enemy, 3f)); // 3초 동안 적을 얼립니다.
+            StartCoroutine(FreezeEnemyForSeconds(enemy, 1.5f)); // 3초 동안 적을 얼립니다.
             blankSound.Play();
         }
     }

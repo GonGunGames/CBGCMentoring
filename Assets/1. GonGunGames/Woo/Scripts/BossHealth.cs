@@ -122,7 +122,7 @@ public class BossHealth : MonoBehaviour
         }
     }
 
-     private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         // 적이 총알과 충돌했을 때 처리
         if (collision.collider.CompareTag("Bullet"))
@@ -208,7 +208,7 @@ public class BossHealth : MonoBehaviour
 
         // 최종 데미지를 현재 체력에서 차감
         currentHealth -= damageAfterDefense;
-
+        B_hpBar.value = currentHealth;
         // 디버그 로그 추가
         Debug.Log($"데미지 적용: {damage} -> 방어력 적용 후: {damageAfterDefense} -> 남은 체력: {currentHealth}");
 
@@ -223,7 +223,7 @@ public class BossHealth : MonoBehaviour
             if (playerGold != null)
             {
                 int goldAmount = Random.Range(100, 200); // 10에서 100 사이의 랜덤 골드 생성
-                playerGold?.AddGold(goldAmount); // 플레이어에게 골드 추rk
+                playerGold?.AddGold(goldAmount); // 플레이어에게 골드 추가
             }
             if (characterController != null)
             {
@@ -239,10 +239,40 @@ public class BossHealth : MonoBehaviour
 
             // 적이 사망 상태임을 표시
             isDead = true;
+
+            // Enemy 태그를 가진 모든 오브젝트의 상태를 Dead로 전환
+            GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in allEnemies)
+            {
+                // CommonMob, CommonMobN, CommonMobB 상태를 Dead로 변경
+                CommonMob mob = enemy.GetComponent<CommonMob>();
+                if (mob != null)
+                {
+                    mob.SetState(FSMState.Dead);
+                }
+
+                CommonMobN mobN = enemy.GetComponent<CommonMobN>();
+                if (mobN != null)
+                {
+                    mobN.SetState(FSMState.Dead);
+                }
+
+                CommonMobB mobB = enemy.GetComponent<CommonMobB>();
+                if (mobB != null)
+                {
+                    mobB.SetState(FSMState.Dead);
+                }
+            }
+
+            // 1초 뒤 게임 정지 호출
+            Invoke("PauseGame", 1f);
         }
 
         return damageAfterDefense; // 최종 데미지를 반환
     }
+
+
+
     private float ApplyDoubleDamage(float damage, out bool isDoubleDamage)
     {
         isDoubleDamage = false;
