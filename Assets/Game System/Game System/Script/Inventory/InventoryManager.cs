@@ -60,8 +60,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public Sprite[] statSprites;
 
-    public Button equipButton;
-    public Button unequipButton;
+    public EquipInfoCheck equipInfoCheck;
     public EquipmentSlot equipableSlot;
 
     [Header("InventoryTab")]
@@ -248,44 +247,7 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
 
-
-        equipButton.onClick.AddListener(() =>
-        {
-            if (!currentItem.data.info.prop.countable)
-            {
-                equipableSlot = equipmentSlots.Single(i => i.type == currentItem.data.info.baseStat.type);
-                if (equipableSlot != null && !equipableSlot.isEquip)
-                {
-                    EquipItem(currentItem, equipableSlot);
-
-                }/*
-                else
-                {
-                    InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
-                    ReplaceItem(currentItem, equippedItem);
-                }*/
-            }
-
-
-        });
-
-        unequipButton.onClick.AddListener(() =>
-        {
-            if (!currentItem.data.info.prop.countable)
-            {
-                equipableSlot = equipmentSlots.Single(i => i.type == currentItem.data.info.baseStat.type);
-
-                if (equipableSlot != null && equipableSlot.isEquip)
-                {
-                    UnequipItem(currentItem);
-                }
-                /*else
-                {
-                    InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
-                    ReplaceItem(currentItem, equippedItem);
-                }*/
-            }
-        });
+        equipInfoCheck.equipmentInfo = currentItem;
     }
 
     void DisplayWeaponStat(InventoryItem currentItem)
@@ -527,7 +489,7 @@ public class InventoryManager : Singleton<InventoryManager>
             ActiveSlot.GetComponent<InventorySlot>().isEmpty = false;
         }
 
-        
+
 
         DataInventory.SaveData(inventoryData);
         DataPlayer.SaveData(playerData);

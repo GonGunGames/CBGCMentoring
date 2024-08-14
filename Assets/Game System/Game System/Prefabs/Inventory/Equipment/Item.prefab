@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 8101133388274673275}
   - component: {fileID: 4817002357994787076}
   - component: {fileID: -6729163008743011340}
+  - component: {fileID: 3286010278626949359}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -508,6 +509,24 @@ MonoBehaviour:
   inventorySlot: {fileID: 0}
   equipmentSlot: {fileID: 0}
   equipableSlot: {fileID: 0}
+--- !u!114 &3286010278626949359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8101133388274673269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ac4ae30ab531343af7a6b8b04b37a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialParent: {fileID: 0}
+  parentAfterDrag: {fileID: 0}
+  inventorySlot: {fileID: 0}
+  equipmentSlot: {fileID: 0}
+  equipableSlot: {fileID: 0}
+  equipField: {fileID: 0}
 --- !u!1 &8101133388310093446
 GameObject:
   m_ObjectHideFlags: 0

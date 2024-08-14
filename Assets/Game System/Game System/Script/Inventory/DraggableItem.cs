@@ -44,7 +44,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         HandleDrop(eventData);
     }
 
-    public void OnEquipButtonClick()
+
+    public void EquipButtonClick()
     {
         thisItem = GetComponent<InventoryItem>();
         if (thisItem.gameObject.GetComponentInParent<Toggle>().isOn != true)
@@ -159,6 +160,9 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         InventoryManager.Instance.scrollRect.vertical = true;
 
         GameObject target = eventData.pointerEnter;
+
+        Debug.Log(target.name);
+        Debug.Log(target);
 
         if (!thisItem.data.info.prop.countable)
         {
