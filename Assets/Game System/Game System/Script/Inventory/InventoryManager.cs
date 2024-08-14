@@ -247,7 +247,7 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
         
-        equipInfoCheck.SlotCheck();
+        equipInfoCheck.SlotCheck(currentItem.data.info.baseStat.type);
         equipInfoCheck.equipmentInfo = currentItem;
     }
 
@@ -387,7 +387,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="equipableSlot"></param> the slot that can be equipped.
     public void EquipItem(InventoryItem thisItem, EquipmentSlot equipableSlot)
     {
-        Debug.Log("EquipItem");
+        //Debug.Log("EquipItem");
 
         if (ActiveSlot.GetComponentInChildren<InventorySlot>() == null) return;
 
@@ -415,7 +415,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="thisItem"></param> current item
     public void UnequipItem(InventoryItem thisItem)
     {
-        Debug.Log("UnequipItem");
+        //Debug.Log("UnequipItem");
         if (ActiveSlot.GetComponentInChildren<EquipmentSlot>() == null) return;
 
         //-----Step 1: Put item into nearest Slot that is Empty
@@ -449,11 +449,11 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="targetItem"></param> Other Item
     public void ReplaceItem(InventoryItem thisItem, InventoryItem targetItem)
     {
-        Debug.Log("ReplaceItem");
+        //Debug.Log("ReplaceItem");
         EquipmentSlot equipmentSlot = targetItem.GetComponentInParent<EquipmentSlot>();
         if (equipmentSlot != null) // Swap with equipped item
         {
-            Debug.Log(equipmentSlot);
+            //Debug.Log(equipmentSlot);
             thisItem.SetPosition(equipmentSlot.transform);
             equipmentSlot.ShowCannotEquip();
             equipmentSlot.isEquip = true;

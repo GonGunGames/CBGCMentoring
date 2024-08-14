@@ -23,42 +23,99 @@ public class EquipInfoCheck : MonoBehaviour
         parentSetActive = transform.parent.parent;
     }
 
-    public void SlotCheck()
+    public void SlotCheck(ItemType itemType)
     {
-        if (weaponSlot.transform.GetChild(5) != null)
+        if (itemType == ItemType.Weapon)
         {
-            equipButton.gameObject.SetActive(false);
+            if (weaponSlot.transform.childCount == 5)
+            {
+                return;
+            }
+            else if (weaponSlot.transform.GetChild(5) != null)
+            {
+                equipButton.gameObject.SetActive(false);
+                return;
+            }
+            return;
         }
-        else if (armorSlot.transform.GetChild(5) != null)
+
+        if (itemType == ItemType.Armor)
         {
-            equipButton.gameObject.SetActive(false);
+            if (armorSlot.transform.childCount == 5)
+            {
+                return;
+            }
+            else if (armorSlot.transform.GetChild(5) != null)
+            {
+                equipButton.gameObject.SetActive(false);
+                return;
+            }
+            return;
         }
-        else if (shoesSlot.transform.GetChild(5) != null)
+
+        if (itemType == ItemType.Pants)
         {
-            equipButton.gameObject.SetActive(false);
+            if (shoesSlot.transform.childCount == 5)
+            {
+                return;
+            }
+            else if (shoesSlot.transform.GetChild(5) != null)
+            {
+                equipButton.gameObject.SetActive(false);
+                return;
+            }
+            return;
         }
-        else if (helmetSlot.transform.GetChild(5) != null)
+
+        if (itemType == ItemType.Helmet)
         {
-            equipButton.gameObject.SetActive(false);
+            if (helmetSlot.transform.childCount == 5)
+            {
+                return;
+            }
+            else if (helmetSlot.transform.GetChild(5) != null)
+            {
+                equipButton.gameObject.SetActive(false);
+                return;
+            }
+            return;
         }
-        else if (necklaceSlot.transform.GetChild(5) != null)
+
+        if (itemType == ItemType.Pet)
         {
-            equipButton.gameObject.SetActive(false);
+            if (necklaceSlot.transform.childCount == 5)
+            {
+                return;
+            }
+            else if (necklaceSlot.transform.GetChild(5) != null)
+            {
+                equipButton.gameObject.SetActive(false);
+                return;
+            }
+            return;
         }
-        else if (ringSlot.transform.GetChild(5) != null)
+
+        if (itemType == ItemType.Gloves)
         {
-            equipButton.gameObject.SetActive(false);
+            if (ringSlot.transform.childCount == 5)
+            {
+                return;
+            }
+            else if (ringSlot.transform.GetChild(5) != null)
+            {
+                equipButton.gameObject.SetActive(false);
+                return;
+            }
+            return;
         }
-        else
-        {
-            equipButton.gameObject.SetActive(true);
-        }
+
+        equipButton.gameObject.SetActive(true);
     }
 
     public void OnClick(int state)
     {
-        Debug.Log(equipmentInfo.data.info.name);
-        Debug.Log(equipmentInfo.data.info.baseStat.type);
+        //Debug.Log(equipmentInfo.data.info.name);
+        //Debug.Log(equipmentInfo.data.info.baseStat.type);
 
         EquipButton equipButton = equipmentInfo.GetComponent<EquipButton>();
         equipButton.EquipButtonClick(state);
