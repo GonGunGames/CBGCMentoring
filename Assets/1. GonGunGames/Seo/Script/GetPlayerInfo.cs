@@ -85,7 +85,7 @@ public class GetPlayerInfo : MonoBehaviour
 
     public float[] GetAllAdditionalStats()
     {
-        // 모든 장비 스탯 가져오기 22ro
+        // 모든 장비 스탯 가져오기
         LoadPlayerData();
         for (int i = 0; i < playerData.additionalStats.Length; i++)
         {
@@ -113,6 +113,17 @@ public class GetPlayerInfo : MonoBehaviour
     {
         // 장비 + 플레이어 스탯 하나 가져오기
         LoadPlayerData();
+        if (playerData.additionalStats[(int)StatType.GunID].value == 0)
+        {
+            playerData.additionalStats[(int)StatType.GunID].value = 111;
+            playerData.additionalStats[(int)StatType.Attack].value = 140;
+            playerData.additionalStats[(int)StatType.AttackSpeed].value = 1;
+            playerData.additionalStats[(int)StatType.BulletSpeed].value = 20;
+            playerData.additionalStats[(int)StatType.GrenadeProbability].value = 0;
+            playerData.additionalStats[(int)StatType.MagazineSize].value = 5;
+            playerData.additionalStats[(int)StatType.ReloadTime].value = 0.1f;
+        }
+
         playerStats[((int)statType)] = playerData.additionalStats[((int)statType)].value + playerData.baseStats[((int)statType)].value;
         return playerStats[((int)statType)];
 

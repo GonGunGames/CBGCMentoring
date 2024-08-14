@@ -15,6 +15,7 @@ public class EquipInfoCheck : MonoBehaviour
     public GameObject ringSlot;
 
     public GameObject equipButton;
+    public GameObject changeButton;
 
     Transform parentSetActive;
 
@@ -29,6 +30,7 @@ public class EquipInfoCheck : MonoBehaviour
         {
             if (weaponSlot.transform.childCount == 5)
             {
+                changeButton.gameObject.SetActive(false);
                 return;
             }
             else if (weaponSlot.transform.GetChild(5) != null)
@@ -43,6 +45,7 @@ public class EquipInfoCheck : MonoBehaviour
         {
             if (armorSlot.transform.childCount == 5)
             {
+                changeButton.gameObject.SetActive(false);
                 return;
             }
             else if (armorSlot.transform.GetChild(5) != null)
@@ -57,6 +60,7 @@ public class EquipInfoCheck : MonoBehaviour
         {
             if (shoesSlot.transform.childCount == 5)
             {
+                changeButton.gameObject.SetActive(false);
                 return;
             }
             else if (shoesSlot.transform.GetChild(5) != null)
@@ -71,6 +75,7 @@ public class EquipInfoCheck : MonoBehaviour
         {
             if (helmetSlot.transform.childCount == 5)
             {
+                changeButton.gameObject.SetActive(false);
                 return;
             }
             else if (helmetSlot.transform.GetChild(5) != null)
@@ -85,6 +90,7 @@ public class EquipInfoCheck : MonoBehaviour
         {
             if (necklaceSlot.transform.childCount == 5)
             {
+                changeButton.gameObject.SetActive(false);
                 return;
             }
             else if (necklaceSlot.transform.GetChild(5) != null)
@@ -99,6 +105,7 @@ public class EquipInfoCheck : MonoBehaviour
         {
             if (ringSlot.transform.childCount == 5)
             {
+                changeButton.gameObject.SetActive(false);
                 return;
             }
             else if (ringSlot.transform.GetChild(5) != null)
