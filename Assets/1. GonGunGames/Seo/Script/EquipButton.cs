@@ -6,18 +6,17 @@ using UnityEngine.UI;
 
 public class EquipButton : MonoBehaviour
 {
-    [HideInInspector]
-    public Transform initialParent;
+    Transform initialParent;
     
 
-    public InventorySlot inventorySlot;
-    public EquipmentSlot equipmentSlot;
+    InventorySlot inventorySlot;
+    EquipmentSlot equipmentSlot;
 
-    public EquipmentSlot equipableSlot;
+    EquipmentSlot equipableSlot;
 
 
     GameObject equipField;
-    private InventoryItem thisItem;
+    InventoryItem thisItem;
 
     private bool allowEquip = false;
     private bool allowUnequip = false;
@@ -51,9 +50,19 @@ public class EquipButton : MonoBehaviour
         {
             equipmentSlot.isEquip = false;
         }
+        Debug.Log("장비 전1");
 
         if (!thisItem.data.info.prop.countable)
         {
+            //Debug.Log(equipableSlot);
+            Debug.Log(transform.parent);
+            //Debug.Log("장비 전2" + equipableSlot.isEquip);
+            if (isEquipState == 0)
+            {
+                Debug.Log(equipableSlot + "111111111");
+                equipmentSlot = transform.parent.GetComponent<EquipmentSlot>();
+                Debug.Log(equipableSlot + "222222");
+            }
             if (equipableSlot.isEquip && isEquipState == 0)
             {
                 Debug.Log("해제");
@@ -61,20 +70,21 @@ public class EquipButton : MonoBehaviour
                 equipableSlot.isEquip = false;
 
             }
-            else if (!equipableSlot.isEquip && isEquipState == 1)
+            if (!equipableSlot.isEquip && isEquipState == 1)
             {
                 Debug.Log("장착");
                 InventoryManager.Instance.EquipItem(thisItem, equipableSlot);
                 equipableSlot.isEquip = true;
             }
-            else if (isEquipState == 2)
+            if (isEquipState == 2)
             {
                 Debug.Log("교체");
                 InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
                 InventoryManager.Instance.ReplaceItem(thisItem, equippedItem);
             }
+            Debug.Log("장비 후1");
         }
-
+        Debug.Log("장비 후2" + equipableSlot.isEquip);
 
         equipField = GameObject.FindGameObjectWithTag("EquipField");
 

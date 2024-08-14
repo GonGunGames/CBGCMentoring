@@ -44,29 +44,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         HandleDrop(eventData);
     }
 
-
-    public void EquipButtonClick()
-    {
-        thisItem = GetComponent<InventoryItem>();
-        if (thisItem.gameObject.GetComponentInParent<Toggle>().isOn != true)
-        {
-            allowDrag = false;
-            return;
-        }
-
-        Debug.Log(thisItem.data.info.name);
-
-        // If the item is already in an equipment slot, unequip it
-        if (equipmentSlot != null && equipmentSlot.isEquip)
-        {
-            InventoryManager.Instance.UnequipItem(thisItem);
-        }
-        else if (equipableSlot != null && !equipableSlot.isEquip)
-        {
-            InventoryManager.Instance.EquipItem(thisItem, equipableSlot);
-        }
-    }
-
     private void PrepareForDrag()
     {
         thisItem = GetComponent<InventoryItem>();

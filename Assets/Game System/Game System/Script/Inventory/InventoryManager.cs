@@ -460,8 +460,8 @@ public class InventoryManager : Singleton<InventoryManager>
             targetItem.SetPosition(ActiveSlot.transform);
             ActiveSlot.GetComponent<InventorySlot>().isEmpty = false;
 
-            Debug.Log(ActiveSlot.transform);
-            Debug.Log(equipmentSlot.transform);
+            //Debug.Log(ActiveSlot.transform);
+            //Debug.Log(equipmentSlot.transform);
 
             //Update the database
             inventoryData.RemoveEquipmentData(targetItem.data.ID);
