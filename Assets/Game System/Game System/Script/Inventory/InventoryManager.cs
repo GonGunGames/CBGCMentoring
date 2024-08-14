@@ -246,7 +246,8 @@ public class InventoryManager : Singleton<InventoryManager>
             itemSpecialStat.text = currentItem.data.info.prop.specialStat;
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
-
+        
+        equipInfoCheck.SlotCheck();
         equipInfoCheck.equipmentInfo = currentItem;
     }
 
