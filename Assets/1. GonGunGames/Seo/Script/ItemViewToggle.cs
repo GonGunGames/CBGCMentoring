@@ -8,13 +8,18 @@ public class ItemViewToggle : MonoBehaviour
     private GameObject targetObject; // 하이어라키에서 활성/비활성화할 객체
     private Toggle toggle; // 프리팹의 토글 컴포넌트
 
+    public GameObject equipButton;
+    public GameObject changeButton;
+    GameObject button;
+
     void Awake()
     {
         // 현재 게임 오브젝트에서 Toggle 컴포넌트를 가져옴
         toggle = GetComponent<Toggle>();
         toggle.isOn = false;
         targetObject = GameObject.FindWithTag("ItemView");
-
+        equipButton = GameObject.FindGameObjectWithTag("EquipButton");
+        changeButton = GameObject.FindGameObjectWithTag("ChangeButton");
     }
 
     void Start()
@@ -25,6 +30,7 @@ public class ItemViewToggle : MonoBehaviour
         {
             toggle.onValueChanged.AddListener(OnToggleValueChanged);
         }
+
     }
 
     // 토글 상태가 변경될 때 호출되는 메서드
@@ -35,6 +41,27 @@ public class ItemViewToggle : MonoBehaviour
         if (targetObject != null && isOn == true)
         {
             targetObject.SetActive(isOn);
+            if (equipButton != null && transform.parent.parent.name == "EquipSlot")
+            {
+                equipButton.gameObject.SetActive(false);
+            }
+
+            if (changeButton != null && transform.parent.parent.name == "EquipSlot")
+            {
+                changeButton.gameObject.SetActive(false);
+            }
         }
+        else
+        {
+            if (equipButton.activeSelf == false)
+            {
+                equipButton.gameObject.SetActive(true);
+            }
+            if (changeButton.activeSelf == false)
+            {
+                changeButton.gameObject.SetActive(true);
+            }
+        }
+
     }
 }
