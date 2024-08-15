@@ -241,6 +241,7 @@ public class UpgradeManager : MonoBehaviour
             previewStats[i].DisplayInfo(false);
             if (CkeckEuipmentStat(upgradeItem, i))
             {
+                Debug.Log(i + " " + upgradeItem.data.currentStat[i].type);
                 previewStats[i].DisplayInfo(true);
 
                 string coloredStatText = "<color=green>" + upgradeItem.data.currentStat[i].GetNextValue().ToString() + "</color>";
