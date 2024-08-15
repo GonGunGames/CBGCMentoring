@@ -12,6 +12,8 @@ public class ItemViewToggle : MonoBehaviour
     public GameObject changeButton;
     GameObject button;
 
+    Transform childTransform;
+
     void Awake()
     {
         // 현재 게임 오브젝트에서 Toggle 컴포넌트를 가져옴
@@ -41,6 +43,18 @@ public class ItemViewToggle : MonoBehaviour
         if (targetObject != null && isOn == true)
         {
             targetObject.SetActive(isOn);
+            
+            if (transform.childCount != 7)
+            {
+                childTransform = transform.GetChild(4);
+                if (childTransform.name != "Item(Clone)")
+                {
+                    targetObject.gameObject.SetActive(false);
+
+                }
+
+            }
+
             if (equipButton != null && transform.parent.parent.name == "EquipSlot")
             {
                 equipButton.gameObject.SetActive(false);
@@ -50,6 +64,9 @@ public class ItemViewToggle : MonoBehaviour
             {
                 changeButton.gameObject.SetActive(false);
             }
+
+            
+
         }
         else
         {
