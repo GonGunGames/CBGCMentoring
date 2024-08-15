@@ -182,19 +182,26 @@ public class UpgradeManager : MonoBehaviour
     private void DisplayUpgradeCurrentStat()
     {
         int len = upgradeItem.data.currentStat.Length;
-        for (int i = 0; i < len; i++)
+        int j = 0;
+        for (int i = 0; i < currentStats.Length; i++)
         {
             currentStats[i].DisplayInfo(false);
+        }
+
+        for (int i = 0; i < len; i++)
+        {
             if (CkeckEuipmentStat(upgradeItem, i))
             {
-                currentStats[i].DisplayInfo(true);
+                currentStats[j].DisplayInfo(true);
                 string statText = upgradeItem.data.currentStat[i].value.ToString();
                 StatType type = upgradeItem.data.info.baseStat.stats[i].type;
                 Sprite icon = ItemManager.Instance.statIconDict[type];
-                currentStats[i].SetText(statText);
-                currentStats[i].SetImage(icon);
+                currentStats[j].SetText(statText);
+                currentStats[j].SetImage(icon);
+                currentStats[j].SetImage(icon);
+                j++;
             }
-            
+
         }
     }
 
@@ -236,30 +243,37 @@ public class UpgradeManager : MonoBehaviour
         previewItem.levelText.color = Color.green;
 
         int len = upgradeItem.data.currentStat.Length;
+        int j = 0;
+
+        for (int i = 0; i < previewStats.Length; i++)
+        {
+            previewStats[i].DisplayInfo(false);
+        }
+
         for (int i = 0; i < len; i++)
         {
             previewStats[i].DisplayInfo(false);
             if (CkeckEuipmentStat(upgradeItem, i))
             {
-                Debug.Log(i + " " + upgradeItem.data.currentStat[i].type);
-                previewStats[i].DisplayInfo(true);
+                Debug.Log(i + " " + upgradeItem.data.currentStat[i].type + " " + j);
+                previewStats[j].DisplayInfo(true);
 
                 string coloredStatText = "<color=green>" + upgradeItem.data.currentStat[i].GetNextValue().ToString() + "</color>";
                 string normalStatText = upgradeItem.data.currentStat[i].GetNextValue().ToString();
 
                 StatType type = upgradeItem.data.info.baseStat.stats[i].type;
                 Sprite icon = ItemManager.Instance.statIconDict[type];
-                previewStats[i].SetImage(icon);
+                previewStats[j].SetImage(icon);
 
                 if (upgradeItem.data.currentStat[i].GetNextValue() == upgradeItem.data.currentStat[i].value)
                 {
-                    previewStats[i].SetText(normalStatText);
+                    previewStats[j].SetText(normalStatText);
                 }
                 else
                 {
-                    previewStats[i].SetText(coloredStatText);
+                    previewStats[j].SetText(coloredStatText);
                 }
-
+                j++;
             }
 
         }
