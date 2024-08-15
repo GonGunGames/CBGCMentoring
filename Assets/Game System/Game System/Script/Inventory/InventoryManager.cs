@@ -408,13 +408,134 @@ public class InventoryManager : Singleton<InventoryManager>
 
         playerStat.AddItemStat(thisItem);
 
-        if (thisItem.data.info.baseStat.type == ItemType.Weapon)
+        /*if (thisItem.data.info.baseStat.type == ItemType.Weapon)
         {
             playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
-        }
+        }*/
+
+        //CheckTypeStatPlus(thisItem);
+
         DataInventory.SaveData(inventoryData);
         DataPlayer.SaveData(playerData);
     }
+
+    public void CheckTypeStatPlus(InventoryItem thisItem)
+    {
+        int len = thisItem.data.info.baseStat.stats.Length;
+        for (int i = 0; i < len; i++)
+        {
+            switch (thisItem.data.info.baseStat.stats[i].type)
+            {
+                case StatType.AdditionalAttacksProbability:
+                    playerData.additionalStats[(int)StatType.AdditionalAttacksProbability].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Attack:
+                    playerData.additionalStats[(int)StatType.Attack].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.AttackSpeed:
+                    playerData.additionalStats[(int)StatType.AttackSpeed].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.BulletSpeed:
+                    playerData.additionalStats[(int)StatType.BulletSpeed].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Defense:
+                    playerData.additionalStats[(int)StatType.Defense].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.GrenadeProbability:
+                    playerData.additionalStats[(int)StatType.GrenadeProbability].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Health:
+                    playerData.additionalStats[(int)StatType.Health].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.MagazineSize:
+                    playerData.additionalStats[(int)StatType.MagazineSize].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.MoveSpeed:
+                    playerData.additionalStats[(int)StatType.MoveSpeed].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.ReloadTime:
+                    playerData.additionalStats[(int)StatType.ReloadTime].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.ArmorID:
+                    playerData.additionalStats[(int)StatType.ArmorID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                case StatType.GlovesID:
+                    playerData.additionalStats[(int)StatType.GlovesID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                case StatType.HelmetID:
+                    playerData.additionalStats[(int)StatType.HelmetID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                case StatType.PantsID:
+                    playerData.additionalStats[(int)StatType.PantsID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                case StatType.GunID:
+                    playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+    public void CheckTypeStatMinus(InventoryItem thisItem)
+    {
+        int len = thisItem.data.info.baseStat.stats.Length;
+        for (int i = 0; i < len; i++)
+        {
+            switch (thisItem.data.info.baseStat.stats[i].type)
+            {
+                case StatType.AdditionalAttacksProbability:
+                    playerData.additionalStats[(int)StatType.AdditionalAttacksProbability].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Attack:
+                    playerData.additionalStats[(int)StatType.Attack].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.AttackSpeed:
+                    playerData.additionalStats[(int)StatType.AttackSpeed].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.BulletSpeed:
+                    playerData.additionalStats[(int)StatType.BulletSpeed].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Defense:
+                    playerData.additionalStats[(int)StatType.Defense].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.GrenadeProbability:
+                    playerData.additionalStats[(int)StatType.GrenadeProbability].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Health:
+                    playerData.additionalStats[(int)StatType.Health].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.MagazineSize:
+                    playerData.additionalStats[(int)StatType.MagazineSize].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.MoveSpeed:
+                    playerData.additionalStats[(int)StatType.MoveSpeed].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.ReloadTime:
+                    playerData.additionalStats[(int)StatType.ReloadTime].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.ArmorID:
+                    playerData.additionalStats[(int)StatType.ArmorID].value = 0;
+                    break;
+                case StatType.GlovesID:
+                    playerData.additionalStats[(int)StatType.GlovesID].value = 0;
+                    break;
+                case StatType.HelmetID:
+                    playerData.additionalStats[(int)StatType.HelmetID].value = 0;
+                    break;
+                case StatType.PantsID:
+                    playerData.additionalStats[(int)StatType.PantsID].value = 0;
+                    break;
+                case StatType.GunID:
+                    playerData.additionalStats[(int)StatType.GunID].value = 0;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+
     /// <summary>
     /// Unequip the item
     /// </summary>
@@ -439,11 +560,13 @@ public class InventoryManager : Singleton<InventoryManager>
                 inventoryData.AddInventoryData(thisItem.data);
 
                 playerStat.RemoveItemStat(thisItem);
+                //CheckTypeStatMinus(thisItem);
 
                 break;
             }
         }
-        playerData.additionalStats[(int)StatType.GunID].value = 0;
+
+
         DataInventory.SaveData(inventoryData);
         DataPlayer.SaveData(playerData);
     }
@@ -479,10 +602,13 @@ public class InventoryManager : Singleton<InventoryManager>
 
             playerStat.RemoveItemStat(targetItem);
             playerStat.AddItemStat(thisItem);
-            if (thisItem.data.info.baseStat.type == ItemType.Weapon)
+
+            //CheckTypeStatMinus(targetItem);
+            //CheckTypeStatPlus(thisItem);
+            /*if (thisItem.data.info.baseStat.type == ItemType.Weapon)
             {
                 playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
-            }
+            }*/
             DataInventory.SaveData(inventoryData);
             DataPlayer.SaveData(playerData);
             return;

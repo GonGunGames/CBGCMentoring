@@ -50,41 +50,30 @@ public class EquipButton : MonoBehaviour
         {
             equipmentSlot.isEquip = false;
         }
-        //Debug.Log("장비 전1");
 
         if (!thisItem.data.info.prop.countable)
         {
-            //Debug.Log(equipableSlot);
-            //Debug.Log(transform.parent);
-            //Debug.Log("장비 전2" + equipableSlot.isEquip);
             if (isEquipState == 0)
             {
-                //Debug.Log(equipableSlot + "111111111");
                 equipmentSlot = transform.parent.GetComponent<EquipmentSlot>();
-                //Debug.Log(equipableSlot + "222222");
             }
             if (equipableSlot.isEquip && isEquipState == 0)
             {
-                //Debug.Log("해제");
                 InventoryManager.Instance.UnequipItem(thisItem);
                 equipableSlot.isEquip = false;
 
             }
             if (!equipableSlot.isEquip && isEquipState == 1)
             {
-                //Debug.Log("장착");
                 InventoryManager.Instance.EquipItem(thisItem, equipableSlot);
                 equipableSlot.isEquip = true;
             }
             if (isEquipState == 2)
             {
-                //Debug.Log("교체");
                 InventoryItem equippedItem = equipableSlot.GetComponentInChildren<InventoryItem>();
                 InventoryManager.Instance.ReplaceItem(thisItem, equippedItem);
             }
-            //Debug.Log("장비 후1");
         }
-        //Debug.Log("장비 후2" + equipableSlot.isEquip);
 
         equipField = GameObject.FindGameObjectWithTag("EquipField");
 
@@ -109,7 +98,6 @@ public class EquipButton : MonoBehaviour
             }
         }
 
-        //Debug.Log(equipableSlot.type + "    " + equipableSlot.isEquip);
     }
 
     public void UnEquipButtonClick()
