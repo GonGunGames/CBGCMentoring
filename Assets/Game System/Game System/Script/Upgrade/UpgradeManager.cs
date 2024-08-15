@@ -184,16 +184,44 @@ public class UpgradeManager : MonoBehaviour
         int len = upgradeItem.data.currentStat.Length;
         for (int i = 0; i < len; i++)
         {
-            currentStats[i].DisplayInfo(true);
-            string statText = upgradeItem.data.currentStat[i].value.ToString();
-            StatType type = upgradeItem.data.info.baseStat.stats[i].type;
-            Sprite icon = ItemManager.Instance.statIconDict[type];
-            currentStats[i].SetText(statText);
-            currentStats[i].SetImage(icon);
-        }
-        for (int i = len; i < 3; i++)
-        {
             currentStats[i].DisplayInfo(false);
+            if (CkeckEuipmentStat(upgradeItem, i))
+            {
+                currentStats[i].DisplayInfo(true);
+                string statText = upgradeItem.data.currentStat[i].value.ToString();
+                StatType type = upgradeItem.data.info.baseStat.stats[i].type;
+                Sprite icon = ItemManager.Instance.statIconDict[type];
+                currentStats[i].SetText(statText);
+                currentStats[i].SetImage(icon);
+            }
+            
+        }
+    }
+
+    bool CkeckEuipmentStat(InventoryItem currentItem, int i)
+    {
+        switch (currentItem.data.info.baseStat.stats[i].type)
+        {
+            case StatType.Attack:
+                return true;
+            case StatType.AttackRange:
+                return true;
+            case StatType.AttackSpeed:
+                return true;
+            case StatType.BulletSpread:
+                return true;
+            case StatType.ExplosionRange:
+                return true;
+            case StatType.ReloadTime:
+                return true;
+            case StatType.Health:
+                return true;
+            case StatType.Defense:
+                return true;
+            case StatType.MoveSpeed:
+                return true;
+            default:
+                return false;
         }
     }
 
@@ -210,29 +238,31 @@ public class UpgradeManager : MonoBehaviour
         int len = upgradeItem.data.currentStat.Length;
         for (int i = 0; i < len; i++)
         {
-            previewStats[i].DisplayInfo(true);
-
-            string coloredStatText = "<color=green>" + upgradeItem.data.currentStat[i].GetNextValue().ToString() + "</color>";
-            string normalStatText = upgradeItem.data.currentStat[i].GetNextValue().ToString();
-
-            StatType type = upgradeItem.data.info.baseStat.stats[i].type;
-            Sprite icon = ItemManager.Instance.statIconDict[type];
-            previewStats[i].SetImage(icon);
-
-            if (upgradeItem.data.currentStat[i].GetNextValue() == upgradeItem.data.currentStat[i].value)
-            {
-                previewStats[i].SetText(normalStatText);
-            }
-            else
-            {
-                previewStats[i].SetText(coloredStatText);
-            }
-
-        }
-        for (int i = len; i < 3; i++)
-        {
             previewStats[i].DisplayInfo(false);
+            if (CkeckEuipmentStat(upgradeItem, i))
+            {
+                previewStats[i].DisplayInfo(true);
+
+                string coloredStatText = "<color=green>" + upgradeItem.data.currentStat[i].GetNextValue().ToString() + "</color>";
+                string normalStatText = upgradeItem.data.currentStat[i].GetNextValue().ToString();
+
+                StatType type = upgradeItem.data.info.baseStat.stats[i].type;
+                Sprite icon = ItemManager.Instance.statIconDict[type];
+                previewStats[i].SetImage(icon);
+
+                if (upgradeItem.data.currentStat[i].GetNextValue() == upgradeItem.data.currentStat[i].value)
+                {
+                    previewStats[i].SetText(normalStatText);
+                }
+                else
+                {
+                    previewStats[i].SetText(coloredStatText);
+                }
+
+            }
+
         }
+
     }
 
 

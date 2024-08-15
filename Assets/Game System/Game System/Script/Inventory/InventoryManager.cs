@@ -211,7 +211,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             //int statLen = currentItem.data.currentStat.Length;
             int statLen = currentItem.data.info.baseStat.stats.Length;
-            if (statLen <= 3)
+            /*if (statLen <= 3)
             {
                 for (int i = 0; i < statLen; i++)
                 {
@@ -222,8 +222,8 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             else
             {
-                DisplayWeaponStat(currentItem);
-            }
+            }*/
+            DisplayEuipmentStat(currentItem);
 
         }
 
@@ -246,17 +246,17 @@ public class InventoryManager : Singleton<InventoryManager>
             itemSpecialStat.text = currentItem.data.info.prop.specialStat;
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
-        
+
         equipInfoCheck.SlotCheck(currentItem.data.info.baseStat.type);
         equipInfoCheck.equipmentInfo = currentItem;
     }
 
-    void DisplayWeaponStat(InventoryItem currentItem)
+    void DisplayEuipmentStat(InventoryItem currentItem)
     {
         int statLen = currentItem.data.info.baseStat.stats.Length;
         for (int i = 0; i < statLen; i++)
         {
-            if (CkeckWeaponStat(currentItem, i))
+            if (CkeckEuipmentStat(currentItem, i))
             {
                 itemStats[i].gameObject.SetActive(true);
                 itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
@@ -266,7 +266,7 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
-    bool CkeckWeaponStat(InventoryItem currentItem, int i)
+    bool CkeckEuipmentStat(InventoryItem currentItem, int i)
     {
         switch (currentItem.data.info.baseStat.stats[i].type)
         {
@@ -281,6 +281,12 @@ public class InventoryManager : Singleton<InventoryManager>
             case StatType.ExplosionRange:
                 return true;
             case StatType.ReloadTime:
+                return true;
+            case StatType.Health:
+                return true;
+            case StatType.Defense:
+                return true;
+            case StatType.MoveSpeed:
                 return true;
             default:
                 return false;
