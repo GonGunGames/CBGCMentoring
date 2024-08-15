@@ -209,7 +209,10 @@ public class ElliteHealth : MonoBehaviour
             }
             Instantiate(deathPrefab, transform.position, transform.rotation);
             deathCount++;
-
+            if (characterController != null)
+            {
+                characterController.enabled = false;
+            }
             // DeathCount 인스턴스를 통해 deathCount를 증가시킴
             if (DeathCount.Instance != null)
             {
@@ -276,17 +279,7 @@ public class ElliteHealth : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ellite.DeadEllite();
         // 프리팹 인스턴스화
-        if (characterController != null)
-        {
-            characterController.enabled = false;
-        }
-        deathCount++;
-        Debug.Log("Enemy");
 
-        // DeathCount 인스턴스를 통해 deathCount를 증가시킴
-        if (DeathCount.Instance != null)
-        {
-            DeathCount.Instance.IncrementDeathCount();
-        }
+        Debug.Log("Enemy");
     }
 }
