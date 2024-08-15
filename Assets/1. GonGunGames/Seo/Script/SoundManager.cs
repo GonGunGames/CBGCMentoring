@@ -28,6 +28,8 @@ public class SoundManager : Singleton<SoundManager>
 
     private void Start()
     {
+        bgmSlider.value = 0.1f;
+
         backgoundMusicSource.clip = backgoundMusic;
         buttonSoundSource.clip = buttonClickSound;
         backgoundMusicSource.Play();

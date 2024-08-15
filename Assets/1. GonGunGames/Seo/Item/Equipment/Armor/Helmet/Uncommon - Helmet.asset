@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Uncommon - Helmet
   m_EditorClassIdentifier: 
   prop:
-    image: {fileID: 1083022533, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
+    image: {fileID: -1257658021, guid: 43090957b4f038941ae71caf828aab56, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
     countable: 0
     itemName: Helmet
@@ -25,9 +25,13 @@ MonoBehaviour:
     rarity: 2
     requiredLevel: 1
     stats:
+    - type: 5
+      value: 0
     - type: 11
       value: 40
     - type: 14
       value: 400
-    - type: 27
+    - type: 17
+      value: 0
+    - type: 24
       value: 107

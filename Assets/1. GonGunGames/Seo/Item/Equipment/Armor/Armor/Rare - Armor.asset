@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rare - Armor
   m_EditorClassIdentifier: 
   prop:
-    image: {fileID: 115940592, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
+    image: {fileID: -1370485777, guid: 43090957b4f038941ae71caf828aab56, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
     countable: 0
     itemName: Armor
@@ -25,9 +25,13 @@ MonoBehaviour:
     rarity: 3
     requiredLevel: 1
     stats:
+    - type: 5
+      value: 0
     - type: 11
       value: 120
     - type: 14
       value: 1200
-    - type: 25
-      value: 102
+    - type: 17
+      value: 0
+    - type: 22
+      value: 101

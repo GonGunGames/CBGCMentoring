@@ -11,9 +11,8 @@ public class WeaponManager : MonoBehaviour
     public GameObject sniper_common;
     public GameObject sniper_uncommon;
     public GameObject sniper_rare;
-    public float rifleID;
-    public float shotgunID;
-    public float sniperID;
+
+    public float weaponID;
     void Awake()
     {
         rifle_common.SetActive(false);
@@ -22,13 +21,14 @@ public class WeaponManager : MonoBehaviour
         shotgun_common.SetActive(false);
         shotgun_uncommon.SetActive(false);
         shotgun_rare.SetActive(false);
-        sniper_common.SetActive (false);
+        sniper_common.SetActive(false);
         sniper_uncommon.SetActive(false);
         sniper_rare.SetActive(false);
 
-        rifleID = GetPlayerInfo.instance.GetStat(StatType.RifleID);
-        shotgunID = GetPlayerInfo.instance.GetStat(StatType.ShotgunID);
-        sniperID = GetPlayerInfo.instance.GetStat(StatType.SniperID);
+        //rifleID = GetPlayerInfo.instance.GetStat(StatType.RifleID);
+        //shotgunID = GetPlayerInfo.instance.GetStat(StatType.ShotgunID);
+        //sniperID = GetPlayerInfo.instance.GetStat(StatType.SniperID);
+        weaponID = GetPlayerInfo.instance.GetStat(StatType.GunID);
         // 게임 시작 시 데이터 로드
         GetPlayerInfo.instance.LoadPlayerData();
     }
@@ -40,39 +40,39 @@ public class WeaponManager : MonoBehaviour
         {
             return;
         }
-        if (rifleID == 111)
+        if (weaponID == 111)
         {
-            rifle_common.SetActive (true);
+            rifle_common.SetActive(true);
         }
-        if (rifleID == 112)
+        if (weaponID == 112)
         {
             rifle_uncommon.SetActive(true);
         }
-        if (rifleID == 113)
+        if (weaponID == 113)
         {
-          rifle_rare.SetActive(true);
+            rifle_rare.SetActive(true);
         }
-        if (shotgunID == 114)
+        if (weaponID == 114)
         {
             shotgun_common.SetActive(true);
         }
-        if (shotgunID == 115)
+        if (weaponID == 115)
         {
             shotgun_uncommon.SetActive(true);
         }
-        if (shotgunID == 116)
+        if (weaponID == 116)
         {
             shotgun_rare.SetActive(true);
         }
-        if (sniperID == 117)
+        if (weaponID == 117)
         {
             sniper_common.SetActive(true);
         }
-        if (sniperID == 118)
+        if (weaponID == 118)
         {
             sniper_uncommon.SetActive(true);
         }
-        if (sniperID == 119)
+        if (weaponID == 119)
         {
             sniper_rare.SetActive(true);
         }

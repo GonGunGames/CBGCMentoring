@@ -6,6 +6,9 @@ public class GetPlayerInfo : MonoBehaviour
     public DataPlayer playerData;
     public DataInventory playerInventory;
 
+    //public PlayerStat player;
+    //public InventoryManager inventoryManager;
+
     float[] playerStats;
 
     int playerEquipmentsWeaponID;
@@ -16,22 +19,40 @@ public class GetPlayerInfo : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
         {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-
-            }
-            else
-            {
-                if (instance != this)
-                    Destroy(this.gameObject);
-
-            }
+            instance = this;
+            DontDestroyOnLoad(gameObject);
 
         }
+        else
+        {
+            if (instance != this)
+                Destroy(this.gameObject);
+
+        }
+
+        /*int Playerdamage;
+        Playerdamage = GetPlayerInfo.instance.GetStat(StatType.Attack);
+
+        weapomID = GetPlayerInfo.instance.GetPlayerEquipmentID(ItemType.Weapon);
+
+        if(weapomID == 100)
+        {
+
+        }*/
+
+
+
+
     }
+
+    public void SavePlayerData()
+    {
+        DataPlayer.SaveData(playerData);
+        DataInventory.SaveData(playerInventory);
+    }
+
     public void LoadPlayerData()
     {
         if (DataPlayer.LoadData() != null)
@@ -92,9 +113,23 @@ public class GetPlayerInfo : MonoBehaviour
     {
         // 장비 + 플레이어 스탯 하나 가져오기
         LoadPlayerData();
+        if (playerData.additionalStats[(int)StatType.GunID].value == 0)
+        {
+            playerData.additionalStats[(int)StatType.GunID].value = 111;
+            playerData.additionalStats[(int)StatType.Attack].value = 140;
+            playerData.additionalStats[(int)StatType.AttackSpeed].value = 1;
+            playerData.additionalStats[(int)StatType.BulletSpeed].value = 20;
+            playerData.additionalStats[(int)StatType.GrenadeProbability].value = 0;
+            playerData.additionalStats[(int)StatType.MagazineSize].value = 5;
+            playerData.additionalStats[(int)StatType.ReloadTime].value = 0.1f;
+        }
+
         playerStats[((int)statType)] = playerData.additionalStats[((int)statType)].value + playerData.baseStats[((int)statType)].value;
         return playerStats[((int)statType)];
+
     }
+
+
     public float GetAdditionalStat(StatType statType)
     {
         // 장비 스탯 하나 가져오기

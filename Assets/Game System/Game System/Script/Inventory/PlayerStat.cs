@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerStat : Singleton<PlayerStat>
 {
@@ -54,7 +55,7 @@ public class PlayerStat : Singleton<PlayerStat>
     public void AddItemStat(InventoryItem item)
     {
 
-        int statLen = item.data.currentStat.Length;
+        /*int statLen = item.data.currentStat.Length;
         for (int i = 0; i < statLen; i++)
         {
             StatType statType = item.data.currentStat[i].type;
@@ -68,7 +69,8 @@ public class PlayerStat : Singleton<PlayerStat>
             {
                 playerData.additionalStats[GetIndex(statType)].value += itemStat;
             }
-        }
+        }*/
+        InventoryManager.Instance.CheckTypeStatPlus(item);
         InitializePlayerStatFromData();
 
         playerCP += cpCalculator.GetItemCP(item);
@@ -77,7 +79,7 @@ public class PlayerStat : Singleton<PlayerStat>
     }
     public void RemoveItemStat(InventoryItem item)
     {
-        int statLen = item.data.currentStat.Length;
+        /*int statLen = item.data.currentStat.Length;
         for (int i = 0; i < statLen; i++)
         {
             StatType statType = item.data.currentStat[i].type;
@@ -91,7 +93,8 @@ public class PlayerStat : Singleton<PlayerStat>
             {
                 playerData.additionalStats[GetIndex(statType)].value -= itemStat;
             }
-        }
+        }*/
+        InventoryManager.Instance.CheckTypeStatMinus(item);
         InitializePlayerStatFromData();
 
         playerCP -= cpCalculator.GetItemCP(item);

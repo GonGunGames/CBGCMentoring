@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class ResetData : MonoBehaviour
@@ -10,5 +11,6 @@ public class ResetData : MonoBehaviour
         dataInventory.ResetAllData();
         dataPlayer.ResetAllData();
         DataPlayer.LoadData();
+        EditorApplication.isPlaying = false;
     }
 }

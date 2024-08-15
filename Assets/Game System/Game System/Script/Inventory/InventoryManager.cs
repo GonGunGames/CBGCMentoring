@@ -13,6 +13,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [Header("DataInventory")]
     public DataInventory inventoryData;
+    public DataPlayer playerData;
 
     [Header("Inventory")]
     public Transform Tabs;
@@ -59,6 +60,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public Sprite[] statSprites;
 
+    public EquipInfoCheck equipInfoCheck;
+    public EquipmentSlot equipableSlot;
 
     [Header("InventoryTab")]
     public ToggleGroup inventoryTabPool;
@@ -73,6 +76,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
 
         DataInventory.LoadData(inventoryData);
+        //Debug.Log(inventoryData);
 
         //Hide all the item stats in baseStat view
         itemStats = itemViewStatGroup.GetComponentsInChildren<UIStat>();
@@ -158,7 +162,7 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <summary>
     /// Display item information in the display field.
     /// </summary>
-    private void DisplayItemViewPanel()
+    public void DisplayItemViewPanel()
     {
         if (ActiveSlot.GetComponentInChildren<InventoryItem>() == null) //Item Information disappear
         {
@@ -207,7 +211,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             //int statLen = currentItem.data.currentStat.Length;
             int statLen = currentItem.data.info.baseStat.stats.Length;
-            if (statLen <= 5)
+            /*if (statLen <= 3)
             {
                 for (int i = 0; i < statLen; i++)
                 {
@@ -218,8 +222,8 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             else
             {
-                DisplayWeaponStat(currentItem);
-            }
+            }*/
+            DisplayEuipmentStat(currentItem);
 
         }
 
@@ -242,24 +246,27 @@ public class InventoryManager : Singleton<InventoryManager>
             itemSpecialStat.text = currentItem.data.info.prop.specialStat;
         }
         itemDescription.text = currentItem.data.info.prop.itemDescription;
+
+        equipInfoCheck.SlotCheck(currentItem.data.info.baseStat.type);
+        equipInfoCheck.equipmentInfo = currentItem;
     }
 
-    void DisplayWeaponStat(InventoryItem currentItem)
+    void DisplayEuipmentStat(InventoryItem currentItem)
     {
         int statLen = currentItem.data.info.baseStat.stats.Length;
         for (int i = 0; i < statLen; i++)
         {
-            if (CkeckWeaponStat(currentItem, i))
+            if (CkeckEuipmentStat(currentItem, i))
             {
                 itemStats[i].gameObject.SetActive(true);
                 itemStats[i].statImage.sprite = CheckStatImage(currentItem.data.info.baseStat.stats[i].type);
                 itemStats[i].statText.text = currentItem.data.info.baseStat.stats[i].value.ToString();
             }
-            
+
         }
     }
 
-    bool CkeckWeaponStat(InventoryItem currentItem, int i)
+    bool CkeckEuipmentStat(InventoryItem currentItem, int i)
     {
         switch (currentItem.data.info.baseStat.stats[i].type)
         {
@@ -274,6 +281,12 @@ public class InventoryManager : Singleton<InventoryManager>
             case StatType.ExplosionRange:
                 return true;
             case StatType.ReloadTime:
+                return true;
+            case StatType.Health:
+                return true;
+            case StatType.Defense:
+                return true;
+            case StatType.MoveSpeed:
                 return true;
             default:
                 return false;
@@ -380,6 +393,8 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="equipableSlot"></param> the slot that can be equipped.
     public void EquipItem(InventoryItem thisItem, EquipmentSlot equipableSlot)
     {
+        //Debug.Log("EquipItem");
+
         if (ActiveSlot.GetComponentInChildren<InventorySlot>() == null) return;
 
         thisItem.SetPosition(equipableSlot.transform);
@@ -390,14 +405,144 @@ public class InventoryManager : Singleton<InventoryManager>
         inventoryData.RemoveInventoryData(thisItem.data.ID);
         inventoryData.AddEquipmentData(thisItem.data);
 
+
         playerStat.AddItemStat(thisItem);
+
+        /*if (thisItem.data.info.baseStat.type == ItemType.Weapon)
+        {
+            playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+        }*/
+
+        //CheckTypeStatPlus(thisItem);
+
+        DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
+
+    public void CheckTypeStatPlus(InventoryItem thisItem)
+    {
+        int len = thisItem.data.info.baseStat.stats.Length;
+        for (int i = 0; i < len; i++)
+        {
+            switch (thisItem.data.info.baseStat.stats[i].type)
+            {
+                case StatType.AdditionalAttacksProbability:
+                    playerData.additionalStats[(int)StatType.AdditionalAttacksProbability].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Attack:
+                    playerData.additionalStats[(int)StatType.Attack].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.AttackSpeed:
+                    playerData.additionalStats[(int)StatType.AttackSpeed].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.BulletSpeed:
+                    playerData.additionalStats[(int)StatType.BulletSpeed].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Defense:
+                    playerData.additionalStats[(int)StatType.Defense].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.GrenadeProbability:
+                    playerData.additionalStats[(int)StatType.GrenadeProbability].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Health:
+                    playerData.additionalStats[(int)StatType.Health].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.MagazineSize:
+                    playerData.additionalStats[(int)StatType.MagazineSize].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.MoveSpeed:
+                    playerData.additionalStats[(int)StatType.MoveSpeed].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.ReloadTime:
+                    playerData.additionalStats[(int)StatType.ReloadTime].value += thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.ArmorID:
+                    playerData.additionalStats[(int)StatType.ArmorID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                case StatType.GlovesID:
+                    playerData.additionalStats[(int)StatType.GlovesID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                case StatType.HelmetID:
+                    playerData.additionalStats[(int)StatType.HelmetID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                case StatType.PantsID:
+                    playerData.additionalStats[(int)StatType.PantsID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                case StatType.GunID:
+                    playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+    public void CheckTypeStatMinus(InventoryItem thisItem)
+    {
+        int len = thisItem.data.info.baseStat.stats.Length;
+        for (int i = 0; i < len; i++)
+        {
+            switch (thisItem.data.info.baseStat.stats[i].type)
+            {
+                case StatType.AdditionalAttacksProbability:
+                    playerData.additionalStats[(int)StatType.AdditionalAttacksProbability].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Attack:
+                    playerData.additionalStats[(int)StatType.Attack].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.AttackSpeed:
+                    playerData.additionalStats[(int)StatType.AttackSpeed].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.BulletSpeed:
+                    playerData.additionalStats[(int)StatType.BulletSpeed].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Defense:
+                    playerData.additionalStats[(int)StatType.Defense].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.GrenadeProbability:
+                    playerData.additionalStats[(int)StatType.GrenadeProbability].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.Health:
+                    playerData.additionalStats[(int)StatType.Health].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.MagazineSize:
+                    playerData.additionalStats[(int)StatType.MagazineSize].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.MoveSpeed:
+                    playerData.additionalStats[(int)StatType.MoveSpeed].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.ReloadTime:
+                    playerData.additionalStats[(int)StatType.ReloadTime].value -= thisItem.data.info.baseStat.stats[i].value;
+                    break;
+                case StatType.ArmorID:
+                    playerData.additionalStats[(int)StatType.ArmorID].value = 0;
+                    break;
+                case StatType.GlovesID:
+                    playerData.additionalStats[(int)StatType.GlovesID].value = 0;
+                    break;
+                case StatType.HelmetID:
+                    playerData.additionalStats[(int)StatType.HelmetID].value = 0;
+                    break;
+                case StatType.PantsID:
+                    playerData.additionalStats[(int)StatType.PantsID].value = 0;
+                    break;
+                case StatType.GunID:
+                    playerData.additionalStats[(int)StatType.GunID].value = 0;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+
     /// <summary>
     /// Unequip the item
     /// </summary>
     /// <param name="thisItem"></param> current item
     public void UnequipItem(InventoryItem thisItem)
     {
+        //Debug.Log("UnequipItem");
         if (ActiveSlot.GetComponentInChildren<EquipmentSlot>() == null) return;
 
         //-----Step 1: Put item into nearest Slot that is Empty
@@ -415,10 +560,15 @@ public class InventoryManager : Singleton<InventoryManager>
                 inventoryData.AddInventoryData(thisItem.data);
 
                 playerStat.RemoveItemStat(thisItem);
+                //CheckTypeStatMinus(thisItem);
 
                 break;
             }
         }
+
+
+        DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     /// <summary>
@@ -428,10 +578,11 @@ public class InventoryManager : Singleton<InventoryManager>
     /// <param name="targetItem"></param> Other Item
     public void ReplaceItem(InventoryItem thisItem, InventoryItem targetItem)
     {
+        //Debug.Log("ReplaceItem");
         EquipmentSlot equipmentSlot = targetItem.GetComponentInParent<EquipmentSlot>();
         if (equipmentSlot != null) // Swap with equipped item
         {
-            Debug.Log(equipmentSlot);
+            //Debug.Log(equipmentSlot);
             thisItem.SetPosition(equipmentSlot.transform);
             equipmentSlot.ShowCannotEquip();
             equipmentSlot.isEquip = true;
@@ -439,8 +590,8 @@ public class InventoryManager : Singleton<InventoryManager>
             targetItem.SetPosition(ActiveSlot.transform);
             ActiveSlot.GetComponent<InventorySlot>().isEmpty = false;
 
-            Debug.Log(ActiveSlot.transform);
-            Debug.Log(equipmentSlot.transform);
+            //Debug.Log(ActiveSlot.transform);
+            //Debug.Log(equipmentSlot.transform);
 
             //Update the database
             inventoryData.RemoveEquipmentData(targetItem.data.ID);
@@ -451,6 +602,15 @@ public class InventoryManager : Singleton<InventoryManager>
 
             playerStat.RemoveItemStat(targetItem);
             playerStat.AddItemStat(thisItem);
+
+            //CheckTypeStatMinus(targetItem);
+            //CheckTypeStatPlus(thisItem);
+            /*if (thisItem.data.info.baseStat.type == ItemType.Weapon)
+            {
+                playerData.additionalStats[(int)StatType.GunID].value = thisItem.data.info.baseStat.IDIDID;
+            }*/
+            DataInventory.SaveData(inventoryData);
+            DataPlayer.SaveData(playerData);
             return;
         }
 
@@ -461,6 +621,11 @@ public class InventoryManager : Singleton<InventoryManager>
             thisItem.SetPosition(inventorySlot.transform);
             ActiveSlot.GetComponent<InventorySlot>().isEmpty = false;
         }
+
+
+
+        DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     public void AddAmountOfItem(ItemBase.ItemData data, int amount, int id)
@@ -531,6 +696,8 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
+        DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
     public void RemoveAmountOfItem(ItemInfo info, int amount)
     {
@@ -559,6 +726,8 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
+        DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
 
     /// <summary>
@@ -572,8 +741,10 @@ public class InventoryManager : Singleton<InventoryManager>
             inventoryData.RemoveInventoryData(activeSlot.GetComponentInChildren<InventoryItem>().data.ID);
             activeSlot.DestroyItem();
         }
-
+        DataInventory.SaveData(inventoryData);
+        DataPlayer.SaveData(playerData);
     }
+
     public int GenerateID()
     {
         int randNum;
@@ -675,6 +846,11 @@ public class InventoryManager : Singleton<InventoryManager>
                 InventoryItem item = itemAdd.GetComponent<InventoryItem>();
                 item.data = data;
 
+                //Debug.Log("data " + data);
+                //Debug.Log("info " + data.info);
+                //Debug.Log("prop " + data.info.prop);
+                //Debug.Log("countable " + data.info.prop.countable);
+
 
                 if (data.info.prop.countable)
                 {
@@ -760,6 +936,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public void QuitGame()
     {
         Debug.Log("종료1");
+        DataInventory.SaveData(inventoryData);
         Application.Quit();
         Debug.Log("종료2");
     }

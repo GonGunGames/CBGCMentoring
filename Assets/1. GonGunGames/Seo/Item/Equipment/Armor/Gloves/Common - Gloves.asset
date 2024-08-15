@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Common - Gloves
   m_EditorClassIdentifier: 
   prop:
-    image: {fileID: -356076688, guid: ca7152eb903eb9643820f5497f8f7a08, type: 3}
+    image: {fileID: 225149473, guid: 43090957b4f038941ae71caf828aab56, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
     countable: 0
     itemName: Gloves
@@ -25,11 +25,13 @@ MonoBehaviour:
     rarity: 1
     requiredLevel: 1
     stats:
+    - type: 5
+      value: 1
     - type: 11
       value: 10
     - type: 14
       value: 100
-    - type: 5
-      value: 1
-    - type: 26
+    - type: 17
+      value: 0
+    - type: 23
       value: 103
