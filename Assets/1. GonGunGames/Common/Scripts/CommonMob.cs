@@ -74,6 +74,10 @@ public class CommonMob : BaseFSM
                     SetState(FSMState.Chase);
                 }
             }
+            if (elliteHealth.isDead)
+            {
+                SetState(FSMState.Dead);
+            }
             yield return null;
         }
     }
@@ -94,7 +98,10 @@ public class CommonMob : BaseFSM
             {
                 SetState(FSMState.Attack);
             }
-
+            if (elliteHealth.isDead)
+            {
+                SetState(FSMState.Dead);
+            }
             yield return null;
         }
     }
@@ -119,6 +126,10 @@ public class CommonMob : BaseFSM
                 {
                     SetState(FSMState.Attack);
                 }
+            }
+            if (elliteHealth.isDead)
+            {
+                SetState(FSMState.Dead);
             }
             yield return null;
         }
@@ -155,6 +166,10 @@ public class CommonMob : BaseFSM
                         }
                     }
                 }
+                if (elliteHealth.isDead)
+                {
+                    SetState(FSMState.Dead);
+                }
             }
             yield return null;
         }
@@ -182,6 +197,10 @@ public class CommonMob : BaseFSM
             // SAttack 완료 후 Attack 상태로 전환
             attackCount = 0; // 공격 카운트 초기화
             SetState(FSMState.Attack);
+        }
+        if (elliteHealth.isDead)
+        {
+            SetState(FSMState.Dead);
         }
     }
 

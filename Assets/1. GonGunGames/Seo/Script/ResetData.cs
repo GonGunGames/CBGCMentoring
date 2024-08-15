@@ -11,6 +11,9 @@ public class ResetData : MonoBehaviour
         dataInventory.ResetAllData();
         dataPlayer.ResetAllData();
         DataPlayer.LoadData();
+
+#if UNITY_EDITOR
         EditorApplication.isPlaying = false;
+#endif
     }
 }
