@@ -32,13 +32,22 @@ public class ItemInfo : ScriptableObject
 
             public float GetNextValue()
             {
-                if (type == StatType.AttackRange || type == StatType.AttackSpeed)
+                if (type == StatType.AttackRange || 
+                    type == StatType.AttackSpeed || 
+                    type == StatType.BulletSpeed ||
+                    type == StatType.ReloadTime ||
+                    type == StatType.GunID ||
+                    type == StatType.ArmorID ||
+                    type == StatType.GlovesID ||
+                    type == StatType.HelmetID ||
+                    type == StatType.PantsID
+                    ) 
                 {
                     return value;
                 }
                 else
                 {
-                    return Mathf.CeilToInt(value * 1.1f);
+                    return Mathf.CeilToInt(value * 1.05f);
                 }
             }
 
