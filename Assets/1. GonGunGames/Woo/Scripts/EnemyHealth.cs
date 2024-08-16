@@ -234,6 +234,14 @@ public class EnemyHealth : MonoBehaviour
                 return damage * 2;
             }
         }
+        else if (sniper != null)
+        {
+            isDoubleDamage = Random.value <= sniper.doubleDamageChance;
+            if (isDoubleDamage)
+            {
+                return damage * 2;
+            }
+        }
         return damage;
     }
 

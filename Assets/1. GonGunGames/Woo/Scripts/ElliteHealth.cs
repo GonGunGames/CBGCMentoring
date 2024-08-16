@@ -246,6 +246,14 @@ public class ElliteHealth : MonoBehaviour
                 return damage * 2; // 두 배의 데미지 적용
             }
         }
+        else if (sniper != null)
+        {
+            isDoubleDamage = Random.value <= sniper.doubleDamageChance;
+            if (isDoubleDamage)
+            {
+                return damage * 2;
+            }
+        }
         return damage; // 기본 데미지 반환
     }
 
