@@ -36,6 +36,7 @@ public class ItemInfo : ScriptableObject
                     type == StatType.AttackSpeed || 
                     type == StatType.BulletSpeed ||
                     type == StatType.ReloadTime ||
+                    type == StatType.MagazineSize ||
                     type == StatType.GunID ||
                     type == StatType.ArmorID ||
                     type == StatType.GlovesID ||
