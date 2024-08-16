@@ -54,7 +54,7 @@ public class PlayerStat : Singleton<PlayerStat>
     }
     public void AddItemStat(InventoryItem item)
     {
-
+        DataPlayer.LoadData();
         /*int statLen = item.data.currentStat.Length;
         for (int i = 0; i < statLen; i++)
         {
@@ -76,9 +76,11 @@ public class PlayerStat : Singleton<PlayerStat>
         playerCP += cpCalculator.GetItemCP(item);
         playerCP_TMP.text = playerCP.ToString();
         playerData.combatPower = playerCP;
+        DataPlayer.SaveData(playerData);
     }
     public void RemoveItemStat(InventoryItem item)
     {
+        DataPlayer.LoadData();
         /*int statLen = item.data.currentStat.Length;
         for (int i = 0; i < statLen; i++)
         {
@@ -100,6 +102,7 @@ public class PlayerStat : Singleton<PlayerStat>
         playerCP -= cpCalculator.GetItemCP(item);
         playerCP_TMP.text = playerCP.ToString();
         playerData.combatPower = playerCP;
+        DataPlayer.SaveData(playerData);
     }
     public int GetIndex(StatType type)
     {
