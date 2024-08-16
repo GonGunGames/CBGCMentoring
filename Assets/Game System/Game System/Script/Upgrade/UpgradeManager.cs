@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine.UI;
 public class UpgradeManager : MonoBehaviour
 {
+    public DataPlayer playerData;
     public PlayerStat playerStat;
 
     [SerializeField] Toggle upgradeSystemButton;
@@ -40,6 +41,7 @@ public class UpgradeManager : MonoBehaviour
             playerStat.playerData.diamond = value;
             goldText.text = playerStat.playerData.gold.ToString();
             diamondText.text = value.ToString();
+            DataPlayer.SaveData(playerData);
         }
     }
     public int Gold
@@ -53,6 +55,7 @@ public class UpgradeManager : MonoBehaviour
             playerStat.playerData.gold = value;
             goldText.text = value.ToString();
             diamondText.text = playerStat.playerData.diamond.ToString();
+            DataPlayer.SaveData(playerData);
         }
     }
 
@@ -144,6 +147,7 @@ public class UpgradeManager : MonoBehaviour
      */
     public void UpgradeItem()
     {
+        DataPlayer.LoadData();
         if (Gold < cost)
             return;
 
@@ -167,6 +171,7 @@ public class UpgradeManager : MonoBehaviour
         DisplayUpgradeCurrentStat();
         DisplayUpgradeStatPreview();
         UpgradeCostUpdate();
+        DataPlayer.SaveData(playerData);
     }
 
     public void UpgradeCostUpdate()
