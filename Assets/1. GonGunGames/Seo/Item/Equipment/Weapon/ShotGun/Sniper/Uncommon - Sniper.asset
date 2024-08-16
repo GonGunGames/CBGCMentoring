@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fa24ec97e3fcf64388c0f2cb2af70d9, type: 3}
-  m_Name: Rare - Sniper
+  m_Name: Uncommon - Sniper
   m_EditorClassIdentifier: 
   prop:
-    image: {fileID: -1950167493, guid: f8b78f23761611c4e83500af9575c669, type: 3}
+    image: {fileID: -856191382, guid: f8b78f23761611c4e83500af9575c669, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
     countable: 0
     itemName: Sniper
     specialStat: 
     itemDescription: Basic Sniper
   baseStat:
-    IDIDID: 119
+    IDIDID: 118
     type: 1
-    rarity: 3
+    rarity: 2
     requiredLevel: 1
     stats:
     - type: 0
-      value: 60
+      value: 40
     - type: 1
-      value: 550
+      value: 450
     - type: 5
-      value: 1
+      value: 1.5
     - type: 8
       value: 40
     - type: 13
       value: 0
     - type: 15
-      value: 3
+      value: 1
     - type: 21
-      value: 3
+      value: 1.5
     - type: 26
-      value: 119
+      value: 118

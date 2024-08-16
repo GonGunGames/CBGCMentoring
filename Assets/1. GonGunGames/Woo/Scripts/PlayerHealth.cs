@@ -119,7 +119,6 @@ public class PlayerHealth : MonoBehaviour
                     CheckDeath();
                 }
             }
-
             isDamage = false; // Damage 처리 후 다시 false로 설정
         }
     }
