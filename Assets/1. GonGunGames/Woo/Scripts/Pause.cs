@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement; // 씬 관리를 위해 추가
 public class UIManager : MonoBehaviour
 {
     public GameObject pauseMenuUI; // 일시정지 메뉴 UI 패널
-
+    public DataPlayer dataPlayer; // DataPlayer 참조
     private bool isPaused = false;
 
     void Start()
@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
     // 로비로 돌아가는 버튼이 눌렸을 때 호출될 메서드
     public void OnReturnToLobbyButtonClicked()
     {
+        DataPlayer.SaveData(dataPlayer);
         Time.timeScale = 1f; // 게임 시간 정상화
         isPaused = false; // 일시정지 상태 해제
         SceneManager.LoadScene("Lobby"); // 로비 씬 로드 (씬 이름에 따라 변경)

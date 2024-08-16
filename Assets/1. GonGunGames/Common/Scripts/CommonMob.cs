@@ -94,7 +94,7 @@ public class CommonMob : BaseFSM
             {
                 SetState(FSMState.Idle);
             }
-            if (player != null && MoveUtil.MoveFrame(controller, player.transform, moveSpeed * 2.0f, turnSpeed) <= attackRange)
+            if (player != null && MoveUtil.MoveFrame(controller, player.transform, moveSpeed * 1.5f, turnSpeed) <= attackRange)
             {
                 SetState(FSMState.Attack);
             }
