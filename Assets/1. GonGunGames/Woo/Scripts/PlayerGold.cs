@@ -14,6 +14,20 @@ public class PlayerGold : MonoBehaviour
 
         // UI 텍스트 초기화
         UpdateGoldText();
+        DataPlayer.LoadData();
+
+        if (dataPlayer == null)
+        {
+            Debug.Log("dataPlayer NULL");
+        }
+        else
+        {
+            Debug.Log(dataPlayer.gold);
+        }
+        if (playerStat == null)
+        {
+            Debug.Log("playerStat NULL");
+        }
     }
 
     // 골드를 증가시키는 메서드
@@ -32,6 +46,7 @@ public class PlayerGold : MonoBehaviour
             playerStat.playerData.gold += amount;
         }
         UpdateGoldText(); // 골드 UI 업데이트
+        DataPlayer.SaveData(dataPlayer);
     }
 
     // UI 텍스트를 골드 값으로 업데이트하는 메서드
