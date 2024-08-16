@@ -89,11 +89,11 @@ public class Weapon : MonoBehaviour
         {
             case UpgradeOption.AttackSpeed:
                 AttackSpeedCount++;
-                burstInterval -= 0.01f; // 공격 속도 증가 
+                burstInterval -= 0.005f; // 공격 속도 증가 
                 Debug.Log("공격속도가 증가했습니다. 현재 공격속도: " + attackSpeed);
                 if (AttackSpeedCount % 3 == 0)
                 {
-                    attackSpeed -= 0.4f;
+                    attackSpeed -= 0.3f;
                 }
                 break;
 
