@@ -128,7 +128,7 @@ public class CommonMobB : BaseFSM
                 yield break; // Chase 상태 종료
             }
 
-            if (MoveUtil.MoveFrame(controller, player.transform, moveSpeed * 3.0f, turnSpeed) <= attackRange)
+            if (MoveUtil.MoveFrame(controller, player.transform, moveSpeed * 2.0f, turnSpeed) <= attackRange)
             {
                 SetState(FSMState.Attack);
                 yield break; // Chase 상태 종료
